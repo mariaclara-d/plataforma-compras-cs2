@@ -51,7 +51,12 @@ def get_user_inventory(steam_api_key_inventory, user_steam_id):
                     "tradable": item.get("tradable", False),
                     "image_url": item.get("image", ""),
                     "rarity": item.get("rarity", "N/A"),
-                    "inspect_link": item.get("inspectlink", "")
+                    "inspect_link": item.get("inspectlink", ""),
+                    "price_median": item.get("pricemedian"),
+                    "price_safe": item.get("pricesafe"),
+                    "price_avg": item.get("priceavg"),
+                    "price_min": item.get("pricemin"),
+                    "price_max": item.get("pricemax")
                 }
                 inventory.append(inventory_item)
             return inventory
