@@ -1,0 +1,17 @@
+<h2>Selecione os itens que deseja vender</h2>
+<form method="post" action="/send_offer">
+    <!-- Iteração para gerar os itens -->
+    {% for item in inventory %}
+    <div>
+        <input type="checkbox" name="item_ids" value="{{ item.assetid }}">
+        <img src="{{ item.image_url }}" alt="{{ item.name }}" width="50">
+        <span>{{ item.name }}</span>
+    </div>
+    {% endfor %}
+    
+    <!-- Campo oculto para manter o tradelink -->
+    <input type="hidden" name="tradelink" value="{{ tradelink }}">
+    
+    <!-- Botão para enviar -->
+    <button type="submit">Enviar Oferta</button>
+</form>
