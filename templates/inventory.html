@@ -1,17 +1,81 @@
 <h2>Selecione os itens que deseja vender</h2>
-<form method="post" action="/send_offer">
-    <!-- Iteração para gerar os itens -->
-    {% for item in inventory %}
-    <div>
-        <input type="checkbox" name="item_ids" value="{{ item.assetid }}">
-        <img src="{{ item.image_url }}" alt="{{ item.name }}" width="50">
-        <span>{{ item.name }}</span>
-    </div>
-    {% endfor %}
-    
+
+<form method="post" action="/enviar-oferta">
+    <table>
+        <thead>
+            <tr> 
+                <th>Selecionar</th>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Preço Médio</th>
+                <th>Preço Seguro</th>
+                <th>Preço Máx.</th>
+                <th>Preço Mín.</th>
+                <th>Preço Avg.</th>
+                <th>Link de Inspeção</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in inventory %}
+            <tr>
+                <td>
+                    <input type="checkbox" name="item_ids" value="{{ item.assetid }}">
+                </td>
+                <td>
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}" width="50">
+                </td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price_median }}</td>
+                <td>{{ item.price_safe }}</td>
+                <td>{{ item.price_max }}</td>
+                <td>{{ item.price_min }}</td>
+                <td>{{ item.price_avg }}</td>
+                <td>
+                    <a href="{{ item.inspect_link }}" target="_blank">Inspecionar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <!-- Campo oculto para manter o tradelink -->
     <input type="hidden" name="tradelink" value="{{ tradelink }}">
-    
+
     <!-- Botão para enviar -->
     <button type="submit">Enviar Oferta</button>
 </form>
+
+
+<!-- Mensagens de status -->
+<div id="status"></div>
+
+<script>
+    document.getElementById("btn-enviar-oferta").addEventListener("click", function () {
+        const form = document.getElementById("form-selecionar-itens");
+        const tradelink = document.getElementById("tradelink").value;
+
+        // Coleta os itens selecionados
+        const itens = Array.from(form.querySelectorAll('input[name="item_ids"]:checked'))
+            .map(input => ({ assetid: input.value, appid: "730" }));
+
+        // Envia os dados via AJAX
+        fetch('/enviar-oferta', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ itens, tradelink })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const statusDiv = document.getElementById("status");
+            if (data.erro) {
+                statusDiv.innerHTML = `<p style="color: red;">Erro: ${data.erro}</p>`;
+            } else {
+                statusDiv.innerHTML = `<p style="color: green;">${data.mensagem}</p>`;
+            }
+        })
+        .catch(error => {
+            const statusDiv = document.getElementById("status");
+            statusDiv.innerHTML = `<p style="color: red;">Erro ao enviar oferta: ${error.message}</p>`;
+        });
+    });
+</script>
