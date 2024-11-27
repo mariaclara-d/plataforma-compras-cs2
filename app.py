@@ -6,15 +6,30 @@ from auth import steam_login
 from inventory import fetch_inventory
 from inventory import validate_tradelink
 from flask import render_template
+from steampy.client import SteamClient
+from steampy.exceptions import InvalidCredentials
+
 
 # Carregar variáveis de ambiente
 load_dotenv()
 
+
 app = Flask(__name__)
+
+
 app.secret_key = os.getenv("SECRET_KEY")
-print("Chave secreta:", app.secret_key)
+
+BOT_USERNAME = os.getenv("BOT_USERNAME")
+BOT_PASSWORD = os.getenv("BOT_PASSWORD")
+TRADE_URL = os.getenv("TRADE_URL")
+STEAM_API_KEY = os.getenv("STEAM_API_KEY")
+STEAM_GUARD_FILE= os.getenv("STEAM_GUARD_FILE")
 
 STEAM_OPENID_URL = "https://steamcommunity.com/openid/login"
+
+# Inicializar o cliente do bot
+steam_client = SteamClient(STEAM_API_KEY)
+
 
 def verify_steam_response(args):
     """Verifica a resposta do OpenID da Steam."""
@@ -101,52 +116,50 @@ def inventory():
     return render_template("tradelink.html")
 
 
-@app.route("/send_offer", methods=["POST"])
-def send_offer():
-    """Recebe os itens selecionados e envia uma oferta de troca para o dono do site."""
-    if "steam_id" not in session:
-        return redirect(url_for("login"))
 
-    tradelink = request.form.get("tradelink")
-    item_ids = request.form.getlist("item_ids")
-    user_steam_id = session.get("steam_id")
-
-    # Validar o tradelink
-    if not validate_tradelink(tradelink, user_steam_id):
-        return "<p>Erro: O tradelink fornecido não corresponde à sua conta Steam.</p>"
-
-    if not item_ids:
-        return "<p>Nenhum item selecionado.</p>"
-
-    # Configurar informações do bot (dono do site)
-    steam_api_key = os.getenv("BOT_API_KEY")
-    bot_username = os.getenv("BOT_USERNAME")
-    bot_password = os.getenv("BOT_PASSWORD")
-  
-
-    # Inicializar cliente Steam
-    steam_client = SteamClient(steam_api_key)
-
+@app.route('/enviar-oferta', methods=['POST'])
+def enviar_oferta():
     try:
+        # Recebe os dados do frontend (itens selecionados pelo usuário e tradelink)
+        dados = request.json
+        itens_selecionados = dados.get("itens")  # Ex.: [{'assetid': '12345', 'appid': '730'}]
+        tradelink = dados.get("tradelink")  # Link de troca do usuário
+
+        # Validação básica
+        if not itens_selecionados:
+            return jsonify({"erro": "Nenhum item foi selecionado"}), 400
+        if not tradelink or "https://steamcommunity.com/tradeoffer/new/?" not in tradelink:
+            return jsonify({"erro": "Tradelink inválido"}), 400
+
         # Login no bot
-        steam_client.login(bot_username, bot_password)
+        steam_client.login(BOT_USERNAME, BOT_PASSWORD, STEAM_GUARD_FILE)
 
-        # Criar e enviar a oferta de troca
-        offer = steam_client.make_offer_with_url(items_from_me=[], items_from_them=item_ids, trade_offer_url=tradelink)
-        response = offer.send()
+        # Monta a oferta de troca
+        itens_para_enviar = [
+            {"assetid": item['assetid'], "appid": item['appid'], "contextid": "2"}
+            for item in itens_selecionados
+        ]
 
-        if "tradeofferid" in response:
-            return f"<p>Oferta enviada com sucesso! ID da oferta: {response['tradeofferid']}</p>"
-        else:
-            return "<p>Erro ao enviar oferta. Verifique o tradelink e tente novamente.</p>"
+        # Envia a oferta para o dono do site
+        steam_client.make_offer_with_url(
+            items_from_me=itens_para_enviar,
+            items_from_them=[],  # Nenhum item do lado do dono
+            trade_offer_url=TRADE_URL,  # Tradelink do dono
+            message="Oferta gerada pelo site."
+        )
+
+        return jsonify({"mensagem": "Oferta enviada com sucesso!"}), 200
 
     except Exception as e:
-        print(f"Erro ao enviar oferta: {e}")
-        return "<p>Erro ao enviar oferta. Tente novamente mais tarde.</p>"
+        return jsonify({"erro": f"Erro ao enviar a oferta: {str(e)}"}), 500
 
     finally:
-        # Logout do bot após enviar a oferta
-        steam_client.logout()
+        try:
+            steam_client.logout()
+        except:
+            pass
+
+
 
 
 if __name__ == "__main__":
