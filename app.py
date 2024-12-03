@@ -23,7 +23,7 @@ BOT_USERNAME = os.getenv("BOT_USERNAME")
 BOT_PASSWORD = os.getenv("BOT_PASSWORD")
 TRADE_URL = os.getenv("TRADE_URL")
 STEAM_API_KEY = os.getenv("STEAM_API_KEY")
-STEAM_GUARD_FILE= os.getenv("STEAM_GUARD_FILE")
+STEAM_GUARD= os.getenv("STEAM_GUARD")
 
 STEAM_OPENID_URL = "https://steamcommunity.com/openid/login"
 
@@ -120,44 +120,59 @@ def inventory():
 @app.route('/enviar-oferta', methods=['POST'])
 def enviar_oferta():
     try:
-        # Recebe os dados do frontend (itens selecionados pelo usuário e tradelink)
+        print("Iniciando o endpoint '/enviar-oferta'")
+
+        # Recebe os dados do frontend
         dados = request.json
+        print(f"Dados recebidos do frontend: {dados}")
+        
         itens_selecionados = dados.get("itens")  # Ex.: [{'assetid': '12345', 'appid': '730'}]
         tradelink = dados.get("tradelink")  # Link de troca do usuário
 
         # Validação básica
         if not itens_selecionados:
+            print("Nenhum item foi selecionado pelo usuário.")
             return jsonify({"erro": "Nenhum item foi selecionado"}), 400
+
         if not tradelink or "https://steamcommunity.com/tradeoffer/new/?" not in tradelink:
+            print(f"Tradelink inválido recebido: {tradelink}")
             return jsonify({"erro": "Tradelink inválido"}), 400
 
         # Login no bot
-        steam_client.login(BOT_USERNAME, BOT_PASSWORD, STEAM_GUARD_FILE)
+        print("Tentando realizar login no bot...")
+        steam_client.login(BOT_USERNAME, BOT_PASSWORD, STEAM_GUARD)
+        print("Login no bot realizado com sucesso.")
 
         # Monta a oferta de troca
-        itens_para_enviar = [
+        itens_para_receber = [
             {"assetid": item['assetid'], "appid": item['appid'], "contextid": "2"}
             for item in itens_selecionados
         ]
+        print(f"Itens para receber (do usuário): {itens_para_receber}")
 
-        # Envia a oferta para o dono do site
+        # Envia a oferta para o usuário
+        print(f"Enviando oferta para o tradelink do usuário: {tradelink}")
         steam_client.make_offer_with_url(
-            items_from_me=itens_para_enviar,
-            items_from_them=[],  # Nenhum item do lado do dono
-            trade_offer_url=TRADE_URL,  # Tradelink do dono
-            message="Oferta gerada pelo site."
+            items_from_me=[],  # Nenhum item do lado do bot
+            items_from_them=itens_para_receber,  # Itens que o usuário está oferecendo
+            trade_offer_url=tradelink,  # Tradelink do usuário
+            message="Obrigado por vender seus itens para o nosso site!"
         )
+        print("Oferta enviada com sucesso.")
 
         return jsonify({"mensagem": "Oferta enviada com sucesso!"}), 200
 
     except Exception as e:
+        print(f"Erro ao enviar a oferta: {e}")
         return jsonify({"erro": f"Erro ao enviar a oferta: {str(e)}"}), 500
 
     finally:
         try:
+            print("Tentando realizar logout do bot...")
             steam_client.logout()
-        except:
-            pass
+            print("Logout realizado com sucesso.")
+        except Exception as logout_error:
+            print(f"Erro ao realizar logout: {logout_error}")
 
 
 
