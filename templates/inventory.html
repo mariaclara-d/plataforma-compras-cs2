@@ -1,5 +1,7 @@
 <h2>Selecione os itens que deseja vender</h2>
 
+<p>Após enviar a oferta, você será notificado pelo SteamGuard para aceitar a troca. Verifique sua conta Steam.</p>
+
 <form method="post" action="/enviar-oferta">
     <table>
         <thead>
@@ -46,23 +48,29 @@
 </form>
 
 
-<!-- Mensagens de status -->
-<div id="status"></div>
 
 <script>
-    document.getElementById("btn-enviar-oferta").addEventListener("click", function () {
-        const form = document.getElementById("form-selecionar-itens");
-        const tradelink = document.getElementById("tradelink").value;
+    document.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
 
-        // Coleta os itens selecionados
-        const itens = Array.from(form.querySelectorAll('input[name="item_ids"]:checked'))
-            .map(input => ({ assetid: input.value, appid: "730" }));
+        const tradelink = document.querySelector('input[name="tradelink"]').value;
 
-        // Envia os dados via AJAX
-        fetch('/enviar-oferta', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ itens, tradelink })
+        // Coletar itens selecionados
+        const itens = Array.from(
+            document.querySelectorAll('input[name="item_ids"]:checked')
+        ).map(input => ({ assetid: input.value, appid: "730" }));
+
+        // Validação básica no frontend
+        if (!tradelink || itens.length === 0) {
+            alert("Por favor, insira um tradelink válido e selecione ao menos um item.");
+            return;
+        }
+
+        // Enviar dados via POST
+        fetch("/enviar-oferta", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ itens, tradelink }),
         })
         .then(response => response.json())
         .then(data => {
