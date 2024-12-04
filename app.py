@@ -8,6 +8,7 @@ from inventory import validate_tradelink
 from flask import render_template
 from steampy.client import SteamClient
 from steampy.exceptions import InvalidCredentials
+#from flask_wtf.csrf import CSRFProtect
 
 
 # Carregar variáveis de ambiente
@@ -17,13 +18,19 @@ load_dotenv()
 app = Flask(__name__)
 
 
+
+#csrf = CSRFProtect(app)
 app.secret_key = os.getenv("SECRET_KEY")
 
 BOT_USERNAME = os.getenv("BOT_USERNAME")
 BOT_PASSWORD = os.getenv("BOT_PASSWORD")
 TRADE_URL = os.getenv("TRADE_URL")
 STEAM_API_KEY = os.getenv("STEAM_API_KEY")
-STEAM_GUARD= os.getenv("STEAM_GUARD")
+#STEAM_GUARD= os.getenv("STEAM_GUARD")
+
+SHARED_SECRET= os.getenv("SHARED_SECRET")
+IDENTITY_SECRET= os.getenv("IDENTITY_SECRET")
+
 
 STEAM_OPENID_URL = "https://steamcommunity.com/openid/login"
 
@@ -138,10 +145,19 @@ def enviar_oferta():
             print(f"Tradelink inválido recebido: {tradelink}")
             return jsonify({"erro": "Tradelink inválido"}), 400
 
+        # Caminho para o arquivo SteamGuard
+        steam_guard_file = r"C:\Users\Tito el mestre\Documents\GitHub\documentacaoFlask---Copia\SteamGuard.txt"
+
+
         # Login no bot
         print("Tentando realizar login no bot...")
-        steam_client.login(BOT_USERNAME, BOT_PASSWORD, STEAM_GUARD)
+        steam_client.login(username=BOT_USERNAME, password=BOT_PASSWORD, steam_guard=steam_guard_file)
         print("Login no bot realizado com sucesso.")
+
+        if steam_client.is_session_alive():
+             print("Sessão ativa, pronto para realizar ações.")
+        else:
+            print("Falha na autenticação. A sessão não está ativa.")
 
         # Monta a oferta de troca
         itens_para_receber = [
@@ -173,6 +189,8 @@ def enviar_oferta():
             print("Logout realizado com sucesso.")
         except Exception as logout_error:
             print(f"Erro ao realizar logout: {logout_error}")
+
+
 
 
 

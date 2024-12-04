@@ -69,8 +69,10 @@ def get_user_inventory(steam_api_key_inventory, user_steam_id):
 
 # Função principal para retornar o inventário validado
 def fetch_inventory(tradelink, user_steam_id):
+
     # Validar o tradelink
     if not validate_tradelink(tradelink, user_steam_id):
+        
         return {"error": "Tradelink não corresponde ao usuário logado."}, 400
 
     # Obter o inventário do usuário
