@@ -13,6 +13,7 @@ from steampy.client import SteamClient, Asset
 from steampy.utils import GameOptions
 import json
 
+
 # Carregar variáveis de ambiente
 load_dotenv()
 
@@ -27,7 +28,7 @@ BOT_USERNAME = os.getenv("BOT_USERNAME")
 BOT_PASSWORD = os.getenv("BOT_PASSWORD")
 TRADE_URL = os.getenv("TRADE_URL")
 STEAM_API_KEY = os.getenv("STEAM_API_KEY")
-# STEAM_GUARD_FILE= os.getenv("STEAM_GUARD_FILE")
+STEAM_GUARD_FILE= os.getenv("STEAM_GUARD_FILE")
 
 
 STEAM_OPENID_URL = "https://steamcommunity.com/openid/login"
@@ -123,16 +124,17 @@ def inventory():
 
 def carregar_cookies():
     try:
-        # Carrega os cookies do arquivo cookies.json
         if os.path.exists('cookies.json'):
             with open('cookies.json', 'r') as f:
                 cookies = json.load(f)
                 steam_client.set_login_cookies(cookies)
                 print("Cookies carregados e sessão configurada.")
+                print(f"Cookies carregados: {cookies}")  # Adicione esta linha para depuração
         else:
             print("Arquivo cookies.json não encontrado.")
     except Exception as e:
         print(f"Erro ao carregar cookies: {e}")
+
 
 
 @app.route('/enviar-oferta', methods=['POST'])
@@ -164,36 +166,7 @@ def enviar_oferta():
             print(f"Arquivo SteamGuard não encontrado em {steam_guard_file}")
             return jsonify({"erro": "Arquivo SteamGuard não encontrado"}), 500
 
-        # Login no bot
-        try:
-            # Carrega cookies
-            carregar_cookies()
-
-            # Carrega o arquivo SteamGuard
-            with open(steam_guard_file, 'r') as f:
-                steam_guard_data = json.load(f)
-
-            # Obtém as credenciais do SteamGuard
-            BOT_USERNAME = steam_guard_data.get('username')
-            BOT_PASSWORD = steam_guard_data.get('password')
-
-            print("Tentando realizar login no bot...")
-
-            # Realiza login se a sessão não está ativa
-            if not steam_client.is_session_alive():
-                steam_client.login(BOT_USERNAME, BOT_PASSWORD, steam_guard_file)
-                print("Login no bot realizado com sucesso.")
-
-                # Salva cookies após o login inicial
-                cookies = steam_client.get_cookies()
-                with open('cookies.json', 'w') as f:
-                    json.dump(cookies, f)
-                print("Cookies salvos com sucesso.")
-
-        except InvalidCredentials:
-            return jsonify({"erro": "Credenciais inválidas para o bot"}), 401
-        except Exception as login_error:
-            return jsonify({"erro": f"Erro ao fazer login: {login_error}"}), 500
+        
 
         # Verificar se a sessão está ativa
         if not steam_client.is_session_alive():
@@ -240,3 +213,6 @@ def enviar_oferta():
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000)
+    
+
+
