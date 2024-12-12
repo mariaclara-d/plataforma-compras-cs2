@@ -1,89 +1,96 @@
-<h2>Selecione os itens que deseja vender</h2>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventário</title>
+    <!-- Adicionar CSS do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Selecione os itens que deseja vender</h2>
+        <p class="text-center text-muted">Após enviar a oferta, você será notificado pelo SteamGuard para aceitar a troca. Verifique sua conta Steam.</p>
+        
+        <form method="post" action="/enviar-oferta">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for item in inventory %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.name }}" style="max-height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ item.name }}</h5>
+                            <p class="card-text">
+                                <strong>Preço Médio:</strong> {{ item.price_median }} <br>
+                                <strong>Preço Seguro:</strong> {{ item.price_safe }} <br>
+                                <strong>Preço Máx.:</strong> {{ item.price_max }} <br>
+                                <strong>Preço Mín.:</strong> {{ item.price_min }} <br>
+                                <strong>Preço Avg.:</strong> {{ item.price_avg }} <br>
+                            </p>
+                            <a href="{{ item.inspect_link }}" target="_blank" class="btn btn-outline-primary btn-sm w-100 mb-2">Inspecionar</a>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item_ids" value="{{ item.assetid }}" id="item-{{ item.assetid }}">
+                                <label class="form-check-label" for="item-{{ item.assetid }}">Selecionar</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
 
-<p>Após enviar a oferta, você será notificado pelo SteamGuard para aceitar a troca. Verifique sua conta Steam.</p>
+            <!-- Campo oculto para manter o tradelink -->
+            <input type="hidden" name="tradelink" value="{{ tradelink }}">
 
-<form method="post" action="/enviar-oferta">
-    <table>
-        <thead>
-            <tr> 
-                <th>Selecionar</th>
-                <th>Imagem</th>
-                <th>Nome</th>
-                <th>Preço Médio</th>
-                <th>Preço Seguro</th>
-                <th>Preço Máx.</th>
-                <th>Preço Mín.</th>
-                <th>Preço Avg.</th>
-                <th>Link de Inspeção</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in inventory %}
-            <tr>
-                <td>
-                    <input type="checkbox" name="item_ids" value="{{ item.assetid }}">
-                </td>
-                <td>
-                    <img src="{{ item.image_url }}" alt="{{ item.name }}" width="50">
-                </td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.price_median }}</td>
-                <td>{{ item.price_safe }}</td>
-                <td>{{ item.price_max }}</td>
-                <td>{{ item.price_min }}</td>
-                <td>{{ item.price_avg }}</td>
-                <td>
-                    <a href="{{ item.inspect_link }}" target="_blank">Inspecionar</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <!-- Botão para enviar -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success btn-lg">Enviar Oferta</button>
+            </div>
+        </form>
 
-    <!-- Campo oculto para manter o tradelink -->
-    <input type="hidden" name="tradelink" value="{{ tradelink }}">
+        <!-- Div para exibir mensagens de status -->
+        <div id="status" class="mt-3 text-center"></div>
+    </div>
 
-    <!-- Botão para enviar -->
-    <button type="submit">Enviar Oferta</button>
-</form>
+    <!-- Adicionar JS do Bootstrap e outros -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
 
+            const tradelink = document.querySelector('input[name="tradelink"]').value;
 
+            // Coletar itens selecionados
+            const itens = Array.from(
+                document.querySelectorAll('input[name="item_ids"]:checked')
+            ).map(input => ({ assetid: input.value, appid: "730" }));
 
-<script>
-    document.querySelector("form").addEventListener("submit", function (event) {
-        event.preventDefault(); // Impede o envio padrão do formulário
-
-        const tradelink = document.querySelector('input[name="tradelink"]').value;
-
-        // Coletar itens selecionados
-        const itens = Array.from(
-            document.querySelectorAll('input[name="item_ids"]:checked')
-        ).map(input => ({ assetid: input.value, appid: "730" }));
-
-        // Validação básica no frontend
-        if (!tradelink || itens.length === 0) {
-            alert("Por favor, insira um tradelink válido e selecione ao menos um item.");
-            return;
-        }
-
-        // Enviar dados via POST
-        fetch("/enviar-oferta", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ itens, tradelink }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            const statusDiv = document.getElementById("status");
-            if (data.erro) {
-                statusDiv.innerHTML = `<p style="color: red;">Erro: ${data.erro}</p>`;
-            } else {
-                statusDiv.innerHTML = `<p style="color: green;">${data.mensagem}</p>`;
+            // Validação básica no frontend
+            if (!tradelink || itens.length === 0) {
+                alert("Por favor, insira um tradelink válido e selecione ao menos um item.");
+                return;
             }
-        })
-        .catch(error => {
-            const statusDiv = document.getElementById("status");
-            statusDiv.innerHTML = `<p style="color: red;">Erro ao enviar oferta: ${error.message}</p>`;
+
+            // Enviar dados via POST
+            fetch("/enviar-oferta", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ itens, tradelink }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const statusDiv = document.getElementById("status");
+                if (data.erro) {
+                    statusDiv.innerHTML = `<p style="color: red;">Erro: ${data.erro}</p>`;
+                } else {
+                    statusDiv.innerHTML = `<p style="color: green;">${data.mensagem}</p>`;
+                }
+            })
+            .catch(error => {
+                const statusDiv = document.getElementById("status");
+                statusDiv.innerHTML = `<p style="color: red;">Erro ao enviar oferta: ${error.message}</p>`;
+            });
         });
-    });
-</script>
+    </script>
+</body>
+</html>
+

@@ -12,6 +12,7 @@ from steampy.exceptions import InvalidCredentials
 from steampy.client import SteamClient, Asset
 from steampy.utils import GameOptions
 import json
+import re 
 
 
 # Carregar variáveis de ambiente
@@ -28,7 +29,7 @@ BOT_USERNAME = os.getenv("BOT_USERNAME")
 BOT_PASSWORD = os.getenv("BOT_PASSWORD")
 TRADE_URL = os.getenv("TRADE_URL")
 STEAM_API_KEY = os.getenv("STEAM_API_KEY")
-STEAM_GUARD_FILE= os.getenv("STEAM_GUARD_FILE")
+#STEAM_GUARD_FILE= os.getenv("STEAM_GUARD_FILE")
 
 
 STEAM_OPENID_URL = "https://steamcommunity.com/openid/login"
@@ -122,20 +123,19 @@ def inventory():
     return render_template("tradelink.html")
 
 
-def carregar_cookies():
+def extrair_partner_steamid(tradelink):
+    """
+    Extrai o SteamID64 do parceiro a partir do tradelink.
+    """
+    # Padrão para capturar o parceiro no tradelink
+    match = re.search(r"partner=(\d+)", tradelink)
+    return match.group(1) if match else None
+
+def steamid32_to_steamid64(steamid32):
     try:
-        if os.path.exists('cookies.json'):
-            with open('cookies.json', 'r') as f:
-                cookies = json.load(f)
-                steam_client.set_login_cookies(cookies)
-                print("Cookies carregados e sessão configurada.")
-                print(f"Cookies carregados: {cookies}")  # Adicione esta linha para depuração
-        else:
-            print("Arquivo cookies.json não encontrado.")
-    except Exception as e:
-        print(f"Erro ao carregar cookies: {e}")
-
-
+        return int(steamid32) + 76561197960265728
+    except ValueError:
+        raise ValueError("SteamID32 inválido")
 
 @app.route('/enviar-oferta', methods=['POST'])
 def enviar_oferta():
@@ -144,9 +144,10 @@ def enviar_oferta():
 
         # Recebe os dados do frontend
         dados = request.json
-        print(f"Dados recebidos do frontend: {dados}")
+        if not dados:
+            print("Nenhum dado foi enviado no corpo da requisição.")
+            return jsonify({"erro": "Dados ausentes na requisição"}), 400
 
-        # Obtém os itens e o tradelink do frontend
         itens_selecionados = dados.get("itens")
         tradelink = dados.get("tradelink")
 
@@ -155,61 +156,60 @@ def enviar_oferta():
             print("Nenhum item válido foi selecionado pelo usuário.")
             return jsonify({"erro": "Nenhum item válido foi selecionado"}), 400
 
+        for item in itens_selecionados:
+            if not isinstance(item, dict) or "assetid" not in item:
+                print(f"Item inválido encontrado: {item}")
+                return jsonify({"erro": "Um ou mais itens possuem formato inválido"}), 400
+
         if not tradelink or "https://steamcommunity.com/tradeoffer/new/?" not in tradelink:
             print(f"Tradelink inválido recebido: {tradelink}")
             return jsonify({"erro": "Tradelink inválido"}), 400
 
-        # Caminho do arquivo SteamGuard.json
-        steam_guard_file = os.getenv("STEAM_GUARD_FILE", "SteamGuard.json")
+        # Extrair o SteamID32 do tradelink
+        match = re.search(r"partner=(\d+)", tradelink)
+        if not match:
+            print(f"Não foi possível extrair o SteamID32 do tradelink: {tradelink}")
+            return jsonify({"erro": "Tradelink inválido"}), 400
 
-        if not os.path.exists(steam_guard_file):
-            print(f"Arquivo SteamGuard não encontrado em {steam_guard_file}")
-            return jsonify({"erro": "Arquivo SteamGuard não encontrado"}), 500
+        partner_steamid32 = match.group(1)
 
-        
-
-        # Verificar se a sessão está ativa
-        if not steam_client.is_session_alive():
-            print("Sessão do bot não está ativa.")
-            return jsonify({"erro": "Sessão do bot não está ativa"}), 500
-
-        # Monta e envia a oferta de troca
+        # Converter SteamID32 para SteamID64
         try:
-            game = GameOptions.CS  # Define o jogo CS:GO
-            itens_para_receber = [
-                Asset(item['assetid'], game) for item in itens_selecionados
-            ]
+            partner_steamid64 = steamid32_to_steamid64(partner_steamid32)
+        except ValueError as e:
+            print(f"Erro ao converter SteamID32: {e}")
+            return jsonify({"erro": "SteamID inválido"}), 400
 
-            print(f"Itens para receber: {itens_para_receber}")
+        # Dados para a API
+        payload = {
+            "steamloginsecure": os.getenv("STEAM_LOGIN_SECURE"),
+            "partneritemassetids": ",".join(item["assetid"] for item in itens_selecionados),
+            "tradelink": tradelink,
+            "partnersteamid": str(partner_steamid64),
+            "message": "Obrigado por vender seus itens para o nosso site!",
+        }
 
-            # Envia a oferta ao tradelink do usuário
-            print(f"Enviando oferta para o tradelink: {tradelink}")
-            steam_client.make_offer_with_url(
-                items_from_me=[],  # Nenhum item do lado do bot
-                items_from_them=itens_para_receber,
-                trade_offer_url=tradelink,
-                message="Obrigado por vender seus itens para o nosso site!"
+        print("Enviando requisição para a API de trocas...")
+        try:
+            response = requests.post(
+                f"https://www.steamwebapi.com/steam/api/trade/create?key={os.getenv('STEAM_API_KEY_NAO_OFICIAL')}",
+                json=payload,
+                timeout=10
             )
+            response.raise_for_status()
+            print("Oferta criada com sucesso!")
+            return jsonify({"mensagem": "Oferta criada com sucesso!"}), 200
+        except requests.exceptions.RequestException as e:
+            print(f"Erro ao conectar à API: {e}")
+            return jsonify({"erro": "Falha na comunicação com a API"}), 500
 
-            print("Oferta enviada com sucesso.")
-            return jsonify({"mensagem": "Oferta enviada com sucesso!"}), 200
+    except Exception as e:
+        print(f"Erro inesperado: {e}")
+        import traceback
+        print(traceback.format_exc())
+        return jsonify({"erro": "Ocorreu um erro inesperado no servidor"}), 500
 
-        except Exception as offer_error:
-            print(f"Erro ao enviar a oferta: {offer_error}")
-            return jsonify({"erro": f"Erro ao enviar oferta: {offer_error}"}), 500
 
-    finally:
-        try:
-            # Tenta fazer logout corretamente
-            if steam_client.is_session_alive():
-                print("Tentando realizar logout do bot...")
-                steam_client.logout()
-                print("Logout realizado com sucesso.")
-            else:
-                print("Nenhuma sessão ativa para realizar logout.")
-
-        except Exception as logout_error:
-            print(f"Erro ao realizar logout: {logout_error}")
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000)
