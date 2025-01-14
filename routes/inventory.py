@@ -1,9 +1,12 @@
+from flask import Blueprint, session, redirect, url_for, render_template, jsonify, request
 import os
 import requests
 from dotenv import load_dotenv
 
 # Carregar variáveis de ambiente
 load_dotenv()
+
+inventory_blueprint = Blueprint('inventory', __name__, template_folder="../templates")
 
 # Inicializar a chave da API Steam
 steam_api_key_inventory = os.getenv("STEAM_API_KEY_NAO_OFICIAL")
@@ -51,7 +54,12 @@ def get_user_inventory(steam_api_key_inventory, user_steam_id):
                     "tradable": item.get("tradable", False),
                     "image_url": item.get("image", ""),
                     "rarity": item.get("rarity", "N/A"),
-                    "inspect_link": item.get("inspectlink", "")
+                    "inspect_link": item.get("inspectlink", ""),
+                    "price_median": item.get("pricemedian"),
+                    "price_safe": item.get("pricesafe"),
+                    "price_avg": item.get("priceavg"),
+                    "price_min": item.get("pricemin"),
+                    "price_max": item.get("pricemax")
                 }
                 inventory.append(inventory_item)
             return inventory
@@ -75,3 +83,52 @@ def fetch_inventory(tradelink, user_steam_id):
         "tradelink": tradelink,
         "inventory": inventory
     }
+
+
+@inventory_blueprint.route("/inventory", methods=["GET", "POST"])
+def inventory():
+    #Exibe o inventário do usuário e permite selecionar itens para troca.
+    if "steam_id" not in session:
+        return redirect(url_for("login"))
+
+    user_steam_id = session["steam_id"]
+
+    if request.method == "POST":
+        # Obter tradelink enviado pelo formulário
+        tradelink = request.form.get("tradelink")
+
+        # Validar tradelink
+        if not validate_tradelink(tradelink, user_steam_id):
+            return render_template(
+                "inventory.html",
+                inventory=None,
+                tradelink=None,
+                error="Tradelink inválido. Por favor, insira novamente."
+            )
+
+        # Buscar inventário usando o tradelink
+        inventory_data = fetch_inventory(tradelink, user_steam_id)
+
+        # Renderizar a página com o inventário se encontrado
+        if "inventory" in inventory_data:
+            return render_template(
+                "inventory.html",
+                inventory=inventory_data["inventory"],
+                tradelink=tradelink
+            )
+
+        # Caso o inventário esteja vazio ou ocorra erro
+        return render_template(
+            "inventory.html",
+            inventory=None,
+            tradelink=tradelink,
+            error="Erro ao buscar inventário ou inventário vazio."
+        )
+
+    # Para requisições GET, exibe o formulário para inserir tradelink
+    return render_template(
+        "inventory.html",
+        inventory=None,
+        tradelink=None,
+        error=None
+    )

@@ -1,0 +1,160 @@
+/* Configuração básica para o layout do Dashboard */
+body {
+    background-color: #1C1A24; 
+    color: #fff; 
+    font-family: 'PT Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para a barra de navegação */
+.navbar {
+    background-color: #2b2e3d;
+}
+
+.navbar-brand {
+    color: #3281ac;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #01a357;
+}
+
+.navbar-text {
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* Layout da seção de inventário */
+.inventory-section {
+    margin: 20px 0px; 
+    padding: 20px;
+    background-color: #2b2e3d;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.inventory-section h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.inventory-section .btn-custom {
+    background-color: #01a357;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.inventory-section .btn-custom:hover {
+    background-color: #017b43;
+}
+
+.list-group-item {
+    background-color: #2b2e3d;
+    color: #fff;
+    border: none;
+}
+
+.list-group-item:hover {
+    background-color: #232634;
+}
+
+.list-group-item label {
+    font-size: 1rem;
+}
+
+.btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-light:hover {
+    background-color: #01a357;
+    color: #fff;
+}
+
+/* Resumo (você recebe) */
+.summary-section {
+    margin: 20px 0px; 
+    padding: 20px;
+    background-color: #232634;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 20px; 
+    left: 20px;
+}
+
+.summary-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.summary-section p.display-6 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.summary-section h5 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.summary-section button {
+    margin: 5px;
+}
+
+/* Botões de forma de pagamento */
+.summary-section button {
+    font-size: 1rem;
+    padding: 8px 15px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.summary-section button:hover {
+    background-color: #01a357;
+    color: #fff;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .inventory-section,
+    .summary-section {
+        margin: 15px 5px; /* Ajustando margens para telas menores */
+        padding: 15px;
+    }
+
+    .inventory-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .summary-section h3 {
+        font-size: 1.3rem;
+    }
+
+    .summary-section p.display-6 {
+        font-size: 2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar-text {
+        font-size: 0.9rem;
+    }
+}

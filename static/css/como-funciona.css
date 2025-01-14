@@ -1,0 +1,70 @@
+.como-funciona {
+  background: #1C1A24;
+  color: #fff;
+  padding: 50px 0;
+}
+
+.como-funciona h2 {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: linear-gradient(135deg, #3281ac, #66b2d8); /* Nova cor */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-icon {
+  font-size: 2.5rem; /* Tamanho do ícone */
+  margin-bottom: 10px; /* Espaçamento entre ícone e título */
+  color: #fff; /* Cor do ícone */
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .card {
+      margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .como-funciona h2 {
+      font-size: 2rem;
+  }
+
+  .card {
+      padding: 15px;
+  }
+
+  .card-title {
+      font-size: 1.1rem;
+  }
+
+  .card-text {
+      font-size: 0.85rem;
+  }
+
+  .card-icon {
+      font-size: 2rem; /* Ajuste no tamanho do ícone */
+  }
+}
+
+  

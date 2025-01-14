@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Tito Skins</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Meu Inventário</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Créditos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Pegue seu Bônus</a></li>
+                </ul>
+            </div>
+            <div class="d-flex">
+                <!-- Exibir nome do usuário -->
+                <span class="navbar-text text-white me-3">Bem-vindo, {{ user_info['personaname'] }}</span>
+                <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+
+
+    <div class="container dashboard-container">
+        <div class="row">
+            <!-- Inventory Section -->
+            <div class="col-md-8 inventory-section">
+                <h2>Seu Inventário</h2>
+                <form method="POST" action="/dashboard">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ form.tradelink.label }}
+                        {{ form.tradelink(class="form-control", placeholder="Cole sua Trade URL aqui") }}
+                        {{ form.submit(class="btn btn-custom mt-2") }}
+                    </div>
+                </form>
+                {% if error %}
+                    <div class="alert alert-danger mt-3">{{ error }}</div>
+                {% endif %}
+                <div>
+                    {% if inventory and inventory|length > 0 %}
+                        <ul class="list-group">
+                            {% for item in inventory %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <input type="checkbox" class="skin-checkbox" data-price="{{ item.price_safe or 0 }}" id="skin-{{ loop.index }}">
+                                        <label for="skin-{{ loop.index }}">{{ item.name }} - Preço: ${{ item.price_safe or "N/A" }}</label>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Atenção! Não encontramos nenhum item. Tente carregar seu inventário.</p>
+                    {% endif %}
+                    <button class="btn btn-outline-light mt-3">Recarregar</button>
+                </div>
+            </div>
+    
+            <!-- Summary Section -->
+            <div class="col-md-4 summary-section">
+                <h3>Você recebe</h3>
+                <p class="display-6">$0.00</p>
+                <h5>Selecione sua forma de pagamento:</h5>
+                <div>
+                    <button class="btn btn-outline-light btn-sm">PayPal</button>
+                    <button class="btn btn-outline-light btn-sm">Visa</button>
+                    <button class="btn btn-outline-light btn-sm">Skrill</button>
+                    <button class="btn btn-outline-light btn-sm">Pix</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+</body>
+</html>
+
+    
+    
+        
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Seleciona os checkboxes e o elemento de exibição do total
+        const skinCheckboxes = document.querySelectorAll('.skin-checkbox');
+        const totalDisplay = document.querySelector('.summary-section .display-6');
+    
+        // Função para calcular o total
+        function calculateTotal() {
+            let total = 0;
+    
+            // Itera pelos checkboxes e soma os valores das skins selecionadas
+            skinCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    total += parseFloat(checkbox.dataset.price || 0);
+                }
+            });
+    
+            // Atualiza o valor exibido
+            totalDisplay.textContent = `$${total.toFixed(2)}`;
+        }
+    
+        // Adiciona eventos de clique aos checkboxes
+        skinCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', calculateTotal);
+        });
+    </script>
+
+<script>
+    const sendOfferButton = document.getElementById('send-offer-button');
+
+    sendOfferButton.addEventListener('click', () => {
+        const selectedSkins = [];
+        document.querySelectorAll('.skin-checkbox').forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedSkins.push(checkbox.dataset.assetid);
+            }
+        });
+
+        const tradelink = document.getElementById('tradelink-input').value;
+        if (!tradelink) {
+            alert('Por favor, insira o tradelink.');
+            return;
+        }
+
+        fetch('/save_selected_skins', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                skins: selectedSkins,
+                tradelink: tradelink
+            })
+        }).then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  alert('Oferta criada com sucesso! Verifique sua conta Steam.');
+              } else {
+                  alert(`Erro: ${data.message}`);
+              }
+          }).catch(error => {
+              console.error(error);
+              alert('Ocorreu um erro ao criar a oferta.');
+          });
+    });
+</script>
+
+    
+</body>
+</html>
+
+
+

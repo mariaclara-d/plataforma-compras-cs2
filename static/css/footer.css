@@ -1,0 +1,55 @@
+.footer {
+  background: #1C1A24;
+  color: #fff;
+  padding: 30px 0;
+}
+
+.footer a {
+  color: #01a357;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #00ffbf;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer h5 {
+  font-size: 1.2rem;
+}
+
+.footer .footer-social-link i {
+  font-size: 1.8rem;
+  color: #01a357;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer .footer-social-link i:hover {
+  color: #00ffbf;
+  transform: scale(1.2);
+}
+
+.footer .d-flex {
+  gap: 15px;
+}
+
+/* Estilização dos ícones de pagamento */
+.payment-icon {
+  width: 40px;
+  height: auto;
+  filter: brightness(0) invert(1); /* Deixa os ícones brancos para o fundo escuro */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.payment-icon:hover {
+  filter: brightness(0.7) invert(1); /* Efeito ao passar o mouse */
+  transform: scale(1.2); /* Aumenta o tamanho ao passar o mouse */
+}
+
+
+  

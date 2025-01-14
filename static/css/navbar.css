@@ -1,0 +1,11 @@
+.navbar {
+    font-weight: 200;
+    background: #1C1A24;
+  }
+  
+  .dropdown-toggle {
+    background: none !important;
+    border: none !important;
+    padding: 0;
+  }
+  
