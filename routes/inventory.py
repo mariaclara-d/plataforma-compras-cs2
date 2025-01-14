@@ -60,6 +60,12 @@ def get_user_inventory(steam_api_key_inventory, user_steam_id):
                     "price_avg": item.get("priceavg"),
                     "price_min": item.get("pricemin"),
                     "price_max": item.get("pricemax")
+                    "inspect_link": item.get("inspectlink", ""),
+                    "price_median": item.get("pricemedian"),
+                    "price_safe": item.get("pricesafe"),
+                    "price_avg": item.get("priceavg"),
+                    "price_min": item.get("pricemin"),
+                    "price_max": item.get("pricemax")
                 }
                 inventory.append(inventory_item)
             return inventory
@@ -72,8 +78,10 @@ def get_user_inventory(steam_api_key_inventory, user_steam_id):
 
 # Função principal para retornar o inventário validado
 def fetch_inventory(tradelink, user_steam_id):
+
     # Validar o tradelink
     if not validate_tradelink(tradelink, user_steam_id):
+        
         return {"error": "Tradelink não corresponde ao usuário logado."}, 400
 
     # Obter o inventário do usuário
