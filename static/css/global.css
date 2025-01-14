@@ -1,0 +1,27 @@
+body {
+    font-family: "PT Sans", serif;
+  }
+  
+  h1 {
+    font-weight: 700;
+    font-size: 3rem;
+  }
+  
+  .btn {
+    background-color: #3281ac;
+  }
+
+  .btn:hover{
+    background-color: #01a357;
+  }
+  
+  @media (max-width: 992px) {
+    .navbar-nav {
+      margin-top: 15px;
+    }
+  
+    .btn {
+      margin-bottom: 10px;
+    }
+  }
+  

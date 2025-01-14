@@ -1,12 +1,15 @@
-from flask import session, redirect, request
+from flask import Blueprint, session, redirect, request, url_for
 from urllib.parse import urlencode
-from urllib import parse
 import os
 import requests
 
+# Configuração do Blueprint para rotas de autenticação
+auth_blueprint = Blueprint('auth', __name__) 
+
 STEAM_OPENID_URL = "https://steamcommunity.com/openid/login"
 
-# Função para redirecionar o usuário ao Steam para login
+# Rota para redirecionar o usuário ao Steam para login
+@auth_blueprint.route("/login")
 def steam_login():
     params = {
         'openid.ns': "http://specs.openid.net/auth/2.0",
@@ -16,11 +19,9 @@ def steam_login():
         'openid.return_to': os.getenv("STEAM_RETURN_URL").strip(),  # URL de retorno válida
         'openid.realm': os.getenv("STEAM_REALM").strip()           # URL base válida
     }
-    query_string = parse.urlencode(params)
+    query_string = urlencode(params)
     auth_url = STEAM_OPENID_URL + "?" + query_string
-    print(auth_url)
     return redirect(auth_url)
-
 
 # Função para verificar a resposta do Steam após o login
 def verify_steam_response(args):
@@ -33,20 +34,19 @@ def verify_steam_response(args):
     }
     for item in args.get('openid.signed').split(','):
         params[f'openid.{item}'] = args.get(f'openid.{item}')
-    
+
     response = requests.post(STEAM_OPENID_URL, data=params)
-    print("Resposta do Steam:", response.text)  # Para debug
     return 'is_valid:true' in response.text
 
-
-# Função para processar o retorno do Steam e obter o Steam ID
+# Rota para processar o retorno do Steam e obter o Steam ID
+@auth_blueprint.route("/complete_steam_login")
 def complete_steam_login():
-    print("Parâmetros recebidos:", request.args)  # Para debug
     openid_claimed_id = request.args.get('openid.claimed_id')
     if openid_claimed_id and verify_steam_response(request.args):
         steam_id = openid_claimed_id.split('/')[-1]
         session['steam_id'] = steam_id
-        print(f"Steam ID extraído: {steam_id}")
-        return steam_id
-    print("Erro ao verificar resposta do Steam")
-    return None
+        return redirect(url_for("dashboard.dashboard"))  # Redireciona para a dashboard após login
+    print(steam_id)
+    return "Erro ao verificar resposta do Steam", 400
+
+

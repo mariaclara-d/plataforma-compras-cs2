@@ -1,0 +1,27 @@
+@media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    #sobre-nos p, #sobre-nos ol {
+      font-size: 16px;
+    }
+  
+    .faq-item h3 {
+      font-size: 18px;
+    }
+  
+    .faq-item p {
+      font-size: 14px;
+    }
+  }
+  
+  /* Navbar responsiva */
+@media (max-width: 992px) {
+  .navbar-nav {
+      margin-top: 15px;
+  }
+  .btn {
+      margin-bottom: 10px;
+  }
+}

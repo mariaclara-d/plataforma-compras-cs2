@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}TitoSkins{% endblock %}
+
+{% block content %}
+
+
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content text-center text-white">
+    <h1 class="hero-title">Transforme suas skins de CS2 em dinheiro real!</h1>
+    <p class="hero-text">Venda com rapidez, segurança e sem complicações.</p>
+    <button class="btn btn-primary btn-lg px-4 py-2 shadow">VENDER AGORA</button>
+  </div>
+</section>
+
+
+<section id="como-funciona" class="como-funciona py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Como Funciona</h2>
+    <div class="row gy-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card text-center p-3">
+          <div class="card-body">
+            <i class="fa-brands fa-steam-symbol card-icon"></i> <!-- Ícone -->
+            <h5 class="card-title">Faça Login</h5>
+            <p class="card-text">Use sua conta Steam para começar.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card text-center p-3">
+          <div class="card-body">
+            <i class="fas fa-link card-icon"></i> <!-- Ícone -->
+            <h5 class="card-title">Conecte o Tradelink</h5>
+            <p class="card-text">Acesse seu inventário em segundos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card text-center p-3">
+          <div class="card-body">
+            <i class="fa-solid fa-gun card-icon"></i>
+            <h5 class="card-title">Selecione Skins</h5>
+            <p class="card-text">Escolha os itens que deseja vender.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card text-center p-3">
+          <div class="card-body">
+            <i class="fa-solid fa-money-check-dollar card-icon"></i>
+            <h5 class="card-title">Receba o Pagamento</h5>
+            <p class="card-text">Complete a troca e receba rápido!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section id="sobre-nos" class="sobre-nos">
+  <div class="container text-center">
+    <h2>TitoSkins</h2>
+    <p>
+      Somos o marketplace brasileiro especializado em skins de CS:GO.
+Oferecemos uma experiência única, segura e rápida para gamers que desejam transformar suas skins em dinheiro de verdade.
+    </p>
+  </div>
+</section>
+
+
+
+<!-- Seção: FAQ -->
+<section id="faq" class="faq">
+  <div class="container">
+    <h2 class="text-center">Perguntas Frequentes</h2>
+    <div class="accordion" id="faqAccordion">
+      <div class="accordion-item">
+        <h3 class="accordion-header" id="faq1">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+            Como recebo o pagamento?
+          </button>
+        </h3>
+        <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            O pagamento é feito manualmente após a conclusão da troca, via PIX ou outros métodos disponíveis.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h3 class="accordion-header" id="faq2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+            O site é seguro?
+          </button>
+        </h3>
+        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Sim! Utilizamos práticas de segurança avançadas, como autenticação via Steam e proteção de dados criptografada.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Rodapé -->
+<footer class="footer py-4">
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <!-- Informações da Empresa -->
+      <div class="col-12 col-md-3 mb-3 mb-md-0">
+        <h5 class="text-uppercase">Tito Skins</h5>
+        <p>Venda suas skins de CS:GO com rapidez e segurança.</p>
+        <p>&copy; 2024 - Tito Skins. Todos os direitos reservados.</p>
+      </div>
+
+      <!-- Links Úteis -->
+      <div class="col-12 col-md-3 mb-3 mb-md-0">
+        <h5 class="text-uppercase">Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#mercado" class="footer-link">Mercado</a></li>
+          <li><a href="#vender-agora" class="footer-link">Vender Agora</a></li>
+          <li><a href="#faq" class="footer-link">FAQ</a></li>
+          <li><a href="#suporte" class="footer-link">Suporte 24h</a></li>
+        </ul>
+      </div>
+
+      <!-- Redes Sociais -->
+      <div class="col-12 col-md-3 mb-3 mb-md-0">
+        <h5 class="text-uppercase mb-3">Siga-nos</h5>
+        <div class="d-flex justify-content-md-start justify-content-center gap-3">
+          <a href="#" class="footer-social-link"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="footer-social-link"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="footer-social-link"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="footer-social-link"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Formas de Pagamento -->
+      <div class="col-12 col-md-3">
+        <h5 class="text-uppercase mb-3">Formas de Pagamento</h5>
+        <div class="d-flex justify-content-md-start justify-content-center gap-3">
+          <img src="imagens/cartao-visa.png" alt="Visa" class="payment-icon">
+          <img src="imagens/cartao-mastercard.png" alt="MasterCard" class="payment-icon">
+          <img src="imagens/cartao-paypal.png" alt="PayPal" class="payment-icon">
+          <img src="imagens/cartao-pix.png" alt="Pix" class="payment-icon">
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+<script>
+function toggleFaq(question) {
+  const answer = question.nextElementSibling;
+  answer.style.display = answer.style.display === "block" ? "none" : "block";
+}
+</script>
+
+
+
+
+{% endblock %}
+
+
+
+
