@@ -130,6 +130,24 @@ body {
     color: #fff;
 }
 
+/* Força o espaçamento entre as seções */
+.inventory-section {
+    margin-right: 20px; /* Espaçamento entre colunas */
+}
+
+.summary-section {
+    margin-left: 20px; /* Espaçamento entre colunas */
+}
+
+/* Ajuste para flexbox no container */
+.dashboard-container {
+    display: flex;
+    justify-content: space-between; /* Garante espaçamento entre colunas */
+    gap: 20px; /* Adiciona espaçamento direto entre as colunas */
+    align-items: flex-start; /* Alinha as colunas no topo */
+}
+
+
 /* Responsividade */
 @media (max-width: 768px) {
     .inventory-section,
