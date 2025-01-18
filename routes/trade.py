@@ -68,9 +68,17 @@ def enviar_oferta():
 
         print("Enviando requisição para a API de trocas...")
         try:
+
+            headers = {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "User-Agent": "Mozilla/5.0",
+                "Authorization": f"Bearer {os.getenv('STEAM_API_KEY_NAO_OFICIAL')}"
+            }
             response = requests.post(
                 f"https://www.steamwebapi.com/steam/api/trade/create?key={os.getenv('STEAM_API_KEY_NAO_OFICIAL')}",
                 json=payload,
+                headers=headers,
                 timeout=10
             )
             response.raise_for_status()

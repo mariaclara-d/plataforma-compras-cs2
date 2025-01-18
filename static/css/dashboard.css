@@ -1,7 +1,7 @@
-/* Configuração básica para o layout do Dashboard */
-body {
-    background-color: #1C1A24; 
-    color: #fff; 
+ /* Configuração básica para o layout do Dashboard */
+ body {
+    background-color: #1C1A24;
+    color: #fff;
     font-family: 'PT Sans', sans-serif;
     margin: 0;
     padding: 0;
@@ -34,11 +34,15 @@ body {
 
 /* Layout da seção de inventário */
 .inventory-section {
-    margin: 20px 0px; 
+    margin: 20px;
     padding: 20px;
     background-color: #2b2e3d;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 2;
+    max-width: none;
+    min-width: 600px;
+    box-sizing: border-box;
 }
 
 .inventory-section h2 {
@@ -61,6 +65,7 @@ body {
     background-color: #2b2e3d;
     color: #fff;
     border: none;
+    transition: background-color 0.3s;
 }
 
 .list-group-item:hover {
@@ -84,15 +89,29 @@ body {
 
 /* Resumo (você recebe) */
 .summary-section {
-    margin: 20px 0px; 
+    margin: 20px;
     padding: 20px;
     background-color: #232634;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: sticky;
-    top: 20px; 
-    left: 20px;
+    top: 20px;
+    flex: 1;
+    max-width: 35%;
+    box-sizing: border-box;
+    min-width: 300px;
+    height: fit-content;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+}
+
+.summary-section #btnVender {
+    font-size: 1rem;
+    padding: 8px 15px;
+    width: auto !important;
+    margin: 10px auto;
+    max-width: 200px;
 }
 
 .summary-section h3 {
@@ -113,15 +132,11 @@ body {
 }
 
 .summary-section button {
-    margin: 5px;
-}
-
-/* Botões de forma de pagamento */
-.summary-section button {
     font-size: 1rem;
     padding: 8px 15px;
     border: 1px solid #fff;
     border-radius: 5px;
+    margin: 5px;
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -130,34 +145,122 @@ body {
     color: #fff;
 }
 
-/* Força o espaçamento entre as seções */
-.inventory-section {
-    margin-right: 20px; /* Espaçamento entre colunas */
-}
-
-.summary-section {
-    margin-left: 20px; /* Espaçamento entre colunas */
-}
-
 /* Ajuste para flexbox no container */
 .dashboard-container {
     display: flex;
-    justify-content: space-between; /* Garante espaçamento entre colunas */
-    gap: 20px; /* Adiciona espaçamento direto entre as colunas */
-    align-items: flex-start; /* Alinha as colunas no topo */
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+    align-items: flex-start;
 }
 
+/* Grid do inventário */
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+    max-height: 600px; /* Limita a altura da grade */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical */
+    scrollbar-width: thin; /* Estiliza a barra de rolagem para navegadores compatíveis */
+    scrollbar-color: #01a357 #2b2e3d; /* Cor do thumb e do track */
+}
+
+.inventory-grid::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+.inventory-grid::-webkit-scrollbar-track {
+    background: #2b2e3d; /* Fundo do track */
+    border-radius: 5px;
+}
+
+.inventory-grid::-webkit-scrollbar-thumb {
+    background-color: #01a357; /* Cor do thumb */
+    border-radius: 5px;
+    border: 2px solid #2b2e3d; /* Bordas para combinar com o design */
+}
+
+.inventory-grid::-webkit-scrollbar-thumb:hover {
+    background-color: #017b43; /* Cor ao passar o mouse */
+}
+
+/* Estilo de cada item no inventário */
+.inventory-item {
+    background-color: #2b2e3d;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.inventory-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagem do item */
+.item-image {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Informações do item */
+.item-info {
+    color: #fff;
+}
+
+.item-name {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.item-price {
+    font-size: 0.9rem;
+    color: #01a357;
+    margin-bottom: 10px;
+}
+
+/* Checkbox do item */
+.item-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.item-checkbox input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.item-checkbox label {
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #fff;
+}
 
 /* Responsividade */
 @media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
     .inventory-section,
     .summary-section {
-        margin: 15px 5px; /* Ajustando margens para telas menores */
-        padding: 15px;
+        max-width: 100%;
+        padding: 10px 0px;
     }
 
     .inventory-section h2 {
         font-size: 1.5rem;
+    }
+
+    .inventory-grid {
+        max-height: 400px; /* Altura menor em telas pequenas */
     }
 
     .summary-section h3 {
