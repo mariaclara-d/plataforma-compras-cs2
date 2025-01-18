@@ -6,7 +6,6 @@
   align-items: center;
   text-align: center;
   overflow: hidden;
-  background-image: url('/static/images/banner-unico.png');
   background-size: cover; /* Ajusta a imagem para cobrir toda a área */
   background-position: center; /* Centraliza a imagem */
   background-repeat: no-repeat;
@@ -32,11 +31,20 @@
   padding: 20px; /* Garantir espaçamento interno */
 }
 
+.hero-image img {
+  max-width: 90%; /* Aumentar a largura máxima */
+  height: auto; /* Manter proporção */
+  display: block;
+  margin: 0 auto; /* Centralizar dentro da coluna */
+  
+}
+
 /* Título */
 .hero-title {
   font-size: 3rem; /* Tamanho grande para desktop */
   font-weight: bold;
   margin-bottom: 15px;
+  color: #fff;
 }
 
 /* Texto descritivo */
@@ -44,6 +52,7 @@
   font-size: 1.25rem;
   margin-bottom: 20px;
   line-height: 1.5;
+  color: #fff;
 }
 
 /* Botão */
@@ -74,10 +83,12 @@
 
   .hero-text {
     font-size: 1rem; /* Texto menor */
+    flex: 2;
   }
 
   .hero-content .btn-primary {
     padding: 8px 16px; /* Botão mais compacto */
     font-size: 1rem;
   }
+  
 }

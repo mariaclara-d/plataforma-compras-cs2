@@ -1,7 +1,15 @@
 .navbar {
-    font-weight: 200;
+    
     background: #1C1A24;
+    
+    
   }
+
+  .nav-link{
+    color: #fff;
+    font-weight:bold;
+  }
+
   
   .dropdown-toggle {
     background: none !important;

@@ -13,7 +13,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Tito Skins</a>
+            <a class="navbar-brand" href="#">TitoSkins</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -35,43 +35,46 @@
     <!-- Dashboard -->
 
 
-    <div class="container dashboard-container">
-        <div class="row">
-            <!-- Inventory Section col-md-8-->
-            <div class="inventory-section">
+    
+    <div class="container-fluid dashboard-container">
+        <div class="row g-3">
+            <!-- Inventory Section -->
+            <div class="col-md-8 col-lg-8 inventory-section">
                 <h2>Seu Inventário</h2>
                 <form method="POST" action="/dashboard">
                     {{ form.hidden_tag() }}
                     <div class="mb-3">
                         {{ form.tradelink.label }}
-                        {{ form.tradelink(class="form-control", placeholder="Cole sua Trade URL aqui") }}
+                        {{ form.tradelink(class="form-control", id="tradelink", placeholder="Cole sua Trade URL aqui") }}
                         {{ form.submit(class="btn btn-custom mt-2") }}
                     </div>
                 </form>
                 {% if error %}
                     <div class="alert alert-danger mt-3">{{ error }}</div>
                 {% endif %}
-                <div>
+                <div class="inventory-grid">
                     {% if inventory and inventory|length > 0 %}
-                        <ul class="list-group">
-                            {% for item in inventory %}
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <input type="checkbox" class="skin-checkbox" data-price="{{ item.price_safe or 0 }}" id="skin-{{ loop.index }}">
-                                        <label for="skin-{{ loop.index }}">{{ item.name }} - Preço: ${{ item.price_safe or "N/A" }}</label>
+                        {% for item in inventory %}
+                            <div class="inventory-item">
+                                <img src="{{ item.image_url }}" alt="{{ item.name }}" class="item-image">
+                                <div class="item-info">
+                                    <p class="item-name">{{ item.name }}</p>
+                                    <p class="item-price">Preço: ${{ item.price_safe or "N/A" }}</p>
+                                    <div class="item-checkbox">
+                                        <input type="checkbox" class="skin-checkbox" 
+                                               data-price="{{ item.price_safe or 0 }}" 
+                                               id="skin-{{ loop.index }}" 
+                                               data-assetid="{{ item.assetid }}">
+                                        <label for="skin-{{ loop.index }}">Selecionar</label>
                                     </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <p>Atenção! Não encontramos nenhum item. Tente carregar seu inventário.</p>
+                                </div>
+                            </div>
+                        {% endfor %}
                     {% endif %}
-                    <button class="btn btn-outline-light mt-3">Recarregar</button>
                 </div>
             </div>
-    
-            <!-- Summary Section  col-md-4-->
-            <div class="summary-section">
+            <!-- Summary Section -->
+            <div class="col-md-4 col-lg-4 summary-section">
                 <h3>Você recebe</h3>
                 <p class="display-6">$0.00</p>
                 <h5>Selecione sua forma de pagamento:</h5>
@@ -81,10 +84,100 @@
                     <button class="btn btn-outline-light btn-sm">Skrill</button>
                     <button class="btn btn-outline-light btn-sm">Pix</button>
                 </div>
+                <button onclick="enviarOferta()" class="btn btn-success mt-3 w-100" id="btnVender" style="display: none;">
+                    Vender
+                </button>
             </div>
         </div>
     </div>
     
+ 
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Seleciona os checkboxes e o elemento de exibição do total
+    const skinCheckboxes = document.querySelectorAll('.skin-checkbox');
+    const totalDisplay = document.querySelector('.summary-section .display-6');
+
+    // Função para calcular o total
+    function calculateTotal() {
+        let total = 0;
+
+        // Itera pelos checkboxes e soma os valores das skins selecionadas
+        skinCheckboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                total += parseFloat(checkbox.dataset.price || 0);
+            }
+        });
+
+        // Atualiza o valor exibido
+        totalDisplay.textContent = `$${total.toFixed(2)}`;
+    }
+
+    // Adiciona eventos de clique aos checkboxes
+    skinCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', calculateTotal);
+    });
+
+    // No arquivo dashboard.html, junto com os outros scripts
+    document.addEventListener('DOMContentLoaded', function() {
+    const tradeLinkInput = document.getElementById('tradelink');
+    const btnVender = document.getElementById('btnVender');
+    const summarySection = document.querySelector('.summary-section');
+
+    function verificarExibicaoBotao() {
+        if (tradeLinkInput.value && document.querySelector('.skin-checkbox:checked')) {
+            btnVender.style.display = 'block';
+            summarySection.style.display = 'block'; // Mantém a seção visível
+        } else {
+            btnVender.style.display = 'none';
+        }
+    }
+
+    tradeLinkInput.addEventListener('input', verificarExibicaoBotao);
+    document.querySelectorAll('.skin-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', verificarExibicaoBotao);
+    });
+});
+</script>
+
+
+<script>
+function enviarOferta() {
+    const selectedItems = Array.from(document.querySelectorAll('.skin-checkbox:checked')).map(checkbox => ({
+        assetid: checkbox.dataset.assetid
+    }));
+
+    if (selectedItems.length === 0) {
+        alert('Selecione pelo menos um item para vender');
+        return;
+    }
+
+    fetch('/trade/enviar-oferta', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            itens: selectedItems,
+            tradelink: document.getElementById('tradelink').value
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.erro) {
+            alert('Erro: ' + data.erro);
+        } else {
+            alert('Oferta enviada com sucesso! Verifique seu Steam Guard.');
+        }
+    })
+    .catch(error => {
+        alert('Erro ao enviar oferta: ' + error);
+    });
+}
+</script>
     
     
 </body>
@@ -94,78 +187,6 @@
     
         
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        // Seleciona os checkboxes e o elemento de exibição do total
-        const skinCheckboxes = document.querySelectorAll('.skin-checkbox');
-        const totalDisplay = document.querySelector('.summary-section .display-6');
-    
-        // Função para calcular o total
-        function calculateTotal() {
-            let total = 0;
-    
-            // Itera pelos checkboxes e soma os valores das skins selecionadas
-            skinCheckboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    total += parseFloat(checkbox.dataset.price || 0);
-                }
-            });
-    
-            // Atualiza o valor exibido
-            totalDisplay.textContent = `$${total.toFixed(2)}`;
-        }
-    
-        // Adiciona eventos de clique aos checkboxes
-        skinCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', calculateTotal);
-        });
-    </script>
-
-<script>
-    const sendOfferButton = document.getElementById('send-offer-button');
-
-    sendOfferButton.addEventListener('click', () => {
-        const selectedSkins = [];
-        document.querySelectorAll('.skin-checkbox').forEach(checkbox => {
-            if (checkbox.checked) {
-                selectedSkins.push(checkbox.dataset.assetid);
-            }
-        });
-
-        const tradelink = document.getElementById('tradelink-input').value;
-        if (!tradelink) {
-            alert('Por favor, insira o tradelink.');
-            return;
-        }
-
-        fetch('/save_selected_skins', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify({
-                skins: selectedSkins,
-                tradelink: tradelink
-            })
-        }).then(response => response.json())
-          .then(data => {
-              if (data.success) {
-                  alert('Oferta criada com sucesso! Verifique sua conta Steam.');
-              } else {
-                  alert(`Erro: ${data.message}`);
-              }
-          }).catch(error => {
-              console.error(error);
-              alert('Ocorreu um erro ao criar a oferta.');
-          });
-    });
-</script>
-
-    
-</body>
-</html>
-
+   
 
 
