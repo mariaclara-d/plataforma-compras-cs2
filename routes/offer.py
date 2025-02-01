@@ -1,32 +1,38 @@
-from flask import Blueprint
+from flask import Blueprint, request, jsonify, current_app
 from db_config import db
-from app import app
 from models import TradeOffer
-
+from datetime import datetime, timedelta
 
 offer_blueprint = Blueprint('offer', __name__, template_folder="../templates")
 
-
 @offer_blueprint.route('/create_trade_offer', methods=['POST'])
 def create_trade_offer():
-    # Exemplo de dados para adicionar uma oferta
-    new_offer = TradeOffer(
-        tradeofferid="123456789",
-        partnersteamid="76561198000000000",
-        expires_at="2025-02-01 23:59:59"
-    )
-
     try:
+        # Recebendo os dados do corpo da requisição
+        data = request.json
+        tradeofferid = data.get('tradeofferid')
+        partnersteamid = data.get('partnersteamid')
+
+        # Define o tempo de expiração (10 minutos a partir de agora)
+        expires_at = datetime.now() + timedelta(minutes=10)
+
+        # Verificando se todos os campos foram fornecidos
+        if not tradeofferid or not partnersteamid:
+            return jsonify({'error': 'Todos os campos (tradeofferid, partnersteamid) são obrigatórios'}), 400
+
+        # Criando uma nova entrada na tabela TradeOffer
+        new_offer = TradeOffer(
+            tradeofferid=tradeofferid,
+            partnersteamid=partnersteamid,
+            expires_at=expires_at
+        )
         db.session.add(new_offer)
         db.session.commit()
-        
-        
-        
-        
-        
-        return f"Oferta de troca {new_offer.tradeofferid} criada com sucesso!"
+
+        return jsonify({'message': f"Oferta de troca {new_offer.tradeofferid} criada com sucesso!"}), 201
     except Exception as e:
-        return f"Erro ao criar oferta de troca: {str(e)}"
+        return jsonify({'error': f"Erro ao criar oferta de troca: {str(e)}"}), 500
+
 
 @offer_blueprint.route('/update_trade_offer/<int:offer_id>', methods=['PUT'])
 def update_trade_offer(offer_id):
