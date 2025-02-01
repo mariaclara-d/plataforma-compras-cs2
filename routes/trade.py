@@ -3,6 +3,9 @@ from steampy.client import SteamClient, Asset, GameOptions  # Asset pode ser út
 import os
 import re
 from dotenv import load_dotenv
+from models import TradeOffer
+from datetime import datetime, timedelta
+from db_config import db
 
 load_dotenv()
 trade_blueprint = Blueprint('trade', __name__, template_folder="../templates")
@@ -100,9 +103,21 @@ def enviar_oferta_com_steampy():
 
             print("Retorno da oferta:", offer)
             if isinstance(offer, dict) and 'tradeofferid' in offer:
+                offer_id = offer['tradeofferid']
+
+                # Insere a oferta no banco de dados
+                nova_oferta = TradeOffer(
+                    tradeofferid=offer_id,
+                    partnersteamid=partner_steamid64,
+                    status='pendente',  # Status inicial
+                    expires_at=datetime.now() + timedelta(minutes=10)  # Expira em 10 minutos
+                )
+                db.session.add(nova_oferta)
+                db.session.commit()
+
                 return jsonify({
                     "mensagem": "Oferta criada com sucesso!",
-                    "offer_id": offer['tradeofferid']
+                    "offer_id": offer_id
                 }), 200
             else:
                 print(f"Retorno inesperado: {offer}")
