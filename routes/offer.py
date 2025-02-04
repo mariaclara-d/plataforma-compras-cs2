@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
 from db_config import db
 from models import TradeOffer
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 offer_blueprint = Blueprint('offer', __name__, template_folder="../templates")
 
@@ -14,8 +14,8 @@ def create_trade_offer():
         partnersteamid = data.get('partnersteamid')
 
         # Define o tempo de expiração (10 minutos a partir de agora)
-        expires_at = datetime.now() + timedelta(minutes=10)
-
+        expires_at = datetime.now(timezone.utc) + timedelta(minutes=10)
+        
         # Verificando se todos os campos foram fornecidos
         if not tradeofferid or not partnersteamid:
             return jsonify({'error': 'Todos os campos (tradeofferid, partnersteamid) são obrigatórios'}), 400
