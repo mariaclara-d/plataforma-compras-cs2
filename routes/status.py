@@ -1,6 +1,7 @@
 import time
 import os
-from datetime import datetime, timedelta  # Importação correta
+from db_config import db
+from datetime import datetime, timezone  # Importação correta
 from steampy.client import SteamClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -17,43 +18,42 @@ SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")  # Substitua pelo
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
 Session = sessionmaker(bind=engine)
 
-# Função para verificar e atualizar o status das ofertas
 def verificar_status_ofertas():
+
+
     # Conecta ao Steam
     steam_client = SteamClient(STEAM_API_KEY)
-    try:
-        steam_client.login(STEAM_USERNAME, STEAM_PASSWORD, STEAM_GUARD_PATH)
-        print("Login na Steam realizado com sucesso!")
-    except Exception as e:
-        print(f"Erro ao fazer login na Steam: {e}")
-        return
+    steam_client.login(STEAM_USERNAME, STEAM_PASSWORD, STEAM_GUARD_PATH)
 
     while True:
         try:
-            # Cria uma sessão do banco de dados
-            session = Session()
-
-            # Obtém ofertas pendentes do banco de dado
-            pendentes = session.query(TradeOffer).filter(TradeOffer.status == 'pendente').all()
+            # Utilize o db.session do Flask-SQLAlchemy
+            pendentes = db.session.query(TradeOffer).filter(TradeOffer.status == 'pendente').all()
 
             for oferta in pendentes:
                 try:
-                    # Verifica o status da oferta no Steam
+                    print(f"Verificando oferta {oferta.tradeofferid}...")
+                    print(f"expires_at: {oferta.expires_at}, agora: {datetime.now(timezone.utc)}")
+                    
                     offer_status = steam_client.get_trade_offer(oferta.tradeofferid)
                     print(f"Resposta da API para oferta {oferta.tradeofferid}: {offer_status}")
+                    
+                    # Se a resposta da API estiver vazia ou não contiver 'trade_offer_state'
+                    if 'trade_offer_state' not in offer_status or not offer_status['response']:
+                        print(f"Oferta {oferta.tradeofferid}: não encontrada ou resposta inválida.")
+                        if datetime.now(timezone.utc) > oferta.expires_at:
+                            print(f"Atualizando status da oferta {oferta.tradeofferid} para 'cancelado' por expiração (sem dados da API).")
+                            # Aqui, chamamos o cancelamento na Steam, se necessário
+                            steam_client.cancel_trade_offer(oferta.tradeofferid)
+                            oferta.status = 'cancelado'
+                            oferta.updated_at = datetime.now(timezone.utc)
+                            db.session.commit()
+                            print(f"Oferta {oferta.tradeofferid} atualizada para cancelado.")
+                        else:
+                            print(f"Oferta {oferta.tradeofferid} ainda não está expirada.")
+                        continue
 
-                    if not offer_status.get('response'):
-                        print(f"Oferta {oferta.tradeofferid} não encontrada ou resposta inválida.")
-                        continue  # Pula para a próxima oferta
-
-                    trade_offer = offer_status['response'].get('offer')
-                    if not trade_offer:
-                        print(f"Oferta {oferta.tradeofferid} não encontrada ou resposta inválida.")
-                        continue  # Pula para a próxima oferta
-
-                    novo_status = trade_offer['trade_offer_state']
-
-                    # Mapeia o status da Steam para o status no banco de dados
+                    novo_status = offer_status['trade_offer_state']
                     status_map = {
                         1: 'pendente',  # Pendente
                         2: 'aceito',    # Aceita
@@ -61,25 +61,23 @@ def verificar_status_ofertas():
                     }
                     novo_status_str = status_map.get(novo_status, 'desconhecido')
 
-                    # Atualiza o status no banco de dados
+                    # Atualiza o status conforme retorno da API
                     oferta.status = novo_status_str
-                    oferta.updated_at = datetime.now()
-                    session.commit()
+                    oferta.updated_at = datetime.now(timezone.utc)
+                    db.session.commit()
+                    print(f"Oferta {oferta.tradeofferid} atualizada para {novo_status_str} via API.")
 
-                    # Se a oferta estiver pendente há mais de 10 minutos, cancela
-                    if novo_status_str == 'pendente' and datetime.now() > oferta.expires_at:
-                        print(f"Cancelando oferta {oferta.tradeofferid}...")
+                    # Se a oferta ainda está pendente mas já expirou, cancelar automaticamente
+                    if novo_status_str == 'pendente' and datetime.now(timezone.utc) > oferta.expires_at:
+                        print(f"Cancelando oferta {oferta.tradeofferid} por expiração...")
                         steam_client.cancel_trade_offer(oferta.tradeofferid)
                         oferta.status = 'cancelado'
-                        oferta.updated_at = datetime.now()
-                        session.commit()
+                        oferta.updated_at = datetime.now(timezone.utc)
+                        db.session.commit()
                         print(f"Oferta {oferta.tradeofferid} cancelada.")
 
                 except Exception as e:
                     print(f"Erro ao verificar oferta {oferta.tradeofferid}: {e}")
-
-            # Fecha a sessão do banco de dados
-            session.close()
 
         except Exception as e:
             print(f"Erro no loop de verificação: {e}")
@@ -89,4 +87,8 @@ def verificar_status_ofertas():
 
 # Inicia o serviço de acompanhamento
 if __name__ == "__main__":
-    verificar_status_ofertas()
+    from app import create_app
+    app = create_app()
+    
+    with app.app_context():
+        verificar_status_ofertas()

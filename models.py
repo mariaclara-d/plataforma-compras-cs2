@@ -9,5 +9,5 @@ class TradeOffer(db.Model):
     status = db.Column(db.String(20), default='pendente')  # Valores possíveis: pendente, aceito, recusado, cancelado
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
-    expires_at = db.Column(db.DateTime, nullable=False)
+    expires_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
