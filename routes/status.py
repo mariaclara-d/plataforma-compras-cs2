@@ -19,8 +19,6 @@ engine = create_engine(SQLALCHEMY_DATABASE_URI)
 Session = sessionmaker(bind=engine)
 
 def verificar_status_ofertas():
-
-
     # Conecta ao Steam
     steam_client = SteamClient(STEAM_API_KEY)
     steam_client.login(STEAM_USERNAME, STEAM_PASSWORD, STEAM_GUARD_PATH)
@@ -33,26 +31,16 @@ def verificar_status_ofertas():
             for oferta in pendentes:
                 try:
                     print(f"Verificando oferta {oferta.tradeofferid}...")
-                    print(f"expires_at: {oferta.expires_at}, agora: {datetime.now(timezone.utc)}")
+                    # Converta oferta.expires_at para aware assumindo UTC:
+                    expires_at_aware = oferta.expires_at.replace(tzinfo=timezone.utc)
+                    agora = datetime.now(timezone.utc)
+                    print(f"expires_at: {expires_at_aware}, agora: {agora}")
                     
-                    offer_status = steam_client.get_trade_offer(oferta.tradeofferid)
+                    offer_status = steam_client.get_trade_offer(oferta.tradeofferid, merge=False, use_webtoken=True)
                     print(f"Resposta da API para oferta {oferta.tradeofferid}: {offer_status}")
                     
                     # Se a resposta da API estiver vazia ou não contiver 'trade_offer_state'
-                    if 'trade_offer_state' not in offer_status or not offer_status['response']:
-                        print(f"Oferta {oferta.tradeofferid}: não encontrada ou resposta inválida.")
-                        if datetime.now(timezone.utc) > oferta.expires_at:
-                            print(f"Atualizando status da oferta {oferta.tradeofferid} para 'cancelado' por expiração (sem dados da API).")
-                            # Aqui, chamamos o cancelamento na Steam, se necessário
-                            steam_client.cancel_trade_offer(oferta.tradeofferid)
-                            oferta.status = 'cancelado'
-                            oferta.updated_at = datetime.now(timezone.utc)
-                            db.session.commit()
-                            print(f"Oferta {oferta.tradeofferid} atualizada para cancelado.")
-                        else:
-                            print(f"Oferta {oferta.tradeofferid} ainda não está expirada.")
-                        continue
-
+                    
                     novo_status = offer_status['trade_offer_state']
                     status_map = {
                         1: 'pendente',  # Pendente
@@ -63,15 +51,22 @@ def verificar_status_ofertas():
 
                     # Atualiza o status conforme retorno da API
                     oferta.status = novo_status_str
+                    if novo_status_str == 'cancelado':
+                        oferta.cancelado_por='usuario'
+                    else:
+                        oferta.cancelado_por = None
+                        
                     oferta.updated_at = datetime.now(timezone.utc)
                     db.session.commit()
                     print(f"Oferta {oferta.tradeofferid} atualizada para {novo_status_str} via API.")
 
                     # Se a oferta ainda está pendente mas já expirou, cancelar automaticamente
-                    if novo_status_str == 'pendente' and datetime.now(timezone.utc) > oferta.expires_at:
+                    if novo_status_str == 'pendente' and agora > expires_at_aware:
                         print(f"Cancelando oferta {oferta.tradeofferid} por expiração...")
                         steam_client.cancel_trade_offer(oferta.tradeofferid)
                         oferta.status = 'cancelado'
+                        oferta.cancelado_por='site'
+                        
                         oferta.updated_at = datetime.now(timezone.utc)
                         db.session.commit()
                         print(f"Oferta {oferta.tradeofferid} cancelada.")

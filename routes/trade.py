@@ -4,7 +4,7 @@ import os
 import re
 from dotenv import load_dotenv
 from models import TradeOffer
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from db_config import db
 
 load_dotenv()
@@ -110,7 +110,7 @@ def enviar_oferta_com_steampy():
                     tradeofferid=offer_id,
                     partnersteamid=partner_steamid64,
                     status='pendente',  # Status inicial
-                    expires_at=datetime.now() + timedelta(minutes=10)  # Expira em 10 minutos
+                    expires_at=datetime.now(timezone.utc) + timedelta(minutes=10)  # Expira em 10 minutos
                 )
                 db.session.add(nova_oferta)
                 db.session.commit()
