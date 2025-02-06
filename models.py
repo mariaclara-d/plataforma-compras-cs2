@@ -6,6 +6,7 @@ class TradeOffer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tradeofferid = db.Column(db.String(50), nullable=False)
     partnersteamid = db.Column(db.String(50), nullable=False)
+    cancelado_por = db.Column(db.String(20), nullable=True)  # Ex.: "usuário" ou "site"
     status = db.Column(db.String(20), default='pendente')  # Valores possíveis: pendente, aceito, recusado, cancelado
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())

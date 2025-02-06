@@ -1,5 +1,6 @@
 from flask import Flask
 from db_config import db
+from flask_migrate import Migrate
 from dotenv import load_dotenv
 import os
 
@@ -27,6 +28,8 @@ def create_app():
     from routes.offer import offer_blueprint
 
     db.init_app(app)
+    
+    migrate = Migrate(app, db)
 
     app.register_blueprint(home_blueprint)
     app.register_blueprint(auth_blueprint)
