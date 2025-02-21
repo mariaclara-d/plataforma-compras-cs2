@@ -33,8 +33,6 @@
     </nav>
 
     <!-- Dashboard -->
-
-
     
     <div class="container-fluid dashboard-container">
         <div class="row g-3">
@@ -73,24 +71,96 @@
                     {% endif %}
                 </div>
             </div>
+
             <!-- Summary Section -->
-            <div class="col-md-4 col-lg-4 summary-section">
-                <h3>Você recebe</h3>
-                <p class="display-6">$0.00</p>
-                <h5>Selecione sua forma de pagamento:</h5>
-                <div>
-                    <button class="btn btn-outline-light btn-sm">PayPal</button>
-                    <button class="btn btn-outline-light btn-sm">Visa</button>
-                    <button class="btn btn-outline-light btn-sm">Skrill</button>
-                    <button class="btn btn-outline-light btn-sm">Pix</button>
-                </div>
-                <button onclick="enviarOferta()" class="btn btn-success mt-3 w-100" id="btnVender" style="display: none;">
-                    Vender
-                </button>
-            </div>
-        </div>
+
+<!-- Sessão de Pagamento Atualizada -->
+<div class="col-md-4 col-lg-4 summary-section">
+    <h3>Você recebe</h3>
+    <p class="display-6" id="totalAmount">$0.00</p>
+    
+    <h5>Selecione sua forma de pagamento:</h5>
+    <div id="paymentOptions" class="d-flex flex-column">
+        <button class="btn btn-outline-light my-1" onclick="selectPayment('pix')">Pix</button>
+        <button class="btn btn-outline-light my-1" onclick="selectPayment('transfer')">Transferência Bancária</button>
+        <button class="btn btn-outline-light my-1" onclick="selectPayment('skrill')">Skrill</button>
     </div>
     
+    <div id="paymentFields" class="mt-3"></div>
+    
+    <button onclick="enviarOferta()" class="btn btn-success mt-3 w-100" id="btnVender" style="display: none;">
+        Vender
+    </button>
+</div>
+
+<script>
+    function selectPayment(method) {
+        const paymentFields = document.getElementById('paymentFields');
+        paymentFields.innerHTML = '';
+
+        if (method === 'pix') {
+            paymentFields.innerHTML = `
+                <label for="pixKey">Chave Pix:</label>
+                <input type="text" id="pixKey" class="form-control" placeholder="E-mail, CPF, CNPJ ou Telefone" required>
+            `;
+        } else if (method === 'transfer') {
+            paymentFields.innerHTML = `
+                <label for="bank">Banco:</label>
+                <input type="text" id="bank" class="form-control" placeholder="Nome do banco" required>
+                
+                <label for="agency">Agência:</label>
+                <input type="text" id="agency" class="form-control" placeholder="Número da agência" required>
+                
+                <label for="account">Conta:</label>
+                <input type="text" id="account" class="form-control" placeholder="Número da conta" required>
+                
+                <label for="accountType">Tipo de Conta:</label>
+                <select id="accountType" class="form-select" required>
+                    <option value="corrente">Corrente</option>
+                    <option value="poupanca">Poupança</option>
+                </select>
+            `;
+        } else if (method === 'skrill') {
+            paymentFields.innerHTML = `
+                <label for="email">E-mail Skrill:</label>
+                <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail" required>
+            `;
+        }
+    }
+
+    function enviarOferta() {
+        let paymentData = {};
+        const paymentFields = document.getElementById('paymentFields');
+
+        if (paymentFields.innerHTML.includes('pixKey')) {
+            paymentData.pixKey = document.getElementById('pixKey').value;
+            if (!paymentData.pixKey) {
+                alert('Digite uma chave Pix válida.');
+                return;
+            }
+        } else if (paymentFields.innerHTML.includes('bank')) {
+            paymentData.bank = document.getElementById('bank').value;
+            paymentData.agency = document.getElementById('agency').value;
+            paymentData.account = document.getElementById('account').value;
+            paymentData.accountType = document.getElementById('accountType').value;
+
+            if (!paymentData.bank || !paymentData.agency || !paymentData.account) {
+                alert('Preencha todos os campos da transferência bancária.');
+                return;
+            }
+        } else if (paymentFields.innerHTML.includes('email')) {
+            paymentData.email = document.getElementById('email').value;
+            if (!paymentData.email.includes('@')) {
+                alert('Digite um e-mail válido.');
+                return;
+            }
+        }
+
+        console.log('Dados de pagamento enviados:', paymentData);
+        alert('Oferta enviada com sucesso!');
+    }
+</script>
+
  
 
 

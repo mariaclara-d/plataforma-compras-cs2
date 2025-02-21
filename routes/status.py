@@ -2,7 +2,7 @@ import time
 import os
 from db_config import db
 from datetime import datetime, timezone  # Importação correta
-from steampy.client import SteamClient
+from steampy import SteamClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import TradeOffer  # Importe o modelo TradeOffer
