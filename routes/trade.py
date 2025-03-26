@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from steampy import SteamClient, Asset, GameOptions  # Asset pode ser útil para manipulação de itens
+from steampy.client import SteamClient, Asset, GameOptions  
 import os
 import re
 from dotenv import load_dotenv

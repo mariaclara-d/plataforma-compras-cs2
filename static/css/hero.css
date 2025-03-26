@@ -1,94 +1,129 @@
+/* CSS ATUALIZADO E CORRIGIDO */
 .hero {
   position: relative;
-  min-height: 100vh; /* Ocupa toda a altura da tela */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #13111C 0%,
+    #1C1A24 50%,
+    #282534 100%
+  );
+  padding: 80px 0;
   overflow: hidden;
-  background-size: cover; /* Ajusta a imagem para cobrir toda a área */
-  background-position: center; /* Centraliza a imagem */
-  background-repeat: no-repeat;
-  background-color: #1C1A24; /* Fallback para conexões lentas */
 }
 
-/* Escurecimento da imagem de fundo */
-.hero::before {
+.text-col {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.highlight {
+  color: #00FFBF;
+  display: block;
+  text-shadow: 0 0 15px rgba(0,255,191,0.2);
+}
+
+.hero-text {
+  color: #e9ecef;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.security-badge {
+  background: rgba(255,255,255,0.05);
+  padding: 12px 20px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(4px);
+}
+
+.cta-btn {
+  background: linear-gradient(45deg, #00CC99, #00FFBF);
+  color: #fff !important;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0,255,191,0.2);
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,255,191,0.3);
+}
+
+.hero-img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+}
+
+/* Efeito de profundidade */
+.hero::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Efeito de escurecimento */
-  z-index: 0;
-}
-
-/* Conteúdo centralizado */
-.hero-content {
-  position: relative;
+  top: -20%;
+  left: -10%;
+  width: 120%;
+  height: 140%;
+  background: radial-gradient(
+    circle at 70% 40%,
+    rgba(0,255,191,0.05) 0%,
+    rgba(28,26,36,0) 60%
+  );
+  transform: rotate(15deg);
   z-index: 1;
-  padding: 20px; /* Garantir espaçamento interno */
 }
 
-.hero-image img {
-  max-width: 90%; /* Aumentar a largura máxima */
-  height: auto; /* Manter proporção */
-  display: block;
-  margin: 0 auto; /* Centralizar dentro da coluna */
+/* Responsividade Garantida */
+@media (max-width: 991px) {
+  .row {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
   
-}
-
-/* Título */
-.hero-title {
-  font-size: 3rem; /* Tamanho grande para desktop */
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #fff;
-}
-
-/* Texto descritivo */
-.hero-text {
-  font-size: 1.25rem;
-  margin-bottom: 20px;
-  line-height: 1.5;
-  color: #fff;
-}
-
-/* Botão */
-.hero-content .btn-primary {
-  background-color: #01a357;
-  border: none;
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  border-radius: 5px;
-  transition: transform 0.2s, background-color 0.2s;
-}
-
-.hero-content .btn-primary:hover {
-  background-color: #00ffbf;
-  transform: scale(1.05);
-}
-
-/* Responsividade para dispositivos menores */
-@media (max-width: 768px) {
-  .hero {
-    min-height: 70vh; /* Reduz a altura em dispositivos menores */
-  }
-
   .hero-title {
-    font-size: 2rem; /* Tamanho reduzido para o título */
+    font-size: 2.2rem;
+    text-align: center;
   }
+  
+  .security-badge {
+    margin: 0 auto;
+  }
+  
+  .cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .hero-img {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
 
+@media (max-width: 575px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
   .hero-text {
-    font-size: 1rem; /* Texto menor */
-    flex: 2;
-  }
-
-  .hero-content .btn-primary {
-    padding: 8px 16px; /* Botão mais compacto */
     font-size: 1rem;
   }
-  
 }

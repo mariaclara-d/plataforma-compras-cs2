@@ -3,11 +3,11 @@ from datetime import datetime, timezone
 import os
 from steampy.client import SteamClient
 
-# Configurações do Steam
+
 STEAM_API_KEY = os.getenv("STEAM_API_KEY")
 STEAM_USERNAME = os.getenv("STEAM_USERNAME")
 STEAM_PASSWORD = os.getenv("STEAM_PASSWORD")
-STEAM_GUARD_PATH = "./steam_guard.json"  # Ajuste conforme necessário
+STEAM_GUARD_PATH = "./steam_guard.json"  
 
 def testar_cancelamento(offer_id):
     # Cria a instância do SteamClient
