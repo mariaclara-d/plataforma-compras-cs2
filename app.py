@@ -2,12 +2,21 @@ from flask import Flask
 from db_config import db
 from flask_migrate import Migrate
 from dotenv import load_dotenv
+from pathlib import Path
 import os
 
 
 def create_app():
 
-    load_dotenv()
+    dotenv_path = Path("C:/Users/Tito el mestre/Documents/GitHub/documentacaoFlask---Copia/.env")
+    load_dotenv(dotenv_path=dotenv_path)
+    
+    print("STEAM_USERNAME:", os.getenv("STEAM_USERNAME"))
+    print("STEAM_PASSWORD:", os.getenv("STEAM_PASSWORD"))
+    print("STEAM_SHARED_SECRET:", os.getenv("STEAM_SHARED_SECRET"))
+    print("STEAM_API_KEY:", os.getenv("STEAM_API_KEY"))
+    print("STEAM_GUARD_FILE:", os.getenv("STEAM_GUARD_FILE"))
+
 
     app = Flask(__name__)
 
