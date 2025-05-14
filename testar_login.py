@@ -1,23 +1,36 @@
-from steampy.client import SteamClient
-from steampy.client import SteamClient
-from dotenv import load_dotenv
-import os
+import asyncio
+from aiosteampy.client import SteamClient
+import json
 
-# Carregar .env
-load_dotenv()
+# Carrega o arquivo steam_guard.json
+with open("steam_guard.json", "r") as f:
+    steam_guard = json.load(f)
 
-print("🔐 Tentando logar na conta bot...")
+username = steam_guard["account_name"]
+password = steam_guard["password"]
+shared_secret = steam_guard["shared_secret"]
+identity_secret = steam_guard["identity_secret"]
+steam_id = steam_guard["steam_id"]
 
-try:
-    api_key = os.getenv("STEAM_API_KEY")
-    if not api_key:
-        raise Exception("❌ API Key não encontrada no .env")
+async def main():
+    print("🔐 Tentando logar com aiosteampy...")
+    try:
+        # Agora com steam_id
+        client = SteamClient(
+            username=username,
+            password=password, 
+            shared_secret=shared_secret,
+            identity_secret=identity_secret,
+            steam_id=steam_id
+        )
 
-    client = SteamClient(api_key)
-    client.login(username="montanhafetida", password="Tobias132", steam_guard="steam_guard.json")
+        await client.login()
+        print("Login bem-sucedido com aiosteampy!")
+        await client.logout()
 
-    print("✅ Login bem-sucedido!")
+    except Exception as e:
+        print(f"Erro no login: {e}")
 
-except Exception as e:
-    print(f"❌ Erro ao logar: {e}")
+if __name__ == "__main__":
+    asyncio.run(main())
 

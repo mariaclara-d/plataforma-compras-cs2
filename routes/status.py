@@ -13,7 +13,7 @@ from urllib.parse import unquote
 STEAM_API_KEY = os.getenv("STEAM_API_KEY")
 STEAM_USERNAME = os.getenv("STEAM_USERNAME")
 STEAM_PASSWORD = os.getenv("STEAM_PASSWORD")
-STEAM_GUARD_PATH = "./steam_guard.json"
+STEAM_GUARD_PATH = os.getenv("STEAM_GUARD_FILE")
 
 # Configurações do banco de dados
 
