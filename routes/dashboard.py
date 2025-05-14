@@ -28,6 +28,8 @@ def get_steam_user_info(steam_id):
 @dashboard_blueprint.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
     """Página do usuário após login."""
+    
+    print("Sessão no dashboard:", session)
     if "steam_id" not in session:
         return redirect(url_for("home"))
 
