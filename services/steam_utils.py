@@ -1,0 +1,42 @@
+# steam_utils.py
+
+import re
+from datetime import datetime, timedelta, timezone
+from db_config import db
+from models import TradeOffer
+
+def extrair_partner_steamid(tradelink):
+    match = re.search(r"partner=(\d+)", tradelink)
+    return match.group(1) if match else None
+
+def steamid32_to_steamid64(steamid32):
+    try:
+        return int(steamid32) + 76561197960265728
+    except ValueError:
+        raise ValueError("SteamID32 inválido")
+
+def validar_dados_requisicao(dados):
+    tradelink = dados.get("tradelink")
+    itens_selecionados = dados.get("itens")
+
+    if not tradelink or not itens_selecionados:
+        raise ValueError("Tradelink e itens são obrigatórios")
+
+    partner_steamid32 = extrair_partner_steamid(tradelink)
+    if not partner_steamid32:
+        raise ValueError("Tradelink inválido")
+
+    partner_steamid64 = steamid32_to_steamid64(partner_steamid32)
+
+    return itens_selecionados, tradelink, partner_steamid64
+
+def registrar_oferta_no_banco(offer_id, steamid64):
+    nova_oferta = TradeOffer(
+        offer_id=offer_id,
+        steamid=steamid64,
+        status="pendente",
+        data_criacao=datetime.now(timezone.utc),
+        data_expiracao=datetime.now(timezone.utc) + timedelta(minutes=10)
+    )
+    db.session.add(nova_oferta)
+    db.session.commit()
