@@ -28,6 +28,8 @@ def get_steam_user_info(steam_id):
 @dashboard_blueprint.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
     """Página do usuário após login."""
+    
+    print("Sessão no dashboard:", session)
     if "steam_id" not in session:
         return redirect(url_for("home"))
 
@@ -36,7 +38,7 @@ def dashboard():
     # Obter informações do usuário
     user_info = get_steam_user_info(user_steam_id)
     if not user_info:
-        return redirect(url_for("logout"))
+        return redirect(url_for("dashboard.logout"))
 
     form = TradeLinkForm()  # Instancie o formulário
 
