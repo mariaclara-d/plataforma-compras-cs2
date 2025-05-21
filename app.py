@@ -3,6 +3,9 @@ from db_config import db
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 from pathlib import Path
+from models import InformacoesPagamento, Skin, TradeOffer, Transacao, Saldo
+
+
 import os
 
 
