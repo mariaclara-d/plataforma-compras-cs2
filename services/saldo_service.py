@@ -2,7 +2,7 @@ from db_config import db
 from models import TradeOffer, Skin, Transacao
 from sqlalchemy import func
 
-def calcular_saldo_usuario(steamid, percentual_comissao=0.8):
+def calcular_saldo_usuario(steamid, percentual_comissao=0.65):
     """
     Calcula o saldo disponível do usuário baseado nas skins vendidas
     e descontando transações já pagas.

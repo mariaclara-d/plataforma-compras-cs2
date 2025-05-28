@@ -86,6 +86,16 @@ def dashboard():
         user_info=user_info,
         saldo=saldo
     )
+    
+@dashboard_blueprint.route("/api/saldo")
+def api_saldo():
+    if "steam_id" not in session:
+        return {"erro": "Usuário não autenticado"}, 401
+    
+    user_steam_id = session["steam_id"]
+    # Calcule o saldo do usuário
+    saldo = calcular_saldo_usuario(user_steam_id)  # Chame a função que calcula o saldo
+    return {"saldo": saldo}
 
 
 @dashboard_blueprint.route("/logout")

@@ -791,3 +791,60 @@ connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001A
 connector: <aiohttp.connector.TCPConnector object at 0x000001A60F693490>
 2025-05-21 17:57:38,118 INFO: Job "tarefa_agendada (trigger: interval[0:01:00], next run at: 2025-05-21 17:58:33 -03)" executed successfully
 2025-05-21 17:57:55,370 INFO: 127.0.0.1 - - [21/May/2025 17:57:55] "GET / HTTP/1.1" 200 -
+2025-05-23 18:33:23,191 INFO: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-23 18:33:23,192 INFO: Added job "tarefa_agendada" to job store "default"
+2025-05-23 18:33:23,192 INFO: Scheduler started
+2025-05-23 18:33:23,220 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-23 18:33:23,220 INFO: [33mPress CTRL+C to quit[0m
+2025-05-23 18:33:23,222 INFO:  * Restarting with stat
+2025-05-23 18:33:23,988 INFO: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-23 18:33:23,989 INFO: Added job "tarefa_agendada" to job store "default"
+2025-05-23 18:33:23,989 INFO: Scheduler started
+2025-05-23 18:33:23,997 WARNING:  * Debugger is active!
+2025-05-23 18:33:24,004 INFO:  * Debugger PIN: 115-492-161
+2025-05-23 18:34:23,192 INFO: Running job "tarefa_agendada (trigger: interval[0:01:00], next run at: 2025-05-23 18:34:23 -03)" (scheduled at 2025-05-23 18:34:23.191102-03:00)
+2025-05-23 18:34:23,193 INFO: \u23f3 Executando tarefa agendada de verificação de ofertas...
+2025-05-23 18:34:23,989 INFO: Running job "tarefa_agendada (trigger: interval[0:01:00], next run at: 2025-05-23 18:34:23 -03)" (scheduled at 2025-05-23 18:34:23.988137-03:00)
+2025-05-23 18:34:23,989 INFO: \u23f3 Executando tarefa agendada de verificação de ofertas...
+2025-05-23 18:34:25,020 INFO: \u2705 Login efetuado com sucesso.
+2025-05-23 18:34:25,093 INFO: \U0001f50d 2 ofertas pendentes encontradas.
+2025-05-23 18:34:25,093 INFO: \U0001f50e Verificando oferta 8114466782...
+2025-05-23 18:34:25,127 ERROR: \U0001f4a5 Erro na execução geral: 'access_token'
+2025-05-23 18:34:25,127 ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000028840B67230>
+2025-05-23 18:34:25,127 ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000028840B5F5F0>, 13390.1503469)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000028840929010>, 13391.0120161)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000028840B67380>
+2025-05-23 18:34:25,128 INFO: Job "tarefa_agendada (trigger: interval[0:01:00], next run at: 2025-05-23 18:35:23 -03)" executed successfully
+2025-05-23 18:34:25,328 INFO: \U0001f4cc Status atualizado: 8114466782 \u2192 pendente
+2025-05-23 18:34:25,617 INFO: \u23f1\ufe0f Oferta expirada cancelada: 8114466782
+2025-05-23 18:34:25,620 INFO: \U0001f50e Verificando oferta 8114490942...
+2025-05-23 18:34:25,836 INFO: \U0001f4cc Status atualizado: 8114490942 \u2192 pendente
+2025-05-23 18:34:25,837 ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000001C3897B7770>
+2025-05-23 18:34:25,840 ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C3898582F0>, 13390.5902257)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C389859070>, 13390.8666223)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C389858F50>, 13390.868182)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C389858E30>, 13390.8954684)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C389858B30>, 13390.9053836)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C3885A5730>, 13391.4916265)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C3885A6450>, 13391.711493)])']
+connector: <aiohttp.connector.TCPConnector object at 0x000001C3897B78C0>
+2025-05-23 18:34:25,842 INFO: Job "tarefa_agendada (trigger: interval[0:01:00], next run at: 2025-05-23 18:35:23 -03)" executed successfully
+2025-05-23 18:35:23,191 INFO: Running job "tarefa_agendada (trigger: interval[0:01:00], next run at: 2025-05-23 18:36:23 -03)" (scheduled at 2025-05-23 18:35:23.191102-03:00)
+2025-05-23 18:35:23,192 INFO: \u23f3 Executando tarefa agendada de verificação de ofertas...
+2025-05-23 18:35:24,000 INFO: Running job "tarefa_agendada (trigger: interval[0:01:00], next run at: 2025-05-23 18:36:23 -03)" (scheduled at 2025-05-23 18:35:23.988137-03:00)
+2025-05-23 18:35:24,001 INFO: \u23f3 Executando tarefa agendada de verificação de ofertas...
+2025-05-23 18:35:25,041 INFO: \u2705 Login efetuado com sucesso.
+2025-05-23 18:35:25,043 INFO: \U0001f50d 1 ofertas pendentes encontradas.
+2025-05-23 18:35:25,043 INFO: \U0001f50e Verificando oferta 8114490942...
+2025-05-23 18:35:25,132 ERROR: \U0001f4a5 Erro na execução geral: 'access_token'
+2025-05-23 18:35:25,132 ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000028840B7DD10>
+2025-05-23 18:35:25,133 ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000028840C0C290>, 13450.1466784)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000028840B5FC50>, 13451.0174467)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000028840B7DE50>
+2025-05-23 18:35:25,137 INFO: Job "tarefa_agendada (trigger: interval[0:01:00], next run at: 2025-05-23 18:36:23 -03)" executed successfully
+2025-05-23 18:35:25,246 INFO: \U0001f4cc Status atualizado: 8114490942 \u2192 pendente
+2025-05-23 18:35:25,246 ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000001C3897CF610>
+2025-05-23 18:35:25,247 ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C3898580B0>, 13450.6185655)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C3885A5D90>, 13450.8035751)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C38985BC50>, 13450.8890669)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C38985BB30>, 13450.8997553)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C38985B710>, 13450.9067045)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C38985BA10>, 13450.9270479)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001C3885A5F10>, 13451.1269227)])']
+connector: <aiohttp.connector.TCPConnector object at 0x000001C3897CF750>
+2025-05-23 18:35:25,248 INFO: Job "tarefa_agendada (trigger: interval[0:01:00], next run at: 2025-05-23 18:36:23 -03)" executed successfully
