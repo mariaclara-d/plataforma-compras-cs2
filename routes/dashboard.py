@@ -1,6 +1,8 @@
+# routes/dashboard.py
 from flask import Blueprint, session, redirect, url_for, render_template
 from routes.forms import TradeLinkForm 
 from routes.inventory import fetch_inventory
+from services.saldo_service import calcular_saldo_usuario
 import requests
 import os
 from dotenv import load_dotenv
@@ -9,11 +11,9 @@ load_dotenv()
 
 dashboard_blueprint = Blueprint('dashboard', __name__, template_folder="../templates")
 
-
 STEAM_API_KEY = os.getenv("STEAM_API_KEY")
 
 def get_steam_user_info(steam_id):
-    """Obtém as informações do usuário pela API da Steam."""
     url = f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/"
     params = {"key": STEAM_API_KEY, "steamids": steam_id}
     response = requests.get(url, params=params)
@@ -21,35 +21,35 @@ def get_steam_user_info(steam_id):
         data = response.json()
         players = data.get("response", {}).get("players", [])
         if players:
-            return players[0]  # Retorna o primeiro (e único) jogador encontrado
+            return players[0]
     return None
 
+def parse_price(value):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
 
 @dashboard_blueprint.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-    """Página do usuário após login."""
-    
-    print("Sessão no dashboard:", session)
     if "steam_id" not in session:
         return redirect(url_for("home"))
 
     user_steam_id = session["steam_id"]
-
-    # Obter informações do usuário
     user_info = get_steam_user_info(user_steam_id)
     if not user_info:
         return redirect(url_for("dashboard.logout"))
 
-    form = TradeLinkForm()  # Instancie o formulário
-
+    form = TradeLinkForm()
     tradelink = None
     inventory = []
+    percentual_comissao = 0.10
+    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
 
-    if form.validate_on_submit():  # Verifica se o formulário foi submetido corretamente
+    if form.validate_on_submit():
         tradelink = form.tradelink.data
-
-        # Buscar inventário do usuário
         result = fetch_inventory(tradelink, user_steam_id)
+
         if "error" in result:
             return render_template(
                 "dashboard.html",
@@ -57,17 +57,24 @@ def dashboard():
                 error=result["error"],
                 inventory=[],
                 tradelink=tradelink,
-                user_info=user_info,  # Passa as informações do usuário
+                user_info=user_info,
+                saldo=saldo
             )
 
-        inventory = result.get("inventory", [])
+        inventory = sorted(
+            result.get("inventory", []),
+            key=lambda x: parse_price(x.get("price_median")),
+            reverse=True
+        )
+
         return render_template(
             "dashboard.html",
             form=form,
             inventory=inventory,
             tradelink=tradelink,
             error=None if inventory else "Seu inventário está vazio.",
-            user_info=user_info,  # Passa as informações do usuário
+            user_info=user_info,
+            saldo=saldo
         )
 
     return render_template(
@@ -76,12 +83,22 @@ def dashboard():
         inventory=inventory,
         tradelink=tradelink,
         error=None,
-        user_info=user_info,  # Passa as informações do usuário
+        user_info=user_info,
+        saldo=saldo
     )
+    
+@dashboard_blueprint.route("/api/saldo")
+def api_saldo():
+    if "steam_id" not in session:
+        return {"erro": "Usuário não autenticado"}, 401
+    
+    user_steam_id = session["steam_id"]
+    # Calcule o saldo do usuário
+    saldo = calcular_saldo_usuario(user_steam_id)  # Chame a função que calcula o saldo
+    return {"saldo": saldo}
 
 
 @dashboard_blueprint.route("/logout")
 def logout():
-    """Realiza logout e limpa a sessão."""
-    session.clear()  # Limpa todos os dados da sessão
-    return redirect(url_for("home.home"))  # Redireciona para a página inicial
+    session.clear()
+    return redirect(url_for("home.home"))

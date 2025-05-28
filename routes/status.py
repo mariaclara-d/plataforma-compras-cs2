@@ -1,147 +1,124 @@
-import time
+import asyncio
 import os
-from db_config import db
-from datetime import datetime, timezone  # Importação correta
-from steampy.client import SteamClient
+import json
+from datetime import datetime, timezone
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import TradeOffer  # Importe o modelo TradeOffer
-from requests.exceptions import ConnectionError
-from urllib.parse import unquote
-
-# Configurações do Steam
-STEAM_API_KEY = os.getenv("STEAM_API_KEY")
-STEAM_USERNAME = os.getenv("STEAM_USERNAME")
-STEAM_PASSWORD = os.getenv("STEAM_PASSWORD")
-STEAM_GUARD_PATH = os.getenv("STEAM_GUARD_FILE")
-
-# Configurações do banco de dados
-
-SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")
-engine = create_engine(SQLALCHEMY_DATABASE_URI)
+from dotenv import load_dotenv
+from aiosteampy.client import SteamClient
+from aiosteampy.constants import TradeOfferStatus
+import logging
+from apscheduler.schedulers.background import BackgroundScheduler
+from flask import Flask
+from models import TradeOffer, Skin, Saldo  # Importando os modelos necessários
+from sqlalchemy import func
+load_dotenv()
+# Banco de dados
+DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URI")
+engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
-
-def login_with_retry(steam_client, username, password, steam_guard_path, retries=3, delay=5):
-    attempt = 0
-    while attempt < retries:
-        try:
-            steam_client.login(username, password, steam_guard_path)
-            print("Login realizado com sucesso!")
-            # Extração do access token:
-            steam_login_secure_cookies = [cookie for cookie in steam_client._session.cookies if cookie.name == 'steamLoginSecure']
-            if steam_login_secure_cookies:
-                cookie_value = steam_login_secure_cookies[0].value
-                decoded_cookie_value = unquote(cookie_value)
-                access_token_parts = decoded_cookie_value.split('||')
-                if len(access_token_parts) >= 2:
-                    steam_client._access_token = access_token_parts[1]
-                else:
-                    print("Access token não encontrado no cookie steamLoginSecure")
-            else:
-                print("Cookie steamLoginSecure não encontrado")
-            return True
-        except ConnectionError as e:
-            attempt += 1
-            print(f"Erro na tentativa de login ({attempt}/{retries}): {e}")
-            time.sleep(delay)
-    return False
-
-def verificar_status_ofertas():
-    # Configura o SteamClient e a sessão com retry se desejar
-    steam_client = SteamClient(STEAM_API_KEY)
-    if not login_with_retry(steam_client, STEAM_USERNAME, STEAM_PASSWORD, STEAM_GUARD_PATH):
-        print("Falha ao realizar login após várias tentativas.")
-        return
-
-    while True:
-        try:
-            pendentes = db.session.query(TradeOffer).filter(TradeOffer.status == 'pendente').all()
-            for oferta in pendentes:
-                try:
-                    print(f"Verificando oferta {oferta.tradeofferid}...")
-                    expires_at_aware = oferta.expires_at.replace(tzinfo=timezone.utc)
-                    agora = datetime.now(timezone.utc)
-                    print(f"expires_at: {expires_at_aware}, agora: {agora}")
-
-                    # Chamada com parâmetros configurados
-                    offer_status = steam_client.get_trade_offer(oferta.tradeofferid, merge=False, use_webtoken=True)
-                    print(f"Resposta da API para oferta {oferta.tradeofferid}: {offer_status}")
-
-                    if ('response' not in offer_status or 'offer' not in offer_status['response'] or not offer_status['response']['offer']):
-                        print(f"Oferta {oferta.tradeofferid}: resposta vazia ou inválida da API.")
-                        if agora > expires_at_aware:
-                            print(f"Atualizando status da oferta {oferta.tradeofferid} para 'cancelado' por expiração (sem dados da API).")
-                            try:
-                                steam_client.cancel_trade_offer(oferta.tradeofferid)
-                                print(f"Método cancel_trade_offer chamado para oferta {oferta.tradeofferid}.")
-                            except Exception as cancel_e:
-                                print(f"Erro ao chamar cancel_trade_offer: {cancel_e}")
-                            oferta.status = 'cancelado'
-                            oferta.cancelado_por = 'site'
-                            oferta.updated_at = datetime.now(timezone.utc)
-                            db.session.commit()
-                            print(f"Oferta {oferta.tradeofferid} atualizada para cancelado.")
-                        else:
-                            print(f"Oferta {oferta.tradeofferid} ainda não está expirada.")
-                        continue
-
-                    novo_status = offer_status['response']['offer'].get('trade_offer_state')
-                    if novo_status is None:
-                        print(f"Não foi possível obter 'trade_offer_state' para a oferta {oferta.tradeofferid}.")
-                        novo_status_str = 'desconhecido'
+# Steam
+STEAM_API_KEY = os.getenv("STEAM_API_KEY")
+STEAM_GUARD_FILE = os.getenv("STEAM_GUARD_FILE")
+# Logging
+logging.basicConfig(
+    filename='status_ofertas.log',
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s: %(message)s'
+)
+STATUS_MAP = {
+    TradeOfferStatus.INVALID: 'inválido',
+    TradeOfferStatus.ACTIVE: 'pendente',
+    TradeOfferStatus.ACCEPTED: 'aceito',
+    TradeOfferStatus.COUNTERED: 'contra-ofertada',
+    TradeOfferStatus.EXPIRED: 'expirada',
+    TradeOfferStatus.CANCELED: 'cancelado',
+    TradeOfferStatus.DECLINED: 'recusada',
+    TradeOfferStatus.INVALID_ITEMS: 'itens inválidos',
+    TradeOfferStatus.CONFIRMATION_NEED: 'precisa de confirmação',
+    TradeOfferStatus.CANCELED_BY_SECONDARY_FACTOR: 'cancelado',
+    TradeOfferStatus.STATE_IN_ESCROW: 'em custódia',
+}
+async def login_aiosteampy():
+    with open(STEAM_GUARD_FILE, 'r') as f:
+        guard = json.load(f)
+    client = SteamClient(
+        steam_id=guard["steam_id"],
+        username=guard["account_name"],
+        password=guard["password"],
+        shared_secret=guard["shared_secret"],
+        identity_secret=guard["identity_secret"],
+        api_key=STEAM_API_KEY
+    )
+    await client.login()
+    logging.info("✅ Login efetuado com sucesso.")
+    return client
+def calcular_valor_liquido(preco, percentual_comissao=0.65):
+    """Calcula o valor líquido baseado no preço e percentual de comissão."""
+    if preco is None:
+        return None
+    return preco * percentual_comissao
+async def verificar_status():
+    session = Session()
+    agora = datetime.now(timezone.utc)
+    try:
+        client = await login_aiosteampy()
+        pendentes = session.query(TradeOffer).filter(TradeOffer.status == 'pendente').all()
+        logging.info(f"🔍 {len(pendentes)} ofertas pendentes encontradas.")
+        for oferta in pendentes:
+            try:
+                logging.info(f"🔎 Verificando oferta {oferta.tradeofferid}...")
+                trade = await client.get_trade_offer(int(oferta.tradeofferid))
+                status_str = STATUS_MAP.get(trade.status, 'desconhecido')
+                oferta.status = status_str
+                oferta.updated_at = agora
+                oferta.cancelado_por = 'usuario' if status_str in ['cancelado', 'recusada'] else None
+                
+                # Atualizar saldo e valor líquido se a oferta for aceita
+                if status_str == 'aceito':
+                    # Atualizar o valor líquido da skin associada
+                    skin = session.query(Skin).filter(Skin.tradeofferid == oferta.tradeofferid).first()
+                    if skin:
+                        skin.valor_liquido = calcular_valor_liquido(skin.preco)
+                        logging.info(f"🔄 Valor líquido da skin {skin.nome} atualizado para R$ {skin.valor_liquido:.2f}.")
+                    
+                    # Atualizar o saldo do usuário
+                    saldo = session.query(Saldo).filter(Saldo.steamid == oferta.partnersteamid).first()
+                    if saldo:
+                        saldo.valor += skin.valor_liquido  # Adiciona o valor líquido ao saldo
                     else:
-                        status_map = {
-                            1: 'pendente',
-                            2: 'aceito',
-                            3: 'cancelado',
-                            4: 'contra-ofertada',
-                            5: 'expirada',
-                            6: 'cancelado',
-                            7: 'recusada',
-                            8: 'itens inválidos',
-                            9: 'criada, precisa de confirmação',
-                            10: 'cancelado',
-                            11: 'em custódia'
-                        }
-                        novo_status_str = status_map.get(novo_status, 'desconhecido')
-
-                    oferta.status = novo_status_str
-                    if novo_status_str == 'cancelado':
-                        if novo_status == 7:
-                            oferta.status = 'recusada'
-                            oferta.cancelado_por = 'usuario'
-                        else:
-                            oferta.cancelado_por = 'usuario'
-                    else:
-                        oferta.cancelado_por = None
-                    oferta.updated_at = datetime.now(timezone.utc)
-                    db.session.commit()
-                    print(f"Oferta {oferta.tradeofferid} atualizada para {oferta.status} via API.")
-
-                    if oferta.status == 'pendente' and agora > expires_at_aware:
-                        print(f"Cancelando oferta {oferta.tradeofferid} por expiração...")
-                        try:
-                            steam_client.cancel_trade_offer(oferta.tradeofferid)
-                            print(f"Método cancel_trade_offer chamado para oferta {oferta.tradeofferid}.")
-                        except Exception as cancel_e:
-                            print(f"Erro ao chamar cancel_trade_offer: {cancel_e}")
-                        oferta.status = 'cancelado'
-                        oferta.cancelado_por = 'site'
-                        oferta.updated_at = datetime.now(timezone.utc)
-                        db.session.commit()
-                        print(f"Oferta {oferta.tradeofferid} cancelada automaticamente pelo site.")
-
-                except Exception as e:
-                    print(f"Erro ao verificar oferta {oferta.tradeofferid}: {e}")
-                    db.session.rollback()
-
-        except Exception as e:
-            print(f"Erro no loop de verificação: {e}")
-
-        time.sleep(60)
-
-if __name__ == "__main__":
-    from app import create_app
-    app = create_app()
-    with app.app_context():
-        verificar_status_ofertas()
+                        saldo = Saldo(steamid=oferta.partnersteamid, valor=skin.valor_liquido)
+                        session.add(saldo)
+                    session.commit()
+                    logging.info(f"💰 Saldo do usuário {oferta.partnersteamid} atualizado para R$ {saldo.valor:.2f}.")
+                
+                session.commit()
+                logging.info(f"📌 Status atualizado: {oferta.tradeofferid} → {status_str}")
+                
+                if status_str == 'pendente' and agora > oferta.expires_at:
+                    await client.cancel_trade_offer(int(oferta.tradeofferid))
+                    oferta.status = 'cancelado'
+                    oferta.cancelado_por = 'site'
+                    oferta.updated_at = agora
+                    session.commit()
+                    logging.info(f"⏱️ Oferta expirada cancelada: {oferta.tradeofferid}")
+            except Exception as e:
+                session.rollback()
+                logging.error(f"❌ Erro verificando oferta {oferta.tradeofferid}: {e}")
+    except Exception as e:
+        logging.error(f"💥 Erro na execução geral: {e}")
+    finally:
+        session.close()
+# Flask + APScheduler
+app = Flask(__name__)
+scheduler = BackgroundScheduler()
+@scheduler.scheduled_job('interval', seconds=60)
+def tarefa_agendada():
+    logging.info("⏳ Executando tarefa agendada de verificação de ofertas...")
+    asyncio.run(verificar_status())
+scheduler.start()
+@app.route("/")
+def index():
+    return "Tarefa agendada de verificação de ofertas está rodando!"
+if __name__ == '__main__':
+    app.run(debug=True)
