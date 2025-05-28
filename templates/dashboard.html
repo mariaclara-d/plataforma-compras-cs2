@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,12 +25,11 @@
             </div>
             <div class="d-flex">
                 <span class="navbar-text text-white me-3">Bem-vindo, {{ user_info['personaname'] }}</span>
-                <span class="navbar-text text-success me-3 fw-bold">Saldo: R$ {{ saldo | round(2) }}</span>
+                <span class="navbar-text text-success me-3 fw-bold">Saldo: R$ <span id="saldoAtual">{{ saldo | round(2) }}</span></span>
                 <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
             </div>
         </div>
     </nav>
-
     <div class="container-fluid dashboard-container">
         <div class="row g-3">
             <!-- Inventory Section -->
@@ -54,7 +53,7 @@
                                 <img src="{{ item.image_url }}" alt="{{ item.name }}" class="item-image" />
                                 <div class="item-info">
                                     <p class="item-name">{{ item.name }}</p>
-                                    <p class="item-price">Preço: ${{ item.price_median or "N/A" }}</p>
+                                    <p class="item-price">Preço: R$ {{ item.price_median or "N/A" }}</p>
                                     <div class="item-checkbox">
                                         <input
                                             type="checkbox"
@@ -71,33 +70,27 @@
                     {% endif %}
                 </div>
             </div>
-
             <!-- Summary Section -->
             <div class="col-md-4 col-lg-4 summary-section">
                 <h3>Você recebe</h3>
-                <p class="display-6" id="totalAmount">$0.00</p>
-
+                <p class="display-6" id="totalAmount">R$ 0.00</p>
                 <h5>Selecione sua forma de pagamento:</h5>
                 <div id="paymentOptions" class="d-flex flex-column">
                     <button class="btn btn-outline-light my-1" onclick="selectPayment('pix')">Pix</button>
                     <button class="btn btn-outline-light my-1" onclick="selectPayment('transfer')">Transferência Bancária</button>
                     <button class="btn btn-outline-light my-1" onclick="selectPayment('skrill')">Skrill</button>
                 </div>
-
                 <div id="paymentFields" class="mt-3"></div>
-
                 <button onclick="enviarOferta()" class="btn btn-success mt-3 w-100" id="btnVender" style="display: none;">
                     Vender
                 </button>
             </div>
         </div>
     </div>
-
 <script>
 function selectPayment(method) {
     const paymentFields = document.getElementById("paymentFields");
     paymentFields.innerHTML = "";
-
     if (method === "pix") {
         paymentFields.innerHTML = `
             <label for="pixKey">Chave Pix:</label>
@@ -124,12 +117,21 @@ function selectPayment(method) {
         `;
     }
 }
-</script>
-<script>
+function atualizarSaldo() {
+    fetch('/api/saldo')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.erro) {
+                document.getElementById('saldoAtual').textContent = data.saldo.toFixed(2);
+            } else {
+                console.error(data.erro);
+            }
+        })
+        .catch(error => console.error('Erro ao atualizar saldo:', error));
+}
 document.addEventListener("DOMContentLoaded", function () {
     const tradeLinkInput = document.getElementById("tradelink");
     const btnVender = document.getElementById("btnVender");
-
     function verificarExibicaoBotao() {
         const algumItemSelecionado = document.querySelector(".skin-checkbox:checked");
         if (tradeLinkInput.value.trim() && algumItemSelecionado) {
@@ -138,48 +140,39 @@ document.addEventListener("DOMContentLoaded", function () {
             btnVender.style.display = "none";
         }
     }
-
     tradeLinkInput.addEventListener("input", verificarExibicaoBotao);
     document.querySelectorAll(".skin-checkbox").forEach((checkbox) =>
         checkbox.addEventListener("change", verificarExibicaoBotao)
     );
 });
-</script>
-<script>
 document.querySelectorAll('.skin-checkbox').forEach(cb => {
     cb.addEventListener('change', () => {
+        const percentualComissao = 0.65; // Valor que o usuário realmente recebe
         let total = 0;
         document.querySelectorAll('.skin-checkbox:checked').forEach(selected => {
-            total += parseFloat(selected.dataset.price || 0);
+            const preco = parseFloat(selected.dataset.price || 0);
+            total += preco * percentualComissao;
         });
-        document.getElementById('totalAmount').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('totalAmount').textContent = `R$ ${total.toFixed(2)}`;
     });
 });
-</script>
-
-<script>
 function enviarOferta() {
     const selectedItems = Array.from(document.querySelectorAll('.skin-checkbox:checked')).map(checkbox => ({
         assetid: checkbox.dataset.assetid
     }));
-
     const tradelink = document.getElementById('tradelink').value.trim();
-
     if (selectedItems.length === 0) {
         alert('Selecione ao menos um item.');
         return;
     }
-
     if (!tradelink) {
         alert('Cole sua Trade URL antes de enviar a oferta.');
         return;
     }
-
     let pagamento = {};
     const pixKey = document.getElementById("pixKey");
     const bank = document.getElementById("bank");
     const email = document.getElementById("email");
-
     if (pixKey) {
         pagamento.metodo_pagamento = "pix";
         pagamento.chave_pix = pixKey.value.trim();
@@ -208,7 +201,6 @@ function enviarOferta() {
         alert("Escolha uma forma de pagamento.");
         return;
     }
-
     fetch('/trade/enviar-oferta', {
         method: 'POST',
         headers: {
@@ -226,6 +218,7 @@ function enviarOferta() {
             alert("Erro: " + data.erro);
         } else {
             alert("✅ Oferta enviada com sucesso!\nID: " + data.offer_id);
+            atualizarSaldo();  // Atualiza o saldo após enviar a oferta
         }
     })
     .catch(error => {
@@ -236,6 +229,4 @@ function enviarOferta() {
 </script>
 </body>
 </html>
-   
-
 
