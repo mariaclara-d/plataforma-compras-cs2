@@ -1,8 +1,8 @@
-"""Cria tabelas e relacionamentos para sistema de trade e pagamento
+"""Cria todas as tabelas iniciais
 
-Revision ID: 305f3543bca4
-Revises: 377720d20ce2
-Create Date: 2025-05-16 16:34:32.448606
+Revision ID: 74ec97590956
+Revises: 
+Create Date: 2025-06-06 20:36:34.030994
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '305f3543bca4'
-down_revision = '377720d20ce2'
+revision = '74ec97590956'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -44,6 +44,7 @@ def upgrade():
     sa.Column('tradeofferid', sa.String(length=50), nullable=False),
     sa.Column('nome', sa.String(length=100), nullable=False),
     sa.Column('preco', sa.Float(), nullable=True),
+    sa.Column('valor_liquido', sa.Float(), nullable=True),
     sa.Column('raridade', sa.String(length=50), nullable=True),
     sa.Column('descricao', sa.Text(), nullable=True),
     sa.Column('assetid', sa.String(length=50), nullable=False),
@@ -52,11 +53,11 @@ def upgrade():
     op.create_table('trade_offers',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('tradeofferid', sa.String(length=50), nullable=False),
-    sa.Column('steamid', sa.String(length=50), nullable=False),
-    sa.Column('status', sa.String(length=20), nullable=True),
+    sa.Column('partnersteamid', sa.String(length=50), nullable=False),
+    sa.Column('status', sa.String(length=20), nullable=False),
     sa.Column('cancelado_por', sa.String(length=20), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('expires_at', sa.DateTime(timezone=True), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )

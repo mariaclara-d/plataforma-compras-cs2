@@ -4,6 +4,13 @@ from flask_migrate import Migrate
 from dotenv import load_dotenv
 from pathlib import Path
 from models import InformacoesPagamento, Skin, TradeOffer, Transacao, Saldo
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+from models.saques import Saque
+from models.saldos import Saldo
+from models.transacoes import Transacao
+from models.trade_offers import TradeOffer
+from models.skins import Skin
 
 
 import os
@@ -38,10 +45,20 @@ def create_app():
     from routes.inventory import inventory_blueprint
     from routes.trade import trade_blueprint
     from routes.offer import offer_blueprint
+    from routes.saque import bp as saque_sistema_blueprint
 
     db.init_app(app)
     
     migrate = Migrate(app, db)
+
+    # --- Flask-Admin ---
+    admin = Admin(app, name='Painel Admin', template_mode='bootstrap3')
+    admin.add_view(ModelView(Saque, db.session))
+    admin.add_view(ModelView(Saldo, db.session))
+    admin.add_view(ModelView(Transacao, db.session))
+    admin.add_view(ModelView(TradeOffer, db.session))
+    admin.add_view(ModelView(Skin, db.session))
+    # -------------------
 
     app.register_blueprint(home_blueprint)
     app.register_blueprint(auth_blueprint)
@@ -50,6 +67,7 @@ def create_app():
     app.register_blueprint(inventory_blueprint, url_prefix='/inventory')
     app.register_blueprint(trade_blueprint, url_prefix='/trade')
     app.register_blueprint(offer_blueprint, url_prefix='/offer')
+    app.register_blueprint(saque_sistema_blueprint)
 
     return app
 
