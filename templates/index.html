@@ -4,8 +4,6 @@
 
 {% block content %}
 
-
-
 <section class="hero">
   <div class="container">
     <div class="row align-items-center">
@@ -18,13 +16,11 @@
 
       <!-- Coluna com imagem -->
       <div class="col-md-6 hero-image">
-        <img src="/static/images/awp-fundo.png" alt="Venda de Skins" class="img-fluid">
+        <img src="{{ url_for('static', filename='images/awp-fundo.png') }}" alt="AWP estilizada sobre fundo azul, representando venda de skins" class="img-fluid">
       </div>
     </div>
   </div>
 </section>
-
-
 
 <section id="como-funciona" class="como-funciona py-5">
   <div class="container">
@@ -33,7 +29,7 @@
       <div class="col-12 col-md-6 col-lg-3">
         <div class="card text-center p-3">
           <div class="card-body">
-            <i class="fa-brands fa-steam-symbol card-icon"></i> <!-- Ícone -->
+            <i class="fa-brands fa-steam-symbol card-icon"></i>
             <h5 class="card-title">Faça Login</h5>
             <p class="card-text">Use sua conta Steam para começar.</p>
           </div>
@@ -42,7 +38,7 @@
       <div class="col-12 col-md-6 col-lg-3">
         <div class="card text-center p-3">
           <div class="card-body">
-            <i class="fas fa-link card-icon"></i> <!-- Ícone -->
+            <i class="fas fa-link card-icon"></i>
             <h5 class="card-title">Conecte o Tradelink</h5>
             <p class="card-text">Acesse seu inventário em segundos.</p>
           </div>
@@ -70,21 +66,15 @@
   </div>
 </section>
 
-
-
-
-
 <section id="sobre-nos" class="sobre-nos">
   <div class="container text-center">
     <h2>TitoSkins</h2>
     <p>
       Somos o marketplace brasileiro especializado em skins de CS:GO.
-Oferecemos uma experiência única, segura e rápida para gamers que desejam transformar suas skins em dinheiro de verdade.
+      Oferecemos uma experiência única, segura e rápida para gamers que desejam transformar suas skins em dinheiro de verdade.
     </p>
   </div>
 </section>
-
-
 
 <!-- Seção: FAQ -->
 <section id="faq" class="faq">
@@ -119,7 +109,6 @@ Oferecemos uma experiência única, segura e rápida para gamers que desejam tra
   </div>
 </section>
 
-
 <!-- Rodapé -->
 <footer class="footer py-4">
   <div class="container">
@@ -146,10 +135,10 @@ Oferecemos uma experiência única, segura e rápida para gamers que desejam tra
       <div class="col-12 col-md-3 mb-3 mb-md-0">
         <h5 class="text-uppercase mb-3">Siga-nos</h5>
         <div class="d-flex justify-content-md-start justify-content-center gap-3">
-          <a href="#" class="footer-social-link"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="footer-social-link"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="footer-social-link"><i class="bi bi-twitter"></i></a>
-          <a href="#" class="footer-social-link"><i class="bi bi-youtube"></i></a>
+          <a href="#" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="footer-social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="bi bi-youtube"></i></a>
         </div>
       </div>
 
@@ -157,29 +146,15 @@ Oferecemos uma experiência única, segura e rápida para gamers que desejam tra
       <div class="col-12 col-md-3">
         <h5 class="text-uppercase mb-3">Formas de Pagamento</h5>
         <div class="d-flex justify-content-md-start justify-content-center gap-3">
-          <img src="imagens/cartao-visa.png" alt="Visa" class="payment-icon">
-          <img src="imagens/cartao-mastercard.png" alt="MasterCard" class="payment-icon">
-          <img src="imagens/cartao-paypal.png" alt="PayPal" class="payment-icon">
-          <img src="imagens/cartao-pix.png" alt="Pix" class="payment-icon">
+          <img src="{{ url_for('static', filename='imagens/cartao-visa.png') }}" alt="Visa" class="payment-icon">
+          <img src="{{ url_for('static', filename='imagens/cartao-mastercard.png') }}" alt="MasterCard" class="payment-icon">
+          <img src="{{ url_for('static', filename='imagens/cartao-paypal.png') }}" alt="PayPal" class="payment-icon">
+          <img src="{{ url_for('static', filename='imagens/cartao-pix.png') }}" alt="Pix" class="payment-icon">
         </div>
       </div>
     </div>
   </div>
 </footer>
-
-
-
-
-
-<script>
-function toggleFaq(question) {
-  const answer = question.nextElementSibling;
-  answer.style.display = answer.style.display === "block" ? "none" : "block";
-}
-</script>
-
-
-
 
 {% endblock %}
 

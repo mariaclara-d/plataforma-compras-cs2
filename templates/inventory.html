@@ -12,7 +12,7 @@
         <h2 class="mb-4 text-center">Selecione os itens que deseja vender</h2>
         <p class="text-center text-muted">Após enviar a oferta, você será notificado pelo SteamGuard para aceitar a troca. Verifique sua conta Steam.</p>
         
-        <form method="post" action="/enviar-oferta">
+        <form id="ofertaForm" method="post" action="/enviar-oferta">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 {% for item in inventory %}
                 <div class="col">
@@ -27,7 +27,7 @@
                                 <strong>Preço Mín.:</strong> {{ item.price_min }} <br>
                                 <strong>Preço Avg.:</strong> {{ item.price_avg }} <br>
                             </p>
-                            <a href="{{ item.inspect_link }}" target="_blank" class="btn btn-outline-primary btn-sm w-100 mb-2">Inspecionar</a>
+                            <a href="{{ item.inspect_link }}" target="_blank" class="btn btn-outline-primary btn-sm w-100 mb-2" rel="noopener noreferrer">Inspecionar</a>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="item_ids" value="{{ item.assetid }}" id="item-{{ item.assetid }}">
                                 <label class="form-check-label" for="item-{{ item.assetid }}">Selecionar</label>
@@ -40,10 +40,12 @@
 
             <!-- Campo oculto para manter o tradelink -->
             <input type="hidden" name="tradelink" value="{{ tradelink }}">
+            <!-- CSRF token -->
+            <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token() }}">
 
             <!-- Botão para enviar -->
             <div class="text-center mt-4">
-                <button type="submit" class="btn btn-success btn-lg">Enviar Oferta</button>
+                <button type="submit" class="btn btn-success btn-lg" id="btnEnviar">Enviar Oferta</button>
             </div>
         </form>
 
@@ -54,42 +56,53 @@
     <!-- Adicionar JS do Bootstrap e outros -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.querySelector("form").addEventListener("submit", function (event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
+    document.getElementById("ofertaForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
 
-            const tradelink = document.querySelector('input[name="tradelink"]').value;
+        const tradelink = document.querySelector('input[name="tradelink"]').value;
+        const csrfToken = document.getElementById('csrf_token').value;
+        const btnEnviar = document.getElementById('btnEnviar');
 
-            // Coletar itens selecionados
-            const itens = Array.from(
-                document.querySelectorAll('input[name="item_ids"]:checked')
-            ).map(input => ({ assetid: input.value, appid: "730" }));
+        // Coletar itens selecionados
+        const itens = Array.from(
+            document.querySelectorAll('input[name="item_ids"]:checked')
+        ).map(input => ({ assetid: input.value, appid: "730" }));
 
-            // Validação básica no frontend
-            if (!tradelink || itens.length === 0) {
-                alert("Por favor, insira um tradelink válido e selecione ao menos um item.");
-                return;
+        // Validação básica no frontend
+        if (!tradelink || itens.length === 0) {
+            showStatus("Por favor, insira um tradelink válido e selecione ao menos um item.", "danger");
+            return;
+        }
+
+        btnEnviar.disabled = true;
+        btnEnviar.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Enviando...';
+
+        fetch("/enviar-oferta", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ itens, tradelink, csrf_token: csrfToken }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            btnEnviar.disabled = false;
+            btnEnviar.innerHTML = 'Enviar Oferta';
+            if (data.erro) {
+                showStatus("Erro: " + data.erro, "danger");
+            } else {
+                showStatus(data.mensagem, "success");
             }
-
-            // Enviar dados via POST
-            fetch("/enviar-oferta", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ itens, tradelink }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                const statusDiv = document.getElementById("status");
-                if (data.erro) {
-                    statusDiv.innerHTML = `<p style="color: red;">Erro: ${data.erro}</p>`;
-                } else {
-                    statusDiv.innerHTML = `<p style="color: green;">${data.mensagem}</p>`;
-                }
-            })
-            .catch(error => {
-                const statusDiv = document.getElementById("status");
-                statusDiv.innerHTML = `<p style="color: red;">Erro ao enviar oferta: ${error.message}</p>`;
-            });
+        })
+        .catch(error => {
+            btnEnviar.disabled = false;
+            btnEnviar.innerHTML = 'Enviar Oferta';
+            showStatus("Erro ao enviar oferta: " + error.message, "danger");
         });
+    });
+
+    function showStatus(msg, type) {
+        const statusDiv = document.getElementById("status");
+        statusDiv.innerHTML = `<div class="alert alert-${type}" role="alert">${msg}</div>`;
+    }
     </script>
 </body>
 </html>

@@ -117,6 +117,42 @@ function selectPayment(method) {
         `;
     }
 }
+
+// Função para mostrar mensagens de forma amigável usando Bootstrap Modal
+function showMessage(title, message, isError = false) {
+    let modal = document.getElementById('feedbackModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.className = 'modal fade';
+        modal.id = 'feedbackModal';
+        modal.tabIndex = -1;
+        modal.innerHTML = `
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    modal.querySelector('.modal-title').textContent = title;
+    modal.querySelector('.modal-body').textContent = message;
+    if (isError) {
+        modal.querySelector('.modal-header').classList.add('bg-danger', 'text-white');
+    } else {
+        modal.querySelector('.modal-header').classList.remove('bg-danger', 'text-white');
+    }
+    const bsModal = new bootstrap.Modal(modal);
+    bsModal.show();
+}
+
 function atualizarSaldo() {
     fetch('/api/saldo')
         .then(response => response.json())
@@ -129,6 +165,7 @@ function atualizarSaldo() {
         })
         .catch(error => console.error('Erro ao atualizar saldo:', error));
 }
+
 document.addEventListener("DOMContentLoaded", function () {
     const tradeLinkInput = document.getElementById("tradelink");
     const btnVender = document.getElementById("btnVender");
@@ -144,29 +181,35 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".skin-checkbox").forEach((checkbox) =>
         checkbox.addEventListener("change", verificarExibicaoBotao)
     );
-});
-document.querySelectorAll('.skin-checkbox').forEach(cb => {
-    cb.addEventListener('change', () => {
-        const percentualComissao = 0.65; // Valor que o usuário realmente recebe
-        let total = 0;
-        document.querySelectorAll('.skin-checkbox:checked').forEach(selected => {
-            const preco = parseFloat(selected.dataset.price || 0);
-            total += preco * percentualComissao;
-        });
-        document.getElementById('totalAmount').textContent = `R$ ${total.toFixed(2)}`;
+    // Atualiza o valor total ao carregar
+    document.querySelectorAll('.skin-checkbox').forEach(cb => {
+        cb.addEventListener('change', atualizarTotal);
     });
+    atualizarTotal();
 });
+
+// Função separada para atualizar o valor total
+function atualizarTotal() {
+    const percentualComissao = 0.65; // Valor que o usuário realmente recebe
+    let total = 0;
+    document.querySelectorAll('.skin-checkbox:checked').forEach(selected => {
+        const preco = parseFloat(selected.dataset.price || 0);
+        total += preco * percentualComissao;
+    });
+    document.getElementById('totalAmount').textContent = `R$ ${total.toFixed(2)}`;
+}
+
 function enviarOferta() {
     const selectedItems = Array.from(document.querySelectorAll('.skin-checkbox:checked')).map(checkbox => ({
         assetid: checkbox.dataset.assetid
     }));
     const tradelink = document.getElementById('tradelink').value.trim();
     if (selectedItems.length === 0) {
-        alert('Selecione ao menos um item.');
+        showMessage('Atenção', 'Selecione ao menos um item.', true);
         return;
     }
     if (!tradelink) {
-        alert('Cole sua Trade URL antes de enviar a oferta.');
+        showMessage('Atenção', 'Cole sua Trade URL antes de enviar a oferta.', true);
         return;
     }
     let pagamento = {};
@@ -177,7 +220,7 @@ function enviarOferta() {
         pagamento.metodo_pagamento = "pix";
         pagamento.chave_pix = pixKey.value.trim();
         if (!pagamento.chave_pix) {
-            alert("Digite uma chave Pix válida.");
+            showMessage('Atenção', 'Digite uma chave Pix válida.', true);
             return;
         }
     } else if (bank) {
@@ -187,20 +230,28 @@ function enviarOferta() {
         pagamento.conta = document.getElementById("account").value.trim();
         pagamento.tipo_conta = document.getElementById("accountType").value;
         if (!pagamento.banco || !pagamento.agencia || !pagamento.conta) {
-            alert("Preencha todos os campos de transferência bancária.");
+            showMessage('Atenção', 'Preencha todos os campos de transferência bancária.', true);
             return;
         }
     } else if (email) {
         pagamento.metodo_pagamento = "skrill";
         pagamento.carteira = email.value.trim();
         if (!pagamento.carteira.includes("@")) {
-            alert("Digite um e-mail válido para Skrill.");
+            showMessage('Atenção', 'Digite um e-mail válido para Skrill.', true);
             return;
         }
     } else {
-        alert("Escolha uma forma de pagamento.");
+        showMessage('Atenção', 'Escolha uma forma de pagamento.', true);
         return;
     }
+
+    // Adiciona CSRF token ao body (importante para segurança)
+    const csrfToken = "{{ csrf_token() }}";
+
+    // Mostra spinner de carregamento
+    btnVender.disabled = true;
+    btnVender.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Enviando...';
+
     fetch('/trade/enviar-oferta', {
         method: 'POST',
         headers: {
@@ -209,24 +260,44 @@ function enviarOferta() {
         body: JSON.stringify({
             itens: selectedItems,
             tradelink: tradelink,
-            pagamento: pagamento
+            pagamento: pagamento,
+            csrf_token: csrfToken
         })
     })
     .then(response => response.json())
     .then(data => {
+        btnVender.disabled = false;
+        btnVender.innerHTML = 'Vender';
         if (data.erro) {
-            alert("Erro: " + data.erro);
+            showMessage('Erro', data.erro, true);
         } else {
-            alert("✅ Oferta enviada com sucesso!\nID: " + data.offer_id);
+            showMessage('Sucesso', `✅ Oferta enviada com sucesso!\nID: ${data.offer_id}`);
             atualizarSaldo();  // Atualiza o saldo após enviar a oferta
         }
     })
     .catch(error => {
+        btnVender.disabled = false;
+        btnVender.innerHTML = 'Vender';
         console.error("Erro ao enviar:", error);
-        alert("❌ Erro inesperado. Verifique o console.");
+        showMessage('Erro', '❌ Erro inesperado. Verifique o console.', true);
     });
 }
 </script>
+<!-- Modal para feedback -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 
