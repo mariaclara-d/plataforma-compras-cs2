@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session, current_app
 from services.aiosteampy_service import (
     realizar_login_aiosteampy,
     enviar_oferta_aiosteampy,
@@ -11,7 +11,17 @@ import asyncio
 
 trade_blueprint = Blueprint('trade', __name__, template_folder="../templates")
 
+def login_required_api(f):
+    from functools import wraps
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if 'steam_id' not in session:
+            return jsonify({"erro": "Usuário não autenticado"}), 401
+        return f(*args, **kwargs)
+    return decorated
+
 @trade_blueprint.route('/enviar-oferta', methods=['POST'])
+@login_required_api
 def enviar_oferta_com_aiosteampy():
     print("📨 Iniciando o endpoint '/enviar-oferta' com aiosteampy")
     dados = request.json
@@ -19,14 +29,35 @@ def enviar_oferta_com_aiosteampy():
     if not dados:
         return jsonify({"erro": "Dados ausentes na requisição"}), 400
 
+    # CSRF token (opcional, se usar no frontend)
+    csrf_token = dados.get('csrf_token')
+    if not csrf_token or csrf_token != session.get('csrf_token'):
+        return jsonify({"erro": "CSRF token inválido"}), 403
+
     try:
         itens_selecionados, tradelink, partner_steamid64 = validar_dados_requisicao(dados)
     except ValueError as e:
         return jsonify({"erro": str(e)}), 400
 
+    # Garante que o usuário só envie oferta do próprio inventário
+    if str(partner_steamid64) != str(session.get('steam_id')):
+        return jsonify({"erro": "Operação não autorizada"}), 403
+
     pagamento = dados.get('pagamento')
     if not pagamento:
         return jsonify({"erro": "Dados de pagamento ausentes"}), 400
+
+    metodo = pagamento.get('metodo_pagamento')
+    if metodo not in {'pix', 'transfer', 'skrill'}:
+        return jsonify({"erro": "Método de pagamento inválido"}), 400
+
+    # Validação básica dos campos de pagamento
+    if metodo == 'pix' and not pagamento.get('chave_pix'):
+        return jsonify({"erro": "Chave PIX obrigatória"}), 400
+    if metodo == 'transfer' and not all([pagamento.get('banco'), pagamento.get('agencia'), pagamento.get('conta'), pagamento.get('tipo_conta')]):
+        return jsonify({"erro": "Dados bancários incompletos"}), 400
+    if metodo == 'skrill' and not pagamento.get('carteira'):
+        return jsonify({"erro": "Carteira Skrill obrigatória"}), 400
 
     # Atualiza ou cria informações de pagamento
     info_pagamento = InformacoesPagamento.query.filter_by(steamid=str(partner_steamid64)).first()
@@ -34,43 +65,38 @@ def enviar_oferta_com_aiosteampy():
         info_pagamento = InformacoesPagamento(steamid=str(partner_steamid64))
 
     info_pagamento.tradelink = tradelink
-    info_pagamento.metodo_pagamento = pagamento.get('metodo_pagamento')
+    info_pagamento.metodo_pagamento = metodo
 
-    if pagamento['metodo_pagamento'] == 'pix':
+    if metodo == 'pix':
         info_pagamento.chave_pix = pagamento.get('chave_pix')
         info_pagamento.banco = info_pagamento.agencia = info_pagamento.conta = info_pagamento.tipo_conta = info_pagamento.carteira = None
-
-    elif pagamento['metodo_pagamento'] == 'transfer':
+    elif metodo == 'transfer':
         info_pagamento.banco = pagamento.get('banco')
         info_pagamento.agencia = pagamento.get('agencia')
         info_pagamento.conta = pagamento.get('conta')
         info_pagamento.tipo_conta = pagamento.get('tipo_conta')
         info_pagamento.chave_pix = info_pagamento.carteira = None
-
-    elif pagamento['metodo_pagamento'] == 'skrill':
+    elif metodo == 'skrill':
         info_pagamento.carteira = pagamento.get('carteira')
         info_pagamento.chave_pix = info_pagamento.banco = info_pagamento.agencia = info_pagamento.conta = info_pagamento.tipo_conta = None
 
-    else:
-        return jsonify({"erro": "Método de pagamento inválido"}), 400
-
     db.session.add(info_pagamento)
     db.session.commit()
-    print("💾 Informações de pagamento salvas no banco.")
+    current_app.logger.info("Informações de pagamento salvas no banco.")
 
     async def processar_oferta():
         try:
             client = await realizar_login_aiosteampy()
-            print("✅ Login com aiosteampy realizado com sucesso.")
+            current_app.logger.info("Login com aiosteampy realizado com sucesso.")
 
             try:
                 offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
-                print(f"🎉 Oferta enviada com sucesso! ID: {offer_id}")
+                current_app.logger.info(f"Oferta enviada com sucesso! ID: {offer_id}")
                 registrar_oferta_no_banco(offer_id, partner_steamid64)
-                print("💾 Oferta registrada com sucesso no banco.")
+                current_app.logger.info("Oferta registrada com sucesso no banco.")
             finally:
                 await client.logout()
-                print("👋 Cliente desconectado após envio.")
+                current_app.logger.info("Cliente desconectado após envio.")
 
             return jsonify({
                 "mensagem": "Oferta criada com sucesso!",
@@ -78,7 +104,7 @@ def enviar_oferta_com_aiosteampy():
             }), 200
 
         except Exception as e:
-            print(f"Erro interno: {e}")
-            return jsonify({"erro": f"Erro interno: {str(e)}"}), 500
+            current_app.logger.error(f"Erro interno: {e}")
+            return jsonify({"erro": "Erro interno ao processar a oferta."}), 500
 
     return asyncio.run(processar_oferta())

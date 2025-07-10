@@ -1,8 +1,8 @@
-"""Cria todas as tabelas iniciais
+"""Cria todas as tabelas do zero
 
-Revision ID: 74ec97590956
+Revision ID: 08b759abc370
 Revises: 
-Create Date: 2025-06-06 20:36:34.030994
+Create Date: 2025-07-10 15:21:18.103731
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '74ec97590956'
+revision = '08b759abc370'
 down_revision = None
 branch_labels = None
 depends_on = None

@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: csgo_skins
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dba0c4
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: flask run --host=0.0.0.0
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://postgres:dba0c4@db:5432/csgo_skins
+      # Outras variáveis do seu .env aqui, se quiser
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+volumes:
+  pgdata:

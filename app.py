@@ -4,26 +4,25 @@ from flask_migrate import Migrate
 from dotenv import load_dotenv
 from pathlib import Path
 from models import InformacoesPagamento, Skin, TradeOffer, Transacao, Saldo
-
-
+from flask_wtf import CSRFProtect
+from flask_wtf.csrf import generate_csrf
 import os
 
+# Cria instância global do CSRF
+csrf = CSRFProtect()
 
 def create_app():
-
+    # Carrega o .env manualmente
     dotenv_path = Path("C:/Users/Tito el mestre/Documents/GitHub/documentacaoFlask---Copia/.env")
     load_dotenv(dotenv_path=dotenv_path)
+
     
-    print("STEAM_USERNAME:", os.getenv("STEAM_USERNAME"))
-    print("STEAM_PASSWORD:", os.getenv("STEAM_PASSWORD"))
-    print("STEAM_SHARED_SECRET:", os.getenv("STEAM_SHARED_SECRET"))
-    print("STEAM_API_KEY:", os.getenv("STEAM_API_KEY"))
-    print("STEAM_GUARD_FILE:", os.getenv("STEAM_GUARD_FILE"))
 
-
+    # Inicializa o app
     app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+    # Configurações essenciais
+    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY") or 'chave-padrao'
     app.config['STEAM_API_KEY_NAO_OFICIAL'] = os.getenv("STEAM_API_KEY_NAO_OFICIAL")
     app.config['STEAM_API_KEY'] = os.getenv("STEAM_API_KEY")
     app.config['STEAM_RETURN_URL'] = os.getenv("STEAM_RETURN_URL")
@@ -31,6 +30,19 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+    # Inicializa CSRF
+    csrf.init_app(app)
+
+    # Injeta token CSRF para uso em <input id="csrf_token"> no base.html
+    @app.context_processor
+    def inject_csrf_token():
+        return dict(csrf_token=generate_csrf())
+
+    # Inicializa banco e migrações
+    db.init_app(app)
+    migrate = Migrate(app, db)
+
+    # Blueprints
     from routes.home import home_blueprint
     from routes.auth import auth_blueprint
     from routes.dashboard import dashboard_blueprint
@@ -38,10 +50,6 @@ def create_app():
     from routes.inventory import inventory_blueprint
     from routes.trade import trade_blueprint
     from routes.offer import offer_blueprint
-
-    db.init_app(app)
-    
-    migrate = Migrate(app, db)
 
     app.register_blueprint(home_blueprint)
     app.register_blueprint(auth_blueprint)
