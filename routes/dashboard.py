@@ -35,12 +35,19 @@ def parse_price(value):
 
 @dashboard_blueprint.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
+    # DEBUG: Mostra o conteúdo da sessão
+    print("DEBUG: Sessão atual:", dict(session))  # Remover em produção
+
     if "steam_id" not in session:
+        print("DEBUG: steam_id não encontrado na sessão. Redirecionando para home.")  # Remover em produção
         return redirect(url_for("home.home"))
 
     user_steam_id = session["steam_id"]
+    print("DEBUG: steam_id encontrado:", user_steam_id)  # Remover em produção
+
     user_info = get_steam_user_info(user_steam_id)
     if not user_info:
+        print("DEBUG: Não foi possível obter user_info do Steam. Redirecionando para logout.")  # Remover em produção
         return redirect(url_for("dashboard.logout"))
 
     form = TradeLinkForm()
@@ -54,6 +61,7 @@ def dashboard():
         result = fetch_inventory(tradelink, user_steam_id)
 
         if "error" in result:
+            print("DEBUG: Erro ao buscar inventário:", result["error"])  # Remover em produção
             return render_template(
                 "dashboard.html",
                 form=form,
@@ -69,6 +77,8 @@ def dashboard():
             key=lambda x: parse_price(x.get("price_median")),
             reverse=True
         )
+
+        print(f"DEBUG: Inventário carregado, {len(inventory)} itens encontrados.")  # Remover em produção
 
         return render_template(
             "dashboard.html",
