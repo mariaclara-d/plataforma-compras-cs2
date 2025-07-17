@@ -14,8 +14,8 @@ shared_secret = steam_guard["shared_secret"]
 identity_secret = steam_guard["identity_secret"]
 steam_id = steam_guard["steam_id"]
 
-tradelink = "https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg"
-item_assetid = "42695553185"
+tradelink = "https://steamcommunity.com/tradeoffer/new/?partner=379153456&token=7-09ViW2"
+item_assetid = "42136080323"
 
 def tradelink_para_steamid64(tradelink: str) -> str:
     match = re.search(r"partner=(\d+)", tradelink)

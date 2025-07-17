@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, session, current_app
+from flask_wtf.csrf import validate_csrf, CSRFError
 from services.aiosteampy_service import (
     realizar_login_aiosteampy,
     enviar_oferta_aiosteampy,
@@ -24,22 +25,25 @@ def login_required_api(f):
 @trade_blueprint.route('/enviar-oferta', methods=['POST'])
 @login_required_api
 def enviar_oferta_com_aiosteampy():
+    current_app.logger.info("===> Entrou no endpoint /enviar-oferta")
     try:
-        print("📨 Iniciando o endpoint '/enviar-oferta' com aiosteampy")
+        current_app.logger.info(f"Payload recebido: {request.json}")
+
         dados = request.json
 
-        if not dados:
-            return jsonify({"erro": "Dados ausentes na requisição"}), 400
-
-        # CSRF token (opcional, se usar no frontend)
-        csrf_token = dados.get('csrf_token')
-        if not csrf_token or csrf_token != session.get('csrf_token'):
+        try:
+            csrf_token = request.headers.get('X-CSRFToken') or dados.get('csrf_token')
+            validate_csrf(csrf_token)
+        except CSRFError as e:
+            current_app.logger.info(f"CSRF inválido: {e.description}")
             return jsonify({"erro": "CSRF token inválido"}), 403
 
         try:
             itens_selecionados, tradelink, partner_steamid64 = validar_dados_requisicao(dados)
-        except ValueError as e:
-            return jsonify({"erro": str(e)}), 400
+        except Exception as e:
+            msg = str(e) or "Erro de validação nos dados enviados."
+            current_app.logger.error(f"Erro ao validar dados: {msg}")
+            return jsonify({"erro": msg}), 400
 
         # Garante que o usuário só envie oferta do próprio inventário
         if str(partner_steamid64) != str(session.get('steam_id')):
@@ -109,11 +113,9 @@ def enviar_oferta_com_aiosteampy():
                 current_app.logger.error(f"Erro interno: {e}")
                 return jsonify({"erro": "Erro interno ao processar a oferta."}), 500
 
-        current_app.logger.info(f"Payload recebido: {dados}")
-
         return asyncio.run(processar_oferta())
 
     except Exception as e:
-        current_app.logger.error(f"Erro inesperado no endpoint /enviar-oferta: {e}")
+        current_app.logger.error(f"Erro inesperado: {e}")
         current_app.logger.error(traceback.format_exc())
         return jsonify({"erro": "Erro inesperado no servidor."}), 500

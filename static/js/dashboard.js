@@ -155,17 +155,20 @@ function enviarOferta() {
     }
 
     // Adiciona CSRF token ao body (importante para segurança)
-    const csrfToken = window.csrfToken || "";
+    const csrfToken = document.getElementById('csrf_token').value;
 
     // Mostra spinner de carregamento
     const btnVender = document.getElementById("btnVender");
     btnVender.disabled = true;
     btnVender.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Enviando...';
 
+    console.log("CSRF enviado:", csrfToken);
+
     fetch('/trade/enviar-oferta', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken // <-- Adicione esta linha!
         },
         body: JSON.stringify({
             itens: selectedItems,

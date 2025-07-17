@@ -1,4 +1,11 @@
-from flask import Flask
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s: %(message)s"
+)
+
+from flask import Flask, session
 from db_config import db
 from flask_migrate import Migrate
 from dotenv import load_dotenv
@@ -36,7 +43,8 @@ def create_app():
     # Injeta token CSRF para uso em <input id="csrf_token"> no base.html
     @app.context_processor
     def inject_csrf_token():
-        return dict(csrf_token=generate_csrf())
+        token = generate_csrf()
+        return dict(csrf_token=token)
 
     # Inicializa banco e migrações
     db.init_app(app)
