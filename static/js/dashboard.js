@@ -163,6 +163,7 @@ function enviarOferta() {
     btnVender.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Enviando...';
 
     console.log("CSRF enviado:", csrfToken);
+    console.log("AssetIDs enviados para oferta:", selectedItems.map(item => item.assetid));
 
     fetch('/trade/enviar-oferta', {
         method: 'POST',

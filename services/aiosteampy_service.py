@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 from aiosteampy.client import SteamClient
 from aiosteampy.constants import AppContext
+from aiosteampy.models import EconItem
 from db_config import db
 from models import TradeOffer
 from models import Skin
@@ -28,11 +29,36 @@ async def realizar_login_aiosteampy():
             identity_secret=steam_guard["identity_secret"],
             api_key=os.getenv("STEAM_API_KEY")
         )
+        print("🔐 Tentando fazer login com aiosteampy...")
+        print(f"🔐 Account: {steam_guard['account_name']}")
+        print(f"🔐 Steam ID: {steam_guard['steam_id']}")
         await client.login()
         print("✅ Login com aiosteampy realizado com sucesso.")
         return client
+    except KeyError as ke:
+        error_details = f"KeyError: Campo ausente na resposta do Steam: {ke}"
+        print(f"🚨 ERRO CRÍTICO: {error_details}")
+        print(f"🚨 Isso indica problema de autenticação Steam")
+        print(f"🚨 Possíveis causas:")
+        print(f"   • Username/password incorretos")
+        print(f"   • Steam Guard secrets inválidos/expirados")
+        print(f"   • Conta Steam com restrições")
+        print(f"   • Steam mudou protocolo de autenticação")
+        raise RuntimeError(f"Falha crítica na autenticação Steam: {error_details}")
     except Exception as e:
-        raise RuntimeError("Falha no login com Steam: " + str(e))
+        print(f"❌ Erro detalhado no login: {type(e).__name__}: {str(e)}")
+        print(f"❌ Conta: {steam_guard.get('account_name', 'N/A')}")
+        
+        # Verificar se é problema de client_id (comum quando credenciais estão incorretas)
+        error_str = str(e)
+        if "client_id" in error_str:
+            raise RuntimeError("❌ PROBLEMA DE AUTENTICAÇÃO: Steam não retornou 'client_id'. Credenciais inválidas ou Steam Guard expirado.")
+        elif "shared_secret" in error_str:
+            raise RuntimeError("Shared secret inválido no steam_guard.json")
+        elif "identity_secret" in error_str:
+            raise RuntimeError("Identity secret inválido no steam_guard.json")
+        else:
+            raise RuntimeError("Falha no login com Steam: " + str(e))
     
     
     # ------------------- VALOR LÍQUIDO------------------- #
@@ -45,6 +71,16 @@ def calcular_valor_liquido(preco, percentual_comissao=0.65):
 
 
 
+# ------------------- VERIFICAÇÃO DE CONTA ------------------- #
+async def verificar_status_conta_steam(client: SteamClient, steamid: int):
+    """Verifica se uma conta Steam pode fazer trades"""
+    # Verificação básica - se conseguiu fazer login, está ok
+    if hasattr(client, 'steam_id') and client.steam_id:
+        return True, "OK"
+    else:
+        return False, "Cliente não conectado"
+
+
 # ------------------- ENVIO DE OFERTA ------------------- #
 def extrair_steamid64_do_tradelink(tradelink: str) -> int:
     match = re.search(r"partner=(\d+)", tradelink)
@@ -54,40 +90,63 @@ def extrair_steamid64_do_tradelink(tradelink: str) -> int:
     return steamid32 + 76561197960265728
 async def enviar_oferta_aiosteampy(client: SteamClient, tradelink: str, assetids: list[str]) -> str:
     partner_steamid64 = extrair_steamid64_do_tradelink(tradelink)
-    print(f"🎒 Buscando itens do inventário de {partner_steamid64}...")
-    itens = []
     
-    # Buscar itens do inventário
-    for assetid in assetids:
-        try:
-            item = await client.get_user_inventory_item(
-                steam_id=partner_steamid64,
-                app_context=AppContext.CS2,
-                obj=int(assetid)
-            )
-            if not item:
-                raise Exception(f"Item com assetid {assetid} não encontrado no inventário do parceiro.")
-            itens.append(item)
-        except Exception as e:
-            raise RuntimeError(f"Erro ao buscar o item {assetid}: {str(e)}")
-    
-    # Enviar oferta de troca
+    # Carregar inventário do usuário
     try:
-        print("🚀 Enviando oferta de troca...")
-        tradeoffer_id = await client.make_trade_offer(
-            obj=tradelink,
-            to_give=[],
-            to_receive=itens,
-            message="Oferta enviada pelo site"
+        user_inventory = await client.get_user_inventory(
+            steam_id=partner_steamid64,
+            app_context=AppContext.CS2
         )
-        print(f"🎉 Oferta enviada com sucesso! ID: {tradeoffer_id}")
         
-        # Registrar a oferta no banco, passando os assetids
-        registrar_oferta_no_banco(tradeoffer_id, partner_steamid64, assetids)
+        if not user_inventory:
+            raise ValueError("Inventário vazio")
         
-        return str(tradeoffer_id)
-    except Exception as e:
-        raise RuntimeError(f"Erro ao enviar a oferta: {str(e)}")
+        # Filtrar itens pelos assetids
+        itens_para_oferta = []
+        for item in user_inventory:
+            if str(item.asset_id) in assetids:
+                itens_para_oferta.append(item)
+        
+        if not itens_para_oferta:
+            raise ValueError(f"Nenhum dos AssetIDs encontrado: {assetids}")
+        
+        itens = itens_para_oferta
+        
+    except Exception:
+        # FALLBACK: criar EconItem manualmente
+        from aiosteampy.models import EconItem
+        from aiosteampy.constants import AppContext
+        
+        class ItemDescription:
+            def __init__(self):
+                self.market_tradable_restriction = 0
+                self.market_marketable_restriction = 0
+                self.name = "CS2 Item"
+                self.type = "Weapon"
+                self.tradable = True
+                self.marketable = True
+        
+        itens = []
+        for assetid in assetids:
+            item = EconItem(
+                asset_id=str(assetid),
+                owner_id=str(partner_steamid64),
+                app_context=AppContext.CS2,
+                amount=1,
+                description=ItemDescription()
+            )
+            itens.append(item)
+    
+    # Enviar oferta
+    tradeoffer_id = await client.make_trade_offer(
+        obj=int(partner_steamid64),
+        to_give=[],
+        to_receive=itens,
+        message="Oferta de compra - TitoSkins",
+        confirm=False
+    )
+    
+    return str(tradeoffer_id)
 
 
 

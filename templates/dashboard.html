@@ -59,6 +59,8 @@
                                         <input
                                             type="checkbox"
                                             class="skin-checkbox"
+                                            name="item_ids"
+                                            value="{{ item.assetid }}"
                                             data-price="{{ item.price_median or 0 }}"
                                             id="skin-{{ loop.index }}"
                                             data-assetid="{{ item.assetid }}"

@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Instala as dependências do projeto
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --default-timeout=100 --no-cache-dir -i https://pypi.org/simple -r requirements.txt
 
 # Copia todos os arquivos do projeto para o contêiner
 COPY . .

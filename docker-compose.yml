@@ -20,7 +20,8 @@ services:
       FLASK_APP: app.py
       FLASK_ENV: development
       DATABASE_URL: postgresql://postgres:dba0c4@db:5432/csgo_skins
-      # Outras variáveis do seu .env aqui, se quiser
+      STEAM_API_KEY: BB2144BBAC98212BD490A2F8B4BC85F6
+      SECRET_KEY: 642c63cb0970be743908e6351247d462cad55173c461d5b6c0f4d7c1a2b9bcd1
     ports:
       - "5000:5000"
     depends_on:

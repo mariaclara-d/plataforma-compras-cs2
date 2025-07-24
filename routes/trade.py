@@ -6,12 +6,16 @@ from services.aiosteampy_service import (
     registrar_oferta_no_banco,
     validar_dados_requisicao,
 )
+from services.inventory_service import InventoryService
 from models import InformacoesPagamento
 from app import db
 import asyncio
 import traceback
 
 trade_blueprint = Blueprint('trade', __name__, template_folder="../templates")
+
+# Initialize inventory service
+inventory_service = InventoryService()
 
 def login_required_api(f):
     from functools import wraps
@@ -48,6 +52,22 @@ def enviar_oferta_com_aiosteampy():
         # Garante que o usuário só envie oferta do próprio inventário
         if str(partner_steamid64) != str(session.get('steam_id')):
             return jsonify({"erro": "Operação não autorizada"}), 403
+
+        # VALIDAÇÃO DE ASSETIDS - Verificar se os itens selecionados são válidos
+        current_app.logger.info("Iniciando validação de assetids...")
+        selected_assetids = [item["assetid"] for item in itens_selecionados]
+        current_app.logger.info(f"AssetIDs selecionados para validação: {selected_assetids}")
+        
+        validation_result = inventory_service.validate_selected_items(selected_assetids, str(partner_steamid64))
+        
+        if not validation_result['valid']:
+            current_app.logger.error(f"Validação de assetids falhou: {validation_result['error']}")
+            return jsonify({
+                "erro": f"Itens inválidos selecionados: {validation_result['invalid_items']}",
+                "detalhes": "Os itens podem ter sido vendidos ou não estão mais disponíveis no seu inventário."
+            }), 400
+        
+        current_app.logger.info(f"Validação de assetids bem-sucedida - {len(validation_result['valid_items'])} itens válidos")
 
         pagamento = dados.get('pagamento')
         if not pagamento:
@@ -98,7 +118,9 @@ def enviar_oferta_com_aiosteampy():
                 try:
                     offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
                     current_app.logger.info(f"Oferta enviada com sucesso! ID: {offer_id}")
-                    registrar_oferta_no_banco(offer_id, partner_steamid64)
+                    
+                    # Registrar a oferta no banco agora (movido para cá)
+                    registrar_oferta_no_banco(offer_id, partner_steamid64, [item["assetid"] for item in itens_selecionados])
                     current_app.logger.info("Oferta registrada com sucesso no banco.")
                 finally:
                     await client.logout()
@@ -110,8 +132,19 @@ def enviar_oferta_com_aiosteampy():
                 }), 200
 
             except Exception as e:
-                current_app.logger.error(f"Erro interno: {e}")
-                return jsonify({"erro": "Erro interno ao processar a oferta."}), 500
+                import traceback
+                current_app.logger.error(f"🚨 ERRO DETALHADO: {type(e).__name__}: {str(e)}")
+                current_app.logger.error(f"🚨 TRACEBACK COMPLETO:")
+                current_app.logger.error(traceback.format_exc())
+                
+                # Desconectar cliente se ainda conectado
+                try:
+                    await client.logout()
+                    current_app.logger.info("Cliente desconectado após erro.")
+                except:
+                    pass
+                
+                return jsonify({"erro": f"Erro interno: {str(e)}"}), 500
 
         return asyncio.run(processar_oferta())
 
