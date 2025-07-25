@@ -1,0 +1,57 @@
+{% extends "admin/login-base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<div class="card admin-login-card">
+    <div class="card-header text-white text-center">
+        <h3 class="mb-0">
+            <i class="fas fa-lock"></i> Login Administrativo
+        </h3>
+        <p class="mb-0 mt-2 opacity-75">Acesso restrito a administradores</p>
+    </div>
+    <div class="card-body">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }}">
+                        <i class="fas fa-exclamation-triangle"></i> {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+            <div class="mb-4">
+                <label class="form-label fw-bold">
+                    <i class="fas fa-user"></i> Username
+                </label>
+                <input type="text" class="form-control" name="username" required 
+                       placeholder="Digite seu usuário admin">
+            </div>
+            <div class="mb-4">
+                <label class="form-label fw-bold">
+                    <i class="fas fa-key"></i> Password
+                </label>
+                <input type="password" class="form-control" name="password" required 
+                       placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn btn-admin w-100">
+                <i class="fas fa-sign-in-alt"></i> Entrar no Painel
+            </button>
+        </form>
+        
+        <div class="text-center mt-4">
+            <small class="text-muted">
+                <i class="fas fa-shield-alt"></i> 
+                Acesso seguro com autenticação em duas etapas
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

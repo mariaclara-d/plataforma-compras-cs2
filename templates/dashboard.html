@@ -38,6 +38,7 @@
                 <h2>Seu Inventário</h2>
                 <form method="POST" action="/dashboard">
                     {{ form.hidden_tag() }}
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
                     <div class="mb-3">
                         {{ form.tradelink.label }}
                         {{ form.tradelink(class="form-control", id="tradelink", placeholder="Cole sua Trade URL aqui") }}

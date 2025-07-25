@@ -1,0 +1,268 @@
+2025-07-25 00:35:08 | ERROR | app | log_exception:875 | Exception on /admin/dashboard [GET]
+Traceback (most recent call last):
+  File "/app/routes/admin.py", line 71, in dashboard
+    saques_recentes = Saque.query.order_by(desc(Saque.created_at)).limit(10).all()
+AttributeError: type object 'Saque' has no attribute 'created_at'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 85, in dashboard
+    return render_template('admin/dashboard.html',
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/templates/admin/dashboard.html", line 1, in top-level template code
+    {% extends "admin/base.html" %}
+  File "/app/templates/admin/base.html", line 89, in top-level template code
+    {% block content %}{% endblock %}
+  File "/app/templates/admin/dashboard.html", line 63, in block 'content'
+    <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ "%.2f"|format(valor_pendente) }}</div>
+  File "/usr/local/lib/python3.10/site-packages/jinja2/filters.py", line 1043, in do_format
+    return soft_str(value) % (kwargs or args)
+jinja2.exceptions.UndefinedError: 'valor_pendente' is undefined
+2025-07-25 00:41:09 | ERROR | app | log_exception:875 | Exception on /admin/dashboard [GET]
+Traceback (most recent call last):
+  File "/app/routes/admin.py", line 71, in dashboard
+    saques_recentes = Saque.query.order_by(desc(Saque.criado_em)).limit(10).all()
+AttributeError: type object 'Saque' has no attribute 'created_at'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 85, in dashboard
+    return render_template('admin/dashboard.html',
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/templates/admin/dashboard.html", line 1, in top-level template code
+    {% extends "admin/base.html" %}
+  File "/app/templates/admin/base.html", line 89, in top-level template code
+    {% block content %}{% endblock %}
+  File "/app/templates/admin/dashboard.html", line 63, in block 'content'
+    <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ "%.2f"|format(valor_saques_pendente) }}</div>
+  File "/usr/local/lib/python3.10/site-packages/jinja2/filters.py", line 1043, in do_format
+    return soft_str(value) % (kwargs or args)
+jinja2.exceptions.UndefinedError: 'valor_pendente' is undefined
+2025-07-25 00:41:09 | ERROR | app | log_exception:875 | Exception on /admin/dashboard [GET]
+Traceback (most recent call last):
+  File "/app/routes/admin.py", line 71, in dashboard
+    saques_recentes = Saque.query.order_by(desc(Saque.criado_em)).limit(10).all()
+AttributeError: type object 'Saque' has no attribute 'created_at'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 85, in dashboard
+    return render_template('admin/dashboard.html',
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/templates/admin/dashboard.html", line 1, in top-level template code
+    {% extends "admin/base.html" %}
+  File "/app/templates/admin/base.html", line 89, in top-level template code
+    {% block content %}{% endblock %}
+  File "/app/templates/admin/dashboard.html", line 63, in block 'content'
+    <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ "%.2f"|format(valor_saques_pendente) }}</div>
+  File "/usr/local/lib/python3.10/site-packages/jinja2/filters.py", line 1043, in do_format
+    return soft_str(value) % (kwargs or args)
+jinja2.exceptions.UndefinedError: 'valor_pendente' is undefined
+2025-07-25 00:45:05 | ERROR | app | log_exception:875 | Exception on /admin/dashboard [GET]
+Traceback (most recent call last):
+  File "/app/routes/admin.py", line 71, in dashboard
+    try:
+AttributeError: type object 'Saque' has no attribute 'created_at'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 85, in dashboard
+    ofertas_aceitas=ofertas_aceitas,
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/templates/admin/dashboard.html", line 1, in top-level template code
+    {% extends "admin/base.html" %}
+  File "/app/templates/admin/base.html", line 89, in top-level template code
+    {% block content %}{% endblock %}
+  File "/app/templates/admin/dashboard.html", line 63, in block 'content'
+    <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ "%.2f"|format(valor_saques_pendente) }}</div>
+  File "/usr/local/lib/python3.10/site-packages/jinja2/filters.py", line 1043, in do_format
+    return soft_str(value) % (kwargs or args)
+jinja2.exceptions.UndefinedError: 'valor_pendente' is undefined
+2025-07-25 01:06:25 | ERROR | app | log_exception:875 | Exception on /admin/saques [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 155, in listar_saques
+    return render_template('admin/saques.html', saques=saques, status=status)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/usr/local/lib/python3.10/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: admin/saques.html
+2025-07-25 01:07:29 | ERROR | app | log_exception:875 | Exception on /admin/saques [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 155, in listar_saques
+    return render_template('admin/saques.html', saques=saques, status=status)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/usr/local/lib/python3.10/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: admin/saques.html
+2025-07-25 01:18:56 | ERROR | app | log_exception:875 | Exception on /admin/saques [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 155, in listar_saques
+    return render_template('admin/saques.html', saques=saques, status=status)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/templates/admin/saques.html", line 1, in top-level template code
+    {% extends "admin/base.html" %}
+  File "/app/templates/admin/base.html", line 89, in top-level template code
+    {% block content %}{% endblock %}
+  File "/app/templates/admin/saques.html", line 85, in block 'content'
+    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ saques | length }}</div>
+TypeError: object of type 'QueryPagination' has no len()
+2025-07-25 01:19:35 | ERROR | app | log_exception:875 | Exception on /admin/saques [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 155, in listar_saques
+    return render_template('admin/saques.html', saques=saques, status=status)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/templates/admin/saques.html", line 1, in top-level template code
+    {% extends "admin/base.html" %}
+  File "/app/templates/admin/base.html", line 89, in top-level template code
+    {% block content %}{% endblock %}
+  File "/app/templates/admin/saques.html", line 85, in block 'content'
+    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ saques | length }}</div>
+TypeError: object of type 'QueryPagination' has no len()

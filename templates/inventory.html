@@ -13,6 +13,7 @@
         <p class="text-center text-muted">Após enviar a oferta, você será notificado pelo SteamGuard para aceitar a troca. Verifique sua conta Steam.</p>
         
         <form id="ofertaForm" method="post" action="/enviar-oferta">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 {% for item in inventory %}
                 <div class="col">

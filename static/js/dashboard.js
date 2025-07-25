@@ -79,15 +79,23 @@ function atualizarSaldo() {
 document.addEventListener("DOMContentLoaded", function () {
     const tradeLinkInput = document.getElementById("tradelink");
     const btnVender = document.getElementById("btnVender");
+    
+    // Função para verificar se deve exibir o botão
     function verificarExibicaoBotao() {
         const algumItemSelecionado = document.querySelector(".skin-checkbox:checked");
-        if (tradeLinkInput.value.trim() && algumItemSelecionado) {
+        if (tradeLinkInput && tradeLinkInput.value.trim() && algumItemSelecionado) {
             btnVender.style.display = "block";
         } else {
             btnVender.style.display = "none";
         }
     }
-    tradeLinkInput.addEventListener("input", verificarExibicaoBotao);
+    
+    // Expor a função globalmente para uso em outras partes do código
+    window.verificarExibicaoBotao = verificarExibicaoBotao;
+    
+    if (tradeLinkInput) {
+        tradeLinkInput.addEventListener("input", verificarExibicaoBotao);
+    }
     document.querySelectorAll(".skin-checkbox").forEach((checkbox) =>
         checkbox.addEventListener("change", verificarExibicaoBotao)
     );
@@ -190,9 +198,22 @@ function enviarOferta() {
         }
         btnVender.disabled = false;
         btnVender.innerHTML = 'Vender';
-        if (data && typeof data.erro !== "undefined") {
-            showMessage('Atenção', data.erro || 'Erro desconhecido.', true);
+        
+        // Lógica corrigida: verificar se há erro ou sucesso
+        if (data && data.erro) {
+            // Há erro - mostrar mensagem de erro
+            showMessage('Atenção', data.erro, true);
+        } else if (data && data.mensagem) {
+            // Sucesso - mostrar mensagem de sucesso
+            showMessage('Sucesso', data.mensagem, false);
+            // Limpar seleções e formulário após sucesso
+            document.querySelectorAll('.skin-checkbox:checked').forEach(cb => cb.checked = false);
+            document.getElementById('tradelink').value = '';
+            document.getElementById('paymentFields').innerHTML = '';
+            atualizarTotal();
+            verificarExibicaoBotao();
         } else {
+            // Resposta inesperada
             showMessage('Erro', 'Resposta inesperada do servidor.', true);
         }
     })

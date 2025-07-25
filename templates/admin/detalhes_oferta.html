@@ -1,0 +1,114 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Detalhes da Oferta - Admin Panel{% endblock %}
+{% block page_title %}Detalhes da Oferta{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Informações da Oferta -->
+    <div class="col-lg-8">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Informações da Oferta</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>ID da Oferta:</strong> <code>{{ oferta.tradeofferid }}</code></p>
+                        <p><strong>SteamID do Parceiro:</strong> {{ oferta.partnersteamid }}</p>
+                        <p><strong>Status:</strong> 
+                            <span class="badge bg-{{ 'warning' if oferta.status == 'pendente' else 'success' if oferta.status == 'aceita' else 'danger' }}">
+                                {{ oferta.status.upper() }}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Data de Criação:</strong> {{ oferta.created_at.strftime('%d/%m/%Y %H:%M') if oferta.created_at else 'N/A' }}</p>
+                        <p><strong>Expira em:</strong> {{ oferta.expires_at.strftime('%d/%m/%Y %H:%M') if oferta.expires_at else 'N/A' }}</p>
+                        <p><strong>Última Atualização:</strong> {{ oferta.updated_at.strftime('%d/%m/%Y %H:%M') if oferta.updated_at else 'N/A' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações -->
+    <div class="col-lg-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Ações</h6>
+            </div>
+            <div class="card-body">
+                {% if oferta.status == 'pendente' %}
+                <form method="POST" action="{{ url_for('admin.processar_oferta', offer_id=oferta.tradeofferid) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+                    <div class="d-grid gap-2">
+                        <button type="submit" name="acao" value="aceitar" class="btn btn-success">
+                            <i class="fas fa-check"></i> Aceitar Oferta
+                        </button>
+                        <button type="submit" name="acao" value="rejeitar" class="btn btn-danger">
+                            <i class="fas fa-times"></i> Rejeitar Oferta
+                        </button>
+                    </div>
+                </form>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> Esta oferta já foi processada.
+                </div>
+                {% endif %}
+                
+                <hr>
+                
+                <a href="{{ url_for('admin.listar_ofertas') }}" class="btn btn-secondary w-100">
+                    <i class="fas fa-arrow-left"></i> Voltar à Lista
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Histórico de Logs (futuro) -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Histórico de Logs</h6>
+    </div>
+    <div class="card-body">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h6 class="timeline-title">Oferta Criada</h6>
+                    <p class="timeline-text">{{ oferta.created_at.strftime('%d/%m/%Y %H:%M') if oferta.created_at else 'N/A' }}</p>
+                </div>
+            </div>
+            {% if oferta.updated_at %}
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h6 class="timeline-title">Última Atualização</h6>
+                    <p class="timeline-text">{{ oferta.updated_at.strftime('%d/%m/%Y %H:%M') }}</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Confirmação antes de processar oferta
+document.querySelectorAll('button[name="acao"]').forEach(button => {
+    button.addEventListener('click', function(e) {
+        const acao = this.value;
+        const mensagem = acao === 'aceitar' ? 
+            'Tem certeza que deseja aceitar esta oferta?' : 
+            'Tem certeza que deseja rejeitar esta oferta?';
+        
+        if (!confirm(mensagem)) {
+            e.preventDefault();
+        }
+    });
+});
+</script>
+{% endblock %}

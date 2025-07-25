@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, session, current_app
 from models.saques import Saque
 from db_config import db
 from services.saldo_service import calcular_saldo_usuario
-from twilio.rest import Client
+from services.notification_service import notification_service
 import os
 
 bp = Blueprint('saque_sistema', __name__)
@@ -42,22 +42,29 @@ def solicitar_saque():
     db.session.commit()
 
     # --- Notificação via WhatsApp (Twilio) ---
-    account_sid = os.getenv('TWILIO_ACCOUNT_SID')
-    auth_token = os.getenv('TWILIO_AUTH_TOKEN')
-    whatsapp_from = os.getenv('TWILIO_WHATSAPP_FROM')
-    whatsapp_to = os.getenv('TWILIO_WHATSAPP_TO')
-    if account_sid and auth_token and whatsapp_from and whatsapp_to:
-        try:
-            client = Client(account_sid, auth_token)
-            mensagem = f"Novo saque solicitado!\nUsuário: {steamid}\nValor: R$ {valor:.2f}"
-            message = client.messages.create(
-                body=mensagem,
-                from_=whatsapp_from,
-                to=whatsapp_to
-            )
-            current_app.logger.info(f"WhatsApp enviado! SID: {message.sid}")
-        except Exception as e:
-            current_app.logger.error(f"Erro ao enviar WhatsApp: {e}")
+    try:
+        # Buscar informações de pagamento do usuário (se disponível)
+        from models import InformacoesPagamento
+        info_pagamento = InformacoesPagamento.query.filter_by(steamid=steamid).first()
+        
+        metodo_pagamento = 'PIX'
+        chave_pix = 'Não informado'
+        
+        if info_pagamento:
+            metodo_pagamento = info_pagamento.metodo_pagamento or 'PIX'
+            chave_pix = info_pagamento.chave_pix or 'Não informado'
+        
+        # Enviar notificação usando o serviço
+        notification_service.enviar_notificacao_saque(
+            usuario_nome=f"SteamID: {steamid}",
+            valor=valor,
+            metodo_pagamento=metodo_pagamento,
+            chave_pix=chave_pix
+        )
+        
+        current_app.logger.info("✅ Notificação de saque enviada com sucesso")
+    except Exception as e:
+        current_app.logger.error(f"❌ Erro ao enviar notificação de saque: {e}")
     # -----------------------------------------
 
     return jsonify({'mensagem': 'Solicitação de saque registrada', 'id': saque.id})

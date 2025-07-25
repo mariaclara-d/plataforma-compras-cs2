@@ -1,0 +1,121 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Trade Offers - Admin Panel{% endblock %}
+{% block page_title %}Trade Offers{% endblock %}
+
+{% block content %}
+<!-- Filtros -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Filtros</h6>
+    </div>
+    <div class="card-body">
+        <form method="GET">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">Status</label>
+                    <select name="status" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="pendente" {{ 'selected' if status == 'pendente' }}>Pendente</option>
+                        <option value="aceita" {{ 'selected' if status == 'aceita' }}>Aceita</option>
+                        <option value="rejeitada" {{ 'selected' if status == 'rejeitada' }}>Rejeitada</option>
+                    </select>
+                </div>
+                <div class="col-md-6 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Lista de Ofertas -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Lista de Ofertas</h6>
+    </div>
+    <div class="card-body">
+        {% if ofertas.items %}
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID da Oferta</th>
+                        <th>SteamID</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Expira em</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for oferta in ofertas.items %}
+                    <tr>
+                        <td><code>{{ oferta.tradeofferid }}</code></td>
+                        <td>{{ oferta.partnersteamid }}</td>
+                        <td>
+                            <span class="badge bg-{{ 'warning' if oferta.status == 'pendente' else 'success' if oferta.status == 'aceita' else 'danger' }}">
+                                {{ oferta.status.upper() }}
+                            </span>
+                        </td>
+                        <td>{{ oferta.created_at.strftime('%d/%m/%Y %H:%M') if oferta.created_at else 'N/A' }}</td>
+                        <td>{{ oferta.expires_at.strftime('%d/%m/%Y %H:%M') if oferta.expires_at else 'N/A' }}</td>
+                        <td>
+                            <a href="{{ url_for('admin.detalhes_oferta', offer_id=oferta.tradeofferid) }}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-eye"></i> Ver
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Paginação -->
+        {% if ofertas.pages > 1 %}
+        <nav aria-label="Navegação das ofertas">
+            <ul class="pagination justify-content-center">
+                {% if ofertas.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('admin.listar_ofertas', page=ofertas.prev_num, status=status) }}">Anterior</a>
+                    </li>
+                {% endif %}
+                
+                {% for page_num in ofertas.iter_pages() %}
+                    {% if page_num %}
+                        {% if page_num != ofertas.page %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('admin.listar_ofertas', page=page_num, status=status) }}">{{ page_num }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ page_num }}</span>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if ofertas.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('admin.listar_ofertas', page=ofertas.next_num, status=status) }}">Próximo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+        
+        {% else %}
+        <div class="text-center py-4">
+            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+            <p class="text-muted">Nenhuma oferta encontrada.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from db_config import db
 from datetime import datetime
-import timezone
+from datetime import timezone
 
 class Saque(db.Model):
     __tablename__ = 'saques'
