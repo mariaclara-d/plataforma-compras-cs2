@@ -19,7 +19,7 @@ document.getElementById("ofertaForm").addEventListener("submit", function (event
         btnEnviar.disabled = true;
         btnEnviar.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Enviando...';
 
-        fetch("/enviar-oferta", {
+        fetch("/trade/enviar-oferta", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ itens, tradelink, csrf_token: csrfToken }),

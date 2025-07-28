@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+
+{% block title %}Trade Protection - Proteção de 7 Dias{% endblock %}
+
+{% block head %}
+<style>
+.trade-protection-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.protection-info-card {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    color: white;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.balance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.balance-item {
+    text-align: center;
+    padding: 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.balance-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.balance-label {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.holds-table {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-top: 20px;
+}
+
+.hold-item {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hold-item:last-child {
+    border-bottom: none;
+}
+
+.hold-info {
+    flex: 1;
+}
+
+.hold-item-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.hold-details {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.hold-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.countdown-timer {
+    background: #ff6b6b;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.countdown-timer.warning {
+    background: #ffa726;
+}
+
+.countdown-timer.safe {
+    background: #66bb6a;
+}
+
+.reverse-btn {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.reverse-btn:hover {
+    background: #ff3838;
+    transform: translateY(-2px);
+}
+
+.reverse-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.info-icon {
+    color: #3498db;
+    margin-right: 8px;
+}
+
+.warning-banner {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.no-holds-message {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.protection-explanation {
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+@media (max-width: 768px) {
+    .balance-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hold-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .hold-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="trade-protection-container">
+    <!-- Header -->
+    <div class="protection-info-card">
+        <h1><i class="fas fa-shield-alt info-icon"></i>Trade Protection System</h1>
+        <p>Sistema de proteção de 7 dias para suas transações. Você pode reverter vendas dentro deste período.</p>
+        
+        {% if hold_info and hold_info.balance_info %}
+        <div class="balance-grid">
+            <div class="balance-item">
+                <div class="balance-label">Saldo Total</div>
+                <div class="balance-value">R$ {{ "%.2f"|format(hold_info.balance_info.saldo_total) }}</div>
+            </div>
+            <div class="balance-item">
+                <div class="balance-label">Em Proteção</div>
+                <div class="balance-value" style="color: #ffa726;">R$ {{ "%.2f"|format(hold_info.balance_info.valor_em_hold) }}</div>
+            </div>
+            <div class="balance-item">
+                <div class="balance-label">Disponível p/ Saque</div>
+                <div class="balance-value" style="color: #66bb6a;">R$ {{ "%.2f"|format(hold_info.balance_info.saldo_disponivel) }}</div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Aviso sobre bloqueio de saque -->
+    {% if hold_info and hold_info.has_active_holds %}
+    <div class="warning-banner">
+        <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+        <strong>Atenção:</strong> Você possui itens em período de proteção. O saque ficará limitado ao saldo disponível.
+    </div>
+    {% endif %}
+
+    <!-- Explicação do sistema -->
+    <div class="protection-explanation">
+        <h3><i class="fas fa-info-circle info-icon"></i>Como funciona a proteção?</h3>
+        <ul>
+            <li><strong>Venda imediata:</strong> Você pode vender seus itens normalmente</li>
+            <li><strong>Período de proteção:</strong> O valor fica "em análise" por 7 dias</li>
+            <li><strong>Reversão:</strong> Durante esses 7 dias, você pode reverter a venda</li>
+            <li><strong>Saque limitado:</strong> Só pode sacar valores não protegidos</li>
+            <li><strong>Liberação automática:</strong> Após 7 dias, o valor fica disponível automaticamente</li>
+        </ul>
+    </div>
+
+    <!-- Lista de itens em hold -->
+    {% if hold_info and hold_info.active_holds %}
+    <div class="holds-table">
+        <div style="padding: 20px; background: #f8f9fa; font-weight: 600;">
+            <i class="fas fa-clock info-icon"></i>Itens em Período de Proteção
+        </div>
+        
+        {% for hold in hold_info.active_holds %}
+        <div class="hold-item">
+            <div class="hold-info">
+                <div class="hold-item-name">{{ hold.item_name }}</div>
+                <div class="hold-details">
+                    Valor: R$ {{ "%.2f"|format(hold.valor) }} • 
+                    Vendido em: {{ hold.created_at[:10] }} • 
+                    ID: #{{ hold.id }}
+                </div>
+            </div>
+            
+            <div class="hold-actions">
+                {% if hold.days_remaining > 0 %}
+                    <div class="countdown-timer {% if hold.days_remaining <= 1 %}warning{% elif hold.days_remaining <= 3 %}warning{% else %}safe{% endif %}">
+                        {% if hold.days_remaining > 0 %}
+                            {{ hold.days_remaining }} dia{{ 's' if hold.days_remaining != 1 else '' }} restante{{ 's' if hold.days_remaining != 1 else '' }}
+                        {% else %}
+                            Processando liberação...
+                        {% endif %}
+                    </div>
+                    
+                    <button class="reverse-btn" data-hold-id="{{ hold.id }}" data-item-name="{{ hold.item_name }}">
+                        <i class="fas fa-undo"></i> Reverter
+                    </button>
+                {% else %}
+                    <div class="countdown-timer safe">
+                        Liberado
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% else %}
+    <div class="holds-table">
+        <div class="no-holds-message">
+            <i class="fas fa-check-circle" style="font-size: 3em; color: #66bb6a; margin-bottom: 15px;"></i>
+            <h3>Nenhum item em proteção</h3>
+            <p>Você não possui itens no período de proteção no momento.</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Modal de confirmação para reversão -->
+<div id="reverseModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar Reversão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Você tem certeza que deseja reverter a venda do item <strong id="itemNameModal"></strong>?</p>
+                <p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Esta ação removerá o valor do seu saldo e não poderá ser desfeita.</p>
+                
+                <div class="mb-3">
+                    <label for="reverseReason" class="form-label">Motivo (opcional):</label>
+                    <textarea class="form-control" id="reverseReason" rows="3" placeholder="Ex: Arrependimento, item vendido por engano..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="confirmReverse()">
+                    <i class="fas fa-undo"></i> Confirmar Reversão
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentHoldId = null;
+
+// Event listener para botões de reversão
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.reverse-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const holdId = this.getAttribute('data-hold-id');
+            const itemName = this.getAttribute('data-item-name');
+            reverseHold(holdId, itemName);
+        });
+    });
+});
+
+function reverseHold(holdId, itemName) {
+    currentHoldId = holdId;
+    document.getElementById('itemNameModal').textContent = itemName;
+    new bootstrap.Modal(document.getElementById('reverseModal')).show();
+}
+
+function confirmReverse() {
+    if (!currentHoldId) return;
+    
+    const reason = document.getElementById('reverseReason').value;
+    
+    fetch(`/api/trade-holds/reverse/${currentHoldId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({ reason: reason })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.sucesso) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Trade Revertido!',
+                text: data.mensagem,
+                confirmButtonColor: '#3085d6'
+            }).then(() => {
+                location.reload();
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: data.erro || 'Erro ao reverter trade'
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'Erro de conexão'
+        });
+    });
+    
+    bootstrap.Modal.getInstance(document.getElementById('reverseModal')).hide();
+}
+
+// Atualizar contadores em tempo real
+function updateCountdowns() {
+    document.querySelectorAll('.countdown-timer').forEach(timer => {
+        // Implementar atualização em tempo real se necessário
+    });
+}
+
+// Atualizar a cada minuto
+setInterval(updateCountdowns, 60000);
+</script>
+{% endblock %}

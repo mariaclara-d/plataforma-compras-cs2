@@ -1,44 +1,22 @@
-<<<<<<< HEAD
+/* Navbar - Limpo e Moderno */
 .navbar {
-    
-    background: #1C1A24;
-    
-    
-  }
-
-  .nav-link{
-    color: #fff;
-    font-weight:bold;
-  }
-
-  
-  .dropdown-toggle {
-    background: none !important;
-    border: none !important;
-    padding: 0;
-  }
-  
-=======
-
-.navbar {
-  background: #1C1A24 !important; /* Fundo mantido */
+  background: #1C1A24 !important;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  z-index: 1050; /* Garante que fique acima de outros elementos */
 }
 
-.btn-sell-now {
-  background: #00FFBF !important;
-  color: #1C1A24 !important;
-  font-weight: 700 !important;
-  padding: 0.5rem 1.5rem;
-  border-radius: 6px;
-  transition: all 0.3s ease;
+/* Links de navegação */
+.nav-link {
+  color: #fff !important;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
-.btn-sell-now:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,255,191,0.3);
+.nav-link:hover {
+  color: #00FFBF !important;
 }
 
+/* Botão de Login Steam */
 .btn-steam {
   background: transparent !important;
   border: 2px solid #00FFBF !important;
@@ -48,43 +26,158 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  transition: all 0.3s ease;
 }
 
-
-.navbar-nav.me-auto {
-  margin-right: 2rem !important;
+.btn-steam:hover {
+  background: #00FFBF !important;
+  color: #1C1A24 !important;
+  transform: translateY(-2px);
 }
 
-.navbar-nav.mx-auto {
-  margin: 0 auto;
+/* Dropdowns */
+.dropdown-toggle {
+  background: none !important;
+  border: none !important;
+  padding: 0.4rem 0.8rem;
+  color: #fff !important;
 }
-
 
 .dropdown-menu {
   background: #2A2833;
   border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .dropdown-item {
   color: #e9ecef !important;
+  transition: background-color 0.2s ease;
 }
 
 .dropdown-item:hover {
   background: rgba(255,255,255,0.05);
+  color: #00FFBF !important;
 }
 
+/* Navbar Brand */
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
 
-@media (max-width: 991px) {
-  .navbar-nav.me-auto,
-  .navbar-nav.mx-auto {
-      margin: 1rem 0 !important;
-      text-align: center;
+/* Responsividade melhorada */
+@media (max-width: 1200px) {
+  .navbar-nav {
+    gap: 1rem;
   }
   
-  .btn-sell-now {
-      display: block;
-      margin: 0 auto 1rem;
-      width: max-content;
+  .d-flex.align-items-center {
+    gap: 0.8rem;
   }
 }
->>>>>>> 385b81d5adb088e87511729a1db62a4bb2fac995
+
+@media (max-width: 991px) {
+  .navbar-nav {
+    margin: 1rem 0;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .navbar-collapse {
+    padding-top: 1rem;
+  }
+  
+  .d-flex.align-items-center {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(0, 255, 191, 0.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+  
+  .navbar-brand img {
+    height: 25px;
+  }
+  
+  .nav-link {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .dropdown-toggle {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .btn-steam {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  
+  .navbar-brand img {
+    height: 22px;
+  }
+  
+  .navbar-brand span {
+    margin-left: 0.5rem;
+  }
+  
+  .nav-link {
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .d-flex.align-items-center {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+  
+  .dropdown {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .btn-steam {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.5rem 0.8rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  
+  .navbar-toggler {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
+  }
+}

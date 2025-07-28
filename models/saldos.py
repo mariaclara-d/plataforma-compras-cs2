@@ -10,3 +10,11 @@ class Saldo(db.Model):
 
     def __repr__(self):
         return f"<Saldo {self.steamid}: R$ {self.valor:.2f}>"
+    
+    @staticmethod
+    def get_saldo_atual(steam_id):
+        """
+        Obtém o saldo atual de um usuário pelo Steam ID
+        """
+        saldo = Saldo.query.filter_by(steamid=steam_id).first()
+        return saldo.valor if saldo else 0.0

@@ -140,6 +140,7 @@ def listar_ofertas():
 @admin_required
 def listar_saques():
     """Lista saques para o admin processar"""
+    from flask_wtf.csrf import generate_csrf
     status = request.args.get('status', '')
     
     query = Saque.query
@@ -149,14 +150,15 @@ def listar_saques():
     
     saques = query.order_by(desc(Saque.criado_em)).all()
     
-    return render_template('admin/saques.html', saques=saques, status=status)
+    return render_template('admin/saques.html', saques=saques, status=status, csrf_token=generate_csrf())
 
 @admin_bp.route('/saque/<int:saque_id>')
 @admin_required
 def detalhes_saque(saque_id):
     """Detalhes de um saque específico"""
+    from flask_wtf.csrf import generate_csrf
     saque = Saque.query.get_or_404(saque_id)
-    return render_template('admin/detalhes_saque.html', saque=saque)
+    return render_template('admin/detalhes_saque.html', saque=saque, csrf_token=generate_csrf())
 
 @admin_bp.route('/saque/<int:saque_id>/processar', methods=['POST'])
 @admin_required

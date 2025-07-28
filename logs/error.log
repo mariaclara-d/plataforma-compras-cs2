@@ -266,3 +266,1649 @@ Traceback (most recent call last):
   File "/app/templates/admin/saques.html", line 85, in block 'content'
     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ saques | length }}</div>
 TypeError: object of type 'QueryPagination' has no len()
+2025-07-25 10:49:06 | ERROR | app | processar_oferta:211 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao carregar steam_guard.json: [Errno 2] No such file or directory: 'steam_guard.json'
+2025-07-25 10:49:06 | ERROR | app | processar_oferta:212 | 🚨 TRACEBACK COMPLETO:
+2025-07-25 10:49:06 | ERROR | app | processar_oferta:213 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 19, in realizar_login_aiosteampy
+    with open("steam_guard.json", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'steam_guard.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 170, in processar_oferta
+    client = await realizar_login_aiosteampy()
+  File "/app/services/aiosteampy_service.py", line 22, in realizar_login_aiosteampy
+    raise RuntimeError("Erro ao carregar steam_guard.json: " + str(e))
+RuntimeError: Erro ao carregar steam_guard.json: [Errno 2] No such file or directory: 'steam_guard.json'
+
+2025-07-25 10:58:25 | ERROR | app | processar_oferta:211 | 🚨 ERRO DETALHADO: ClientResponseError: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-25 10:58:25 | ERROR | app | processar_oferta:212 | 🚨 TRACEBACK COMPLETO:
+2025-07-25 10:58:25 | ERROR | app | processar_oferta:213 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 174, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 141, in enviar_oferta_aiosteampy
+    tradeoffer_id = await client.make_trade_offer(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 727, in make_trade_offer
+    r = await self.session.post(base_url / "send", data=data, headers={"Referer": str(referer), **headers})
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+2025-07-25 12:18:03 | ERROR | app | log_exception:875 | Exception on /admin/saques [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 152, in listar_saques
+    return render_template('admin/saques.html', saques=saques, status=status)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/templates/admin/saques.html", line 1, in top-level template code
+    {% extends "admin/base.html" %}
+  File "/app/templates/admin/base.html", line 89, in top-level template code
+    {% block content %}{% endblock %}
+  File "/app/templates/admin/saques.html", line 171, in block 'content'
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+TypeError: 'str' object is not callable
+2025-07-25 14:43:16 | ERROR | app | processar_oferta:236 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro da Steam (500): Os servidores da Steam estão temporariamente indisponíveis. Tente novamente em alguns minutos. Detalhes: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-25 14:43:16 | ERROR | app | processar_oferta:237 | 🚨 TRACEBACK COMPLETO:
+2025-07-25 14:43:16 | ERROR | app | processar_oferta:238 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 142, in enviar_oferta_aiosteampy
+    tradeoffer_id = await client.make_trade_offer(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 727, in make_trade_offer
+    r = await self.session.post(base_url / "send", data=data, headers={"Referer": str(referer), **headers})
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 197, in processar_oferta
+    # Erro definitivo ou esgotaram as tentativas
+  File "/app/routes/trade.py", line 180, in processar_oferta
+    current_app.logger.info(f"Tentativa {tentativa_atual}/{max_tentativas} de enviar oferta...")
+  File "/app/services/aiosteampy_service.py", line 155, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro da Steam (500): Os servidores da Steam estão temporariamente indisponíveis. Tente novamente em alguns minutos. Detalhes: {error_msg}")
+RuntimeError: ❌ Erro da Steam (500): Os servidores da Steam estão temporariamente indisponíveis. Tente novamente em alguns minutos. Detalhes: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+2025-07-25 17:56:46 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/clsregistry.py", line 516, in _resolve_name
+    rval = d[token]
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/_collections.py", line 345, in __missing__
+    self[key] = val = self.creator(key)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/clsregistry.py", line 484, in _access_cls
+    return self.fallback[key]
+KeyError: 'User'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/dashboard.py", line 56, in dashboard
+    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+  File "/app/services/saldo_service.py", line 20, in calcular_saldo_usuario
+    .scalar()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2835, in scalar
+    ret = self.one()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1415, in execute
+    return meth(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1629, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 711, in _compile_w_cache
+    compiled_sql = self._compiler(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 320, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/sql/compiler.py", line 1446, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/sql/compiler.py", line 886, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/sql/compiler.py", line 932, in process
+    return obj._compiler_dispatch(self, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/sql/visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/sql/compiler.py", line 4728, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/sql/base.py", line 687, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/context.py", line 447, in create_for_statement
+    return cls._create_orm_context(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/context.py", line 1175, in _create_orm_context
+    _QueryEntity.to_compile_state(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/context.py", line 2635, in to_compile_state
+    _ColumnEntity._for_columns(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/context.py", line 3015, in _for_columns
+    _ORMColumnEntity(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/context.py", line 3235, in __init__
+    _entity._post_inspect
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 1338, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/mapper.py", line 2724, in _post_inspect
+    self._check_configure()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/mapper.py", line 2401, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/mapper.py", line 4214, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/mapper.py", line 4255, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/mapper.py", line 2418, in _post_configure_properties
+    prop.init()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/interfaces.py", line 589, in init
+    self.do_init()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/relationships.py", line 1656, in do_init
+    self._setup_entity()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/relationships.py", line 1866, in _setup_entity
+    self._clsregistry_resolve_name(argument)(),
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/clsregistry.py", line 520, in _resolve_name
+    self._raise_for_name(name, err)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/clsregistry.py", line 501, in _raise_for_name
+    raise exc.InvalidRequestError(
+sqlalchemy.exc.InvalidRequestError: When initializing mapper Mapper[TradeHold(trade_holds)], expression 'User' failed to locate a name ('User'). If this is a class name, consider adding this relationship() to the <class 'models.trade_holds.TradeHold'> class after both dependent classes have been defined.
+2025-07-25 18:17:02 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/dashboard.py", line 56, in dashboard
+    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+  File "/app/services/saldo_service.py", line 27, in calcular_saldo_usuario
+    .filter(Transacao.steam_id == steamid)
+AttributeError: type object 'Transacao' has no attribute 'steam_id'
+2025-07-25 18:27:50 | ERROR | app | processar_oferta:250 | ❌ Erro ao criar Trade Hold: TradeHoldService.create_hold_for_transaction() got an unexpected keyword argument 'user_id'
+2025-07-25 18:28:05 | ERROR | app | log_exception:875 | Exception on /admin/oferta/8299380143 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/admin.py", line 18, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/routes/admin.py", line 196, in detalhes_oferta
+    return render_template('admin/detalhes_oferta.html', oferta=oferta)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/usr/local/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/app/templates/admin/detalhes_oferta.html", line 1, in top-level template code
+    {% extends "admin/base.html" %}
+  File "/app/templates/admin/base.html", line 89, in top-level template code
+    {% block content %}{% endblock %}
+  File "/app/templates/admin/detalhes_oferta.html", line 43, in block 'content'
+    <form method="POST" action="{{ url_for('admin.processar_oferta', offer_id=oferta.tradeofferid) }}">
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "/usr/local/lib/python3.10/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'admin.processar_oferta' with values ['offer_id']. Did you mean 'admin.processar_saque' instead?
+2025-07-25 19:03:36 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/dashboard.py", line 56, in dashboard
+    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+  File "/app/services/saldo_service.py", line 27, in calcular_saldo_usuario
+    .filter(Transacao.steam_id == steamid)
+AttributeError: type object 'Transacao' has no attribute 'steam_id'
+2025-07-25 19:09:58 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/dashboard.py", line 56, in dashboard
+    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+  File "/app/services/saldo_service.py", line 27, in calcular_saldo_usuario
+    .filter(Transacao.steamid == steamid)
+AttributeError: type object 'Transacao' has no attribute 'steam_id'
+2025-07-25 19:12:43 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/dashboard.py", line 56, in dashboard
+    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+  File "/app/services/saldo_service.py", line 27, in calcular_saldo_usuario
+    .filter(Transacao.steamid == steamid)
+AttributeError: type object 'Transacao' has no attribute 'steam_id'
+2025-07-25 19:16:09 | ERROR | app | processar_oferta:250 | ❌ Erro ao criar Trade Hold: TradeHoldService.create_hold_for_transaction() got an unexpected keyword argument 'user_id'
+2025-07-25 21:16:30 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3297, in raw_connection
+    return self.pool.connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 713, in checkout
+    rec = pool._do_get()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 675, in __init__
+    self.__connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "/usr/local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/dashboard.py", line 56, in dashboard
+    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+  File "/app/services/saldo_service.py", line 20, in calcular_saldo_usuario
+    .scalar()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2835, in scalar
+    ret = self.one()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2241, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2110, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1189, in _connection_for_bind
+    conn = bind.connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3273, in connect
+    return self._connection_cls(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2436, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3297, in raw_connection
+    return self.pool.connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 713, in checkout
+    rec = pool._do_get()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 675, in __init__
+    self.__connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "/usr/local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "db" to address: Name or service not known
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-25 21:26:02 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3297, in raw_connection
+    return self.pool.connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 713, in checkout
+    rec = pool._do_get()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 675, in __init__
+    self.__connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "/usr/local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/dashboard.py", line 56, in dashboard
+    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+  File "/app/services/saldo_service.py", line 20, in calcular_saldo_usuario
+    .scalar()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2835, in scalar
+    ret = self.one()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2241, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2110, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1189, in _connection_for_bind
+    conn = bind.connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3273, in connect
+    return self._connection_cls(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2436, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3297, in raw_connection
+    return self.pool.connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 713, in checkout
+    rec = pool._do_get()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 675, in __init__
+    self.__connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "/usr/local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "db" to address: Name or service not known
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-25 21:30:54 | ERROR | app | processar_oferta:250 | ❌ Erro ao criar Trade Hold: TradeHoldService.create_hold_for_transaction() got an unexpected keyword argument 'user_id'
+2025-07-26 14:33:27 | ERROR | app | processar_oferta:284 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro da Steam (500): Os servidores da Steam estão temporariamente indisponíveis. Tente novamente em alguns minutos. Detalhes: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-26 14:33:27 | ERROR | app | processar_oferta:285 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 14:33:27 | ERROR | app | processar_oferta:286 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 142, in enviar_oferta_aiosteampy
+    tradeoffer_id = await client.make_trade_offer(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 727, in make_trade_offer
+    r = await self.session.post(base_url / "send", data=data, headers={"Referer": str(referer), **headers})
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 198, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 181, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 155, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro da Steam (500): Os servidores da Steam estão temporariamente indisponíveis. Tente novamente em alguns minutos. Detalhes: {error_msg}")
+RuntimeError: ❌ Erro da Steam (500): Os servidores da Steam estão temporariamente indisponíveis. Tente novamente em alguns minutos. Detalhes: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+2025-07-26 15:05:55 | ERROR | app | processar_oferta:226 | ❌ Falha após 5 tentativas: 🕐 Steam temporariamente indisponível: Os servidores da Steam estão com instabilidade. Status: 500. Este é um problema temporário da Steam, não da nossa aplicação.
+2025-07-26 15:05:55 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: 🕐 Steam temporariamente indisponível: Os servidores da Steam estão com instabilidade. Status: 500. Este é um problema temporário da Steam, não da nossa aplicação.
+2025-07-26 15:05:55 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 15:05:55 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 142, in enviar_oferta_aiosteampy
+    tradeoffer_id = await client.make_trade_offer(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 727, in make_trade_offer
+    r = await self.session.post(base_url / "send", data=data, headers={"Referer": str(referer), **headers})
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 158, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"🕐 Steam temporariamente indisponível: Os servidores da Steam estão com instabilidade. Status: 500. Este é um problema temporário da Steam, não da nossa aplicação.")
+RuntimeError: 🕐 Steam temporariamente indisponível: Os servidores da Steam estão com instabilidade. Status: 500. Este é um problema temporário da Steam, não da nossa aplicação.
+
+2025-07-26 15:15:32 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 15:15:32 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 15:15:32 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 15:15:32 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 100, in enviar_oferta_aiosteampy
+    user_inventory = await client.get_user_inventory(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 111, in get_user_inventory
+    raise e
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 99, in get_user_inventory
+    r = await self.session.get(
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 160, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro ao acessar inventário Steam via aiosteampy: {error_msg}")
+RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+2025-07-26 15:59:48 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 15:59:48 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 15:59:48 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 15:59:48 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 382, in enviar_oferta_aiosteampy
+    user_inventory = await client.get_user_inventory(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 111, in get_user_inventory
+    raise e
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 99, in get_user_inventory
+    r = await self.session.get(
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 442, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro ao acessar inventário Steam via aiosteampy: {error_msg}")
+RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+2025-07-26 16:04:19 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 16:04:19 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 16:04:19 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 16:04:19 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 382, in enviar_oferta_aiosteampy
+    user_inventory = await client.get_user_inventory(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 111, in get_user_inventory
+    raise e
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 99, in get_user_inventory
+    r = await self.session.get(
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 442, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro ao acessar inventário Steam via aiosteampy: {error_msg}")
+RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+2025-07-26 16:12:47 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 16:12:47 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 16:12:47 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 16:12:47 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 382, in enviar_oferta_aiosteampy
+    user_inventory = await client.get_user_inventory(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 111, in get_user_inventory
+    raise e
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 99, in get_user_inventory
+    r = await self.session.get(
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 442, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro ao acessar inventário Steam via aiosteampy: {error_msg}")
+RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+2025-07-26 16:21:32 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 16:21:32 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 16:21:32 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 16:21:32 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 382, in enviar_oferta_aiosteampy
+    user_inventory = await client.get_user_inventory(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 111, in get_user_inventory
+    raise e
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 99, in get_user_inventory
+    r = await self.session.get(
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 442, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro ao acessar inventário Steam via aiosteampy: {error_msg}")
+RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+2025-07-26 17:16:56 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 17:16:56 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 17:16:56 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 17:16:56 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 382, in enviar_oferta_aiosteampy
+    user_inventory = await client.get_user_inventory(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 111, in get_user_inventory
+    raise e
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 99, in get_user_inventory
+    r = await self.session.get(
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 442, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro ao acessar inventário Steam via aiosteampy: {error_msg}")
+RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+2025-07-26 17:32:42 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 17:32:42 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+2025-07-26 17:32:42 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 17:32:42 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 433, in enviar_oferta_aiosteampy
+    user_inventory = await client.get_user_inventory(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 111, in get_user_inventory
+    raise e
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/public.py", line 99, in get_user_inventory
+    r = await self.session.get(
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 493, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro ao acessar inventário Steam via aiosteampy: {error_msg}")
+RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: 400, message='Bad Request', url='https://steamcommunity.com/inventory/76561199063085722/730/2?l=english&count=5000'
+
+2025-07-26 18:04:03 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ❌ Erro ao acessar inventário Steam via aiosteampy: EconItem.__init__() got an unexpected keyword argument 'class_id'
+2025-07-26 18:04:03 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: EconItem.__init__() got an unexpected keyword argument 'class_id'
+2025-07-26 18:04:03 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 18:04:03 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 189, in enviar_oferta_aiosteampy
+    user_inventory = await get_user_inventory_fixed(client, partner_steamid64)
+  File "/app/services/aiosteampy_service.py", line 48, in get_user_inventory_fixed
+    item = EconItem(
+TypeError: EconItem.__init__() got an unexpected keyword argument 'class_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 247, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro ao acessar inventário Steam via aiosteampy: {error_msg}")
+RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: EconItem.__init__() got an unexpected keyword argument 'class_id'
+
+2025-07-26 18:12:42 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ❌ Erro ao acessar inventário Steam via aiosteampy: EconItem.__init__() got an unexpected keyword argument 'assetid'
+2025-07-26 18:12:42 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: EconItem.__init__() got an unexpected keyword argument 'assetid'
+2025-07-26 18:12:42 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 18:12:42 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 189, in enviar_oferta_aiosteampy
+    user_inventory = await get_user_inventory_fixed(client, partner_steamid64)
+  File "/app/services/aiosteampy_service.py", line 48, in get_user_inventory_fixed
+    item = EconItem(
+TypeError: EconItem.__init__() got an unexpected keyword argument 'assetid'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 247, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"❌ Erro ao acessar inventário Steam via aiosteampy: {error_msg}")
+RuntimeError: ❌ Erro ao acessar inventário Steam via aiosteampy: EconItem.__init__() got an unexpected keyword argument 'assetid'
+
+2025-07-26 18:59:56 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ⚠️ Erro inesperado da Steam: 'EconItem' object has no attribute 'app_context'
+2025-07-26 18:59:56 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado da Steam: 'EconItem' object has no attribute 'app_context'
+2025-07-26 18:59:56 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 18:59:56 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 272, in enviar_oferta_aiosteampy
+    tradeoffer_id = await client.make_trade_offer(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 717, in make_trade_offer
+    "them": {"assets": [self._to_asset_dict(i) for i in to_receive], "currency": [], "ready": False},
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 717, in <listcomp>
+    "them": {"assets": [self._to_asset_dict(i) for i in to_receive], "currency": [], "ready": False},
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 739, in _to_asset_dict
+    "appid": i.app_context.app.value,
+AttributeError: 'EconItem' object has no attribute 'app_context'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 297, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"⚠️ Erro inesperado da Steam: {error_msg}")
+RuntimeError: ⚠️ Erro inesperado da Steam: 'EconItem' object has no attribute 'app_context'
+
+2025-07-26 19:02:24 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: ⚠️ Erro inesperado da Steam: 'EconItem' object has no attribute 'asset_id'
+2025-07-26 19:02:24 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado da Steam: 'EconItem' object has no attribute 'asset_id'
+2025-07-26 19:02:24 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 19:02:24 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 280, in enviar_oferta_aiosteampy
+    tradeoffer_id = await client.make_trade_offer(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 717, in make_trade_offer
+    "them": {"assets": [self._to_asset_dict(i) for i in to_receive], "currency": [], "ready": False},
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 717, in <listcomp>
+    "them": {"assets": [self._to_asset_dict(i) for i in to_receive], "currency": [], "ready": False},
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 742, in _to_asset_dict
+    "assetid": str(i.asset_id),
+AttributeError: 'EconItem' object has no attribute 'asset_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 305, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"⚠️ Erro inesperado da Steam: {error_msg}")
+RuntimeError: ⚠️ Erro inesperado da Steam: 'EconItem' object has no attribute 'asset_id'
+
+2025-07-26 19:11:29 | ERROR | app | processar_oferta:226 | ❌ Falha após 5 tentativas: 🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.
+2025-07-26 19:11:29 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: 🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.
+2025-07-26 19:11:29 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 19:11:29 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 293, in enviar_oferta_aiosteampy
+    tradeoffer_id = await client.make_trade_offer(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 727, in make_trade_offer
+    r = await self.session.post(base_url / "send", data=data, headers={"Referer": str(referer), **headers})
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 308, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.")
+RuntimeError: 🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.
+
+2025-07-26 19:17:54 | ERROR | app | processar_oferta:226 | ❌ Falha após 5 tentativas: 🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.
+2025-07-26 19:17:54 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: 🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.
+2025-07-26 19:17:54 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 19:17:54 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 293, in enviar_oferta_aiosteampy
+    tradeoffer_id = await client.make_trade_offer(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 727, in make_trade_offer
+    r = await self.session.post(base_url / "send", data=data, headers={"Referer": str(referer), **headers})
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 308, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.")
+RuntimeError: 🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.
+
+2025-07-26 19:33:01 | ERROR | app | processar_oferta:226 | ❌ Falha após 5 tentativas: 🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.
+2025-07-26 19:33:01 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: RuntimeError: 🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.
+2025-07-26 19:33:01 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 19:33:01 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 293, in enviar_oferta_aiosteampy
+    tradeoffer_id = await client.make_trade_offer(
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/trade.py", line 727, in make_trade_offer
+    r = await self.session.post(base_url / "send", data=data, headers={"Referer": str(referer), **headers})
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client.py", line 834, in _request
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 1161, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+  File "/app/services/aiosteampy_service.py", line 308, in enviar_oferta_aiosteampy
+    raise RuntimeError(f"🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.")
+RuntimeError: 🕐 Steam temporariamente indisponível: Status 500. Problema temporário da Steam.
+
+2025-07-26 19:53:43 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: enviar_oferta_aiosteampy() takes 2 positional arguments but 3 were given
+2025-07-26 19:53:43 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: TypeError: enviar_oferta_aiosteampy() takes 2 positional arguments but 3 were given
+2025-07-26 19:53:43 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 19:53:43 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+TypeError: enviar_oferta_aiosteampy() takes 2 positional arguments but 3 were given
+
+2025-07-26 19:57:41 | ERROR | app | processar_oferta:226 | ❌ Falha após 1 tentativas: enviar_oferta_aiosteampy() takes 2 positional arguments but 3 were given
+2025-07-26 19:57:41 | ERROR | app | processar_oferta:317 | 🚨 ERRO DETALHADO: TypeError: enviar_oferta_aiosteampy() takes 2 positional arguments but 3 were given
+2025-07-26 19:57:41 | ERROR | app | processar_oferta:318 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 19:57:41 | ERROR | app | processar_oferta:319 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 227, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 183, in processar_oferta
+    offer_id = await enviar_oferta_aiosteampy(client, tradelink, [item["assetid"] for item in itens_selecionados])
+TypeError: enviar_oferta_aiosteampy() takes 2 positional arguments but 3 were given
+
+2025-07-26 20:02:00 | ERROR | app | processar_oferta:240 | ❌ Falha após 1 tentativas: ⚠️ Erro inesperado: Falha crítica na autenticação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-26 20:02:00 | ERROR | app | processar_oferta:331 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: Falha crítica na autenticação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-26 20:02:00 | ERROR | app | processar_oferta:332 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 20:02:00 | ERROR | app | processar_oferta:333 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 241, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 199, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: Falha crítica na autenticação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+
+2025-07-26 20:11:06 | ERROR | app | processar_oferta:240 | ❌ Falha após 1 tentativas: ⚠️ Erro inesperado: TradeMixin.make_trade_offer() got an unexpected keyword argument 'items_to_give'
+2025-07-26 20:11:06 | ERROR | app | processar_oferta:331 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: TradeMixin.make_trade_offer() got an unexpected keyword argument 'items_to_give'
+2025-07-26 20:11:06 | ERROR | app | processar_oferta:332 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 20:11:06 | ERROR | app | processar_oferta:333 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 241, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 199, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: TradeMixin.make_trade_offer() got an unexpected keyword argument 'items_to_give'
+
+2025-07-26 20:29:54 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3297, in raw_connection
+    return self.pool.connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 713, in checkout
+    rec = pool._do_get()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 675, in __init__
+    self.__connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "/usr/local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/dashboard.py", line 56, in dashboard
+    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+  File "/app/services/saldo_service.py", line 20, in calcular_saldo_usuario
+    .scalar()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2835, in scalar
+    ret = self.one()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2241, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2110, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1189, in _connection_for_bind
+    conn = bind.connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3273, in connect
+    return self._connection_cls(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2436, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3297, in raw_connection
+    return self.pool.connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 713, in checkout
+    rec = pool._do_get()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 675, in __init__
+    self.__connect()
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "/usr/local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "db" to address: Name or service not known
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-26 20:40:05 | ERROR | app | processar_oferta:240 | ❌ Falha após 1 tentativas: ⚠️ Erro inesperado: Falha crítica na autenticação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-26 20:40:05 | ERROR | app | processar_oferta:331 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: Falha crítica na autenticação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-26 20:40:05 | ERROR | app | processar_oferta:332 | 🚨 TRACEBACK COMPLETO:
+2025-07-26 20:40:05 | ERROR | app | processar_oferta:333 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 241, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 199, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: Falha crítica na autenticação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+
+2025-07-26 20:59:00 | ERROR | app | processar_oferta:297 | ❌ Erro ao criar Trade Hold: float() argument must be a string or a real number, not 'NoneType'
+2025-07-27 14:06:24 | ERROR | app | processar_oferta:240 | ❌ Falha após 3 tentativas: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 14:06:24 | ERROR | app | processar_oferta:331 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 14:06:24 | ERROR | app | processar_oferta:332 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 14:06:24 | ERROR | app | processar_oferta:333 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 241, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 199, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: 'tradeofferid'
+
+2025-07-27 14:15:12 | ERROR | app | processar_oferta:203 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json
+2025-07-27 14:15:12 | ERROR | app | processar_oferta:204 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json"}
+2025-07-27 14:15:23 | ERROR | app | processar_oferta:203 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json
+2025-07-27 14:15:23 | ERROR | app | processar_oferta:204 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json"}
+2025-07-27 14:15:48 | ERROR | app | processar_oferta:203 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 14:15:48 | ERROR | app | processar_oferta:204 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: 'tradeofferid'"}
+2025-07-27 14:15:48 | ERROR | app | processar_oferta:246 | ❌ Falha após 3 tentativas: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 14:15:48 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 14:15:48 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 14:15:48 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 247, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 205, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: 'tradeofferid'
+
+2025-07-27 17:12:56 | ERROR | app | processar_oferta:203 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json
+2025-07-27 17:12:56 | ERROR | app | processar_oferta:204 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json"}
+2025-07-27 17:13:10 | ERROR | app | processar_oferta:203 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 17:13:10 | ERROR | app | processar_oferta:204 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: 'tradeofferid'"}
+2025-07-27 17:13:10 | ERROR | app | processar_oferta:246 | ❌ Falha após 2 tentativas: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 17:13:10 | ERROR | app | processar_oferta:334 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 17:13:10 | ERROR | app | processar_oferta:335 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 17:13:10 | ERROR | app | processar_oferta:336 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 247, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 205, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: 'tradeofferid'
+
+2025-07-27 17:21:12 | ERROR | app | processar_oferta:203 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json
+2025-07-27 17:21:12 | ERROR | app | processar_oferta:204 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json"}
+2025-07-27 17:21:22 | ERROR | app | processar_oferta:203 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json
+2025-07-27 17:21:22 | ERROR | app | processar_oferta:204 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json"}
+2025-07-27 17:21:47 | ERROR | app | processar_oferta:203 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 17:21:47 | ERROR | app | processar_oferta:204 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: 'tradeofferid'"}
+2025-07-27 17:21:47 | ERROR | app | processar_oferta:246 | ❌ Falha após 3 tentativas: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 17:21:47 | ERROR | app | processar_oferta:334 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: 'tradeofferid'
+2025-07-27 17:21:47 | ERROR | app | processar_oferta:335 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 17:21:47 | ERROR | app | processar_oferta:336 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 247, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 205, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: 'tradeofferid'
+
+2025-07-27 17:30:12 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json
+2025-07-27 17:30:12 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json"}
+2025-07-27 17:30:26 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json
+2025-07-27 17:30:26 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'access_token'. Verifique username/password no steam_guard.json"}
+2025-07-27 17:30:43 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'client_id'. Verifique username/password no steam_guard.json
+2025-07-27 17:30:43 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'client_id'. Verifique username/password no steam_guard.json"}
+2025-07-27 17:31:11 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'client_id'. Verifique username/password no steam_guard.json
+2025-07-27 17:31:11 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'client_id'. Verifique username/password no steam_guard.json"}
+2025-07-27 17:31:47 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'client_id'. Verifique username/password no steam_guard.json
+2025-07-27 17:31:47 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'client_id'. Verifique username/password no steam_guard.json"}
+2025-07-27 17:31:47 | ERROR | app | processar_oferta:256 | ❌ Falha após 5 tentativas: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'client_id'. Verifique username/password no steam_guard.json
+2025-07-27 17:31:47 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'client_id'. Verifique username/password no steam_guard.json
+2025-07-27 17:31:47 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 17:31:47 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: ❌ CREDENCIAIS STEAM INVÁLIDAS: KeyError: Campo ausente na resposta do Steam: 'client_id'. Verifique username/password no steam_guard.json
+
+2025-07-27 18:08:27 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Falha crítica na autenticação Steam: KeyError: Campo ausente na resposta do Steam: 'client_id'
+2025-07-27 18:08:27 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 18:08:27 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 35, in realizar_login_aiosteampy
+    await client.login()
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/login.py", line 198, in login
+    client_id = session_data["response"]["client_id"]
+KeyError: 'client_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 171, in processar_oferta
+    client = await realizar_login_aiosteampy()
+  File "/app/services/aiosteampy_service.py", line 47, in realizar_login_aiosteampy
+    raise RuntimeError(f"Falha crítica na autenticação Steam: {error_details}")
+RuntimeError: Falha crítica na autenticação Steam: KeyError: Campo ausente na resposta do Steam: 'client_id'
+
+2025-07-27 18:17:48 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-27 18:17:48 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'"}
+2025-07-27 18:17:48 | ERROR | app | processar_oferta:256 | ❌ Falha após 1 tentativas: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-27 18:17:48 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-27 18:17:48 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 18:17:48 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+
+2025-07-27 19:32:26 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-27 19:32:26 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'"}
+2025-07-27 19:32:26 | ERROR | app | processar_oferta:256 | ❌ Falha após 1 tentativas: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-27 19:32:26 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-27 19:32:26 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 19:32:26 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+
+2025-07-27 19:51:03 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-27 19:51:03 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'"}
+2025-07-27 19:51:15 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-27 19:51:15 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'"}
+2025-07-27 19:51:15 | ERROR | app | processar_oferta:256 | ❌ Falha após 2 tentativas: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-27 19:51:15 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+2025-07-27 19:51:15 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 19:51:15 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: ⚠️ Erro inesperado: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'access_token'
+
+2025-07-27 20:02:06 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-27 20:02:06 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'http_error', 'message': 'Erro HTTP 404: <html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n</body>\n</html>'}
+2025-07-27 20:02:06 | ERROR | app | processar_oferta:256 | ❌ Falha após 1 tentativas: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-27 20:02:06 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-27 20:02:06 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 20:02:06 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+
+2025-07-27 20:03:34 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-27 20:03:34 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'"}
+2025-07-27 20:03:46 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-27 20:03:46 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'http_error', 'message': 'Erro HTTP 404: <html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n</body>\n</html>'}
+2025-07-27 20:03:47 | ERROR | app | processar_oferta:256 | ❌ Falha após 2 tentativas: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-27 20:03:47 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-27 20:03:47 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-27 20:03:47 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+
+2025-07-28 10:32:53 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 10:32:53 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'http_error', 'message': 'Erro HTTP 404: <html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n</body>\n</html>'}
+2025-07-28 10:32:53 | ERROR | app | processar_oferta:256 | ❌ Falha após 1 tentativas: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 10:32:53 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 10:32:53 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 10:32:53 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+
+2025-07-28 16:41:38 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 16:41:38 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'http_error', 'message': 'Erro HTTP 404: <html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n</body>\n</html>'}
+2025-07-28 16:41:38 | ERROR | app | processar_oferta:256 | ❌ Falha após 1 tentativas: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 16:41:38 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 16:41:38 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 16:41:38 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+
+2025-07-28 18:33:35 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Falha no login com Steam: SteamClientBase.__init__() got an unexpected keyword argument 'country'
+2025-07-28 18:33:35 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 18:33:35 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 28, in realizar_login_aiosteampy
+    client = SteamClient(
+TypeError: SteamClientBase.__init__() got an unexpected keyword argument 'country'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 171, in processar_oferta
+    client = await realizar_login_aiosteampy()
+  File "/app/services/aiosteampy_service.py", line 84, in realizar_login_aiosteampy
+    raise RuntimeError("Falha no login com Steam: " + str(e))
+RuntimeError: Falha no login com Steam: SteamClientBase.__init__() got an unexpected keyword argument 'country'
+
+2025-07-28 18:46:42 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 18:46:42 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'http_error', 'message': 'Erro HTTP 404: <html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n</body>\n</html>'}
+2025-07-28 18:46:42 | ERROR | app | processar_oferta:256 | ❌ Falha após 1 tentativas: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 18:46:42 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 18:46:42 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 18:46:42 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+
+2025-07-28 18:51:30 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 18:51:30 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'http_error', 'message': 'Erro HTTP 404: <html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n</body>\n</html>'}
+2025-07-28 18:51:30 | ERROR | app | processar_oferta:256 | ❌ Falha após 1 tentativas: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 18:51:30 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 18:51:30 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 18:51:30 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+
+2025-07-28 18:57:55 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 18:57:55 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'http_error', 'message': 'Erro HTTP 404: <html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n</body>\n</html>'}
+2025-07-28 18:57:55 | ERROR | app | processar_oferta:256 | ❌ Falha após 1 tentativas: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 18:57:55 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 18:57:55 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 18:57:55 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+
+2025-07-28 19:07:09 | ERROR | app | processar_oferta:213 | ❌ ERRO RETORNADO: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 19:07:09 | ERROR | app | processar_oferta:214 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'http_error', 'message': 'Erro HTTP 404: <html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n</body>\n</html>'}
+2025-07-28 19:07:09 | ERROR | app | processar_oferta:256 | ❌ Falha após 1 tentativas: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 19:07:09 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 19:07:09 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 19:07:09 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 257, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 215, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+
+2025-07-28 19:12:18 | ERROR | app | processar_oferta:344 | 🚨 ERRO DETALHADO: RuntimeError: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'client_id'
+2025-07-28 19:12:18 | ERROR | app | processar_oferta:345 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 19:12:18 | ERROR | app | processar_oferta:346 | Traceback (most recent call last):
+  File "/app/services/aiosteampy_service.py", line 44, in realizar_login_aiosteampy
+    await asyncio.wait_for(client.login(), timeout=120.0)
+  File "/usr/local/lib/python3.10/asyncio/tasks.py", line 445, in wait_for
+    return fut.result()
+  File "/usr/local/lib/python3.10/site-packages/aiosteampy/mixins/login.py", line 198, in login
+    client_id = session_data["response"]["client_id"]
+KeyError: 'client_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/routes/trade.py", line 171, in processar_oferta
+    client = await realizar_login_aiosteampy()
+  File "/app/services/aiosteampy_service.py", line 64, in realizar_login_aiosteampy
+    raise RuntimeError(f"Falha técnica na comunicação Steam: {error_details}")
+RuntimeError: Falha técnica na comunicação Steam: KeyError: Campo ausente na resposta do Steam: 'client_id'
+
+2025-07-28 19:32:06 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: ⚠️ Erro inesperado: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-28 19:32:07 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'unknown_error', 'message': "⚠️ Erro inesperado: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'"}
+2025-07-28 19:32:19 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 19:32:19 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'http_error', 'message': 'Erro HTTP 404: <html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n</body>\n</html>'}
+2025-07-28 19:32:19 | ERROR | app | processar_oferta:252 | ❌ Falha após 2 tentativas: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 19:32:19 | ERROR | app | processar_oferta:336 | 🚨 ERRO DETALHADO: RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+2025-07-28 19:32:19 | ERROR | app | processar_oferta:337 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 19:32:19 | ERROR | app | processar_oferta:338 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 253, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro HTTP 404: <html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>Not Found</h1>
+</body>
+</html>
+
+2025-07-28 20:54:45 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Erro ao carregar steam_guard.json: [Errno 2] No such file or directory: 'steam_guard.json'
+2025-07-28 20:54:45 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Erro ao carregar steam_guard.json: [Errno 2] No such file or directory: 'steam_guard.json'", 'message': "Erro ao enviar oferta: Erro ao carregar steam_guard.json: [Errno 2] No such file or directory: 'steam_guard.json'"}
+2025-07-28 20:54:45 | ERROR | app | processar_oferta:252 | ❌ Falha após 1 tentativas: Erro ao enviar oferta: Erro ao carregar steam_guard.json: [Errno 2] No such file or directory: 'steam_guard.json'
+2025-07-28 20:54:45 | ERROR | app | processar_oferta:336 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Erro ao carregar steam_guard.json: [Errno 2] No such file or directory: 'steam_guard.json'
+2025-07-28 20:54:45 | ERROR | app | processar_oferta:337 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 20:54:45 | ERROR | app | processar_oferta:338 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 253, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Erro ao carregar steam_guard.json: [Errno 2] No such file or directory: 'steam_guard.json'
+
+2025-07-28 21:05:27 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-28 21:05:27 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'", 'message': "Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'"}
+2025-07-28 21:05:40 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-28 21:05:40 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'", 'message': "Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'"}
+2025-07-28 21:06:04 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-28 21:06:04 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'", 'message': "Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'"}
+2025-07-28 21:06:40 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-28 21:06:40 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'", 'message': "Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'"}
+2025-07-28 21:07:24 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-28 21:07:24 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'", 'message': "Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'"}
+2025-07-28 21:07:24 | ERROR | app | processar_oferta:252 | ❌ Falha após 5 tentativas: Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-28 21:07:24 | ERROR | app | processar_oferta:336 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+2025-07-28 21:07:24 | ERROR | app | processar_oferta:337 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 21:07:24 | ERROR | app | processar_oferta:338 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 253, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: 500, message='Internal Server Error', url='https://steamcommunity.com/tradeoffer/new/send'
+
+2025-07-28 21:18:55 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.
+2025-07-28 21:18:55 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.', 'message': 'Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.'}
+2025-07-28 21:19:14 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.
+2025-07-28 21:19:14 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.', 'message': 'Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.'}
+2025-07-28 21:19:48 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.
+2025-07-28 21:19:48 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.', 'message': 'Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.'}
+2025-07-28 21:20:38 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.
+2025-07-28 21:20:38 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.', 'message': 'Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.'}
+2025-07-28 21:21:45 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.
+2025-07-28 21:21:45 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.', 'message': 'Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.'}
+2025-07-28 21:21:45 | ERROR | app | processar_oferta:253 | ❌ Falha após 5 tentativas: Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.
+2025-07-28 21:21:45 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.
+2025-07-28 21:21:45 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-07-28 21:21:45 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 500). Tente novamente em alguns minutos.
+
+2025-07-28 22:54:26 | ERROR | app | processar_oferta:281 | ❌ Erro ao enviar notificação WhatsApp: float() argument must be a string or a real number, not 'NoneType'
+2025-07-28 22:54:26 | ERROR | app | processar_oferta:307 | ❌ Erro ao criar Trade Hold: float() argument must be a string or a real number, not 'NoneType'

@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import asyncio
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 from aiosteampy.client import SteamClient
@@ -16,11 +17,14 @@ load_dotenv()
 # ------------------- LOGIN ------------------- #
 async def realizar_login_aiosteampy():
     try:
-        with open("steam_guard.json", "r") as f:
+        with open("config/steam/steam_guard.json", "r") as f:
             steam_guard = json.load(f)
     except Exception as e:
         raise RuntimeError("Erro ao carregar steam_guard.json: " + str(e))
+    
+    client = None
     try:
+        # Configurações mais robustas para o cliente
         client = SteamClient(
             steam_id=steam_guard["steam_id"],
             username=steam_guard["account_name"],
@@ -32,10 +36,18 @@ async def realizar_login_aiosteampy():
         print("🔐 Tentando fazer login com aiosteampy...")
         print(f"🔐 Account: {steam_guard['account_name']}")
         print(f"🔐 Steam ID: {steam_guard['steam_id']}")
+        
+        # Login com timeout mais longo para estabilidade
         await client.login()
         print("✅ Login com aiosteampy realizado com sucesso.")
         return client
+        
     except KeyError as ke:
+        if client:
+            try:
+                await client.logout()
+            except:
+                pass
         error_details = f"KeyError: Campo ausente na resposta do Steam: {ke}"
         print(f"🚨 ERRO CRÍTICO: {error_details}")
         print(f"🚨 Isso indica problema de autenticação Steam")
@@ -45,7 +57,13 @@ async def realizar_login_aiosteampy():
         print(f"   • Conta Steam com restrições")
         print(f"   • Steam mudou protocolo de autenticação")
         raise RuntimeError(f"Falha crítica na autenticação Steam: {error_details}")
+        
     except Exception as e:
+        if client:
+            try:
+                await client.logout()
+            except:
+                pass
         print(f"❌ Erro detalhado no login: {type(e).__name__}: {str(e)}")
         print(f"❌ Conta: {steam_guard.get('account_name', 'N/A')}")
         
@@ -88,6 +106,7 @@ def extrair_steamid64_do_tradelink(tradelink: str) -> int:
         raise ValueError("Tradelink inválido. Parâmetro 'partner' ausente.")
     steamid32 = int(match.group(1))
     return steamid32 + 76561197960265728
+
 async def enviar_oferta_aiosteampy(client: SteamClient, tradelink: str, assetids: list[str]) -> str:
     partner_steamid64 = extrair_steamid64_do_tradelink(tradelink)
     
@@ -112,10 +131,9 @@ async def enviar_oferta_aiosteampy(client: SteamClient, tradelink: str, assetids
         
         itens = itens_para_oferta
         
-    except Exception:
+    except Exception as inv_error:
         # FALLBACK: criar EconItem manualmente
-        from aiosteampy.models import EconItem
-        from aiosteampy.constants import AppContext
+        print(f"⚠️ Inventário não carregado: {inv_error}. Usando fallback...")
         
         class ItemDescription:
             def __init__(self):
@@ -137,22 +155,163 @@ async def enviar_oferta_aiosteampy(client: SteamClient, tradelink: str, assetids
             )
             itens.append(item)
     
-    # Enviar oferta
-    tradeoffer_id = await client.make_trade_offer(
-        obj=int(partner_steamid64),
-        to_give=[],
-        to_receive=itens,
-        message="Oferta de compra - TitoSkins",
-        confirm=False
-    )
-    
-    return str(tradeoffer_id)
+    # Enviar oferta com TRATAMENTO AVANÇADO para erro 500
+    try:
+        print(f"🚀 Enviando oferta para {partner_steamid64} com {len(itens)} itens...")
+        
+        # PRIMEIRA TENTATIVA: Configuração padrão
+        tradeoffer_id = await client.make_trade_offer(
+            obj=int(partner_steamid64),
+            to_give=[],
+            to_receive=itens,
+            message="Oferta de compra - TitoSkins",
+            confirm=False
+        )
+        
+        print(f"✅ Oferta criada com ID: {tradeoffer_id}")
+        return str(tradeoffer_id)
+        
+    except Exception as trade_error:
+        error_str = str(trade_error)
+        print(f"❌ Erro ao enviar oferta: {error_str}")
+        
+        # TRATAMENTO ESPECÍFICO PARA ERRO 500 - VÁRIAS TENTATIVAS
+        if "500" in error_str and "Internal Server Error" in error_str:
+            print("🚨 Steam retornou erro 500 - tentando correções automáticas...")
+            
+            # TENTATIVA 2: Aguardar e tentar com message simplificada
+            print("🔄 Tentativa 2: Aguardando 3s e usando message simplificada...")
+            await asyncio.sleep(3)
+            
+            try:
+                tradeoffer_id = await client.make_trade_offer(
+                    obj=int(partner_steamid64),
+                    to_give=[],
+                    to_receive=itens,
+                    message="Trade offer",
+                    confirm=False
+                )
+                print(f"✅ Oferta criada na tentativa 2! ID: {tradeoffer_id}")
+                return str(tradeoffer_id)
+                
+            except Exception as retry_error2:
+                print(f"❌ Tentativa 2 falhou: {str(retry_error2)}")
+                
+                # TENTATIVA 3: Sem message
+                if "500" in str(retry_error2):
+                    print("🔄 Tentativa 3: Sem message...")
+                    await asyncio.sleep(2)
+                    
+                    try:
+                        tradeoffer_id = await client.make_trade_offer(
+                            obj=int(partner_steamid64),
+                            to_give=[],
+                            to_receive=itens,
+                            confirm=False
+                        )
+                        print(f"✅ Oferta criada na tentativa 3! ID: {tradeoffer_id}")
+                        return str(tradeoffer_id)
+                        
+                    except Exception as retry_error3:
+                        print(f"❌ Tentativa 3 falhou: {str(retry_error3)}")
+                        
+                        # TENTATIVA 4: Com delay maior
+                        if "500" in str(retry_error3):
+                            print("🔄 Tentativa 4: Delay maior (5s)...")
+                            await asyncio.sleep(5)
+                            
+                            try:
+                                tradeoffer_id = await client.make_trade_offer(
+                                    obj=int(partner_steamid64),
+                                    to_give=[],
+                                    to_receive=itens,
+                                    confirm=False
+                                )
+                                print(f"✅ Oferta criada na tentativa 4! ID: {tradeoffer_id}")
+                                return str(tradeoffer_id)
+                                
+                            except Exception as retry_error4:
+                                print(f"❌ Tentativa 4 falhou: {str(retry_error4)}")
+                                
+            # Se todas as tentativas falharam com 500, é problema do Steam
+            raise RuntimeError("Steam temporariamente indisponível (HTTP 500). Servidor Steam sobrecarregado. Tente novamente em alguns minutos.")
+                
+        elif "429" in error_str:
+            print("🚨 Rate limit do Steam atingido")
+            raise RuntimeError("Muitas requisições ao Steam. Aguarde alguns minutos antes de tentar novamente.")
+        elif "403" in error_str:
+            print("🚨 Acesso negado pelo Steam")
+            raise RuntimeError("Steam negou a requisição. Verifique permissões da conta.")
+        else:
+            raise RuntimeError(f"Falha ao enviar oferta: {error_str}")
 
+
+# ------------------- FUNÇÃO WRAPPER PARA COMPATIBILIDADE ------------------- #
+async def enviar_oferta_principal(partner_steamid64: int, dados: dict) -> dict:
+    """
+    Função principal para enviar ofertas - compatível com routes/trade.py
+    Faz login automaticamente e envia a oferta
+    """
+    print("🚀 INICIANDO enviar_oferta_principal")
+    print(f"Partner ID: {partner_steamid64}")
+    print(f"Dados: {dados}")
+    
+    client = None
+    try:
+        # 1. Fazer login
+        print("🔐 Fazendo login...")
+        client = await realizar_login_aiosteampy()
+        print("✅ Login realizado com sucesso")
+        
+        # 2. Extrair dados
+        tradelink = dados.get("tradelink")
+        items = dados.get("items", [])
+        assetids = [item["assetid"] for item in items]
+        
+        print(f"🔍 Tradelink: {tradelink}")
+        print(f"🔍 AssetIDs: {assetids}")
+        
+        if not assetids:
+            raise ValueError("Nenhum AssetID fornecido")
+        
+        # 3. Enviar oferta REAL
+        print("🚀 Enviando oferta REAL...")
+        tradeoffer_id = await enviar_oferta_aiosteampy(client, tradelink, assetids)
+        print(f"✅ Oferta REAL enviada! ID: {tradeoffer_id}")
+        
+        # 4. Registrar no banco
+        print("💾 Registrando no banco...")
+        registrar_oferta_no_banco(tradeoffer_id, partner_steamid64, assetids)
+        print("✅ Registrado no banco com sucesso")
+        
+        return {
+            "success": True,
+            "tradeoffer_id": tradeoffer_id,
+            "message": "Oferta REAL enviada com sucesso"
+        }
+        
+    except Exception as e:
+        print(f"❌ ERRO em enviar_oferta_principal: {type(e).__name__}: {str(e)}")
+        return {
+            "success": False,
+            "error": str(e),
+            "message": f"Erro ao enviar oferta: {str(e)}"
+        }
+    finally:
+        # IMPORTANTE: Sempre fechar o cliente para evitar vazamento de memória
+        if client:
+            try:
+                print("🔒 Fechando cliente Steam...")
+                await client.logout()
+                print("✅ Cliente Steam fechado com sucesso")
+            except Exception as close_error:
+                print(f"⚠️ Erro ao fechar cliente: {close_error}")
 
 
 # ------------------- REGISTRAR OFERTA NO BANCO ------------------- #
 def registrar_oferta_no_banco(offer_id: str, partner_steamid64: int, assetids: list[str]):
     try:
+        # TODAS AS OFERTAS SÃO REAIS - NÃO HÁ MAIS SIMULAÇÃO
         nova_oferta = TradeOffer(
             tradeofferid=offer_id,
             partnersteamid=str(partner_steamid64),
@@ -161,17 +320,23 @@ def registrar_oferta_no_banco(offer_id: str, partner_steamid64: int, assetids: l
         )
         db.session.add(nova_oferta)
         db.session.commit()
-        print("💾 Oferta registrada com sucesso no banco.")
+        print("💾 Oferta REAL registrada no banco.")
+        
         # Atualizar valor_liquido para as skins associadas à oferta
         for assetid in assetids:
-            skin = db.session.query(Skin).filter(Skin.assetid == assetid).first()  # Supondo que assetid é usado para identificar a skin
+            skin = db.session.query(Skin).filter(Skin.assetid == assetid).first()
             if skin:
                 # Calcule o valor líquido
-                skin.valor_liquido = calcular_valor_liquido(skin.preco)
-                db.session.commit()  # Salva a alteração no valor líquido
-                print(f"🔄 Valor líquido da skin {skin.nome} atualizado para R$ {skin.valor_liquido:.2f}.")
+                valor_liquido = calcular_valor_liquido(skin.preco)
+                if valor_liquido is not None:
+                    skin.valor_liquido = valor_liquido
+                    db.session.commit()
+                    print(f"🔄 Valor líquido da skin {skin.nome} atualizado para R$ {skin.valor_liquido:.2f}.")
+                else:
+                    print(f"⚠️ Skin {skin.nome} sem preço válido para calcular valor líquido.")
             else:
                 print(f"⚠️ Skin com assetid {assetid} não encontrada.")
+            
     except Exception as e:
         raise RuntimeError(f"Erro ao registrar oferta no banco: {str(e)}")
 

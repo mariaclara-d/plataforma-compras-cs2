@@ -168,14 +168,14 @@
                         <td>
                             {% if saque.status == 'pendente' %}
                                 <form method="POST" action="{{ url_for('admin.processar_saque', saque_id=saque.id) }}" class="d-inline">
-                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
                                     <button type="submit" class="btn btn-sm btn-success" 
                                             onclick="return confirm('Processar este saque?')">
                                         <i class="fas fa-check"></i> Processar
                                     </button>
                                 </form>
                                 <form method="POST" action="{{ url_for('admin.cancelar_saque', saque_id=saque.id) }}" class="d-inline ml-1">
-                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
                                     <button type="submit" class="btn btn-sm btn-danger"
                                             onclick="return confirm('Cancelar este saque?')">
                                         <i class="fas fa-times"></i> Cancelar

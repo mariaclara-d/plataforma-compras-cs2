@@ -355,12 +355,11 @@ class InventoryService:
         # 3. Buscar via Steam API oficial SEMPRE (para validação ou fallback)
         steam_assets = self.fetch_inventory_steam_api(steam_id)
         
-        # 3.1. Se API alternativa falhou, criar itens básicos da Steam API para teste
+        # 3.1. Se API alternativa falhou, NÃO criar itens falsos - retornar vazio
         if not inventory_items and steam_assets:
-            self.logger.warning("Criando itens básicos da Steam API para teste")
-            inventory_items = []
+            self.logger.warning("API alternativa falhou, mas Steam API retornou dados - validando disponibilidade real")
             
-            # Buscar descriptions também (necessário para nomes e ícones)
+            # Verificar se inventário Steam realmente existe e é acessível
             try:
                 url = f"{self.steam_inventory_url}/{steam_id}/730/2"
                 headers = {
@@ -368,7 +367,9 @@ class InventoryService:
                     'Accept': 'application/json'
                 }
                 response = requests.get(url, headers=headers, timeout=30)
+                
                 if response.status_code == 200:
+                    self.logger.info("✅ Inventário Steam confirmado como acessível")
                     data = response.json()
                     descriptions = data.get('descriptions', [])
                     
@@ -378,8 +379,8 @@ class InventoryService:
                         key = f"{desc.get('classid')}_{desc.get('instanceid', 0)}"
                         desc_map[key] = desc
                     
-                    # Criar itens básicos fazendo join entre assets e descriptions
-                    for asset in steam_assets[:10]:  # Limitar a 10 itens para teste
+                    # Criar itens reais fazendo join entre assets e descriptions
+                    for asset in steam_assets:
                         if asset.get('assetid'):
                             # Buscar description correspondente
                             key = f"{asset.get('classid')}_{asset.get('instanceid', 0)}"
@@ -392,33 +393,31 @@ class InventoryService:
                                 'instanceid': asset.get('instanceid'),
                                 'market_hash_name': desc.get('market_hash_name', f'Item {asset["assetid"]}'),
                                 'icon_url': desc.get('icon_url', ''),
-                                'price_median': 1.0,  # Preço padrão para teste
+                                'price_median': 'N/A',  # Sem preço da API alternativa
                                 'tradable': desc.get('tradable', 1) == 1,
                                 'marketable': desc.get('marketable', 1) == 1
                             }
                             
-                            basic_item = InventoryItem(item_data)
-                            inventory_items.append(basic_item)
+                            real_item = InventoryItem(item_data)
+                            inventory_items.append(real_item)
+                            
+                    self.logger.info(f"✅ Criados {len(inventory_items)} itens reais do inventário")
+                
+                elif response.status_code == 400:
+                    self.logger.error("❌ ERRO 400: Inventário não existe ou está privado")
+                    return []  # Retornar vazio - inventário inacessível
+                
+                elif response.status_code == 403:
+                    self.logger.error("❌ ERRO 403: Inventário privado")
+                    return []  # Retornar vazio - inventário privado
+                
+                else:
+                    self.logger.error(f"❌ ERRO {response.status_code}: Não foi possível acessar inventário")
+                    return []  # Retornar vazio - erro de acesso
                             
             except Exception as e:
-                self.logger.error(f"Erro ao buscar descriptions da Steam API: {e}")
-                # Fallback: criar itens básicos apenas com assetid
-                for asset in steam_assets[:10]:
-                    if asset.get('assetid'):
-                        item_data = {
-                            'assetid': asset['assetid'],
-                            'classid': asset.get('classid'),
-                            'instanceid': asset.get('instanceid'),
-                            'market_hash_name': f'Item {asset["assetid"]}',
-                            'icon_url': '',
-                            'price_median': 1.0,
-                            'tradable': True,
-                            'marketable': True
-                        }
-                        basic_item = InventoryItem(item_data)
-                        inventory_items.append(basic_item)
-                        
-            self.logger.info(f"Criados {len(inventory_items)} itens básicos para teste")
+                self.logger.error(f"❌ Erro ao verificar inventário Steam: {e}")
+                return []  # Retornar vazio em caso de erro
         
         # 4. Criar conjunto de assetids válidos da Steam API
         valid_assetids = set()
@@ -486,22 +485,69 @@ class InventoryService:
         # Tentar buscar inventário atual via API alternativa primeiro
         current_inventory = self.get_user_inventory(steam_id)
         
-        # Se API alternativa falhou, usar Steam API oficial apenas para validação
+        # Se API alternativa falhou, verificar se inventário realmente existe
         if not current_inventory:
-            self.logger.warning("API alternativa falhou - usando Steam API oficial apenas para validação de assetids")
-            steam_assets = self.fetch_inventory_steam_api(steam_id)
+            self.logger.warning("API alternativa falhou - verificando se inventário realmente existe")
             
-            if not steam_assets:
+            # Tentar acessar inventário para confirmar se existe
+            try:
+                url = f"{self.steam_inventory_url}/{steam_id}/730/2"
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                    'Accept': 'application/json'
+                }
+                response = requests.get(url, headers=headers, timeout=30)
+                
+                if response.status_code == 400:
+                    self.logger.error("❌ ERRO 400: Inventário não existe ou está privado")
+                    return {
+                        'valid': False,
+                        'error': 'Inventário não existe ou está privado. Verifique se o inventário CS2 está público.',
+                        'valid_items': [],
+                        'invalid_items': selected_assetids
+                    }
+                elif response.status_code == 403:
+                    self.logger.error("❌ ERRO 403: Inventário privado")
+                    return {
+                        'valid': False,
+                        'error': 'Inventário privado. Por favor, torne seu inventário CS2 público para vendas.',
+                        'valid_items': [],
+                        'invalid_items': selected_assetids
+                    }
+                elif response.status_code != 200:
+                    self.logger.error(f"❌ ERRO {response.status_code}: Não foi possível acessar inventário")
+                    return {
+                        'valid': False,
+                        'error': f'Erro {response.status_code} ao acessar inventário. Tente novamente mais tarde.',
+                        'valid_items': [],
+                        'invalid_items': selected_assetids
+                    }
+                
+                # Se chegou aqui, inventário existe
+                data = response.json()
+                steam_assets = data.get('assets', [])
+                
+                if not steam_assets:
+                    self.logger.warning("Inventário vazio")
+                    return {
+                        'valid': False,
+                        'error': 'Inventário vazio ou sem itens CS2',
+                        'valid_items': [],
+                        'invalid_items': selected_assetids
+                    }
+                
+                # Criar conjunto de assetids válidos
+                valid_assetids = {asset.get('assetid') for asset in steam_assets if asset.get('assetid')}
+                self.logger.info(f"✅ Inventário confirmado: {len(valid_assetids)} assetids válidos")
+                
+            except Exception as e:
+                self.logger.error(f"❌ Erro ao verificar inventário: {e}")
                 return {
                     'valid': False,
-                    'error': 'Não foi possível carregar o inventário atual via nenhuma API',
+                    'error': f'Erro de conexão ao verificar inventário: {str(e)}',
                     'valid_items': [],
                     'invalid_items': selected_assetids
                 }
-            
-            # Criar conjunto de assetids válidos apenas da Steam API
-            valid_assetids = {asset.get('assetid') for asset in steam_assets if asset.get('assetid')}
-            self.logger.info(f"Steam API oficial encontrou {len(valid_assetids)} assetids válidos para validação")
             
         else:
             # Usar inventário da API alternativa

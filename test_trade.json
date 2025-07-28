@@ -1,0 +1,11 @@
+{
+  "partner_steam_id": "76561198123456789",
+  "items": [
+    {
+      "assetid": "test123",
+      "contextid": "2",
+      "appid": "730"
+    }
+  ],
+  "trade_url": "https://steamcommunity.com/tradeoffer/new/?partner=123456789&token=test_token"
+}

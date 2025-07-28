@@ -68,6 +68,8 @@ def create_app():
     from routes.offer import offer_blueprint
     from routes.admin import admin_bp
     from routes.saque import bp as saque_bp
+    from routes.trade_holds import bp as trade_holds_bp
+    from routes.transactions import transactions_blueprint
 
     app.register_blueprint(home_blueprint)
     app.register_blueprint(auth_blueprint)
@@ -78,6 +80,12 @@ def create_app():
     app.register_blueprint(offer_blueprint, url_prefix='/offer')
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(saque_bp, url_prefix='/api')
+    app.register_blueprint(trade_holds_bp)
+    app.register_blueprint(transactions_blueprint)
+    
+    # Importar e registrar rota de status da Steam
+    from routes.steam_status import bp as steam_status_bp
+    app.register_blueprint(steam_status_bp)
 
     return app
 

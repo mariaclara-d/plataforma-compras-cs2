@@ -1,69 +1,193 @@
 .como-funciona {
   background: #1C1A24;
   color: #fff;
-  padding: 50px 0;
+  padding: 60px 0;
 }
 
 .como-funciona h2 {
   color: #fff;
   font-size: 2.5rem;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  font-weight: 700;
 }
 
 .card {
-  background: linear-gradient(135deg, #3281ac, #66b2d8); /* Nova cor */
+  background: linear-gradient(135deg, #2A2833, #34314A);
   color: #fff;
-  border: none;
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  padding: 20px;
+  border: 1px solid rgba(0, 255, 191, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  padding: 30px 20px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 255, 191, 0.15);
+  border-color: rgba(0, 255, 191, 0.3);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00CC99, #00FFBF);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card-icon {
-  font-size: 2.5rem; /* Tamanho do ícone */
-  margin-bottom: 10px; /* Espaçamento entre ícone e título */
-  color: #fff; /* Cor do ícone */
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #00FFBF;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-icon {
+  transform: scale(1.1);
 }
 
 .card-title {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #fff;
 }
 
 .card-text {
-  font-size: 0.95rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #e9ecef;
+}
+
+/* Responsividade melhorada */
+@media (max-width: 1200px) {
+  .como-funciona {
+    padding: 55px 0;
+  }
+  
+  .como-funciona h2 {
+    font-size: 2.3rem;
+    margin-bottom: 35px;
+  }
+  
+  .card {
+    padding: 25px 18px;
+  }
+}
+
+@media (max-width: 991px) {
+  .como-funciona {
+    padding: 50px 0;
+  }
+  
+  .como-funciona h2 {
+    font-size: 2.2rem;
+  }
+  
+  .card {
+    margin-bottom: 25px;
+    padding: 28px 20px;
+  }
+  
+  .card-icon {
+    font-size: 2.8rem;
+  }
 }
 
 @media (max-width: 768px) {
+  .como-funciona {
+    padding: 45px 0;
+  }
+  
+  .como-funciona h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
   .card {
-      margin-bottom: 20px;
+    padding: 25px 20px;
+    margin-bottom: 20px;
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  
+  .card-text {
+    font-size: 0.95rem;
   }
 }
 
 @media (max-width: 576px) {
+  .como-funciona {
+    padding: 40px 0;
+  }
+  
   .como-funciona h2 {
-      font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
   }
-
+  
   .card {
-      padding: 15px;
+    padding: 20px 15px;
+    margin-bottom: 15px;
   }
-
-  .card-title {
-      font-size: 1.1rem;
-  }
-
-  .card-text {
-      font-size: 0.85rem;
-  }
-
+  
   .card-icon {
-      font-size: 2rem; /* Ajuste no tamanho do ícone */
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .como-funciona {
+    padding: 35px 0;
+  }
+  
+  .como-funciona h2 {
+    font-size: 1.6rem;
+  }
+  
+  .card {
+    padding: 18px 12px;
+  }
+  
+  .card-icon {
+    font-size: 2rem;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .card-text {
+    font-size: 0.85rem;
   }
 }
 
