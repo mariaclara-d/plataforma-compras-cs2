@@ -34,7 +34,9 @@ def get_database_url():
         return f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
     
     # 3. SQLite (desenvolvimento/fallback)
-    return 'sqlite:///instance/users.db'
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    sqlite_path = os.path.join(current_dir, 'instance', 'users.db')
+    return f'sqlite:///{sqlite_path}'
 
 def configure_database(app):
     """

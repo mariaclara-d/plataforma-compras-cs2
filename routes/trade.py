@@ -263,53 +263,45 @@ def enviar_oferta_com_aiosteampy():
                     
                 # Enviar notificação WhatsApp
                 try:
-                    # Verificar se não é oferta simulada antes de enviar notificação
-                    if not offer_id.startswith('SIM'):
-                        # Calcular valor total dos itens - tratar valores None
-                        valor_total = sum([
-                            float(item.get('price', 0) or 0) for item in itens_selecionados
-                        ])
-                        
-                        # Enviar notificação
-                        notification_service.enviar_notificacao_trade_oferta(
-                            usuario_nome=session.get('steam_username', f"SteamID: {session.get('steam_id', 'N/A')}"),
-                            valor_total=valor_total,
-                            itens_count=len(itens_selecionados),
-                            offer_id=offer_id
-                        )
-                        current_app.logger.info("✅ Notificação WhatsApp enviada com sucesso")
-                    else:
-                        current_app.logger.info("⚠️ Notificação WhatsApp não enviada - oferta simulada")
+                    # Calcular valor total dos itens
+                    valor_total = sum([
+                        float(item.get('price', 0)) for item in itens_selecionados
+                    ])
+                    
+                    # Enviar notificação
+                    notification_service.enviar_notificacao_trade_oferta(
+                        usuario_nome=session.get('steam_username', f"SteamID: {session.get('steam_id', 'N/A')}"),
+                        valor_total=valor_total,
+                        itens_count=len(itens_selecionados),
+                        offer_id=offer_id
+                    )
+                    current_app.logger.info("✅ Notificação WhatsApp enviada com sucesso")
                 except Exception as notification_error:
                     # Log do erro mas não quebrar o fluxo
                     current_app.logger.error(f"❌ Erro ao enviar notificação WhatsApp: {notification_error}")
                 
                 # ===== NOVO: CRIAR TRADE HOLD PARA PROTEÇÃO DE 7 DIAS =====
                 try:
-                    # Verificar se não é oferta simulada antes de criar hold
-                    if not offer_id.startswith('SIM'):
-                        # Calcular valor total dos itens vendidos - tratar valores None
-                        valor_total = sum([float(item.get('price', 0) or 0) for item in itens_selecionados])
-                        
-                        # Lista de nomes dos itens para o hold
-                        nomes_itens = [item.get('market_hash_name', 'Item desconhecido') for item in itens_selecionados]
-                        descricao_itens = f"{len(nomes_itens)} item(s): {', '.join(nomes_itens[:3])}"
-                        if len(nomes_itens) > 3:
-                            descricao_itens += f" e mais {len(nomes_itens) - 3}..."
-                        
-                        # Criar hold usando o offer_id como transacao_id (temporário)
-                        # Em uma implementação completa, você criaria uma transação real primeiro
-                        hold = TradeHoldService.create_hold_for_transaction(
-                            user_id=session.get('steam_id'),
-                            transacao_id=offer_id,  # Usando offer_id temporariamente
-                            valor=valor_total,
-                            item_name=descricao_itens
-                        )
-                        
-                        current_app.logger.info(f"✅ Trade Hold criado: ID {hold.id}, Valor: R$ {valor_total}, Expira em: {hold.expires_at}")
-                    else:
-                        current_app.logger.info("⚠️ Trade Hold não criado - oferta simulada")
-                        
+                    # Calcular valor total dos itens vendidos
+                    valor_total = sum([float(item.get('price', 0)) for item in itens_selecionados])
+                    
+                    # Lista de nomes dos itens para o hold
+                    nomes_itens = [item.get('market_hash_name', 'Item desconhecido') for item in itens_selecionados]
+                    descricao_itens = f"{len(nomes_itens)} item(s): {', '.join(nomes_itens[:3])}"
+                    if len(nomes_itens) > 3:
+                        descricao_itens += f" e mais {len(nomes_itens) - 3}..."
+                    
+                    # Criar hold usando o offer_id como transacao_id (temporário)
+                    # Em uma implementação completa, você criaria uma transação real primeiro
+                    hold = TradeHoldService.create_hold_for_transaction(
+                        user_id=session.get('steam_id'),
+                        transacao_id=offer_id,  # Usando offer_id temporariamente
+                        valor=valor_total,
+                        item_name=descricao_itens
+                    )
+                    
+                    current_app.logger.info(f"✅ Trade Hold criado: ID {hold.id}, Valor: R$ {valor_total}, Expira em: {hold.expires_at}")
+                    
                 except Exception as hold_error:
                     # Log do erro mas não quebrar o fluxo principal
                     current_app.logger.error(f"❌ Erro ao criar Trade Hold: {hold_error}")

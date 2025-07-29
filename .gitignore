@@ -1,1 +1,31 @@
 .env
+
+# Arquivos de teste temporários
+test_*.py
+teste_*.py
+debug_*.py
+verificar_*.py
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Logs
+*.log
+
+# Banco de dados local
+instance/
+*.db
+
+# Configurações do editor
+.vscode/
+.idea/
+
+# Dependências
+node_modules/
+
+# Build artifacts
+build/
+dist/
