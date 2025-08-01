@@ -24,7 +24,7 @@ def login_required_api(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if 'steam_id' not in session:
-            return jsonify({"erro": "Usuário não autenticado"}), 401
+            return jsonify({"error": "User not authenticated"}), 401
         return f(*args, **kwargs)
     return decorated
 
@@ -41,7 +41,7 @@ def enviar_oferta_com_aiosteampy():
             "client_id": client_id,
             "endpoint": "/trade/enviar-oferta"
         })
-        return jsonify({"erro": "Muitas tentativas. Tente novamente em 1 minuto."}), 429
+        return jsonify({"error": "Too many attempts. Please try again in 1 minute."}), 429
     
     try:
         current_app.logger.info(f"Payload recebido: {request.json}")
@@ -58,7 +58,7 @@ def enviar_oferta_com_aiosteampy():
                 "client_id": client_id
             })
             current_app.logger.info(f"CSRF inválido: {e.description}")
-            return jsonify({"erro": "CSRF token inválido"}), 403
+            return jsonify({"error": "Invalid CSRF token"}), 403
 
         # BASIC DATA VALIDATION
         try:
@@ -70,7 +70,7 @@ def enviar_oferta_com_aiosteampy():
             })
             msg = str(e) or "Erro de validação nos dados enviados."
             current_app.logger.error(f"Erro ao validar dados: {msg}")
-            return jsonify({"erro": msg}), 400
+            return jsonify({"error": msg}), 400
 
         # ADDITIONAL SECURITY VALIDATIONS
         if not SecurityService.validate_steam_id(str(partner_steamid64)):
@@ -78,14 +78,14 @@ def enviar_oferta_com_aiosteampy():
                 "steam_id": str(partner_steamid64),
                 "client_id": client_id
             })
-            return jsonify({"erro": "SteamID inválido"}), 400
+            return jsonify({"error": "Invalid Steam ID"}), 400
         
         if not SecurityService.validate_tradelink(tradelink):
             SecurityService.log_security_event("INVALID_TRADELINK", {
                 "tradelink": tradelink[:50] + "...",  # Log parcial por segurança
                 "client_id": client_id
             })
-            return jsonify({"erro": "Trade link inválido"}), 400
+            return jsonify({"error": "Invalid trade link"}), 400
 
         # Garante que o usuário só envie oferta do próprio inventário
         if str(partner_steamid64) != str(session.get('steam_id')):
@@ -94,7 +94,7 @@ def enviar_oferta_com_aiosteampy():
                 "session_steam_id": str(session.get('steam_id')),
                 "client_id": client_id
             })
-            return jsonify({"erro": "Operação não autorizada"}), 403
+            return jsonify({"error": "Unauthorized operation"}), 403
 
         # VALIDAÇÃO DE ASSETIDS COM SECURITY SERVICE
         current_app.logger.info("Iniciando validação de assetids...")
@@ -107,7 +107,7 @@ def enviar_oferta_com_aiosteampy():
                     "assetid": assetid,
                     "client_id": client_id
                 })
-                return jsonify({"erro": f"Asset ID inválido: {assetid}"}), 400
+                return jsonify({"error": f"Invalid Asset ID: {assetid}"}), 400
         
         current_app.logger.info(f"AssetIDs selecionados para validação: {selected_assetids}")
         
@@ -135,7 +135,7 @@ def enviar_oferta_com_aiosteampy():
                 "error": payment_validation['error'],
                 "client_id": client_id
             })
-            return jsonify({"erro": payment_validation['error']}), 400
+            return jsonify({"error": payment_validation['error']}), 400
         
         # Usar dados sanitizados
         pagamento_sanitizado = payment_validation['sanitized_data']
@@ -322,12 +322,12 @@ def enviar_oferta_com_aiosteampy():
                     current_app.logger.error(f"Erro ao obter info de hold: {e}")
 
                 return jsonify({
-                    "mensagem": "Oferta criada com sucesso!",
+                    "message": "Trade offer created successfully!",
                     "offer_id": offer_id,
                     "trade_protection": {
-                        "ativo": True,
-                        "periodo_dias": 7,
-                        "mensagem": "Seus itens estão protegidos por 7 dias. Você pode reverter a venda durante este período.",
+                        "active": True,
+                        "period_days": 7,
+                        "message": "Your items are protected for 7 days. You can reverse the sale during this period.",
                         "hold_info": hold_info
                     }
                 }), 200
@@ -345,53 +345,53 @@ def enviar_oferta_com_aiosteampy():
                     "Erro da Steam (500)" in error_message or
                     ("500" in error_message and "Internal Server Error" in error_message)):
                     return jsonify({
-                        "erro": "🕐 Steam indisponível temporariamente",
-                        "detalhes": "Os servidores da Steam estão com instabilidade. Este é um problema da própria Steam, não da nossa plataforma. Tente novamente em 10-15 minutos.",
-                        "tipo": "steam_server_error",
-                        "retry_sugestao": "Aguarde 10-15 minutos e tente novamente",
-                        "codigo_steam": "500"
+                        "error": "🕐 Steam temporarily unavailable",
+                        "details": "Steam servers are experiencing instability. This is a Steam issue, not our platform. Please try again in 10-15 minutes.",
+                        "type": "steam_server_error",
+                        "retry_suggestion": "Wait 10-15 minutes and try again",
+                        "steam_code": "500"
                     }), 503
                 elif "Erro de autenticação" in error_message or "🔐" in error_message:
                     return jsonify({
-                        "erro": "🔒 Problema de autenticação Steam",
-                        "detalhes": "Problema temporário com o bot da Steam. Nossa equipe foi notificada.",
-                        "tipo": "steam_auth_error",
-                        "contato_suporte": True
+                        "error": "🔒 Steam authentication problem",
+                        "details": "Temporary issue with Steam bot. Our team has been notified.",
+                        "type": "steam_auth_error",
+                        "contact_support": True
                     }), 401
                 elif "Rate limit" in error_message or "⏳" in error_message:
                     return jsonify({
-                        "erro": "⏳ Limite de requisições atingido",
-                        "detalhes": "A Steam está limitando as requisições. Aguarde 30 minutos antes de tentar novamente.",
-                        "tipo": "rate_limit_error",
-                        "retry_sugestao": "Aguarde 30 minutos"
+                        "error": "⏳ Rate limit reached",
+                        "details": "Steam is limiting requests. Please wait 30 minutes before trying again.",
+                        "type": "rate_limit_error",
+                        "retry_suggestion": "Wait 30 minutes"
                     }), 429
                 elif "Timeout" in error_message or "⏱️" in error_message:
                     return jsonify({
-                        "erro": "⏱️ Timeout na conexão com Steam",
-                        "detalhes": "A Steam demorou muito para responder. Tente novamente em alguns minutos.",
-                        "tipo": "timeout_error",
-                        "retry_sugestao": "Tente novamente em 5 minutos"
+                        "error": "⏱️ Steam connection timeout",
+                        "details": "Steam took too long to respond. Please try again in a few minutes.",
+                        "type": "timeout_error",
+                        "retry_suggestion": "Try again in 5 minutes"
                     }), 504
                 elif "rede" in error_message.lower() or "network" in error_message.lower():
                     return jsonify({
-                        "erro": "🌐 Problema de conectividade",
-                        "detalhes": "Problema temporário de rede com a Steam. Tente novamente em alguns minutos.",
-                        "tipo": "network_error",
-                        "retry_sugestao": "Tente novamente em 2-5 minutos"
+                        "error": "🌐 Connectivity issue",
+                        "details": "Temporary network issue with Steam. Please try again in a few minutes.",
+                        "type": "network_error",
+                        "retry_suggestion": "Try again in 2-5 minutes"
                     }), 502
                 else:
                     return jsonify({
-                        "erro": "⚠️ Erro inesperado",
-                        "detalhes": f"Ocorreu um erro técnico: {error_message[:200]}...",
-                        "tipo": "general_error",
-                        "contato_suporte": True
+                        "error": "⚠️ Unexpected error",
+                        "details": f"A technical error occurred: {error_message[:200]}...",
+                        "type": "general_error",
+                        "contact_support": True
                     }), 500
                 
-                return jsonify({"erro": f"Erro interno: {str(e)}"}), 500
+                return jsonify({"error": f"Internal error: {str(e)}"}), 500
 
         return asyncio.run(processar_oferta())
 
     except Exception as e:
         current_app.logger.error(f"Erro inesperado: {e}")
         current_app.logger.error(traceback.format_exc())
-        return jsonify({"erro": "Erro inesperado no servidor."}), 500
+        return jsonify({"error": "Unexpected server error."}), 500

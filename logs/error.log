@@ -1912,3 +1912,240 @@ RuntimeError: Erro ao enviar oferta: Steam temporariamente indisponível (HTTP 5
 
 2025-07-28 22:54:26 | ERROR | app | processar_oferta:281 | ❌ Erro ao enviar notificação WhatsApp: float() argument must be a string or a real number, not 'NoneType'
 2025-07-28 22:54:26 | ERROR | app | processar_oferta:307 | ❌ Erro ao criar Trade Hold: float() argument must be a string or a real number, not 'NoneType'
+2025-07-29 22:14:13 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-07-29 22:14:13 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-07-29 22:14:24 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-07-29 22:14:24 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-07-29 22:14:42 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-07-29 22:14:42 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-07-29 22:15:09 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-07-29 22:15:09 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-07-29 22:15:43 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-07-29 22:15:43 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-07-29 22:15:44 | ERROR | app | processar_oferta:253 | ❌ Falha após 5 tentativas: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-07-29 22:15:44 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-07-29 22:15:44 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-07-29 22:15:44 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+
+2025-07-29 22:25:53 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Steam rejeitou as credenciais. Verifique username, password e Steam Guard secrets.
+2025-07-29 22:25:53 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam rejeitou as credenciais. Verifique username, password e Steam Guard secrets.', 'message': 'Erro ao enviar oferta: Steam rejeitou as credenciais. Verifique username, password e Steam Guard secrets.'}
+2025-07-29 22:27:37 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.
+2025-07-29 22:27:37 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.', 'message': 'Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.'}
+2025-07-29 22:30:12 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.
+2025-07-29 22:30:12 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.', 'message': 'Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.'}
+2025-07-29 22:32:55 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.
+2025-07-29 22:32:55 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.', 'message': 'Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.'}
+2025-07-29 22:35:47 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.
+2025-07-29 22:35:47 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.', 'message': 'Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.'}
+2025-07-29 22:35:47 | ERROR | app | processar_oferta:253 | ❌ Falha após 5 tentativas: Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.
+2025-07-29 22:35:47 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.
+2025-07-29 22:35:47 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-07-29 22:35:47 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Credenciais username/password rejeitadas pelo Steam. Verifique se a conta existe e não tem restrições.
+
+2025-08-01 11:37:30 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 11:37:30 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 11:37:39 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 11:37:39 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 11:38:00 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 11:38:00 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 11:38:27 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 11:38:27 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 11:39:02 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 11:39:02 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 11:39:02 | ERROR | app | processar_oferta:253 | ❌ Falha após 5 tentativas: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 11:39:02 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 11:39:02 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 11:39:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+
+2025-08-01 12:55:39 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 12:55:39 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 12:55:49 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 12:55:49 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 12:56:08 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 12:56:08 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 12:56:34 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 12:56:34 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 12:57:10 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 12:57:10 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 12:57:10 | ERROR | app | processar_oferta:253 | ❌ Falha após 5 tentativas: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 12:57:10 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 12:57:10 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 12:57:10 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+
+2025-08-01 13:15:08 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 13:15:08 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 13:15:20 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 13:15:20 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 13:16:41 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: KeyError persistente: 'client_id'
+2025-08-01 13:16:41 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "KeyError persistente: 'client_id'", 'message': "Erro ao enviar oferta: KeyError persistente: 'client_id'"}
+2025-08-01 13:16:41 | ERROR | app | processar_oferta:253 | ❌ Falha após 3 tentativas: Erro ao enviar oferta: KeyError persistente: 'client_id'
+2025-08-01 13:16:41 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: KeyError persistente: 'client_id'
+2025-08-01 13:16:41 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 13:16:41 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: KeyError persistente: 'client_id'
+
+2025-08-01 18:24:46 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 18:24:46 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 18:24:56 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 18:24:56 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 18:25:14 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 18:25:14 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 18:25:39 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 18:25:39 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 18:26:13 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 18:26:13 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.', 'message': 'Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.'}
+2025-08-01 18:26:13 | ERROR | app | processar_oferta:253 | ❌ Falha após 5 tentativas: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 18:26:13 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+2025-08-01 18:26:13 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 18:26:13 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Credenciais Steam Guard estão inválidas. Verifique shared_secret e identity_secret.
+
+2025-08-01 18:32:31 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding
+2025-08-01 18:32:31 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Secrets não são Base32 válidos: Incorrect padding', 'message': 'Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding'}
+2025-08-01 18:32:31 | ERROR | app | processar_oferta:253 | ❌ Falha após 1 tentativas: Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding
+2025-08-01 18:32:31 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding
+2025-08-01 18:32:31 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 18:32:31 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding
+
+2025-08-01 18:39:24 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding
+2025-08-01 18:39:24 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Secrets não são Base32 válidos: Incorrect padding', 'message': 'Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding'}
+2025-08-01 18:39:24 | ERROR | app | processar_oferta:253 | ❌ Falha após 1 tentativas: Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding
+2025-08-01 18:39:24 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding
+2025-08-01 18:39:24 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 18:39:24 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Secrets não são Base32 válidos: Incorrect padding
+
+2025-08-01 18:45:35 | ERROR | app | log_exception:875 | Exception on /dashboard [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/routes/dashboard.py", line 54, in dashboard
+    return redirect(url_for("auth.logout"))
+  File "/usr/local/lib/python3.10/site-packages/flask/helpers.py", line 232, in url_for
+    return current_app.url_for(
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "/usr/local/lib/python3.10/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.logout'. Did you mean 'admin.logout' instead?
+2025-08-01 18:47:02 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Steam rejeitou as credenciais. Verifique username, password e Steam Guard secrets.
+2025-08-01 18:47:02 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam rejeitou as credenciais. Verifique username, password e Steam Guard secrets.', 'message': 'Erro ao enviar oferta: Steam rejeitou as credenciais. Verifique username, password e Steam Guard secrets.'}
+2025-08-01 18:47:51 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Falha crítica na autenticação: Cannot connect to host api.steampowered.com:443 ssl:default [Temporary failure in name resolution]
+2025-08-01 18:47:51 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Falha crítica na autenticação: Cannot connect to host api.steampowered.com:443 ssl:default [Temporary failure in name resolution]', 'message': 'Erro ao enviar oferta: Falha crítica na autenticação: Cannot connect to host api.steampowered.com:443 ssl:default [Temporary failure in name resolution]'}
+2025-08-01 18:47:51 | ERROR | app | processar_oferta:253 | ❌ Falha após 2 tentativas: Erro ao enviar oferta: Falha crítica na autenticação: Cannot connect to host api.steampowered.com:443 ssl:default [Temporary failure in name resolution]
+2025-08-01 18:47:51 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Falha crítica na autenticação: Cannot connect to host api.steampowered.com:443 ssl:default [Temporary failure in name resolution]
+2025-08-01 18:47:51 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 18:47:51 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Falha crítica na autenticação: Cannot connect to host api.steampowered.com:443 ssl:default [Temporary failure in name resolution]
+
+2025-08-01 18:57:16 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: KeyError persistente: 'client_id'
+2025-08-01 18:57:16 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "KeyError persistente: 'client_id'", 'message': "Erro ao enviar oferta: KeyError persistente: 'client_id'"}
+2025-08-01 18:57:16 | ERROR | app | processar_oferta:253 | ❌ Falha após 1 tentativas: Erro ao enviar oferta: KeyError persistente: 'client_id'
+2025-08-01 18:57:16 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: KeyError persistente: 'client_id'
+2025-08-01 18:57:16 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 18:57:16 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: KeyError persistente: 'client_id'
+
+2025-08-01 19:04:36 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: KeyError persistente: 'client_id'
+2025-08-01 19:04:36 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "KeyError persistente: 'client_id'", 'message': "Erro ao enviar oferta: KeyError persistente: 'client_id'"}
+2025-08-01 19:04:36 | ERROR | app | processar_oferta:253 | ❌ Falha após 1 tentativas: Erro ao enviar oferta: KeyError persistente: 'client_id'
+2025-08-01 19:04:36 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: KeyError persistente: 'client_id'
+2025-08-01 19:04:36 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 19:04:36 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: KeyError persistente: 'client_id'
+
+2025-08-01 19:27:24 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Steam rejeitou as credenciais. Verifique username, password e Steam Guard secrets.
+2025-08-01 19:27:24 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam rejeitou as credenciais. Verifique username, password e Steam Guard secrets.', 'message': 'Erro ao enviar oferta: Steam rejeitou as credenciais. Verifique username, password e Steam Guard secrets.'}
+2025-08-01 19:28:07 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.
+2025-08-01 19:28:07 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.', 'message': 'Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.'}
+2025-08-01 19:28:07 | ERROR | app | processar_oferta:253 | ❌ Falha após 2 tentativas: Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.
+2025-08-01 19:28:07 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.
+2025-08-01 19:28:07 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 19:28:07 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.
+
+2025-08-01 19:44:55 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.
+2025-08-01 19:44:55 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.', 'message': 'Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.'}
+2025-08-01 19:44:55 | ERROR | app | processar_oferta:253 | ❌ Falha após 1 tentativas: Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.
+2025-08-01 19:44:55 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.
+2025-08-01 19:44:55 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 19:44:56 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Falha crítica na autenticação: Steam API não está retornando client_id necessário. Tente novamente em alguns minutos.
+
+2025-08-01 20:19:02 | ERROR | app | processar_oferta:209 | ❌ ERRO RETORNADO: Erro ao enviar oferta: Falha crítica na autenticação: Steam API está com problemas graves de client_id. Servidores podem estar em manutenção.
+2025-08-01 20:19:02 | ERROR | app | processar_oferta:210 | ❌ RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Falha crítica na autenticação: Steam API está com problemas graves de client_id. Servidores podem estar em manutenção.', 'message': 'Erro ao enviar oferta: Falha crítica na autenticação: Steam API está com problemas graves de client_id. Servidores podem estar em manutenção.'}
+2025-08-01 20:19:02 | ERROR | app | processar_oferta:253 | ❌ Falha após 1 tentativas: Erro ao enviar oferta: Falha crítica na autenticação: Steam API está com problemas graves de client_id. Servidores podem estar em manutenção.
+2025-08-01 20:19:02 | ERROR | app | processar_oferta:337 | 🚨 ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: Falha crítica na autenticação: Steam API está com problemas graves de client_id. Servidores podem estar em manutenção.
+2025-08-01 20:19:02 | ERROR | app | processar_oferta:338 | 🚨 TRACEBACK COMPLETO:
+2025-08-01 20:19:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "/app/routes/trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "/app/routes/trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: Falha crítica na autenticação: Steam API está com problemas graves de client_id. Servidores podem estar em manutenção.
+

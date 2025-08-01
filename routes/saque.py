@@ -13,7 +13,7 @@ def login_required_api(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if 'steam_id' not in session:
-            return jsonify({'erro': 'Usuário não autenticado'}), 401
+            return jsonify({'error': 'User not authenticated'}), 401
         return f(*args, **kwargs)
     return decorated
 
@@ -25,19 +25,19 @@ def solicitar_saque():
     try:
         valor = float(data.get('valor', 0))
     except (TypeError, ValueError):
-        return jsonify({'erro': 'Valor inválido'}), 400
+        return jsonify({'error': 'Invalid amount'}), 400
 
     # Garante que o usuário só saque do próprio saldo
     if steamid != session.get('steam_id'):
-        return jsonify({'erro': 'Operação não autorizada'}), 403
+        return jsonify({'error': 'Unauthorized operation'}), 403
 
     if not steamid or valor <= 0:
-        return jsonify({'erro': 'Dados inválidos'}), 400
+        return jsonify({'error': 'Invalid data'}), 400
 
     # Verificar saldo total
     saldo = calcular_saldo_usuario(steamid)
     if valor > saldo:
-        return jsonify({'erro': 'Saldo insuficiente'}), 400
+        return jsonify({'error': 'Insufficient balance'}), 400
     
     # VERIFICAÇÃO DE TRADE HOLD - Novo sistema
     try:
@@ -47,19 +47,19 @@ def solicitar_saque():
         # Verificar se pode sacar o valor solicitado
         if not TradeHoldService.can_withdraw_amount(steamid, valor):
             return jsonify({
-                'erro': 'Saldo bloqueado por Trade Protection',
-                'detalhes': {
-                    'saldo_total': balance_info['saldo_total'],
-                    'valor_em_hold': balance_info['valor_em_hold'],
-                    'saldo_disponivel': balance_info['saldo_disponivel'],
-                    'valor_solicitado': valor,
+                'error': 'Balance blocked by Trade Protection',
+                'details': {
+                    'total_balance': balance_info['saldo_total'],
+                    'amount_on_hold': balance_info['valor_em_hold'],
+                    'available_balance': balance_info['saldo_disponivel'],
+                    'requested_amount': valor,
                     'trade_protection_info': TradeHoldService.get_user_hold_info(steamid)
                 }
             }), 400
             
     except Exception as e:
         current_app.logger.error(f"Erro ao verificar trade holds: {e}")
-        return jsonify({'erro': 'Erro interno no sistema de proteção'}), 500
+        return jsonify({'error': 'Internal error in protection system'}), 500
 
     saque = Saque(steamid=steamid, valor=valor)
     db.session.add(saque)

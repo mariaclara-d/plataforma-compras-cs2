@@ -215,14 +215,14 @@ function processarVenda(selectedItems, tradelink) {
         .then(data => {
             Swal.close();
             
-            if (data.mensagem && data.offer_id) {
+            if (data.message && data.offer_id) {
                 // Sucesso - oferta enviada
                 Swal.fire({
                     icon: 'success',
                     title: 'Oferta Enviada!',
                     html: `
                         <div class="text-start">
-                            <p><strong>✅ ${data.mensagem}</strong></p>
+                            <p><strong>✅ ${data.message}</strong></p>
                             <p><strong>ID da Oferta:</strong> ${data.offer_id}</p>
                             <p><strong>Itens:</strong> ${selectedItems.length} selecionados</p>
                             <p><strong>Status:</strong> Aguardando aceitação no Steam</p>
@@ -230,7 +230,7 @@ function processarVenda(selectedItems, tradelink) {
                             ${data.trade_protection ? `
                                 <hr>
                                 <p><strong>🛡️ Proteção Ativa:</strong> ${data.trade_protection.periodo_dias} dias</p>
-                                <p class="text-muted small">${data.trade_protection.mensagem}</p>
+                                <p class="text-muted small">${data.trade_protection.message}</p>
                             ` : ''}
                         </div>
                     `,
@@ -247,7 +247,7 @@ function processarVenda(selectedItems, tradelink) {
                         window.steamStatusMonitor.onTradeSuccess();
                     }
                 });
-            } else if (data.erro) {
+            } else if (data.error) {
                 // Erro no processamento
                 let errorTitle = 'Erro ao Enviar Oferta';
                 let errorIcon = 'error';
@@ -282,8 +282,8 @@ function processarVenda(selectedItems, tradelink) {
                 
                 let htmlContent = `
                     <div class="text-start">
-                        <p><strong>${data.erro}</strong></p>
-                        ${data.detalhes ? `<p class="text-muted">${data.detalhes}</p>` : ''}
+                        <p><strong>${data.error}</strong></p>
+                        ${data.details ? `<p class="text-muted">${data.details}</p>` : ''}
                         ${data.codigo_steam ? `<p class="text-muted small">Código Steam: ${data.codigo_steam}</p>` : ''}
                         ${showRetryButton ? `
                             <hr>
@@ -434,7 +434,7 @@ function atualizarSaldo() {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success && !data.erro) {
+        if (data.success && !data.error) {
             const saldoElements = document.querySelectorAll('#saldoAtual, #totalBalance');
             saldoElements.forEach(element => {
                 if (element) {
