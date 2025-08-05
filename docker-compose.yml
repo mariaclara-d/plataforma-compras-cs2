@@ -1,31 +1,15 @@
+﻿version: '3.8'
 services:
-  db:
-    image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_DB: csgo_skins
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: dba0c4
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   web:
-    build: .
-    command: flask run --host=0.0.0.0
-    environment:
-      FLASK_APP: app.py
-      FLASK_ENV: development
-      DATABASE_URL: postgresql://postgres:dba0c4@db:5432/csgo_skins
-      STEAM_API_KEY: BB2144BBAC98212BD490A2F8B4BC85F6
-      SECRET_KEY: 642c63cb0970be743908e6351247d462cad55173c461d5b6c0f4d7c1a2b9bcd1
+    image: documentacaoflask---copia-web
+    container_name: documentacaoflask---copia-web-1
     ports:
       - "5000:5000"
     depends_on:
       - db
-    volumes:
-      - .:/app
-
-volumes:
-  pgdata:
+    
+  db:
+    image: postgres:15
+    container_name: documentacaoflask---copia-db-1
+    ports:
+      - "5432:5432"

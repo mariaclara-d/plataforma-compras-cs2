@@ -37,16 +37,7 @@ class SteamClientManager:
         self.client = None
         self.username = os.getenv('STEAM_USERNAME')
         self.password = os.getenv('STEAM_PASSWORD')
-        
-        # CORRECAO CRITICA: Steam ID como inteiro
-        steam_id_raw = os.getenv('STEAM_ID')
-        if steam_id_raw:
-            try:
-                self.steam_id = int(steam_id_raw)
-            except ValueError:
-                raise ValueError(f"STEAM_ID deve ser numerico: {steam_id_raw}")
-        else:
-            raise ValueError("STEAM_ID nao encontrado nas variaveis de ambiente")
+        self.steam_id = os.getenv('STEAM_ID')
         
         # Carregar secrets do arquivo JSON
         self._load_steam_guard_secrets()
@@ -108,11 +99,11 @@ class SteamClientManager:
                 cookies = json.load(f)
             
             self.client = SteamClient(
-                steam_id=int(self.steam_id), 
-                username=str(self.username),
-                password=str(self.password),
-                shared_secret=str(self.shared_secret),
-                identity_secret=str(self.identity_secret)
+                steam_id=self.steam_id, 
+                username=self.username,
+                password=self.password,
+                shared_secret=self.shared_secret,
+                identity_secret=self.identity_secret
             )
             
             # Restaurar cookies
@@ -153,11 +144,11 @@ class SteamClientManager:
                 
                 # Criar novo cliente para cada tentativa
                 self.client = SteamClient(
-                    steam_id=int(self.steam_id),
-                    username=str(self.username),
-                    password=str(self.password),
-                    shared_secret=str(self.shared_secret),
-                    identity_secret=str(self.identity_secret)
+                    steam_id=self.steam_id,
+                    username=self.username,
+                    password=self.password,
+                    shared_secret=self.shared_secret,
+                    identity_secret=self.identity_secret
                 )
                 
                 # Delay anti-rate-limit
@@ -210,11 +201,11 @@ class SteamTradeManager:
     def __init__(self, client_manager):
         self.client_manager = client_manager
     
-    async def send_trade_offer(self, tradelink, asset_ids, message=""):
+    async def send_trade_offer(self, tradelink, asset_ids, message=""): # Adicionar async
         """Envia oferta de trade"""
         
         try:
-            # Garantir que asset_ids sao inteiros
+            # Garantir que asset_ids s o inteiros
             if isinstance(asset_ids, list):
                 asset_ids = [int(x) for x in asset_ids]
             else:
@@ -226,34 +217,33 @@ class SteamTradeManager:
             # Extrair dados do tradelink
             partner_raw = extrair_partner_steamid(tradelink)
             if not partner_raw:
-                raise ValueError("Tradelink invalido - partner nao encontrado")
+                raise ValueError("Tradelink inv lido - partner n o encontrado")
             
-            # CORRECAO: Garantir tipos corretos
-            partner_steamid64 = int(steamid32_to_steamid64(int(partner_raw)))
+            partner_steamid64 = steamid32_to_steamid64(partner_raw)
             
             # Extrair token
             token = extrair_token_tradelink(tradelink)
             if not token:
-                raise ValueError("Token nao encontrado no tradelink")
+                raise ValueError("Token n o encontrado no tradelink")
             
-            # CORRECAO: CS2 assets com tipos corretos
+            # Criar assets para trade
             assets = []
             for asset_id in asset_ids:
                 assets.append({
-                    'assetid': str(asset_id),  # String para asset ID
-                    'appid': 730,              # Int para CS2
-                    'contextid': 2             # Int para context ID
+                    'assetid': str(asset_id),
+                    'appid': 730, # CS:GO
+                    'contextid': '2'
                 })
             
             # Enviar oferta
-            logger.info(f"[SEND] Enviando oferta CS2 para {partner_steamid64} com {len(assets)} itens")
+            logger.info(f"[SEND] Enviando oferta para {partner_steamid64} com {len(assets)} itens")
             
             response = await client.send_trade_offer(
-                partner_steam_id=int(partner_steamid64),  # Int obrigatorio
+                partner_steam_id=partner_steamid64,
                 items_to_give=assets,
                 items_to_receive=[],
-                message=str(message),  # String obrigatoria
-                trade_offer_access_token=str(token)  # String obrigatoria
+                message=message,
+                trade_offer_access_token=token
             )
             
             if response and hasattr(response, 'tradeofferid'):
@@ -262,25 +252,25 @@ class SteamTradeManager:
                 # Registrar no banco
                 registrar_oferta_no_banco(offer_id, partner_steamid64)
                 
-                logger.info(f"[OK] Oferta CS2 enviada com sucesso! ID: {offer_id}")
+                logger.info(f"[OK] Oferta enviada com sucesso! ID: {offer_id}")
                 
                 return {
                     'success': True,
                     'tradeoffer_id': offer_id,
-                    'message': f'Oferta CS2 enviada com sucesso! ID: {offer_id}'
+                    'message': f'Oferta enviada com sucesso! ID: {offer_id}'
                 }
             else:
-                raise Exception("Resposta invalida da Steam - sem offer ID")
-                
+                raise Exception("Resposta inv lida da Steam - sem offer ID")
+        
         except Exception as e:
-            logger.error(f"[ERROR] Erro ao enviar oferta CS2: {e}")
+            logger.error(f"[ERROR] Erro ao enviar oferta: {e}")
             return {
                 'success': False,
                 'error': str(e),
-                'message': f'Erro ao enviar oferta CS2: {e}'
+                'message': f'Erro ao enviar oferta: {e}'
             }
 
-# Instancias globais (singleton pattern)
+# Inst ncias globais (singleton pattern)
 _client_manager = None
 _trade_manager = None
 
@@ -298,11 +288,11 @@ def get_trade_manager():
         _trade_manager = SteamTradeManager(get_client_manager())
     return _trade_manager
 
-# Funcao principal para compatibilidade com codigo existente
+# Fun o principal para compatibilidade com c digo existente
 async def enviar_oferta_principal(partner_steamid64, items_dict, message="Trade offer from TitoSkins"):
     """
-    Funcao principal para envio de ofertas
-    Compativel com a chamada em routes/trade.py
+    Fun o principal para envio de ofertas
+    Compat vel com a chamada em routes/trade.py
     """
     try:
         # Extrair tradelink e asset_ids do items_dict
@@ -311,14 +301,14 @@ async def enviar_oferta_principal(partner_steamid64, items_dict, message="Trade 
         asset_ids = [item["assetid"] for item in items]
         
         if not tradelink:
-            raise ValueError("Tradelink nao fornecido em items_dict")
+            raise ValueError("Tradelink n o fornecido em items_dict")
         
         if not asset_ids:
             raise ValueError("Nenhum asset_id fornecido")
         
         trade_manager = get_trade_manager()
         return await trade_manager.send_trade_offer(tradelink, asset_ids, message)
-        
+    
     except Exception as e:
         logger.error(f"[ERROR] enviar_oferta_principal: {e}")
         return {
@@ -327,11 +317,11 @@ async def enviar_oferta_principal(partner_steamid64, items_dict, message="Trade 
             'message': f'Erro ao processar oferta: {e}'
         }
 
-# Funcao legacy mantida para compatibilidade
+# Fun o legacy mantida para compatibilidade
 async def realizar_login_aiosteampy():
-    """
-    Funcao legacy - mantida para compatibilidade
-    Use get_client_manager().get_authenticated_client() para nova implementacao
-    """
-    client_manager = get_client_manager()
-    return await client_manager.get_authenticated_client()
+ """
+ Fun o legacy - mantida para compatibilidade
+ Use get_client_manager().get_authenticated_client() para nova implementa o
+ """
+ client_manager = get_client_manager()
+ return await client_manager.get_authenticated_client()

@@ -1,4 +1,4 @@
-# steam_utils.py
+# services/steam_utils.py
 
 import re
 from datetime import datetime, timedelta, timezone
@@ -6,16 +6,24 @@ from db_config import db
 from models import TradeOffer
 
 def extrair_partner_steamid(tradelink):
+    """Extrai partner ID do tradelink"""
     match = re.search(r"partner=(\d+)", tradelink)
     return match.group(1) if match else None
 
+def extrair_token_tradelink(tradelink):
+    """Extrai token do tradelink"""
+    match = re.search(r"token=([^&]+)", tradelink)
+    return match.group(1) if match else None
+
 def steamid32_to_steamid64(steamid32):
+    """Converte SteamID32 para SteamID64"""
     try:
         return int(steamid32) + 76561197960265728
     except ValueError:
         raise ValueError("SteamID32 inválido")
 
 def validar_dados_requisicao(dados):
+    """Valida dados da requisição de trade"""
     tradelink = dados.get("tradelink")
     itens_selecionados = dados.get("itens")
 
@@ -27,10 +35,10 @@ def validar_dados_requisicao(dados):
         raise ValueError("Tradelink inválido")
 
     partner_steamid64 = steamid32_to_steamid64(partner_steamid32)
-
     return itens_selecionados, tradelink, partner_steamid64
 
 def registrar_oferta_no_banco(offer_id, steamid64):
+    """Registra oferta no banco de dados"""
     nova_oferta = TradeOffer(
         offer_id=offer_id,
         steamid=steamid64,
@@ -40,3 +48,15 @@ def registrar_oferta_no_banco(offer_id, steamid64):
     )
     db.session.add(nova_oferta)
     db.session.commit()
+
+def calcular_valor_liquido(preco, percentual_comissao=0.65):
+    """
+    Calcula valor líquido após comissão
+    Consolidada aqui para evitar duplicação
+    """
+    if preco is None:
+        return None
+    try:
+        return round(float(preco) * percentual_comissao, 2)
+    except (ValueError, TypeError):
+        return None

@@ -3204,3 +3204,253 @@ RuntimeError: Erro ao enviar oferta: Falha crÃ­tica na autenticaÃ§Ã£o: Steam API
     raise RuntimeError(error_message)
 RuntimeError: Erro ao enviar oferta: Falha crÃ­tica na autenticaÃ§Ã£o: Steam API estÃ¡ com problemas graves de client_id. Servidores podem estar em manutenÃ§Ã£o.
 
+2025-08-04 11:01:34 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 11:01:34 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 18:39:27 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 18:39:27 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 19:00:30 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 19:00:30 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 19:01:03 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 19:01:03 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 19:01:03 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361720695', 'price': 10, 'market_hash_name': 'M4A4 | Royal Paladin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjdmNWQ3OGY3OGYyZDA2ZDZkMDljNTdjNTZhN2UzMTBlYjJkYmI1MmUi.aJEtkA.R_bu-unQgqs7bmQeaq1a11GRM4c'}
+2025-08-04 19:01:03 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361720695', 'price': 10, 'market_hash_name': 'M4A4 | Royal Paladin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjdmNWQ3OGY3OGYyZDA2ZDZkMDljNTdjNTZhN2UzMTBlYjJkYmI1MmUi.aJEtkA.R_bu-unQgqs7bmQeaq1a11GRM4c'}
+2025-08-04 19:01:03 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 19:01:03 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 19:01:03 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361720695']
+2025-08-04 19:01:03 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361720695']
+2025-08-04 19:01:20 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 19:01:20 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 19:01:20 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 19:01:20 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 19:01:21 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: SteamClientBase.__init__() missing 1 required positional argument: 'steam_id'
+
+2025-08-04 19:01:21 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: SteamClientBase.__init__() missing 1 required positional argument: 'steam_id'
+
+2025-08-04 19:43:59 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 19:43:59 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 19:44:24 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 19:44:24 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 19:44:24 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361720695', 'price': 10, 'market_hash_name': 'M4A4 | Royal Paladin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjdmNWQ3OGY3OGYyZDA2ZDZkMDljNTdjNTZhN2UzMTBlYjJkYmI1MmUi.aJE3vw.B_Y8H-Zg-_UWol7hnzYeso7xFJI'}
+2025-08-04 19:44:24 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361720695', 'price': 10, 'market_hash_name': 'M4A4 | Royal Paladin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjdmNWQ3OGY3OGYyZDA2ZDZkMDljNTdjNTZhN2UzMTBlYjJkYmI1MmUi.aJE3vw.B_Y8H-Zg-_UWol7hnzYeso7xFJI'}
+2025-08-04 19:44:24 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 19:44:24 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 19:44:24 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361720695']
+2025-08-04 19:44:24 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361720695']
+2025-08-04 19:44:25 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 19:44:25 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 19:44:25 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 19:44:25 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 19:44:26 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'NoneType' and 'int'
+
+2025-08-04 19:44:26 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'NoneType' and 'int'
+
+2025-08-04 19:57:15 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 19:57:15 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 19:57:42 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 19:57:42 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 19:57:42 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361924770', 'price': 14.92, 'market_hash_name': 'Galil AR | Stone Cold (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJE63g.eBYkOeS-m9oG2DzZzmaMiEJW-1Y'}
+2025-08-04 19:57:42 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361924770', 'price': 14.92, 'market_hash_name': 'Galil AR | Stone Cold (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJE63g.eBYkOeS-m9oG2DzZzmaMiEJW-1Y'}
+2025-08-04 19:57:42 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 19:57:42 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 19:57:42 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361924770']
+2025-08-04 19:57:42 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361924770']
+2025-08-04 19:57:44 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 19:57:44 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 19:57:44 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 19:57:44 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 19:57:45 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 19:57:45 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 20:15:10 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 20:15:10 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 20:15:10 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJE-9A.cjT-57cWMN8JVscfm9dzpMuLd6M'}
+2025-08-04 20:15:10 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJE-9A.cjT-57cWMN8JVscfm9dzpMuLd6M'}
+2025-08-04 20:15:10 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 20:15:10 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 20:15:10 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-04 20:15:10 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-04 20:15:11 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 20:15:11 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 20:15:11 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 20:15:11 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 20:15:12 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 20:15:12 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 20:53:09 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 20:53:09 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 20:53:09 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJFH1Q.s3ADtCbY7gl12AC8ULuUFtNQn-E'}
+2025-08-04 20:53:09 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJFH1Q.s3ADtCbY7gl12AC8ULuUFtNQn-E'}
+2025-08-04 20:53:09 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 20:53:09 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 20:53:09 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-04 20:53:09 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-04 20:53:11 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 20:53:11 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 20:53:11 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 20:53:11 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 20:53:11 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-04 20:53:11 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-04 20:53:11 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 20:53:11 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 20:53:11 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-04 20:53:11 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-04 20:53:11 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-04 20:53:11 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 21:20:30 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 21:20:30 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 21:21:34 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 21:21:34 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 21:21:34 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361973032', 'price': 3.74, 'market_hash_name': 'StatTrak™ MAC-10 | Light Box (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJFOgA.EG3JFTzNKOOzBcHCwrWaj39vCRs'}
+2025-08-04 21:21:34 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361973032', 'price': 3.74, 'market_hash_name': 'StatTrak™ MAC-10 | Light Box (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJFOgA.EG3JFTzNKOOzBcHCwrWaj39vCRs'}
+2025-08-04 21:21:34 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 21:21:34 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 21:21:34 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361973032']
+2025-08-04 21:21:34 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361973032']
+2025-08-04 21:21:40 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 21:21:40 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 21:21:40 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 21:21:40 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 21:21:40 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-04 21:21:40 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-04 21:21:40 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 21:21:40 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 21:21:40 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-04 21:21:40 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-04 21:21:40 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-04 21:21:40 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 21:54:46 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 21:54:46 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-04 21:55:36 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 21:55:36 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-04 21:55:36 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361924770', 'price': 13.76, 'market_hash_name': 'Galil AR | Stone Cold (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJFWeQ.fd9nMwMUVkvMSMzngqvTKdolfuo'}
+2025-08-04 21:55:36 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361924770', 'price': 13.76, 'market_hash_name': 'Galil AR | Stone Cold (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjE1MjFmMzk3NWQyNTUwZjgyN2M4ODQ4NDQwNzgxN2E4NjMwNDExNTIi.aJFWeQ.fd9nMwMUVkvMSMzngqvTKdolfuo'}
+2025-08-04 21:55:36 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 21:55:36 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-04 21:55:36 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361924770']
+2025-08-04 21:55:36 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361924770']
+2025-08-04 21:55:37 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 21:55:37 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-04 21:55:37 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 21:55:37 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-04 21:55:37 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-04 21:55:37 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-04 21:57:13 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Steam API nao esta retornando access_token. Tente novamente mais tarde.', 'message': 'Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.'}
+2025-08-04 21:57:13 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Steam API nao esta retornando access_token. Tente novamente mais tarde.', 'message': 'Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.'}
+2025-08-04 21:57:13 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-04 21:57:13 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-04 21:57:13 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-04 21:57:13 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam API nao esta retornando access_token. Tente novamente mais tarde.', 'message': 'Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.'}
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam API nao esta retornando access_token. Tente novamente mais tarde.', 'message': 'Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.'}
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+

@@ -2149,3 +2149,131 @@ RuntimeError: Erro ao enviar oferta: Falha cr√≠tica na autentica√ß√£o: Steam API
     raise RuntimeError(error_message)
 RuntimeError: Erro ao enviar oferta: Falha cr√≠tica na autentica√ß√£o: Steam API est√° com problemas graves de client_id. Servidores podem estar em manuten√ß√£o.
 
+2025-08-04 19:01:21 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: SteamClientBase.__init__() missing 1 required positional argument: 'steam_id'
+
+2025-08-04 19:01:21 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: SteamClientBase.__init__() missing 1 required positional argument: 'steam_id'
+
+2025-08-04 19:44:26 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'NoneType' and 'int'
+
+2025-08-04 19:44:26 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'NoneType' and 'int'
+
+2025-08-04 19:57:45 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 19:57:45 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 20:15:12 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 20:15:12 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:253 | [ERROR] Falha apÛs 1 tentativas: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:253 | [ERROR] Falha apÛs 1 tentativas: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 20:53:11 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'"}
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:253 | [ERROR] Falha apÛs 1 tentativas: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:253 | [ERROR] Falha apÛs 1 tentativas: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 21:21:40 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta: '<' not supported between instances of 'str' and 'int'
+
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam API nao esta retornando access_token. Tente novamente mais tarde.', 'message': 'Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.'}
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Steam API nao esta retornando access_token. Tente novamente mais tarde.', 'message': 'Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.'}
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:253 | [ERROR] Falha apÛs 1 tentativas: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:253 | [ERROR] Falha apÛs 1 tentativas: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+
+2025-08-04 21:57:13 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
+
