@@ -7,6 +7,8 @@ from models import TradeOffer
 
 def extrair_partner_steamid(tradelink):
     """Extrai partner ID do tradelink"""
+    if not tradelink or "partner=" not in tradelink:
+        return None
     match = re.search(r"partner=(\d+)", tradelink)
     return match.group(1) if match else None
 
@@ -17,10 +19,9 @@ def extrair_token_tradelink(tradelink):
 
 def steamid32_to_steamid64(steamid32):
     """Converte SteamID32 para SteamID64"""
-    try:
-        return int(steamid32) + 76561197960265728
-    except ValueError:
-        raise ValueError("SteamID32 inválido")
+    if steamid32 is None or not str(steamid32).isdigit():
+        raise ValueError(f"SteamID32 inválido: {steamid32}")
+    return int(steamid32) + 76561197960265728
 
 def validar_dados_requisicao(dados):
     """Valida dados da requisição de trade"""
@@ -55,8 +56,8 @@ def calcular_valor_liquido(preco, percentual_comissao=0.65):
     Consolidada aqui para evitar duplicação
     """
     if preco is None:
-        return None
+        return 0.0
     try:
         return round(float(preco) * percentual_comissao, 2)
     except (ValueError, TypeError):
-        return None
+        return 0.0

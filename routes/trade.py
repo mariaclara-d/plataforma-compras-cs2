@@ -1,14 +1,11 @@
 ﻿from flask import Blueprint, request, jsonify, session, current_app
 from flask_wtf.csrf import validate_csrf, CSRFError
-from services.aiosteampy_service import (
-    enviar_oferta_principal,
-    registrar_oferta_no_banco,
-    validar_dados_requisicao,
-)
 from services.inventory_service import InventoryService
 from services.notification_service import notification_service
 from services.security_service import SecurityService
 from services.trade_hold_service import TradeHoldService
+from services.steam_utils import validar_dados_requisicao, calcular_valor_liquido
+from services.steamwebapi_service import enviar_oferta_steamwebapi
 from models import InformacoesPagamento
 from app import db
 import asyncio
@@ -167,227 +164,32 @@ def enviar_oferta_com_aiosteampy():
 
         async def processar_oferta():
             try:
-                # Sistema de retry inteligente para erros temporários da Steam
-                max_tentativas = 5  # Aumentar para 5 tentativas
-                tentativa_atual = 1  # [OK] Garantir que é int
-                offer_id = None
-                retry_error = None
+                # Calcular valor (usando steam_utils)
+                valor_total = sum(calcular_valor_liquido(item.get('price', 0)) for item in itens_selecionados)
                 
-                while tentativa_atual <= max_tentativas:
-                    try:
-                        current_app.logger.info(f"[RETRY] Tentativa {tentativa_atual}/{max_tentativas} de enviar oferta...")
-                        
-                        # Preparar dados para a nova assinatura da função
-                        items_dict = {
-                            "tradelink": tradelink,
-                            "items": [{"assetid": item["assetid"]} for item in itens_selecionados]
-                        }
-                        
-                        result = await enviar_oferta_principal(partner_steamid64, items_dict)
-                        
-                        current_app.logger.info(f"[SEARCH] RESULTADO COMPLETO: {result}")
-                        current_app.logger.info(f"[SEARCH] TIPO DO RESULTADO: {type(result)}")
-                        current_app.logger.info(f"[SEARCH] CHAVES DISPONÍVEIS: {list(result.keys()) if isinstance(result, dict) else 'N/A'}")
-                        
-                        if result.get("success"):
-                            offer_id = result.get("tradeoffer_id")
-                            if not offer_id:
-                                # Tentar chaves alternativas que podem vir da Steam
-                                offer_id = result.get("trade_offer_id") or result.get("offerid") or result.get("id")
-                            
-                            if offer_id:
-                                current_app.logger.info(f"[OK] Oferta enviada com sucesso! ID: {offer_id}")
-                                break  # Sucesso, sair do loop
-                            else:
-                                error_message = "[ERROR] ERRO: Steam não retornou Trade Offer ID válido"
-                                current_app.logger.error(error_message)
-                                current_app.logger.error(f"[ERROR] RESULTADO COMPLETO: {result}")
-                                raise RuntimeError(error_message)
-                        else:
-                            # Se não foi sucesso, tratar como erro
-                            error_message = result.get("message", "Erro desconhecido")
-                            current_app.logger.error(f"[ERROR] ERRO RETORNADO: {error_message}")
-                            current_app.logger.error(f"[ERROR] RESULTADO COMPLETO DO ERRO: {result}")
-                            raise RuntimeError(error_message)
-                        
-                    except Exception as e:
-                        error_msg = str(e)
-                        retry_error = e
-                        
-                        # Determinar se deve tentar novamente
-                        should_retry = False
-                        wait_time = 0
-                        
-                        if ("Steam temporariamente indisponível" in error_msg or 
-                            "Erro da Steam (500)" in error_msg or
-                            "500" in error_msg and "Internal Server Error" in error_msg or
-                            "Steam temporariamente indisponível (HTTP 500)" in error_msg):
-                            # Erro 500 da Steam - retry com backoff exponencial mais conservador
-                            should_retry = True
-                            wait_time = min(int(tentativa_atual) * 15, 90)  # [OK] Forçar int()
-                            current_app.logger.warning(f"[WARN] Steam indisponível (tentativa {tentativa_atual}). Aguardando {wait_time}s...")
-                        elif "Rate limit" in error_msg or "429" in error_msg:
-                            # Rate limit - retry com espera maior
-                            should_retry = True
-                            wait_time = 30 + (int(tentativa_atual) * 15)  # [OK] Forçar int()
-                            current_app.logger.warning(f"[WARN] Rate limit da Steam (tentativa {tentativa_atual}). Aguardando {wait_time}s...")
-                        elif "Timeout" in error_msg or "timeout" in error_msg.lower():
-                            # Timeout - retry rápido
-                            should_retry = True
-                            wait_time = int(tentativa_atual) * 5  # [OK] Forçar int()
-                            current_app.logger.warning(f"[WARN] Timeout da Steam (tentativa {tentativa_atual}). Aguardando {wait_time}s...")
-                        elif "rede" in error_msg.lower() or "network" in error_msg.lower():
-                            # Problema de rede - retry moderado
-                            should_retry = True
-                            wait_time = int(tentativa_atual) * 8  # [OK] Forçar int() - LINHA 242!
-                            current_app.logger.warning(f"[WARN] Problema de rede (tentativa {tentativa_atual}). Aguardando {wait_time}s...")
-                        
-                        # Se deve tentar novamente e ainda tem tentativas
-                        if should_retry and tentativa_atual < max_tentativas:
-                            import asyncio
-                            await asyncio.sleep(wait_time)
-                            tentativa_atual += 1  # [OK] Incrementar como int
-                            continue
-                        else:
-                            # Erro definitivo ou esgotaram tentativas
-                            current_app.logger.error(f"[ERROR] Falha após {tentativa_atual} tentativas: {error_msg}")
-                            raise retry_error
+                # CHAMAR STEAMWEBAPI
+                current_app.logger.info("[MAIN] === USANDO STEAMWEBAPI OFICIAL ===")
                 
-                # Verificar se a oferta foi enviada com sucesso
-                if not offer_id:
-                    raise retry_error or Exception("Falha ao enviar oferta após todas as tentativas")
-                    
-                # Registrar a oferta no banco após sucesso
-                registrar_oferta_no_banco(offer_id, partner_steamid64, [item["assetid"] for item in itens_selecionados])
-                current_app.logger.info("Oferta registrada com sucesso no banco.")
-                    
-                # Enviar notificação WhatsApp
-                try:
-                    # Calcular valor total dos itens
-                    valor_total = sum([
-                        float(item.get('price', 0)) for item in itens_selecionados
-                    ])
-                    
-                    # Enviar notificação
-                    notification_service.enviar_notificacao_trade_oferta(
-                        usuario_nome=session.get('steam_username', f"SteamID: {session.get('steam_id', 'N/A')}"),
-                        valor_total=valor_total,
-                        itens_count=len(itens_selecionados),
-                        offer_id=offer_id
-                    )
-                    current_app.logger.info("[OK] Notificação WhatsApp enviada com sucesso")
-                except Exception as notification_error:
-                    # Log do erro mas não quebrar o fluxo
-                    current_app.logger.error(f"[ERROR] Erro ao enviar notificação WhatsApp: {notification_error}")
+                items_dict = {
+                    "tradelink": tradelink,
+                    "itens": [{"assetid": item["assetid"]} for item in itens_selecionados]
+                }
                 
-                # ===== NOVO: CRIAR TRADE HOLD PARA PROTEÇÃO DE 7 DIAS =====
-                try:
-                    # Calcular valor total dos itens vendidos
-                    valor_total = sum([float(item.get('price', 0)) for item in itens_selecionados])
-                    
-                    # Lista de nomes dos itens para o hold
-                    nomes_itens = [item.get('market_hash_name', 'Item desconhecido') for item in itens_selecionados]
-                    descricao_itens = f"{len(nomes_itens)} item(s): {', '.join(nomes_itens[:3])}"
-                    if len(nomes_itens) > 3:
-                        descricao_itens += f" e mais {len(nomes_itens) - 3}..."
-                    
-                    # Criar hold usando o offer_id como transacao_id (temporário)
-                    # Em uma implementação completa, você criaria uma transação real primeiro
-                    hold = TradeHoldService.create_hold_for_transaction(
-                        user_id=session.get('steam_id'),
-                        transacao_id=offer_id,  # Usando offer_id temporariamente
-                        valor=valor_total,
-                        item_name=descricao_itens
-                    )
-                    
-                    current_app.logger.info(f"[OK] Trade Hold criado: ID {hold.id}, Valor: R$ {valor_total}, Expira em: {hold.expires_at}")
-                    
-                except Exception as hold_error:
-                    # Log do erro mas não quebrar o fluxo principal
-                    current_app.logger.error(f"[ERROR] Erro ao criar Trade Hold: {hold_error}")
-                    # A venda continua mesmo se o hold falhar
-                # =========================================================
+                resultado_steamwebapi = await enviar_oferta_steamwebapi(
+                    partner_steamid64, 
+                    items_dict, 
+                    f"Venda para TitoSkins - {len(itens_selecionados)} item(s) - Você receberá o pagamento via PIX após aceitar"
+                )
                 
-                # Obter informações de hold para retornar ao usuário
-                hold_info = None
-                try:
-                    user_hold_info = TradeHoldService.get_user_hold_info(session.get('steam_id'))
-                    if user_hold_info:
-                        hold_info = {
-                            'total_em_hold': user_hold_info['balance_info']['valor_em_hold'],
-                            'saldo_disponivel': user_hold_info['balance_info']['saldo_disponivel'],
-                            'holds_ativos': len(user_hold_info['active_holds'])
-                        }
-                except Exception as e:
-                    current_app.logger.error(f"Erro ao obter info de hold: {e}")
-
-                return jsonify({
-                    "message": "Trade offer created successfully!",
-                    "offer_id": offer_id,
-                    "trade_protection": {
-                        "active": True,
-                        "period_days": 7,
-                        "message": "Your items are protected for 7 days. You can reverse the sale during this period.",
-                        "hold_info": hold_info
-                    }
-                }), 200
+                if resultado_steamwebapi.get('success'):
+                    current_app.logger.info("[SUCCESS] ✅ Trade offer criada via SteamWebAPI!")
+                    return resultado_steamwebapi
+                else:
+                    raise Exception(f"SteamWebAPI falhou: {resultado_steamwebapi.get('error')}")
 
             except Exception as e:
-                import traceback
-                current_app.logger.error(f"[ALERT] ERRO DETALHADO: {type(e).__name__}: {str(e)}")
-                current_app.logger.error(f"[ALERT] TRACEBACK COMPLETO:")
-                current_app.logger.error(traceback.format_exc())
-                
-                # Tratar erros específicos para o usuário
-                error_message = str(e)
-                
-                if ("Steam temporariamente indisponível" in error_message or 
-                    "Erro da Steam (500)" in error_message or
-                    ("500" in error_message and "Internal Server Error" in error_message)):
-                    return jsonify({
-                        "error": "[CLOCK] Steam temporarily unavailable",
-                        "details": "Steam servers are experiencing instability. This is a Steam issue, not our platform. Please try again in 10-15 minutes.",
-                        "type": "steam_server_error",
-                        "retry_suggestion": "Wait 10-15 minutes and try again",
-                        "steam_code": "500"
-                    }), 503
-                elif "Erro de autenticação" in error_message or "[AUTH]" in error_message:
-                    return jsonify({
-                        "error": "[LOCK] Steam authentication problem",
-                        "details": "Temporary issue with Steam bot. Our team has been notified.",
-                        "type": "steam_auth_error",
-                        "contact_support": True
-                    }), 401
-                elif "Rate limit" in error_message or "[HOURGLASS]" in error_message:
-                    return jsonify({
-                        "error": "[HOURGLASS] Rate limit reached",
-                        "details": "Steam is limiting requests. Please wait 30 minutes before trying again.",
-                        "type": "rate_limit_error",
-                        "retry_suggestion": "Wait 30 minutes"
-                    }), 429
-                elif "Timeout" in error_message or "[TIMER]" in error_message:
-                    return jsonify({
-                        "error": "[TIMER] Steam connection timeout",
-                        "details": "Steam took too long to respond. Please try again in a few minutes.",
-                        "type": "timeout_error",
-                        "retry_suggestion": "Try again in 5 minutes"
-                    }), 504
-                elif "rede" in error_message.lower() or "network" in error_message.lower():
-                    return jsonify({
-                        "error": "[GLOBE] Connectivity issue",
-                        "details": "Temporary network issue with Steam. Please try again in a few minutes.",
-                        "type": "network_error",
-                        "retry_suggestion": "Try again in 2-5 minutes"
-                    }), 502
-                else:
-                    return jsonify({
-                        "error": "[WARN] Unexpected error",
-                        "details": f"A technical error occurred: {error_message[:200]}...",
-                        "type": "general_error",
-                        "contact_support": True
-                    }), 500
-                
-                return jsonify({"error": f"Internal error: {str(e)}"}), 500
+                current_app.logger.error(f"[STEAMWEBAPI] Erro: {e}")
+                return {"success": False, "error": str(e)}
 
         return asyncio.run(processar_oferta())
 

@@ -2277,3 +2277,499 @@ RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_to
     raise RuntimeError(error_message)
 RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
 
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Non-base32 digit found', 'message': 'Erro ao enviar oferta CS2: Non-base32 digit found'}
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Non-base32 digit found', 'message': 'Erro ao enviar oferta CS2: Non-base32 digit found'}
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Non-base32 digit found
+
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Non-base32 digit found
+
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Não foi possível obter sessionid', 'message': 'Erro ao processar via Community API: Não foi possível obter sessionid', 'method': 'Steam Community API'}
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Não foi possível obter sessionid', 'message': 'Erro ao processar via Community API: Não foi possível obter sessionid', 'method': 'Steam Community API'}
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Não foi possível obter sessionid
+
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Não foi possível obter sessionid
+
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Login falhou: Login falhou sem detalhes', 'message': 'Erro ao processar via Community API: Login falhou: Login falhou sem detalhes', 'method': 'Steam Community API'}
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Login falhou: Login falhou sem detalhes', 'message': 'Erro ao processar via Community API: Login falhou: Login falhou sem detalhes', 'method': 'Steam Community API'}
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Captcha necessário - conta pode estar com restrições', 'message': 'Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições', 'method': 'Steam Community API'}
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Captcha necessário - conta pode estar com restrições', 'message': 'Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições', 'method': 'Steam Community API'}
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:48:20 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+
+2025-08-05 18:48:20 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)", 'message': "Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)"}
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)", 'message': "Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)"}
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+
+2025-08-07 10:48:47 | ERROR | app | enviar_oferta_com_aiosteampy:68 | Erro ao validar dados: name 'validar_dados_requisicao' is not defined
+2025-08-07 10:48:47 | ERROR | app | enviar_oferta_com_aiosteampy:68 | Erro ao validar dados: name 'validar_dados_requisicao' is not defined
+2025-08-07 18:44:08 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 18:44:08 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 19:14:02 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 19:14:02 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 21:02:14 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 21:02:14 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 21:14:53 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 21:14:53 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 07:24:53 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 07:24:53 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 12:25:02 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 12:25:02 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 12:33:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 401: {"status":401,"message":"API Key missing"}
+2025-08-08 12:33:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 401: {"status":401,"message":"API Key missing"}
+2025-08-08 14:23:03 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 14:23:03 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 16:24:41 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 16:24:41 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 16:31:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 16:31:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 14:57:14 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 14:57:14 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 16:30:21 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 16:30:21 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 17:02:09 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 17:02:09 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 17:52:28 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 17:52:28 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 19:52:19 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 'account_name'
+2025-08-11 19:52:19 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 'account_name'
+2025-08-11 19:59:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-08-11 19:59:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-08-11 20:06:18 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 20:06:18 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 20:13:46 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-08-11 20:13:46 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-08-11 20:26:45 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
+2025-08-11 20:26:45 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 

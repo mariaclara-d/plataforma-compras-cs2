@@ -3454,3 +3454,1233 @@ RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_to
     raise RuntimeError(error_message)
 RuntimeError: Erro ao enviar oferta CS2: Steam API nao esta retornando access_token. Tente novamente mais tarde.
 
+2025-08-05 07:45:15 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 07:45:15 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 09:04:51 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 09:04:51 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 09:05:28 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 09:05:28 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 09:05:28 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': 8.55, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJHzeQ.mO83d6ADrIw4gvUUdNvzcCn8kk8'}
+2025-08-05 09:05:28 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': 8.55, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJHzeQ.mO83d6ADrIw4gvUUdNvzcCn8kk8'}
+2025-08-05 09:05:28 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 09:05:28 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 09:05:28 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-05 09:05:28 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-05 09:05:34 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 09:05:34 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 09:05:34 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 09:05:34 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 09:05:34 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 09:05:34 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 09:05:34 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 09:05:34 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 09:05:34 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 09:05:34 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 09:05:34 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 09:05:34 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+
+2025-08-05 09:05:34 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+
+2025-08-05 10:52:57 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 10:52:57 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 10:52:57 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIMrw.h-O-KFHz6of8U332iYBdoJCw5Kk'}
+2025-08-05 10:52:57 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIMrw.h-O-KFHz6of8U332iYBdoJCw5Kk'}
+2025-08-05 10:52:57 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 10:52:57 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 10:52:57 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 10:52:57 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 10:52:59 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 10:52:59 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 10:52:59 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 10:52:59 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 10:52:59 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 10:52:59 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 10:52:59 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 10:52:59 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 10:52:59 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 10:52:59 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 10:52:59 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 10:52:59 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'", 'message': "Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'"}
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+
+2025-08-05 10:52:59 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: SteamClientBase.__init__() missing 1 required positional argument: 'shared_secret'
+
+2025-08-05 11:03:24 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 11:03:24 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 11:03:24 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIPIw.GLT6dQQnu2EozAE3T-a0jZ2lYc0'}
+2025-08-05 11:03:24 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIPIw.GLT6dQQnu2EozAE3T-a0jZ2lYc0'}
+2025-08-05 11:03:24 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 11:03:24 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 11:03:24 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-05 11:03:24 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-05 11:03:26 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 11:03:26 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 11:03:26 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 11:03:26 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 11:03:26 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 11:03:26 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 11:03:26 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 11:03:26 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 11:03:26 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 11:03:26 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 11:03:26 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 11:03:26 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "'<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+
+2025-08-05 11:03:26 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: '<' not supported between instances of 'str' and 'int'
+
+2025-08-05 11:14:44 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 11:14:44 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 11:14:44 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361973032', 'price': None, 'market_hash_name': 'StatTrak™ MAC-10 | Light Box (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIRyg.I9-7XMXX5Egw1QsmWkjIFr1lbik'}
+2025-08-05 11:14:44 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361973032', 'price': None, 'market_hash_name': 'StatTrak™ MAC-10 | Light Box (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIRyg.I9-7XMXX5Egw1QsmWkjIFr1lbik'}
+2025-08-05 11:14:44 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 11:14:44 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 11:14:44 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361973032']
+2025-08-05 11:14:44 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361973032']
+2025-08-05 11:14:46 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 11:14:46 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 11:14:46 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 11:14:46 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 11:14:46 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 11:14:46 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 11:14:46 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Non-base32 digit found', 'message': 'Erro ao enviar oferta CS2: Non-base32 digit found'}
+2025-08-05 11:14:46 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Non-base32 digit found', 'message': 'Erro ao enviar oferta CS2: Non-base32 digit found'}
+2025-08-05 11:14:46 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 11:14:46 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 11:14:46 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 11:14:46 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Non-base32 digit found', 'message': 'Erro ao enviar oferta CS2: Non-base32 digit found'}
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Non-base32 digit found', 'message': 'Erro ao enviar oferta CS2: Non-base32 digit found'}
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Non-base32 digit found
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Non-base32 digit found
+
+2025-08-05 11:14:46 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Non-base32 digit found
+
+2025-08-05 11:50:53 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 11:50:53 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 11:50:53 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42281959857', 'price': None, 'market_hash_name': 'Sticker | Evil Geniuses | 2020 RMR'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIaMg.MywKxAaNZ__FQSI6WTMxdpYufmk'}
+2025-08-05 11:50:53 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42281959857', 'price': None, 'market_hash_name': 'Sticker | Evil Geniuses | 2020 RMR'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIaMg.MywKxAaNZ__FQSI6WTMxdpYufmk'}
+2025-08-05 11:50:53 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 11:50:53 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 11:50:53 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42281959857']
+2025-08-05 11:50:53 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42281959857']
+2025-08-05 11:50:55 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 11:50:55 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 11:50:55 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 11:50:55 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 11:50:55 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 11:50:55 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 11:50:55 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:50:55 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:50:55 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 11:50:55 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 11:50:55 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 11:50:55 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 11:50:55 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 11:57:00 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 11:57:00 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 11:57:00 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIbtA.RvnwoCGfSYk0tFEgHihhBZRFHxQ'}
+2025-08-05 11:57:00 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIbtA.RvnwoCGfSYk0tFEgHihhBZRFHxQ'}
+2025-08-05 11:57:00 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 11:57:00 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 11:57:00 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-05 11:57:00 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-05 11:57:02 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 11:57:02 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 11:57:02 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 11:57:02 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 11:57:02 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 11:57:02 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 11:57:02 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:57:02 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:57:02 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 11:57:02 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 11:57:02 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 11:57:02 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 11:57:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 12:03:10 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 12:03:10 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 12:03:10 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIdJg.UhZs8mU1KsFvy76Eus0mzzdZT94'}
+2025-08-05 12:03:10 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIdJg.UhZs8mU1KsFvy76Eus0mzzdZT94'}
+2025-08-05 12:03:10 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 12:03:10 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 12:03:10 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 12:03:10 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 12:03:12 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 12:03:12 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 12:03:12 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 12:03:12 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 12:03:12 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 12:03:12 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 12:03:12 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 12:03:12 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 12:03:12 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 12:03:12 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 12:03:12 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 12:03:12 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Incorrect padding', 'message': 'Erro ao enviar oferta CS2: Incorrect padding'}
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 12:03:12 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Incorrect padding
+
+2025-08-05 12:25:24 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 12:25:24 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 12:25:24 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIiXA.zUDJk5-CB_xLpBruujxwnJ-CPHA'}
+2025-08-05 12:25:24 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIiXA.zUDJk5-CB_xLpBruujxwnJ-CPHA'}
+2025-08-05 12:25:24 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 12:25:24 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 12:25:24 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 12:25:24 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 12:25:26 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 12:25:26 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 12:25:26 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 12:25:26 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 12:25:26 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 12:25:26 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 12:25:56 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 12:25:56 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 12:25:56 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 12:25:56 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 12:25:56 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 12:25:56 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'"}
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+
+2025-08-05 12:25:56 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: '<' not supported between instances of 'str' and 'int'
+
+2025-08-05 12:32:31 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 12:32:31 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 12:32:31 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIkBg.GlJgklD71NcGhLIDpk7uUHTLWiY'}
+2025-08-05 12:32:31 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImI0MDNkOThmNDU4MTRjZmI5NzIzY2UyMjQxN2U2NGY1NjliZGZlYTEi.aJIkBg.GlJgklD71NcGhLIDpk7uUHTLWiY'}
+2025-08-05 12:32:31 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 12:32:31 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 12:32:31 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 12:32:31 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 12:32:32 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 12:32:32 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 12:32:32 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 12:32:32 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 12:32:32 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 12:32:32 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 12:33:02 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 12:33:02 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 12:33:02 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 12:33:02 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 12:33:02 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 12:33:02 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 12:33:02 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 16:15:46 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 16:15:46 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 16:16:14 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 16:16:14 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 16:16:14 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJYdA.SF3oJuAuzJSvMkeaRdYin7CUhH8'}
+2025-08-05 16:16:14 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJYdA.SF3oJuAuzJSvMkeaRdYin7CUhH8'}
+2025-08-05 16:16:14 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 16:16:14 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 16:16:14 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-05 16:16:14 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-05 16:16:15 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 16:16:15 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 16:16:15 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 16:16:15 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 16:16:15 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 16:16:15 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 16:16:45 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:16:45 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:16:45 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 16:16:45 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 16:16:45 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 16:16:45 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 16:16:45 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 16:17:14 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 16:17:14 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 16:17:14 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJYsw.tWLZK7bFNuJ9FVfQRLq61zWuDBE'}
+2025-08-05 16:17:14 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJYsw.tWLZK7bFNuJ9FVfQRLq61zWuDBE'}
+2025-08-05 16:17:14 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 16:17:14 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 16:17:14 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-05 16:17:14 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-05 16:17:16 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 16:17:16 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 16:17:16 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 16:17:16 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 16:17:16 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 16:17:16 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 16:17:46 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:17:46 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:17:46 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 16:17:46 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 16:17:46 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 16:17:46 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'"}
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 16:17:46 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: invalid literal for int() with base 10: 'montanhafetida'
+
+2025-08-05 16:20:55 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 16:20:55 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 17:41:22 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 17:41:22 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-05 17:43:21 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 17:43:21 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 17:43:21 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJstg.UDJEqY7skPVgd58ibGP5no9hNGo'}
+2025-08-05 17:43:21 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJstg.UDJEqY7skPVgd58ibGP5no9hNGo'}
+2025-08-05 17:43:21 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 17:43:21 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 17:43:21 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-05 17:43:21 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-05 17:43:23 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 17:43:23 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 17:43:23 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 17:43:23 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 17:43:23 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 17:43:23 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 17:44:19 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:44:19 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:44:19 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 17:44:19 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 17:44:19 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 17:44:19 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+
+2025-08-05 17:44:19 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+
+2025-08-05 17:45:41 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 17:45:41 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 17:45:41 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJstg.UDJEqY7skPVgd58ibGP5no9hNGo'}
+2025-08-05 17:45:41 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJstg.UDJEqY7skPVgd58ibGP5no9hNGo'}
+2025-08-05 17:45:41 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 17:45:41 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 17:45:41 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-05 17:45:41 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-05 17:45:43 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 17:45:43 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 17:45:43 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 17:45:43 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 17:45:43 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 17:45:43 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 17:46:38 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:46:38 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:46:38 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 17:46:38 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 17:46:38 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 17:46:38 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'access_token'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'"}
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+
+2025-08-05 17:46:38 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'access_token'
+
+2025-08-05 17:55:37 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 17:55:37 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 17:55:37 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361973032', 'price': None, 'market_hash_name': 'StatTrak™ MAC-10 | Light Box (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJvvw.mgIxJzah3348c_4ZkxAYLDuUHpw'}
+2025-08-05 17:55:37 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361973032', 'price': None, 'market_hash_name': 'StatTrak™ MAC-10 | Light Box (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJvvw.mgIxJzah3348c_4ZkxAYLDuUHpw'}
+2025-08-05 17:55:37 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 17:55:37 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 17:55:37 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361973032']
+2025-08-05 17:55:37 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361973032']
+2025-08-05 17:55:39 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 17:55:39 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 17:55:39 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 17:55:39 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 17:55:39 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 17:55:39 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:00:59 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:00:59 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:00:59 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361766726', 'price': None, 'market_hash_name': 'USP-S | Stainless (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJxAg.GTDjppKmMB2RgV9UI2eMlsFKW-w'}
+2025-08-05 18:00:59 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361766726', 'price': None, 'market_hash_name': 'USP-S | Stainless (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJxAg.GTDjppKmMB2RgV9UI2eMlsFKW-w'}
+2025-08-05 18:00:59 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:00:59 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:00:59 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361766726']
+2025-08-05 18:00:59 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361766726']
+2025-08-05 18:01:01 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:01:01 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:01:02 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:01:02 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:01:02 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:01:02 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:01:55 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:01:55 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:01:55 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:01:55 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:01:55 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 18:01:55 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+
+2025-08-05 18:01:55 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+
+2025-08-05 18:22:00 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:22:00 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:22:00 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42695553185', 'price': None, 'market_hash_name': 'Sawed-Off | Forest DDPAT (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJ18Q.qXwCc5hQFqkdAh0GBDnKkFTtYG8'}
+2025-08-05 18:22:00 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42695553185', 'price': None, 'market_hash_name': 'Sawed-Off | Forest DDPAT (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJ18Q.qXwCc5hQFqkdAh0GBDnKkFTtYG8'}
+2025-08-05 18:22:00 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:22:00 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:22:00 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42695553185']
+2025-08-05 18:22:00 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42695553185']
+2025-08-05 18:22:02 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:22:02 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:22:02 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:22:02 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:22:02 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:22:02 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:22:58 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:22:58 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:22:58 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:22:58 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:22:58 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 18:22:58 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "Login falhou após 3 tentativas: 'client_id'", 'message': "Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'"}
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+
+2025-08-05 18:22:58 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao enviar oferta CS2: Login falhou após 3 tentativas: 'client_id'
+
+2025-08-05 18:31:20 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:31:20 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:31:20 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361497211', 'price': None, 'market_hash_name': 'StatTrak™ AWP | Exoskeleton (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJ4Hw.p7hP3TAhC7jQiXR639E5kh1-VcQ'}
+2025-08-05 18:31:20 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42361497211', 'price': None, 'market_hash_name': 'StatTrak™ AWP | Exoskeleton (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJ4Hw.p7hP3TAhC7jQiXR639E5kh1-VcQ'}
+2025-08-05 18:31:20 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:31:20 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:31:20 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361497211']
+2025-08-05 18:31:20 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42361497211']
+2025-08-05 18:31:22 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:31:22 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:31:22 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:31:22 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:31:22 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:31:22 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:31:22 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Não foi possível obter sessionid', 'message': 'Erro ao processar via Community API: Não foi possível obter sessionid', 'method': 'Steam Community API'}
+2025-08-05 18:31:22 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Não foi possível obter sessionid', 'message': 'Erro ao processar via Community API: Não foi possível obter sessionid', 'method': 'Steam Community API'}
+2025-08-05 18:31:22 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:31:22 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:31:22 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message', 'method']
+2025-08-05 18:31:22 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message', 'method']
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Não foi possível obter sessionid', 'message': 'Erro ao processar via Community API: Não foi possível obter sessionid', 'method': 'Steam Community API'}
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Não foi possível obter sessionid', 'message': 'Erro ao processar via Community API: Não foi possível obter sessionid', 'method': 'Steam Community API'}
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Não foi possível obter sessionid
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Não foi possível obter sessionid
+
+2025-08-05 18:31:22 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Não foi possível obter sessionid
+
+2025-08-05 18:37:55 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:37:55 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:37:55 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42695553185', 'price': None, 'market_hash_name': 'Sawed-Off | Forest DDPAT (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJ5dw.qf6Iix5pYGOSadM09w4SI0fSnlo'}
+2025-08-05 18:37:55 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42695553185', 'price': None, 'market_hash_name': 'Sawed-Off | Forest DDPAT (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJ5dw.qf6Iix5pYGOSadM09w4SI0fSnlo'}
+2025-08-05 18:37:55 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:37:55 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:37:55 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42695553185']
+2025-08-05 18:37:55 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42695553185']
+2025-08-05 18:37:56 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:37:56 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:37:56 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:37:56 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:37:56 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:37:56 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:37:57 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Login falhou: Login falhou sem detalhes', 'message': 'Erro ao processar via Community API: Login falhou: Login falhou sem detalhes', 'method': 'Steam Community API'}
+2025-08-05 18:37:57 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Login falhou: Login falhou sem detalhes', 'message': 'Erro ao processar via Community API: Login falhou: Login falhou sem detalhes', 'method': 'Steam Community API'}
+2025-08-05 18:37:57 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:37:57 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:37:57 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message', 'method']
+2025-08-05 18:37:57 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message', 'method']
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Login falhou: Login falhou sem detalhes', 'message': 'Erro ao processar via Community API: Login falhou: Login falhou sem detalhes', 'method': 'Steam Community API'}
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Login falhou: Login falhou sem detalhes', 'message': 'Erro ao processar via Community API: Login falhou: Login falhou sem detalhes', 'method': 'Steam Community API'}
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+
+2025-08-05 18:37:57 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Login falhou: Login falhou sem detalhes
+
+2025-08-05 18:48:16 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:48:16 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-05 18:48:16 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJ8GQ.gMDhQNCi5c-VNf2TruuKcriQbv0'}
+2025-08-05 18:48:16 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImMxMDQxMDI4MGFmZTljYjY3Zjg5ZjlhNDUwNWEzODEyZGI2NWVlYzMi.aJJ8GQ.gMDhQNCi5c-VNf2TruuKcriQbv0'}
+2025-08-05 18:48:16 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:48:16 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-05 18:48:16 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 18:48:16 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-05 18:48:18 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:48:18 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-05 18:48:18 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:48:18 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-05 18:48:18 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:48:18 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-05 18:48:19 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Captcha necessário - conta pode estar com restrições', 'message': 'Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições', 'method': 'Steam Community API'}
+2025-08-05 18:48:19 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': 'Captcha necessário - conta pode estar com restrições', 'message': 'Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições', 'method': 'Steam Community API'}
+2025-08-05 18:48:19 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:48:19 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-05 18:48:19 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message', 'method']
+2025-08-05 18:48:19 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message', 'method']
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Captcha necessário - conta pode estar com restrições', 'message': 'Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições', 'method': 'Steam Community API'}
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': 'Captcha necessário - conta pode estar com restrições', 'message': 'Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições', 'method': 'Steam Community API'}
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:48:19 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-05 18:48:20 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+
+2025-08-05 18:48:20 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro ao processar via Community API: Captcha necessário - conta pode estar com restrições
+
+2025-08-06 09:49:51 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-06 09:49:51 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-06 09:50:35 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-06 09:50:35 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-06 09:50:35 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': 1.53, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImM3MzMxNDFlYzE2NmExMmQ2Njk4ODdhZWUwMmY2ZDZkZTdkMjBiYTIi.aJNPfA.SR95scGUOPgP735mptxPCScl9IE'}
+2025-08-06 09:50:35 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': 1.53, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImM3MzMxNDFlYzE2NmExMmQ2Njk4ODdhZWUwMmY2ZDZkZTdkMjBiYTIi.aJNPfA.SR95scGUOPgP735mptxPCScl9IE'}
+2025-08-06 09:50:35 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-06 09:50:35 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-06 09:50:35 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-06 09:50:35 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-06 09:50:37 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-06 09:50:37 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-06 09:50:37 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-06 09:50:37 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-06 09:50:37 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-06 09:50:37 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-06 09:50:37 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)", 'message': "Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)"}
+2025-08-06 09:50:37 | INFO | app | processar_oferta:188 | [SEARCH] RESULTADO COMPLETO: {'success': False, 'error': "cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)", 'message': "Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)"}
+2025-08-06 09:50:37 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-06 09:50:37 | INFO | app | processar_oferta:189 | [SEARCH] TIPO DO RESULTADO: <class 'dict'>
+2025-08-06 09:50:37 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-06 09:50:37 | INFO | app | processar_oferta:190 | [SEARCH] CHAVES DISPONÍVEIS: ['success', 'error', 'message']
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:209 | [ERROR] ERRO RETORNADO: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)", 'message': "Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)"}
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:210 | [ERROR] RESULTADO COMPLETO DO ERRO: {'success': False, 'error': "cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)", 'message': "Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\\Users\\Windows 10\\Documents\\GitHub\\documentacaoFlask---Copia\\services\\steam_community_api.py)"}
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:253 | [ERROR] Falha após 1 tentativas: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:337 | [ALERT] ERRO DETALHADO: RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:338 | [ALERT] TRACEBACK COMPLETO:
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+
+2025-08-06 09:50:37 | ERROR | app | processar_oferta:339 | Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 254, in processar_oferta
+    raise retry_error
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\trade.py", line 211, in processar_oferta
+    raise RuntimeError(error_message)
+RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' from 'services.steam_community_api' (C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\services\steam_community_api.py)
+
+2025-08-06 11:21:02 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-06 11:21:02 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-06 11:21:02 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImM3MzMxNDFlYzE2NmExMmQ2Njk4ODdhZWUwMmY2ZDZkZTdkMjBiYTIi.aJNkww.4Ct6Dd8IPYexfQBxIk4Pwr7kEEM'}
+2025-08-06 11:21:02 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImM3MzMxNDFlYzE2NmExMmQ2Njk4ODdhZWUwMmY2ZDZkZTdkMjBiYTIi.aJNkww.4Ct6Dd8IPYexfQBxIk4Pwr7kEEM'}
+2025-08-06 11:21:02 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-06 11:21:02 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-06 11:21:02 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-06 11:21:02 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-06 11:21:04 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-06 11:21:04 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-06 11:21:04 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-06 11:21:04 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-06 11:21:04 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-06 11:21:04 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-06 11:46:12 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-06 11:46:12 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-06 11:46:12 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42695553185', 'price': None, 'market_hash_name': 'Sawed-Off | Forest DDPAT (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImM3MzMxNDFlYzE2NmExMmQ2Njk4ODdhZWUwMmY2ZDZkZTdkMjBiYTIi.aJNqog.heJrWMnWtALg4xgeUdZwog37KCo'}
+2025-08-06 11:46:12 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42695553185', 'price': None, 'market_hash_name': 'Sawed-Off | Forest DDPAT (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImM3MzMxNDFlYzE2NmExMmQ2Njk4ODdhZWUwMmY2ZDZkZTdkMjBiYTIi.aJNqog.heJrWMnWtALg4xgeUdZwog37KCo'}
+2025-08-06 11:46:12 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-06 11:46:12 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-06 11:46:12 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42695553185']
+2025-08-06 11:46:12 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42695553185']
+2025-08-06 11:46:13 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-06 11:46:13 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-06 11:46:13 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-06 11:46:13 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-06 11:46:13 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-06 11:46:13 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-06 11:54:42 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-06 11:54:42 | INFO | app | enviar_oferta_com_aiosteampy:35 | ===> Entrou no endpoint /enviar-oferta
+2025-08-06 11:54:42 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImM3MzMxNDFlYzE2NmExMmQ2Njk4ODdhZWUwMmY2ZDZkZTdkMjBiYTIi.aJNsqA.jynfdcySQqhpG_EJs3FJNlj5fUs'}
+2025-08-06 11:54:42 | INFO | app | enviar_oferta_com_aiosteampy:47 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImM3MzMxNDFlYzE2NmExMmQ2Njk4ODdhZWUwMmY2ZDZkZTdkMjBiYTIi.aJNsqA.jynfdcySQqhpG_EJs3FJNlj5fUs'}
+2025-08-06 11:54:42 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-06 11:54:42 | INFO | app | enviar_oferta_com_aiosteampy:100 | Iniciando validação de assetids...
+2025-08-06 11:54:42 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-06 11:54:42 | INFO | app | enviar_oferta_com_aiosteampy:112 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-06 11:54:43 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-06 11:54:43 | INFO | app | enviar_oferta_com_aiosteampy:127 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-06 11:54:43 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-06 11:54:43 | INFO | app | enviar_oferta_com_aiosteampy:166 | Informações de pagamento salvas no banco.
+2025-08-06 11:54:43 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-06 11:54:43 | INFO | app | processar_oferta:178 | [RETRY] Tentativa 1/5 de enviar oferta...
+2025-08-07 10:48:15 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-07 10:48:15 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-07 10:48:47 | INFO | app | enviar_oferta_com_aiosteampy:31 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 10:48:47 | INFO | app | enviar_oferta_com_aiosteampy:31 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 10:48:47 | INFO | app | enviar_oferta_com_aiosteampy:43 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'Ijk1NTgyMjU4OWQzOGJiYjJhZmYwZDY4MTcxZjE0ZWIwMmIxZTJkMGMi.aJSurQ.v_2fWcVntJbpDJ3RNiiwykYdaLU'}
+2025-08-07 10:48:47 | INFO | app | enviar_oferta_com_aiosteampy:43 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'Ijk1NTgyMjU4OWQzOGJiYjJhZmYwZDY4MTcxZjE0ZWIwMmIxZTJkMGMi.aJSurQ.v_2fWcVntJbpDJ3RNiiwykYdaLU'}
+2025-08-07 10:48:47 | WARNING | app | log_security_event:222 | Security Event: INVALID_REQUEST_DATA from 127.0.0.1
+2025-08-07 10:48:47 | WARNING | app | log_security_event:222 | Security Event: INVALID_REQUEST_DATA from 127.0.0.1
+2025-08-07 10:48:47 | ERROR | app | enviar_oferta_com_aiosteampy:68 | Erro ao validar dados: name 'validar_dados_requisicao' is not defined
+2025-08-07 10:48:47 | ERROR | app | enviar_oferta_com_aiosteampy:68 | Erro ao validar dados: name 'validar_dados_requisicao' is not defined
+2025-08-07 18:41:53 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-07 18:41:53 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-07 18:44:06 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 18:44:06 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 18:44:06 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJUeGw.oQvSej79xwLWTWZGpR2s6_E9smY'}
+2025-08-07 18:44:06 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJUeGw.oQvSej79xwLWTWZGpR2s6_E9smY'}
+2025-08-07 18:44:06 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-07 18:44:06 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-07 18:44:06 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-07 18:44:06 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-07 18:44:08 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-07 18:44:08 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-07 18:44:08 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-07 18:44:08 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-07 18:44:08 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 18:44:08 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 19:14:00 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 19:14:00 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 19:14:00 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJUlHg.Bwdmd387gg31ZhpVLNfgyqm9xN4'}
+2025-08-07 19:14:00 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJUlHg.Bwdmd387gg31ZhpVLNfgyqm9xN4'}
+2025-08-07 19:14:00 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-07 19:14:00 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-07 19:14:00 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-07 19:14:00 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-07 19:14:02 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-07 19:14:02 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-07 19:14:02 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-07 19:14:02 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-07 19:14:02 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 19:14:02 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 21:02:12 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 21:02:12 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 21:02:12 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361973032', 'price': None, 'market_hash_name': 'StatTrak™ MAC-10 | Light Box (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJU-dg.WekbfHtMyQTUUk-bJhYZFvpZCJQ'}
+2025-08-07 21:02:12 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361973032', 'price': None, 'market_hash_name': 'StatTrak™ MAC-10 | Light Box (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJU-dg.WekbfHtMyQTUUk-bJhYZFvpZCJQ'}
+2025-08-07 21:02:12 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-07 21:02:12 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-07 21:02:12 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361973032']
+2025-08-07 21:02:12 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361973032']
+2025-08-07 21:02:14 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-07 21:02:14 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-07 21:02:14 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-07 21:02:14 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-07 21:02:14 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 21:02:14 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 21:14:51 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 21:14:51 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-07 21:14:51 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361924770', 'price': None, 'market_hash_name': 'Galil AR | Stone Cold (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJVBcQ.KQ3mO1zA_2nkSLr1XuXsiMNX3l0'}
+2025-08-07 21:14:51 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361924770', 'price': None, 'market_hash_name': 'Galil AR | Stone Cold (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJVBcQ.KQ3mO1zA_2nkSLr1XuXsiMNX3l0'}
+2025-08-07 21:14:51 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-07 21:14:51 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-07 21:14:51 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361924770']
+2025-08-07 21:14:51 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361924770']
+2025-08-07 21:14:53 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-07 21:14:53 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-07 21:14:53 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-07 21:14:53 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-07 21:14:53 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-07 21:14:53 | ERROR | app | processar_oferta:194 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 07:23:12 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 07:23:12 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 07:24:45 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 07:24:45 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 07:24:45 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJXQOw.pfjAlaCJjZvGgFB0hn5zH49NUJ4'}
+2025-08-08 07:24:45 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJXQOw.pfjAlaCJjZvGgFB0hn5zH49NUJ4'}
+2025-08-08 07:24:45 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 07:24:45 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 07:24:45 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-08 07:24:45 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-08 07:24:53 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 07:24:53 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 07:24:53 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 07:24:53 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 07:24:53 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 07:24:53 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 10:09:16 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 10:09:16 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 10:30:17 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 10:30:17 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 10:34:23 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 10:34:23 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 12:25:00 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 12:25:00 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 12:25:00 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJYWvw.GBwl5ASQXFyNVFhhxOkggStqNR4'}
+2025-08-08 12:25:00 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJYWvw.GBwl5ASQXFyNVFhhxOkggStqNR4'}
+2025-08-08 12:25:00 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 12:25:00 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 12:25:00 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-08 12:25:00 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-08 12:25:02 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 12:25:02 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 12:25:02 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 12:25:02 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 12:25:02 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 12:25:02 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: unsupported operand type(s) for +: 'int' and 'NoneType'
+2025-08-08 12:33:36 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 12:33:36 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 12:33:36 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': None, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJYYwg.3Y_8gTsv7KRb2GQR6g3i4M2-f2Q'}
+2025-08-08 12:33:36 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': None, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJYYwg.3Y_8gTsv7KRb2GQR6g3i4M2-f2Q'}
+2025-08-08 12:33:36 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 12:33:36 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 12:33:36 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-08 12:33:36 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-08 12:33:37 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 12:33:37 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 12:33:37 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 12:33:37 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 12:33:37 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-08 12:33:37 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-08 12:33:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 401: {"status":401,"message":"API Key missing"}
+2025-08-08 12:33:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 401: {"status":401,"message":"API Key missing"}
+2025-08-08 14:22:03 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 14:22:03 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-08 14:22:50 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 14:22:50 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 14:22:50 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJYyWg.1f7t6AduQHx9WovCrvTwLnLJpLA'}
+2025-08-08 14:22:50 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJYyWg.1f7t6AduQHx9WovCrvTwLnLJpLA'}
+2025-08-08 14:22:50 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 14:22:50 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 14:22:50 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-08 14:22:50 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-08 14:22:52 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 14:22:52 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 14:22:53 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 14:22:53 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 14:22:53 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-08 14:22:53 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-08 14:23:03 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 14:23:03 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 16:24:29 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 16:24:29 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 16:24:29 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJZO5A.78SdHhdzS4MCjMRcXH0M3vjI-OI'}
+2025-08-08 16:24:29 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42518640476', 'price': None, 'market_hash_name': 'P90 | Wash me (Well-Worn)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJZO5A.78SdHhdzS4MCjMRcXH0M3vjI-OI'}
+2025-08-08 16:24:29 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 16:24:29 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 16:24:29 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-08 16:24:29 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42518640476']
+2025-08-08 16:24:31 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 16:24:31 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 16:24:31 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 16:24:31 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 16:24:31 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-08 16:24:31 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-08 16:24:41 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 16:24:41 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 16:31:24 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 16:31:24 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-08 16:31:24 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJZQSw.Y1sR3fSuwUoBkxiTJWDsICrzHTQ'}
+2025-08-08 16:31:24 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjJlNTg3NDEzYWZmMWZjYTU0NjViYjMxNzA0NzQzMmIyOTFmMTlkODMi.aJZQSw.Y1sR3fSuwUoBkxiTJWDsICrzHTQ'}
+2025-08-08 16:31:24 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 16:31:24 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-08 16:31:24 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-08 16:31:24 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-08 16:31:26 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 16:31:26 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-08 16:31:26 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 16:31:26 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-08 16:31:26 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-08 16:31:26 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-08 16:31:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-08 16:31:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 14:53:00 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 14:53:00 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 14:57:02 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 14:57:02 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 14:57:02 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361497211', 'price': 23, 'market_hash_name': 'StatTrak™ AWP | Exoskeleton (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJoupw.3M38oUQSnfsIHxSCiagvajNvTvs'}
+2025-08-11 14:57:02 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361497211', 'price': 23, 'market_hash_name': 'StatTrak™ AWP | Exoskeleton (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJoupw.3M38oUQSnfsIHxSCiagvajNvTvs'}
+2025-08-11 14:57:02 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 14:57:02 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 14:57:02 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361497211']
+2025-08-11 14:57:02 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361497211']
+2025-08-11 14:57:04 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 14:57:04 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 14:57:04 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 14:57:04 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 14:57:04 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 14:57:04 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 14:57:14 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 14:57:14 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 16:29:50 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 16:29:50 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 16:30:12 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 16:30:12 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 16:30:12 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361720695', 'price': 10.78, 'market_hash_name': 'M4A4 | Royal Paladin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJpEug.4HlWMCahXU6ncaf4Jtcb598gVNc'}
+2025-08-11 16:30:12 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361720695', 'price': 10.78, 'market_hash_name': 'M4A4 | Royal Paladin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJpEug.4HlWMCahXU6ncaf4Jtcb598gVNc'}
+2025-08-11 16:30:12 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 16:30:12 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 16:30:12 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361720695']
+2025-08-11 16:30:12 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361720695']
+2025-08-11 16:30:14 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 16:30:14 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 16:30:14 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 16:30:14 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 16:30:14 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 16:30:14 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 16:30:21 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 16:30:21 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 17:01:39 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 17:01:39 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 17:02:00 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 17:02:00 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 17:02:00 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': 9.51, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJpMLg.FOgXZvFmdbupWbI0Ses5N0JkSfQ'}
+2025-08-11 17:02:00 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': 9.51, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJpMLg.FOgXZvFmdbupWbI0Ses5N0JkSfQ'}
+2025-08-11 17:02:00 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 17:02:00 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 17:02:00 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-11 17:02:00 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-11 17:02:01 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 17:02:01 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 17:02:01 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 17:02:01 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 17:02:01 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 17:02:01 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 17:02:09 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 17:02:09 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 17:51:58 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 17:51:58 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 17:52:19 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 17:52:19 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 17:52:19 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJpX-w.6X6_s-U3Cm-qsg4I2UJJ6JNw32s'}
+2025-08-11 17:52:19 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362645825', 'price': None, 'market_hash_name': 'MAC-10 | Calf Skin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJpX-w.6X6_s-U3Cm-qsg4I2UJJ6JNw32s'}
+2025-08-11 17:52:19 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 17:52:19 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 17:52:19 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-11 17:52:19 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362645825']
+2025-08-11 17:52:21 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 17:52:21 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 17:52:21 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 17:52:21 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 17:52:21 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 17:52:21 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 17:52:28 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 17:52:28 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 19:51:29 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 19:51:29 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 19:52:17 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 19:52:17 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 19:52:17 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': 9.51, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp0GA.uUVvGshVB7f0uj8AiRGJMcNsetI'}
+2025-08-11 19:52:17 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': 9.51, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp0GA.uUVvGshVB7f0uj8AiRGJMcNsetI'}
+2025-08-11 19:52:17 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 19:52:17 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 19:52:17 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-11 19:52:17 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-11 19:52:19 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 19:52:19 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 19:52:19 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 19:52:19 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 19:52:19 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 19:52:19 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 19:52:19 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 'account_name'
+2025-08-11 19:52:19 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 'account_name'
+2025-08-11 19:59:15 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 19:59:15 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 19:59:15 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': 9.51, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp1ug.Smf1nPaaF6vlTV-_8qrq_iG3ybY'}
+2025-08-11 19:59:15 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362085201', 'price': 9.51, 'market_hash_name': 'StatTrak™ Desert Eagle | Light Rail (Minimal Wear)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp1ug.Smf1nPaaF6vlTV-_8qrq_iG3ybY'}
+2025-08-11 19:59:15 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 19:59:15 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 19:59:15 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-11 19:59:15 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362085201']
+2025-08-11 19:59:17 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 19:59:17 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 19:59:17 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 19:59:17 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 19:59:17 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 19:59:17 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 19:59:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-08-11 19:59:38 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-08-11 20:06:09 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 20:06:09 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 20:06:09 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361720695', 'price': 10.78, 'market_hash_name': 'M4A4 | Royal Paladin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp3WA.GsWAEWN7ymTF-ku4rJMGOL7IHz8'}
+2025-08-11 20:06:09 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42361720695', 'price': 10.78, 'market_hash_name': 'M4A4 | Royal Paladin (Field-Tested)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp3WA.GsWAEWN7ymTF-ku4rJMGOL7IHz8'}
+2025-08-11 20:06:09 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 20:06:09 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 20:06:09 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361720695']
+2025-08-11 20:06:09 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42361720695']
+2025-08-11 20:06:10 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 20:06:10 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 20:06:10 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 20:06:10 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 20:06:10 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 20:06:10 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 20:06:18 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 20:06:18 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro HTTP 411: {"status":411,"error":{"success":false,"message":"Invalid username or password [1]"}}
+2025-08-11 20:13:05 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 20:13:05 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-08-11 20:13:29 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 20:13:29 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 20:13:29 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp5Dw.oMFjtiyIFR-5tE0WMWwb6k92--Y'}
+2025-08-11 20:13:29 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42520192257', 'price': None, 'market_hash_name': 'Five-SeveN | Midnight Paintover (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp5Dw.oMFjtiyIFR-5tE0WMWwb6k92--Y'}
+2025-08-11 20:13:29 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 20:13:29 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 20:13:29 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-11 20:13:29 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42520192257']
+2025-08-11 20:13:31 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 20:13:31 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 20:13:31 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 20:13:31 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 20:13:31 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 20:13:31 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 20:13:46 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-08-11 20:13:46 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-08-11 20:26:13 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 20:26:13 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-08-11 20:26:13 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp8Cg.CNKPdYK2USiWjkUXhGCj4l-63L8'}
+2025-08-11 20:26:13 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '42362137810', 'price': None, 'market_hash_name': 'StatTrak™ MP9 | Featherweight (Factory New)'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImJkNTgyMjczZDFhYTQ1NjJiMzVlYjVlYzk3NGRlODFkYjgzNGQ2OTgi.aJp8Cg.CNKPdYK2USiWjkUXhGCj4l-63L8'}
+2025-08-11 20:26:13 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 20:26:13 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-08-11 20:26:13 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-11 20:26:13 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['42362137810']
+2025-08-11 20:26:15 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 20:26:15 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-08-11 20:26:15 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 20:26:15 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-08-11 20:26:15 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 20:26:15 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-08-11 20:26:45 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
+2025-08-11 20:26:45 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
