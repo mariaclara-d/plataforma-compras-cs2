@@ -2773,3 +2773,42 @@ RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' fro
 2025-08-11 20:13:46 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
 2025-08-11 20:26:45 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
 2025-08-11 20:26:45 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
+2025-09-03 19:18:03 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\dashboard.py", line 54, in dashboard
+    return redirect(url_for("auth.logout"))
+                    ~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\helpers.py", line 232, in url_for
+    return current_app.url_for(
+           ~~~~~~~~~~~~~~~~~~~^
+        endpoint,
+        ^^^^^^^^^
+    ...<4 lines>...
+        **values,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.logout'. Did you mean 'admin.logout' instead?
+2025-09-03 19:20:09 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
+2025-09-03 19:41:29 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-09-03 19:57:42 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Invalid asset ID

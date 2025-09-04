@@ -100,19 +100,22 @@ class SteamWebAPIService:
             async with self.session.post(endpoint, json=payload) as response:
                 response_text = await response.text()
                 logger.info(f"[STEAMWEBAPI] Status: {response.status}")
+                logger.info(f"[STEAMWEBAPI] Response Body: {response_text}")
 
                 if response.status == 200:
                     try:
                         result = json.loads(response_text)
-                        steam_cookie = result.get('steamLoginSecure')
+                        # ✅ CORRIJA ESTA LINHA:
+                        steam_cookie = result.get('cookies', {}).get('steamloginsecure')
+                        
                         if steam_cookie:
                             logger.info("[STEAMWEBAPI] ✅ steamLoginSecure obtido com sucesso!")
                             logger.info(f"[STEAMWEBAPI] Cookie: {steam_cookie[:50]}...")
                             return steam_cookie
                         else:
-                            error_msg = result.get('error', 'Cookie não retornado')
-                            logger.error(f"[STEAMWEBAPI] ❌ Erro: {error_msg}")
-                            raise Exception(f"Erro ao obter cookie: {error_msg}")
+                            logger.error(f"[STEAMWEBAPI] ❌ Erro: Campo steamloginsecure não encontrado no response")
+                            logger.error(f"[STEAMWEBAPI] ❌ Response completo: {result}")
+                            raise Exception(f"Campo steamloginsecure não encontrado: {result}")
 
                     except json.JSONDecodeError as e:
                         logger.error(f"[STEAMWEBAPI] ❌ Resposta não é JSON: {e}")

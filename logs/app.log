@@ -4684,3 +4684,65 @@ RuntimeError: Erro final: cannot import name 'enviar_oferta_steam_community' fro
 2025-08-11 20:26:15 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
 2025-08-11 20:26:45 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
 2025-08-11 20:26:45 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
+2025-09-03 19:14:08 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-09-03 19:17:49 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-09-03 19:18:03 | ERROR | app | log_exception:875 | Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\routes\dashboard.py", line 54, in dashboard
+    return redirect(url_for("auth.logout"))
+                    ~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\helpers.py", line 232, in url_for
+    return current_app.url_for(
+           ~~~~~~~~~~~~~~~~~~~^
+        endpoint,
+        ^^^^^^^^^
+    ...<4 lines>...
+        **values,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\Windows 10\Documents\GitHub\documentacaoFlask---Copia\.venv\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.logout'. Did you mean 'admin.logout' instead?
+2025-09-03 19:19:25 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-09-03 19:19:25 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '41669089188', 'price': None, 'market_hash_name': 'Charm Detachment Pack'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjZlZjNmMzNkMDVlNGE0YTc0OGQxZjg2MDU0NTk5NzUxZmRkMGI1N2Ui.aLi-ug.6p2hp4jLYLsNy8EqmJi8xSeIpnk'}
+2025-09-03 19:19:25 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-09-03 19:19:25 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['41669089188']
+2025-09-03 19:19:39 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-09-03 19:19:39 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-09-03 19:19:39 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-09-03 19:20:09 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
+2025-09-03 19:41:12 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-09-03 19:41:12 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '41669089188', 'price': None, 'market_hash_name': 'Charm Detachment Pack'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjZlZjNmMzNkMDVlNGE0YTc0OGQxZjg2MDU0NTk5NzUxZmRkMGI1N2Ui.aLjD-w.fIQ33CWZxVfbUy09dvJNjV0ZHU0'}
+2025-09-03 19:41:12 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-09-03 19:41:12 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['41669089188']
+2025-09-03 19:41:13 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-09-03 19:41:13 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-09-03 19:41:13 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-09-03 19:41:29 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
+2025-09-03 19:57:25 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-09-03 19:57:25 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '22667046271', 'price': None, 'market_hash_name': 'USP-S'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'IjZlZjNmMzNkMDVlNGE0YTc0OGQxZjg2MDU0NTk5NzUxZmRkMGI1N2Ui.aLjHyA.s9vK4qwBuZvJTCMuULC2kK_E0TA'}
+2025-09-03 19:57:25 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-09-03 19:57:25 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['22667046271']
+2025-09-03 19:57:27 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 1 itens válidos
+2025-09-03 19:57:27 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-09-03 19:57:27 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-09-03 19:57:42 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Invalid asset ID
