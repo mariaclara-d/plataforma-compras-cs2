@@ -1,6 +1,6 @@
-# 🔒 GUIA DE SEGURANÇA PARA PRODUÇÃO
+#  GUIA DE SEGURANÇA PARA PRODUÇÃO
 
-## ✅ CHECKLIST PRÉ-DEPLOY
+##  CHECKLIST PRÉ-DEPLOY
 
 ### **Configuração de Ambiente**
 - [ ] `.env.production` configurado com valores reais
@@ -51,34 +51,34 @@
 - [ ] Alertas para ações admin suspeitas
 - [ ] Logs de rate limiting
 
-## 🚨 VULNERABILIDADES CRÍTICAS CORRIGIDAS
+##  VULNERABILIDADES CRÍTICAS CORRIGIDAS
 
-### **1. SECRET_KEY Hardcoded** ✅ CORRIGIDO
+### **1. SECRET_KEY Hardcoded**  CORRIGIDO
 - **Problema**: Chave secreta exposta no código
 - **Solução**: Validação e geração automática segura
 - **Verificação**: `check_secret_key()` em `app.py`
 
-### **2. Autenticação Insegura** ✅ CORRIGIDO
+### **2. Autenticação Insegura**  CORRIGIDO
 - **Problema**: Sessions sem validação HMAC
 - **Solução**: Tokens HMAC com validação temporal
 - **Verificação**: `utils/auth_helpers.py`
 
-### **3. Rate Limiting Ausente** ✅ CORRIGIDO
+### **3. Rate Limiting Ausente**  CORRIGIDO
 - **Problema**: Sem proteção contra brute force
 - **Solução**: Rate limiting baseado em sliding window
 - **Verificação**: `middleware/rate_limiting.py`
 
-### **4. Admin Senha Padrão** ✅ CORRIGIDO
+### **4. Admin Senha Padrão**  CORRIGIDO
 - **Problema**: Credenciais admin/admin123
 - **Solução**: Criação forçada de senha forte
 - **Verificação**: `scripts/create_admin.py`
 
-### **5. CSP Permissiva** ✅ CORRIGIDO
+### **5. CSP Permissiva**  CORRIGIDO
 - **Problema**: 'unsafe-inline' no CSP
 - **Solução**: CSP restritiva sem inline
 - **Verificação**: `middleware/security_headers.py`
 
-## 🔧 COMANDOS DE DEPLOY SEGURO
+##  COMANDOS DE DEPLOY SEGURO
 
 ### **1. Preparação do Ambiente**
 ```bash
@@ -106,16 +106,16 @@ python scripts/create_admin.py
 ### **3. Verificação de Segurança**
 ```bash
 # Testar configurações
-python -c "from app import create_app; app = create_app(); print('✅ App configurada corretamente')"
+python -c "from app import create_app; app = create_app(); print(' App configurada corretamente')"
 
 # Verificar SECRET_KEY
-python -c "import os; print('✅ SECRET_KEY configurada' if os.getenv('SECRET_KEY') and len(os.getenv('SECRET_KEY')) >= 32 else '❌ SECRET_KEY inválida')"
+python -c "import os; print(' SECRET_KEY configurada' if os.getenv('SECRET_KEY') and len(os.getenv('SECRET_KEY')) >= 32 else ' SECRET_KEY inválida')"
 
 # Testar autenticação
 python simple_auth_test.py
 ```
 
-## 🛡️ CONFIGURAÇÕES DE SERVIDOR
+##  CONFIGURAÇÕES DE SERVIDOR
 
 ### **Nginx (Proxy Reverso)**
 ```nginx
@@ -184,7 +184,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-## 📊 MONITORAMENTO E ALERTAS
+##  MONITORAMENTO E ALERTAS
 
 ### **Logs Importantes**
 - `logs/security.log` - Tentativas de login, admin actions
@@ -199,7 +199,7 @@ WantedBy=multi-user.target
 - Falhas de conexão com Steam API
 - Uso de CPU/memória alto
 
-## 🧪 TESTES DE SEGURANÇA
+##  TESTES DE SEGURANÇA
 
 ### **Testes Manuais**
 ```bash
@@ -222,7 +222,7 @@ curl "http://localhost:5000/api/user/'; DROP TABLE users; --/balance"
 - sqlmap - SQL injection testing
 - Burp Suite - Web application testing
 
-## 📋 MANUTENÇÃO CONTÍNUA
+##  MANUTENÇÃO CONTÍNUA
 
 ### **Atualizações de Segurança**
 - Atualizar dependências mensalmente

@@ -61,7 +61,7 @@ async def login_aiosteampy():
             api_key=STEAM_API_KEY
         )
         await client.login()
-        logging.info("✅ Login efetuado com sucesso.")
+        logging.info(" Login efetuado com sucesso.")
         return client
     except Exception as e:
         logging.error(f"Erro ao fazer login no Steam: {e}")
@@ -81,10 +81,10 @@ async def verificar_status():
     try:
         client = await login_aiosteampy()
         pendentes = session.query(TradeOffer).filter(TradeOffer.status == 'pendente').all()
-        logging.info(f"🔍 {len(pendentes)} ofertas pendentes encontradas.")
+        logging.info(f" {len(pendentes)} ofertas pendentes encontradas.")
         for oferta in pendentes:
             try:
-                logging.info(f"🔎 Verificando oferta {oferta.tradeofferid}...")
+                logging.info(f" Verificando oferta {oferta.tradeofferid}...")
                 trade = await client.get_trade_offer(int(oferta.tradeofferid))
                 status_str = STATUS_MAP.get(trade.status, 'desconhecido')
                 oferta.status = status_str
@@ -96,7 +96,7 @@ async def verificar_status():
                     skin = session.query(Skin).filter(Skin.tradeofferid == oferta.tradeofferid).first()
                     if skin:
                         skin.valor_liquido = calcular_valor_liquido(skin.preco)
-                        logging.info(f"🔄 Valor líquido da skin {skin.nome} atualizado para R$ {skin.valor_liquido:.2f}.")
+                        logging.info(f" Valor líquido da skin {skin.nome} atualizado para R$ {skin.valor_liquido:.2f}.")
                         saldo = session.query(Saldo).filter(Saldo.steamid == oferta.partnersteamid).first()
                         if saldo:
                             saldo.valor += skin.valor_liquido
@@ -104,12 +104,12 @@ async def verificar_status():
                             saldo = Saldo(steamid=oferta.partnersteamid, valor=skin.valor_liquido)
                             session.add(saldo)
                         session.commit()
-                        logging.info(f"💰 Saldo do usuário {oferta.partnersteamid} atualizado para R$ {saldo.valor:.2f}.")
+                        logging.info(f" Saldo do usuário {oferta.partnersteamid} atualizado para R$ {saldo.valor:.2f}.")
                     else:
                         logging.warning(f"Nenhuma skin encontrada para a oferta {oferta.tradeofferid}.")
 
                 session.commit()
-                logging.info(f"📌 Status atualizado: {oferta.tradeofferid} → {status_str}")
+                logging.info(f" Status atualizado: {oferta.tradeofferid} → {status_str}")
 
                 if status_str == 'pendente' and agora > oferta.expires_at:
                     await client.cancel_trade_offer(int(oferta.tradeofferid))
@@ -117,15 +117,15 @@ async def verificar_status():
                     oferta.cancelado_por = 'site'
                     oferta.updated_at = agora
                     session.commit()
-                    logging.info(f"⏱️ Oferta expirada cancelada: {oferta.tradeofferid}")
+                    logging.info(f"⏱ Oferta expirada cancelada: {oferta.tradeofferid}")
             except SQLAlchemyError as db_err:
                 session.rollback()
-                logging.error(f"❌ Erro de banco verificando oferta {oferta.tradeofferid}: {db_err}")
+                logging.error(f" Erro de banco verificando oferta {oferta.tradeofferid}: {db_err}")
             except Exception as e:
                 session.rollback()
-                logging.error(f"❌ Erro verificando oferta {oferta.tradeofferid}: {e}")
+                logging.error(f" Erro verificando oferta {oferta.tradeofferid}: {e}")
     except Exception as e:
-        logging.error(f"💥 Erro na execução geral: {e}")
+        logging.error(f" Erro na execução geral: {e}")
     finally:
         session.close()
 

@@ -61,14 +61,14 @@ def configure_database(app):
         
         # Log do banco configurado
         parsed_url = urlparse(database_url)
-        print(f"🗄️ PostgreSQL configurado: {parsed_url.hostname}:{parsed_url.port}/{parsed_url.path[1:]}")
+        print(f" PostgreSQL configurado: {parsed_url.hostname}:{parsed_url.port}/{parsed_url.path[1:]}")
         
     else:
         # Configurações para SQLite
         app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
             'echo': app.config.get('DEBUG', False)
         }
-        print(f"🗄️ SQLite configurado: {database_url}")
+        print(f" SQLite configurado: {database_url}")
     
     # Inicializar SQLAlchemy
     db.init_app(app)

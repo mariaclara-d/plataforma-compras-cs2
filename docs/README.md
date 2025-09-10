@@ -6,7 +6,7 @@ Este projeto é uma plataforma de compras de itens de CS2 (skins, armas, etc.), 
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **Backend:** Flask (Python)
 - **Frontend:** Bootstrap, HTML, CSS, JavaScript
@@ -22,7 +22,7 @@ Este projeto é uma plataforma de compras de itens de CS2 (skins, armas, etc.), 
 
 ---
 
-## ⚙️ Funcionalidades
+##  Funcionalidades
 
 1. **Autenticação via Steam:**
    - Os usuários fazem login usando suas contas da Steam através do Steam OpenID.
@@ -42,7 +42,7 @@ Este projeto é uma plataforma de compras de itens de CS2 (skins, armas, etc.), 
 
 ---
 
-## 📋 Pré-requisitos
+##  Pré-requisitos
 
 Antes de executar o projeto, certifique-se de ter instalado:
 
@@ -52,13 +52,13 @@ Antes de executar o projeto, certifique-se de ter instalado:
 
 ---
 
-## 📄 Licença
+##  Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-## 🙋‍♂️ Autor
+##  Autor
 
 - **Maria Clara Guimarães**  
 - GitHub: [mariaclara-d](https://github.com/mariaclara-d)  
@@ -66,4 +66,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ---
 
-�
+

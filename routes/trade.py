@@ -1,4 +1,4 @@
-﻿from flask import Blueprint, request, jsonify, session, current_app
+from flask import Blueprint, request, jsonify, session, current_app
 from flask_wtf.csrf import validate_csrf, CSRFError
 from services.inventory_service import InventoryService
 from services.notification_service import notification_service
@@ -182,7 +182,7 @@ def enviar_oferta_com_aiosteampy():
                 )
                 
                 if resultado_steamwebapi.get('success'):
-                    current_app.logger.info("[SUCCESS] ✅ Trade offer criada via SteamWebAPI!")
+                    current_app.logger.info("[SUCCESS]  Trade offer criada via SteamWebAPI!")
                     return resultado_steamwebapi
                 else:
                     raise Exception(f"SteamWebAPI falhou: {resultado_steamwebapi.get('error')}")
