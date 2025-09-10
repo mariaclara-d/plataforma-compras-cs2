@@ -1,7 +1,9 @@
-from flask import Blueprint, session, redirect, request, url_for
+from flask import Blueprint, session, redirect, request, url_for, current_app, abort
 from urllib.parse import urlencode
 import os
 import requests
+import re
+from utils.auth_helpers import create_secure_session, validate_steam_id, clear_session
 
 # Configuração do Blueprint para rotas de autenticação
 auth_blueprint = Blueprint('auth', __name__) 
@@ -60,19 +62,46 @@ def verify_steam_response(args):
 # Rota para processar o retorno do Steam e obter o Steam ID
 @auth_blueprint.route("/complete_steam_login")
 def complete_steam_login():
-    openid_claimed_id = request.args.get('openid.claimed_id')
-    print(f"[LOG] openid.claimed_id recebido: {openid_claimed_id}")
-    if openid_claimed_id and verify_steam_response(request.args):
+    try:
+        openid_claimed_id = request.args.get('openid.claimed_id')
+        current_app.logger.info(f"Tentativa de login Steam de IP: {request.remote_addr}")
+        
+        if not openid_claimed_id:
+            current_app.logger.warning("Login Steam sem openid.claimed_id")
+            abort(400)
+        
+        # Validar formato do claimed_id
+        if not openid_claimed_id.startswith('https://steamcommunity.com/openid/id/'):
+            current_app.logger.warning(f"Formato inválido de claimed_id: {openid_claimed_id}")
+            abort(400)
+        
+        if not verify_steam_response(request.args):
+            current_app.logger.warning("Falha na verificação da resposta Steam")
+            abort(400)
+        
+        # Extrair Steam ID de forma segura
         steam_id = openid_claimed_id.split('/')[-1]
-        print(f"[LOG] Steam ID extraído: {steam_id}")
-        # Validação básica do steam_id
-        if not steam_id.isdigit() or len(steam_id) > 20:
-            print("[LOG] Steam ID inválido.")
-            return "Steam ID inválido.", 400
-        session['steam_id'] = steam_id
-        print("[LOG] Login Steam bem-sucedido, redirecionando para dashboard.")
-        return redirect(url_for("dashboard.dashboard"))  # Redireciona para a dashboard após login
-    print("[LOG] Erro ao verificar resposta do Steam")
-    return "Erro ao verificar resposta do Steam", 400
+        
+        # Validar Steam ID
+        if not validate_steam_id(steam_id):
+            current_app.logger.warning(f"Steam ID inválido extraído: {steam_id}")
+            abort(400)
+        
+        # Criar sessão segura
+        create_secure_session(steam_id)
+        
+        current_app.logger.info(f"Login Steam bem-sucedido para Steam ID: {steam_id}")
+        return redirect(url_for("dashboard.dashboard"))
+        
+    except Exception as e:
+        current_app.logger.error(f"Erro no login Steam: {str(e)}")
+        abort(500)
+
+@auth_blueprint.route("/logout")
+def logout():
+    """Logout seguro"""
+    current_app.logger.info(f"Logout realizado por IP: {request.remote_addr}")
+    clear_session()
+    return redirect(url_for("home.home"))
 
 

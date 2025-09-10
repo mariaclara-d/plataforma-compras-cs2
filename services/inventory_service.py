@@ -556,21 +556,46 @@ class InventoryService:
         # Separar itens válidos e inválidos
         valid_items = []
         invalid_items = []
+        non_tradable_items = []
         
         for assetid in selected_assetids:
             if assetid in valid_assetids:
-                valid_items.append(assetid)
+                # Verificar se o item é negociável
+                item_tradable = True
+                if current_inventory:
+                    # Se temos dados detalhados do inventário, verificar tradable
+                    for item in current_inventory:
+                        if item.assetid == assetid:
+                            item_tradable = item.tradable
+                            if not item_tradable:
+                                self.logger.warning(f"Item {assetid} ({item.name}) não é negociável")
+                            break
+                
+                if item_tradable:
+                    valid_items.append(assetid)
+                else:
+                    non_tradable_items.append(assetid)
             else:
                 invalid_items.append(assetid)
         
-        self.logger.info(f"Validação concluída - Válidos: {len(valid_items)}, Inválidos: {len(invalid_items)}")
+        self.logger.info(f"Validação concluída - Válidos: {len(valid_items)}, Inválidos: {len(invalid_items)}, Não-negociáveis: {len(non_tradable_items)}")
         
-        if invalid_items:
-            self.logger.warning(f"AssetIDs inválidos encontrados: {invalid_items}")
+        # Combinar itens inválidos e não-negociáveis para erro
+        all_invalid = invalid_items + non_tradable_items
+        
+        if all_invalid:
+            error_msg = []
+            if invalid_items:
+                error_msg.append(f"AssetIDs inválidos: {invalid_items}")
+            if non_tradable_items:
+                error_msg.append(f"Itens não-negociáveis: {non_tradable_items}")
+            
+            self.logger.warning(f"Itens problemáticos encontrados: {'; '.join(error_msg)}")
         
         return {
-            'valid': len(invalid_items) == 0,
+            'valid': len(all_invalid) == 0,
             'valid_items': valid_items,
-            'invalid_items': invalid_items,
-            'error': f'AssetIDs inválidos: {invalid_items}' if invalid_items else None
+            'invalid_items': all_invalid,
+            'non_tradable_items': non_tradable_items,
+            'error': '; '.join(error_msg) if all_invalid else None
         }

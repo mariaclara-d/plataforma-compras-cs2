@@ -7,14 +7,33 @@ from db_config import db
 from functools import wraps
 from datetime import datetime
 from sqlalchemy import desc
+from utils.auth_helpers import require_auth
+from middleware.rate_limiting import rate_limit
+from config.logging_config import logger
 
 admin_bp = Blueprint('admin', __name__)
 
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
+        # Primeiro verifica se está logado
+        if 'user_id' not in session and 'steam_id' not in session:
+            flash('Acesso negado: faça login primeiro', 'error')
+            return redirect(url_for('auth.steam_login'))
+        
+        # Verifica se é admin
         if 'admin_id' not in session:
+            flash('Acesso negado: privilégios de admin necessários', 'error')
+            logger.warning(f"Tentativa de acesso admin sem autorização - Session: {session}")
             return redirect(url_for('admin.login'))
+        
+        # Verifica se admin ainda está ativo
+        admin = Admin.query.get(session['admin_id'])
+        if not admin or not admin.is_active:
+            flash('Acesso negado: conta admin inativa', 'error')
+            session.pop('admin_id', None)
+            return redirect(url_for('admin.login'))
+        
         return f(*args, **kwargs)
     return decorated_function
 
@@ -26,10 +45,16 @@ def index():
     return redirect(url_for('admin.login'))
 
 @admin_bp.route('/login', methods=['GET', 'POST'])
+@rate_limit(max_requests=5, window_seconds=300)  # 5 tentativas em 5 minutos
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
+        
+        if not username or not password:
+            flash('Username e senha são obrigatórios', 'error')
+            logger.warning("Tentativa de login admin com campos vazios")
+            return render_template('admin/login.html')
         
         admin = Admin.query.filter_by(username=username, is_active=True).first()
         

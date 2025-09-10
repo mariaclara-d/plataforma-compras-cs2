@@ -28,6 +28,13 @@ def setup_security_logging():
         maxBytes=10*1024*1024,  # 10MB
         backupCount=5
     )
+    
+    # Handler para monitoramento de performance
+    performance_file_handler = logging.handlers.RotatingFileHandler(
+        os.path.join(log_dir, 'performance.log'),
+        maxBytes=5*1024*1024,  # 5MB
+        backupCount=3
+    )
     security_file_handler.setLevel(logging.INFO)
     security_file_handler.setFormatter(security_formatter)
     

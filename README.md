@@ -1,26 +1,30 @@
-# 🎮 Plataforma de Compras CS2
+# 🔐 CS2 Marketplace - Flask Application
 
-> Sistema de trading de itens Counter-Strike 2 com painel administrativo completo
+[![Security Status](https://img.shields.io/badge/Security-Hardened-green.svg)](docs/SECURITY_PRODUCTION_GUIDE.md)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-2.0+-red.svg)](https://flask.palletsprojects.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[![Deploy Status](https://img.shields.io/badge/deploy-ready-brightgreen)]()
-[![Python](https://img.shields.io/badge/python-3.8+-blue)]()
-[![Flask](https://img.shields.io/badge/flask-3.1+-red)]()
-[![PostgreSQL](https://img.shields.io/badge/postgresql-15-blue)]()
+Uma plataforma segura para marketplace de itens CS2 com integração Steam e sistema de trading avançado.
 
-## 🚀 Deploy Rápido
+## 🚀 **CARACTERÍSTICAS PRINCIPAIS**
 
-```bash
-# 1. Instalar Heroku CLI e fazer login
-heroku login
+### **Segurança Empresarial** 🔐
+- ✅ Autenticação Steam OpenID com tokens HMAC
+- ✅ Rate limiting avançado (sliding window)
+- ✅ Headers de segurança (CSP, HSTS, X-Frame-Options)
+- ✅ Validação e sanitização completa de inputs
+- ✅ Proteção contra XSS, SQL Injection e CSRF
+- ✅ Sistema de admin com auditoria completa
 
-# 2. Executar script de deploy automatizado
-.\deploy\deploy_heroku.ps1
+### **Sistema de Trading** 💱
+- 🔄 Integração completa com Steam Web API
+- 📦 Gerenciamento de inventário em tempo real
+- 💰 Sistema de saldos e transações
+- 🔒 Trade holds e proteção anti-fraude
+- � Dashboard administrativo avançado
 
-# 3. Seguir checklist detalhado
-# Ver: deploy/CHECKLIST_DEPLOY.md
-```
-
-## 📁 Estrutura do Projeto
+## 🔧 **INSTALAÇÃO RÁPIDA**
 
 ```
 📂 raiz/

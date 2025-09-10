@@ -3,6 +3,7 @@ from flask import Blueprint, session, redirect, url_for, render_template, jsonif
 from routes.forms import TradeLinkForm 
 from services.inventory_service import InventoryService
 from services.saldo_service import calcular_saldo_usuario
+from utils.auth_helpers import require_auth
 import requests
 import os
 import logging
@@ -16,17 +17,29 @@ STEAM_API_KEY = os.getenv("STEAM_API_KEY")
 inventory_service = InventoryService()
 
 def get_steam_user_info(steam_id):
+    """Busca informações do usuário Steam com tratamento de erro melhorado"""
     url = f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/"
     params = {"key": STEAM_API_KEY, "steamids": steam_id}
     try:
-        response = requests.get(url, params=params, timeout=5)
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()  # Levanta exceção para status HTTP de erro
+        
         if response.status_code == 200:
             data = response.json()
             players = data.get("response", {}).get("players", [])
             if players:
+                logging.info(f"[DASHBOARD] Informações do usuário Steam obtidas com sucesso: {steam_id}")
                 return players[0]
-    except requests.RequestException:
-        pass
+            else:
+                logging.warning(f"[DASHBOARD] Nenhum jogador encontrado para Steam ID: {steam_id}")
+                
+    except requests.exceptions.Timeout:
+        logging.error(f"[DASHBOARD] Timeout ao buscar informações do usuário Steam: {steam_id}")
+    except requests.exceptions.RequestException as e:
+        logging.error(f"[DASHBOARD] Erro na requisição Steam API: {str(e)}")
+    except Exception as e:
+        logging.error(f"[DASHBOARD] Erro inesperado ao buscar usuário Steam: {str(e)}")
+        
     return None
 
 def parse_price(price_str):
@@ -38,9 +51,8 @@ def parse_price(price_str):
         return 0
 
 @dashboard_blueprint.route("/dashboard", methods=["GET", "POST"])
+@require_auth
 def dashboard():
-    if "steam_id" not in session:
-        return redirect(url_for("auth.steam_login"))
 
     user_steam_id = session["steam_id"]
     form = TradeLinkForm()
@@ -80,10 +92,8 @@ def dashboard():
     )
     
 @dashboard_blueprint.route("/api/saldo")
+@require_auth
 def api_saldo():
-    if "steam_id" not in session:
-        return jsonify({"erro": "Usuário não autenticado"}), 401
-    
     user_steam_id = session["steam_id"]
     percentual_comissao = 0.65
     saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)

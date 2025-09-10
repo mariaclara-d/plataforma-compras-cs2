@@ -32,8 +32,18 @@ def create_app():
     # Inicializa o app
     app = Flask(__name__)
 
-    # Configurações essenciais
-    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY") or 'chave-padrao'
+    # Configurações essenciais de segurança
+    secret_key = os.getenv("SECRET_KEY")
+    if not secret_key:
+        if os.getenv("FLASK_ENV") == "production":
+            raise ValueError("SECRET_KEY é obrigatória em produção. Defina uma chave forte no ambiente.")
+        else:
+            # Apenas para desenvolvimento - gerar chave aleatória
+            import secrets
+            secret_key = secrets.token_urlsafe(32)
+            print("⚠️  AVISO: Usando SECRET_KEY temporária para desenvolvimento")
+    
+    app.config['SECRET_KEY'] = secret_key
     app.config['STEAM_API_KEY_NAO_OFICIAL'] = os.getenv("STEAM_API_KEY_NAO_OFICIAL")
     app.config['STEAM_API_KEY'] = os.getenv("STEAM_API_KEY")
     app.config['STEAM_RETURN_URL'] = os.getenv("STEAM_RETURN_URL")

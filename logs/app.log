@@ -4746,3 +4746,21 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.l
 2025-09-03 19:57:27 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
 2025-09-03 19:57:27 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
 2025-09-03 19:57:42 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Invalid asset ID
+2025-09-04 21:14:19 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-09-04 21:14:19 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-09-04 21:17:12 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-09-04 21:17:12 | INFO | app | enviar_oferta_com_aiosteampy:32 | ===> Entrou no endpoint /enviar-oferta
+2025-09-04 21:17:12 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '41668376730', 'price': None, 'market_hash_name': 'Music Kit | Valve, CS:GO'}, {'assetid': '22667046271', 'price': None, 'market_hash_name': 'USP-S'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImE4OWZlNzlmMDlmYTE0NTI2MTZlMTFmNTRjMjBlYmNlNjE2NDJkMjUi.aLor3w.d-4xoeo2k79XStrSt9W7I05lj9g'}
+2025-09-04 21:17:12 | INFO | app | enviar_oferta_com_aiosteampy:44 | Payload recebido: {'itens': [{'assetid': '41668376730', 'price': None, 'market_hash_name': 'Music Kit | Valve, CS:GO'}, {'assetid': '22667046271', 'price': None, 'market_hash_name': 'USP-S'}], 'tradelink': 'https://steamcommunity.com/tradeoffer/new/?partner=1102819994&token=IwADD8Gg', 'pagamento': {'metodo_pagamento': 'pix', 'chave_pix': '74999619371'}, 'csrf_token': 'ImE4OWZlNzlmMDlmYTE0NTI2MTZlMTFmNTRjMjBlYmNlNjE2NDJkMjUi.aLor3w.d-4xoeo2k79XStrSt9W7I05lj9g'}
+2025-09-04 21:17:12 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-09-04 21:17:12 | INFO | app | enviar_oferta_com_aiosteampy:97 | Iniciando validação de assetids...
+2025-09-04 21:17:12 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['41668376730', '22667046271']
+2025-09-04 21:17:12 | INFO | app | enviar_oferta_com_aiosteampy:109 | AssetIDs selecionados para validação: ['41668376730', '22667046271']
+2025-09-04 21:17:13 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 2 itens válidos
+2025-09-04 21:17:13 | INFO | app | enviar_oferta_com_aiosteampy:124 | Validação de assetids bem-sucedida - 2 itens válidos
+2025-09-04 21:17:13 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-09-04 21:17:13 | INFO | app | enviar_oferta_com_aiosteampy:163 | Informações de pagamento salvas no banco.
+2025-09-04 21:17:13 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-09-04 21:17:13 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
+2025-09-04 21:17:44 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
+2025-09-04 21:17:44 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 

@@ -2812,3 +2812,5 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.l
 2025-09-03 19:20:09 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
 2025-09-03 19:41:29 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Erro ao obter cookie: Cookie não retornado
 2025-09-03 19:57:42 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: Invalid asset ID
+2025-09-04 21:17:44 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
+2025-09-04 21:17:44 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
