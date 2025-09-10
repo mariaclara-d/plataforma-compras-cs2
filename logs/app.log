@@ -4764,3 +4764,12 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.l
 2025-09-04 21:17:13 | INFO | app | processar_oferta:171 | [MAIN] === USANDO STEAMWEBAPI OFICIAL ===
 2025-09-04 21:17:44 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
 2025-09-04 21:17:44 | ERROR | app | processar_oferta:191 | [STEAMWEBAPI] Erro: SteamWebAPI falhou: 
+2025-09-10 07:44:19 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-09-10 07:44:27 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-09-10 07:45:19 | INFO | app | complete_steam_login:67 | Tentativa de login Steam de IP: 127.0.0.1
+2025-09-10 07:45:20 | WARNING | app | complete_steam_login:87 | Steam ID inválido extraído: 76561199063085722
+2025-09-10 07:45:20 | ERROR | app | complete_steam_login:97 | Erro no login Steam: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2025-09-10 08:26:42 | INFO | app | home:7 | Acesso à home de 127.0.0.1
+2025-09-10 08:26:59 | INFO | app | complete_steam_login:67 | Tentativa de login Steam de IP: 127.0.0.1
+2025-09-10 08:27:00 | INFO | app | create_secure_session:102 | Sessão segura criada para Steam ID: 76561199063085722
+2025-09-10 08:27:00 | INFO | app | complete_steam_login:93 | Login Steam bem-sucedido para Steam ID: 76561199063085722

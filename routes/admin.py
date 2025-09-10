@@ -9,7 +9,10 @@ from datetime import datetime
 from sqlalchemy import desc
 from utils.auth_helpers import require_auth
 from middleware.rate_limiting import rate_limit
-from config.logging_config import logger
+import logging
+
+# Configurar logger
+logger = logging.getLogger(__name__)
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -45,7 +48,7 @@ def index():
     return redirect(url_for('admin.login'))
 
 @admin_bp.route('/login', methods=['GET', 'POST'])
-@rate_limit(max_requests=5, window_seconds=300)  # 5 tentativas em 5 minutos
+@rate_limit(limit=5, window=300)  # 5 tentativas em 5 minutos
 def login():
     if request.method == 'POST':
         username = request.form.get('username', '').strip()

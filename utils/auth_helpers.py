@@ -49,8 +49,13 @@ def validate_steam_id(steam_id):
     if not steam_id.isdigit() or len(steam_id) != 17:
         return False
     
-    # Steam ID deve começar com 765611979 (formato Steam64)
-    if not steam_id.startswith('765611979'):
+    # Steam ID deve começar com 76561 (formato Steam64)
+    if not steam_id.startswith('76561'):
+        return False
+    
+    # Verificar se é um Steam ID válido (range básico)
+    steam_id_int = int(steam_id)
+    if steam_id_int < 76561197960265728 or steam_id_int > 76561999999999999:
         return False
     
     return True

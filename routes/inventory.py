@@ -9,7 +9,7 @@ inventory_service = InventoryService()
 
 @inventory_blueprint.route("/inventory", methods=["GET", "POST"])
 @require_auth
-@rate_limit(max_requests=30, window_seconds=60)  # 30 requests per minute
+@rate_limit(limit=30, window=60)  # 30 requests per minute
 def inventory():
     user_steam_id = session["steam_id"]
 
@@ -17,39 +17,35 @@ def inventory():
         tradelink = request.form.get("tradelink")
         
         # Rate limiting adicional para operações POST
-        if not rate_limit(max_requests=10, window_seconds=300)():
-            return render_template(
-                "inventory.html",
-                inventory=None,
-                tradelink=None,
-                error="Muitas tentativas. Aguarde alguns minutos."
-            )
-        
-        result = inventory_service.fetch_inventory(tradelink, user_steam_id)
-        
-        if isinstance(result, tuple) and result[1] == 400:
-            return render_template(
-                "inventory.html",
-                inventory=None,
-                tradelink=None,
-                error=result[0]["error"]
-            )
+        @rate_limit(limit=10, window=300)  # 10 requests per 5 minutes
+        def process_post():
+            result = inventory_service.fetch_inventory(tradelink, user_steam_id)
+            
+            if isinstance(result, tuple) and result[1] == 400:
+                return render_template(
+                    "inventory.html",
+                    inventory=None,
+                    tradelink=None,
+                    error=result[0]["error"]
+                )
 
-        if "inventory" in result and result["inventory"]:
-            logging.info(f"[INVENTORY_PAGE] Inventário carregado com {len(result['inventory'])} itens")
+            if "inventory" in result and result["inventory"]:
+                logging.info(f"[INVENTORY_PAGE] Inventário carregado com {len(result['inventory'])} itens")
+                return render_template(
+                    "inventory.html",
+                    inventory=result["inventory"],
+                    tradelink=tradelink,
+                    error=None
+                )
+
             return render_template(
                 "inventory.html",
-                inventory=result["inventory"],
+                inventory=None,
                 tradelink=tradelink,
-                error=None
+                error="Erro ao buscar inventário ou inventário vazio."
             )
-
-        return render_template(
-            "inventory.html",
-            inventory=None,
-            tradelink=tradelink,
-            error="Erro ao buscar inventário ou inventário vazio."
-        )
+        
+        return process_post()
 
     return render_template(
         "inventory.html",

@@ -14,7 +14,7 @@ class InputValidator:
     """Classe para validação e sanitização de inputs"""
     
     # Regex patterns para validação
-    STEAM_ID_PATTERN = re.compile(r'^7656119[0-9]{10}$')
+    STEAM_ID_PATTERN = re.compile(r'^765611[0-9]{11}$')  # Steam ID64 válido
     USERNAME_PATTERN = re.compile(r'^[a-zA-Z0-9_-]{3,20}$')
     EMAIL_PATTERN = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
     TRADELINK_PATTERN = re.compile(r'^https://steamcommunity\.com/tradeoffer/new/\?partner=\d+&token=[a-zA-Z0-9_-]+$')
