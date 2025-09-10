@@ -1,4 +1,4 @@
-# 🔐 CS2 Marketplace - Flask Application
+#  CS2 Marketplace - Flask Application
 
 [![Security Status](https://img.shields.io/badge/Security-Hardened-green.svg)](docs/SECURITY_PRODUCTION_GUIDE.md)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
@@ -7,78 +7,78 @@
 
 Uma plataforma segura para marketplace de itens CS2 com integração Steam e sistema de trading avançado.
 
-## 🚀 **CARACTERÍSTICAS PRINCIPAIS**
+##  **CARACTERÍSTICAS PRINCIPAIS**
 
-### **Segurança Empresarial** 🔐
-- ✅ Autenticação Steam OpenID com tokens HMAC
-- ✅ Rate limiting avançado (sliding window)
-- ✅ Headers de segurança (CSP, HSTS, X-Frame-Options)
-- ✅ Validação e sanitização completa de inputs
-- ✅ Proteção contra XSS, SQL Injection e CSRF
-- ✅ Sistema de admin com auditoria completa
+### **Segurança Empresarial** 
+-  Autenticação Steam OpenID com tokens HMAC
+-  Rate limiting avançado (sliding window)
+-  Headers de segurança (CSP, HSTS, X-Frame-Options)
+-  Validação e sanitização completa de inputs
+-  Proteção contra XSS, SQL Injection e CSRF
+-  Sistema de admin com auditoria completa
 
-### **Sistema de Trading** 💱
-- 🔄 Integração completa com Steam Web API
-- 📦 Gerenciamento de inventário em tempo real
-- 💰 Sistema de saldos e transações
-- 🔒 Trade holds e proteção anti-fraude
-- � Dashboard administrativo avançado
+### **Sistema de Trading** 
+-  Integração completa com Steam Web API
+-  Gerenciamento de inventário em tempo real
+-  Sistema de saldos e transações
+-  Trade holds e proteção anti-fraude
+-  Dashboard administrativo avançado
 
-## 🔧 **INSTALAÇÃO RÁPIDA**
+##  **INSTALAÇÃO RÁPIDA**
 
 ```
-📂 raiz/
-├── 🏠 Arquivos Principais
-│   ├── app.py              # Aplicação Flask principal
-│   ├── main.py             # Ponto de entrada alternativo  
-│   ├── db_config.py        # Configuração inteligente do banco
-│   ├── requirements.txt    # Dependências Python
-│   ├── Procfile           # Configuração Heroku
-│   ├── docker-compose.yml # Orquestração Docker
-│   └── Dockerfile         # Container da aplicação
-│
-├── 📂 Código da Aplicação
-│   ├── models/            # Modelos SQLAlchemy
-│   ├── routes/            # Rotas da aplicação  
-│   ├── services/          # Serviços de negócio
-│   ├── middleware/        # Middleware de segurança
-│   ├── templates/         # Templates HTML/Jinja2
-│   └── static/           # Arquivos estáticos (CSS/JS/img)
-│
-├── 📂 Configuração
-│   ├── config/           # Configurações gerais
-│   │   ├── logging_config.py
-│   │   └── steam/        # Configurações Steam
-│   ├── .env.example      # Template de variáveis
-│   ├── .env.production   # Config produção
-│   └── migrations/       # Migrações Alembic
-│
-├── 📂 Scripts e Automação
-│   ├── scripts/          # Scripts utilitários
-│   │   ├── backup_*.py   # Backup do banco
-│   │   ├── create_admin*.py # Criação de admin
-│   │   ├── migrate_*.py  # Migração de dados
-│   │   └── start_*.bat   # Scripts inicialização
-│   ├── deploy/           # Deploy e CI/CD
-│   │   ├── deploy_heroku.ps1 # Script deploy automatizado
-│   │   └── CHECKLIST_DEPLOY.md # Guia passo-a-passo
-│   └── utils/            # Utilitários diversos
-│
-├── 📂 Documentação
-│   ├── docs/             # Documentação técnica
-│   │   ├── README.md     # Documentação completa
-│   │   ├── DOCKER_COMMANDS.md
-│   │   ├── POSTGRESQL_CONFIG.md
-│   │   └── SECURITY_AUDIT.md
-│   └── utils/ESTRUTURA_PROJETO.md # Este arquivo
-│
-└── 📂 Dados e Logs
-    ├── instance/         # Dados da instância
-    ├── logs/            # Logs da aplicação
-    └── backups/         # Backups do banco
+ raiz/
+  Arquivos Principais
+    app.py              # Aplicação Flask principal
+    main.py             # Ponto de entrada alternativo  
+    db_config.py        # Configuração inteligente do banco
+    requirements.txt    # Dependências Python
+    Procfile           # Configuração Heroku
+    docker-compose.yml # Orquestração Docker
+    Dockerfile         # Container da aplicação
+
+  Código da Aplicação
+    models/            # Modelos SQLAlchemy
+    routes/            # Rotas da aplicação  
+    services/          # Serviços de negócio
+    middleware/        # Middleware de segurança
+    templates/         # Templates HTML/Jinja2
+    static/           # Arquivos estáticos (CSS/JS/img)
+
+  Configuração
+    config/           # Configurações gerais
+       logging_config.py
+       steam/        # Configurações Steam
+    .env.example      # Template de variáveis
+    .env.production   # Config produção
+    migrations/       # Migrações Alembic
+
+  Scripts e Automação
+    scripts/          # Scripts utilitários
+       backup_*.py   # Backup do banco
+       create_admin*.py # Criação de admin
+       migrate_*.py  # Migração de dados
+       start_*.bat   # Scripts inicialização
+    deploy/           # Deploy e CI/CD
+       deploy_heroku.ps1 # Script deploy automatizado
+       CHECKLIST_DEPLOY.md # Guia passo-a-passo
+    utils/            # Utilitários diversos
+
+  Documentação
+    docs/             # Documentação técnica
+       README.md     # Documentação completa
+       DOCKER_COMMANDS.md
+       POSTGRESQL_CONFIG.md
+       SECURITY_AUDIT.md
+    utils/ESTRUTURA_PROJETO.md # Este arquivo
+
+  Dados e Logs
+     instance/         # Dados da instância
+     logs/            # Logs da aplicação
+     backups/         # Backups do banco
 ```
 
-## ⚡ Início Rápido
+##  Início Rápido
 
 ### Desenvolvimento Local
 ```bash
@@ -94,15 +94,15 @@ python app.py
 - **Admin:** http://localhost:5000/admin/login
   - User: `admin` / Password: `admin123`
 
-## 📚 Documentação
+##  Documentação
 
-- 📖 [**Documentação Completa**](docs/README.md)
-- 🚀 [**Guia de Deploy**](deploy/CHECKLIST_DEPLOY.md)  
-- 🐳 [**Comandos Docker**](docs/DOCKER_COMMANDS.md)
-- 🔒 [**Auditoria de Segurança**](docs/SECURITY_AUDIT.md)
-- 🗃️ [**Configuração PostgreSQL**](docs/POSTGRESQL_CONFIG.md)
+-  [**Documentação Completa**](docs/README.md)
+-  [**Guia de Deploy**](deploy/CHECKLIST_DEPLOY.md)  
+-  [**Comandos Docker**](docs/DOCKER_COMMANDS.md)
+-  [**Auditoria de Segurança**](docs/SECURITY_AUDIT.md)
+-  [**Configuração PostgreSQL**](docs/POSTGRESQL_CONFIG.md)
 
-## 🛠️ Scripts Úteis
+##  Scripts Úteis
 
 ```bash
 # Inicializar ambiente
@@ -118,15 +118,15 @@ python scripts\reset_db.py
 python scripts\create_admin.py
 ```
 
-## 🎯 Status do Projeto
+##  Status do Projeto
 
-- ✅ **Sistema Admin:** Funcionando
-- ✅ **Banco PostgreSQL:** Configurado
-- ✅ **Docker:** Operacional
-- ✅ **Segurança:** Auditada
-- 🚀 **Deploy:** Pronto para Heroku
+-  **Sistema Admin:** Funcionando
+-  **Banco PostgreSQL:** Configurado
+-  **Docker:** Operacional
+-  **Segurança:** Auditada
+-  **Deploy:** Pronto para Heroku
 
-## 🔗 Links Importantes
+##  Links Importantes
 
 - [Heroku Dashboard](https://dashboard.heroku.com)
 - [Steam API Documentation](https://developer.valvesoftware.com/wiki/Steam_Web_API)
@@ -134,6 +134,6 @@ python scripts\create_admin.py
 
 ---
 
-**📧 Contato:** [mariaclara-d](https://github.com/mariaclara-d)  
-**🏷️ Versão:** 1.0.0  
-**📅 Última atualização:** $(Get-Date -Format "dd/MM/yyyy")
+** Contato:** [mariaclara-d](https://github.com/mariaclara-d)  
+** Versão:** 1.0.0  
+** Última atualização:** $(Get-Date -Format "dd/MM/yyyy")

@@ -81,12 +81,12 @@ for tentativa_atual in range(1, max_tentativas + 1):
 showSteamServerError(errorData) {
     Swal.fire({
         icon: 'warning',
-        title: '⚠️ Steam Temporariamente Indisponível',
+        title: ' Steam Temporariamente Indisponível',
         html: `
             <p><strong>Os servidores da Steam estão com problemas.</strong></p>
             <p>Isso é temporário e não é culpa nossa!</p>
             <button onclick="steamErrorHandler.scheduleRetry()">
-                🔄 Tentar Novamente em 30s
+                 Tentar Novamente em 30s
             </button>
         `
     });
@@ -98,11 +98,11 @@ showSteamServerError(errorData) {
 showAuthError(errorData) {
     Swal.fire({
         icon: 'error',
-        title: '🔒 Problema de Autenticação',
+        title: ' Problema de Autenticação',
         html: `
             <p>Nosso bot Steam está com problemas de autenticação.</p>
             <button onclick="steamErrorHandler.contactSupport()">
-                💬 Contatar Suporte
+                 Contatar Suporte
             </button>
         `
     });
@@ -220,7 +220,7 @@ delay = tentativa_atual * 5  # Ajustar delay entre tentativas
 ### Personalizar Mensagens:
 ```javascript
 // Em steam-error-handler.js
-title: '⚠️ Steam Temporariamente Indisponível'  // Personalizar títulos
+title: ' Steam Temporariamente Indisponível'  // Personalizar títulos
 text: 'Os servidores da Steam estão com problemas.'  // Personalizar textos
 ```
 
@@ -254,4 +254,4 @@ text: 'Os servidores da Steam estão com problemas.'  // Personalizar textos
 **Versão**: 1.0  
 **Data**: 24 de Janeiro de 2025  
 **Autor**: Sistema TitoSkins  
-**Status**: Implementado e Testado ✅
+**Status**: Implementado e Testado 

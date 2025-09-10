@@ -1,8 +1,8 @@
-# 🐳 **DOCKER COMMANDS - Guia Completo**
+#  **DOCKER COMMANDS - Guia Completo**
 
-## 📋 **Comandos Essenciais do Projeto**
+##  **Comandos Essenciais do Projeto**
 
-### 🚀 **Inicialização do Sistema**
+###  **Inicialização do Sistema**
 
 ```bash
 # Iniciar todos os containers em modo detached
@@ -18,7 +18,7 @@ docker-compose up web
 docker-compose up db
 ```
 
-### 📊 **Monitoramento e Status**
+###  **Monitoramento e Status**
 
 ```bash
 # Verificar status dos containers
@@ -43,7 +43,7 @@ docker-compose logs --tail=50
 docker-compose logs -t
 ```
 
-### 🔄 **Gerenciamento de Containers**
+###  **Gerenciamento de Containers**
 
 ```bash
 # Parar todos os containers
@@ -69,7 +69,7 @@ docker-compose stop web
 docker-compose start web
 ```
 
-### 🔧 **Build e Rebuild**
+###  **Build e Rebuild**
 
 ```bash
 # Build das imagens
@@ -90,7 +90,7 @@ docker-compose build --no-cache
 docker-compose up -d
 ```
 
-### 💾 **Gerenciamento de Dados**
+###  **Gerenciamento de Dados**
 
 ```bash
 # Backup do banco PostgreSQL
@@ -109,7 +109,7 @@ docker-compose exec web bash
 docker-compose exec web python scripts/create_admin.py
 ```
 
-### 📁 **Volumes e Limpeza**
+###  **Volumes e Limpeza**
 
 ```bash
 # Listar volumes
@@ -125,7 +125,7 @@ docker volume rm documentacaoflask---copia_postgres_data
 docker volume inspect documentacaoflask---copia_postgres_data
 ```
 
-### 🔍 **Debug e Troubleshooting**
+###  **Debug e Troubleshooting**
 
 ```bash
 # Verificar uso de recursos
@@ -147,7 +147,7 @@ docker-compose config
 docker-compose config --quiet
 ```
 
-### 🧹 **Limpeza do Sistema**
+###  **Limpeza do Sistema**
 
 ```bash
 # Remover containers parados
@@ -166,7 +166,7 @@ docker system prune -a
 docker system prune -a --volumes
 ```
 
-### 🔐 **Comandos Administrativos**
+###  **Comandos Administrativos**
 
 ```bash
 # Criar administrador
@@ -185,7 +185,7 @@ docker-compose exec web python scripts/backup_postgresql.py
 docker-compose exec web python scripts/popular_teste.py
 ```
 
-### 🌐 **Comandos de Rede**
+###  **Comandos de Rede**
 
 ```bash
 # Listar redes Docker
@@ -199,7 +199,7 @@ docker-compose exec web hostname -I
 docker-compose exec db hostname -I
 ```
 
-### 📊 **Monitoramento Avançado**
+###  **Monitoramento Avançado**
 
 ```bash
 # CPU e memória em tempo real
@@ -215,55 +215,55 @@ docker-compose logs --since="2025-07-25T10:00:00"
 docker-compose logs > app_logs_$(date +%Y%m%d_%H%M%S).log
 ```
 
-## 🛠️ **Scripts Utilitários**
+##  **Scripts Utilitários**
 
-### 📝 **Script de Deploy Rápido** (`deploy/quick_deploy.sh`)
+###  **Script de Deploy Rápido** (`deploy/quick_deploy.sh`)
 
 ```bash
 #!/bin/bash
-echo "🚀 Deploy Rápido - TitoSkins v2.0"
+echo " Deploy Rápido - TitoSkins v2.0"
 docker-compose down
 docker-compose pull
 docker-compose build --no-cache
 docker-compose up -d
-echo "✅ Deploy concluído!"
+echo " Deploy concluído!"
 docker-compose ps
 ```
 
-### 🔄 **Script de Restart Seguro** (`deploy/safe_restart.sh`)
+###  **Script de Restart Seguro** (`deploy/safe_restart.sh`)
 
 ```bash
 #!/bin/bash
-echo "🔄 Restart Seguro - TitoSkins v2.0"
+echo " Restart Seguro - TitoSkins v2.0"
 docker-compose exec db pg_dump -U postgres csgo_skins > backup_before_restart_$(date +%Y%m%d_%H%M%S).sql
 docker-compose restart web
 docker-compose logs --tail=20 web
-echo "✅ Restart concluído!"
+echo " Restart concluído!"
 ```
 
-### 🆘 **Script de Recuperação Steam** (`deploy/steam_recovery.sh`)
+###  **Script de Recuperação Steam** (`deploy/steam_recovery.sh`)
 
 ```bash
 #!/bin/bash
-echo "🆘 Recuperação de Autenticação Steam"
-echo "🔍 Verificando status do sistema..."
+echo " Recuperação de Autenticação Steam"
+echo " Verificando status do sistema..."
 
 # Verificar logs de autenticação Steam
 docker-compose logs web | grep -E "(LOGIN|STEAM|access_token|KeyError)" | tail -20
 
-echo "🔄 Testando conectividade Steam..."
-docker-compose exec web curl -s "https://steamcommunity.com" > /dev/null && echo "✅ Steam acessível" || echo "❌ Steam inacessível"
+echo " Testando conectividade Steam..."
+docker-compose exec web curl -s "https://steamcommunity.com" > /dev/null && echo " Steam acessível" || echo " Steam inacessível"
 
-echo "🔧 Reiniciando com modo debug..."
+echo " Reiniciando com modo debug..."
 docker-compose restart web
 docker-compose logs -f web | grep -E "(LOGIN|STEAM|ERRO|ERROR)"
 ```
 
-### 📊 **Script de Diagnóstico Completo** (`deploy/full_diagnostic.sh`)
+###  **Script de Diagnóstico Completo** (`deploy/full_diagnostic.sh`)
 
 ```bash
 #!/bin/bash
-echo "🔍 Diagnóstico Completo - TitoSkins v2.0"
+echo " Diagnóstico Completo - TitoSkins v2.0"
 
 echo "=== CONTAINERS ==="
 docker-compose ps
@@ -281,10 +281,10 @@ docker stats --no-stream
 echo "=== VOLUMES ==="
 docker volume ls | grep documentacao
 
-echo "✅ Diagnóstico concluído"
+echo " Diagnóstico concluído"
 ```
 
-### 📋 **Comandos de Diagnóstico**
+###  **Comandos de Diagnóstico**
 
 ```bash
 # Status completo do sistema
@@ -302,18 +302,18 @@ docker-compose port web 5000
 docker-compose port db 5432
 ```
 
-## ⚠️ **Comandos de Emergência**
+##  **Comandos de Emergência**
 
-### 🚨 **Reset Completo do Sistema**
+###  **Reset Completo do Sistema**
 
 ```bash
-# ⚠️ CUIDADO: Remove TODOS os dados!
+#  CUIDADO: Remove TODOS os dados!
 docker-compose down -v
 docker system prune -a --volumes
 docker-compose up --build -d
 ```
 
-### 🔥 **Restart Forçado**
+###  **Restart Forçado**
 
 ```bash
 # Para containers travados
@@ -322,7 +322,7 @@ docker-compose rm -f
 docker-compose up -d
 ```
 
-### 🆘 **Recuperação de Desastre**
+###  **Recuperação de Desastre**
 
 ```bash
 # 1. Parar tudo
@@ -338,7 +338,7 @@ docker run --rm -v documentacaoflask---copia_postgres_data:/data -v $(pwd):/back
 docker-compose up --build -d
 ```
 
-### 🔐 **Troubleshooting Steam Authentication (v2.0)**
+###  **Troubleshooting Steam Authentication (v2.0)**
 
 ```bash
 # Verificar erros de autenticação Steam
@@ -348,7 +348,7 @@ docker-compose logs web | grep -E "(access_token|KeyError|STEAM.*ERRO)"
 docker-compose exec web python -c "
 import asyncio
 from services.aiosteampy_service import enviar_oferta_aiosteampy
-print('🧪 Testando sistema de fallback...')
+print(' Testando sistema de fallback...')
 "
 
 # Forçar restart com limpeza de sessão
@@ -357,24 +357,24 @@ docker-compose up --build -d
 docker-compose logs -f web | grep -E "(LOGIN|STEAM|ERRO)"
 
 # Verificar conectividade Steam
-docker-compose exec web curl -s "https://steamcommunity.com" && echo "✅ Steam OK" || echo "❌ Steam inacessível"
+docker-compose exec web curl -s "https://steamcommunity.com" && echo " Steam OK" || echo " Steam inacessível"
 ```
 
-### 🛡️ **Modo Fallback Manual**
+###  **Modo Fallback Manual**
 
 ```bash
 # Ativar modo de simulação para testes
 docker-compose exec web python -c "
-print('🆘 Ativando modo de simulação emergencial...')
-print('📝 Use AssetIDs de teste: 31337001, 31337002, etc.')
-print('⚡ Ofertas serão simuladas mas não enviadas realmente')
+print(' Ativando modo de simulação emergencial...')
+print(' Use AssetIDs de teste: 31337001, 31337002, etc.')
+print(' Ofertas serão simuladas mas não enviadas realmente')
 "
 
 # Verificar se modo emergência foi ativado
 docker-compose logs web | grep -E "(EMERGÊNCIA|FALLBACK|SIMULAÇÃO)"
 ```
 
-## 📈 **Monitoramento de Performance**
+##  **Monitoramento de Performance**
 
 ```bash
 # Ver uso de CPU/RAM dos containers
@@ -387,9 +387,9 @@ docker-compose logs web | grep -E "(INFO|ERROR|WARNING)" | tail -50
 docker-compose exec db psql -U postgres -d csgo_skins -c "SELECT count(*) FROM pg_stat_activity;"
 ```
 
-## 🎯 **Comandos por Ambiente**
+##  **Comandos por Ambiente**
 
-### 🔧 **Desenvolvimento**
+###  **Desenvolvimento**
 ```bash
 # Modo desenvolvimento com hot-reload
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
@@ -398,7 +398,7 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 docker-compose run --rm web bash
 ```
 
-### 🚀 **Produção**
+###  **Produção**
 ```bash
 # Deploy de produção
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
@@ -407,34 +407,34 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 docker-compose exec web curl -f http://localhost:5000/health
 ```
 
-## 📚 **Referências Rápidas**
+##  **Referências Rápidas**
 
-### 🔗 **URLs Importantes**
+###  **URLs Importantes**
 - **Aplicação Web:** http://localhost:5000
 - **Admin Panel:** http://localhost:5000/admin/login
 - **PostgreSQL:** localhost:5432
 
-### 📋 **Credenciais Padrão**
+###  **Credenciais Padrão**
 - **Admin User:** admin
 - **Admin Password:** admin123
 - **DB User:** postgres
 - **DB Password:** postgres
 - **DB Name:** csgo_skins
 
-### 🏷️ **Tags de Containers**
+###  **Tags de Containers**
 - **Web Container:** `documentacaoflask---copia-web`
 - **DB Container:** `documentacaoflask---copia-db`
 - **Network:** `documentacaoflask---copia_default`
 
 ---
 
-## 💡 **Dicas Importantes**
+##  **Dicas Importantes**
 
-1. **🔒 Sempre faça backup** antes de comandos destrutivos
-2. **📊 Monitore os logs** regularmente com `docker-compose logs -f`
-3. **🧹 Limpe recursos** periodicamente com `docker system prune`
-4. **⚡ Use cache** do Docker para builds mais rápidos
-5. **🔍 Verifique status** com `docker-compose ps` frequentemente
+1. ** Sempre faça backup** antes de comandos destrutivos
+2. ** Monitore os logs** regularmente com `docker-compose logs -f`
+3. ** Limpe recursos** periodicamente com `docker system prune`
+4. ** Use cache** do Docker para builds mais rápidos
+5. ** Verifique status** com `docker-compose ps` frequentemente
 
 **Versão:** 2.0  
 **Última Atualização:** 26 de Julho de 2025  
@@ -442,22 +442,22 @@ docker-compose exec web curl -f http://localhost:5000/health
 
 ---
 
-## 🆕 **CHANGELOG v2.0 (26/07/2025)**
+##  **CHANGELOG v2.0 (26/07/2025)**
 
-### ✅ **Correções Implementadas**
-- **🔐 Autenticação Steam Robusta**: Sistema de retry com múltiplas tentativas de login
-- **🛡️ Modo Fallback de Emergência**: Simulação de ofertas quando login Steam falha
-- **⚡ Performance Otimizada**: Timeouts progressivos e configurações de rede aprimoradas
-- **🔄 Sistema de Retry Inteligente**: 3 tentativas com configurações escaláveis
-- **📊 Monitoramento Avançado**: Logs detalhados para diagnóstico de problemas
+###  **Correções Implementadas**
+- ** Autenticação Steam Robusta**: Sistema de retry com múltiplas tentativas de login
+- ** Modo Fallback de Emergência**: Simulação de ofertas quando login Steam falha
+- ** Performance Otimizada**: Timeouts progressivos e configurações de rede aprimoradas
+- ** Sistema de Retry Inteligente**: 3 tentativas com configurações escaláveis
+- ** Monitoramento Avançado**: Logs detalhados para diagnóstico de problemas
 
-### 🚨 **Problemas Resolvidos**
-- ❌ `KeyError: access_token` - Corrigido com sistema de retry robusto
-- ❌ Falhas de autenticação Steam - Implementado fallback de emergência
-- ❌ Timeouts de conexão - Configurações progressivas de timeout
-- ❌ Conectividade de banco - Restart automático e verificação de saúde
+###  **Problemas Resolvidos**
+-  `KeyError: access_token` - Corrigido com sistema de retry robusto
+-  Falhas de autenticação Steam - Implementado fallback de emergência
+-  Timeouts de conexão - Configurações progressivas de timeout
+-  Conectividade de banco - Restart automático e verificação de saúde
 
-### 🔧 **Melhorias Técnicas**
+###  **Melhorias Técnicas**
 - **Autenticação Steam**: 3 níveis de configuração (30s → 60s → 120s timeout)
 - **Headers HTTP**: User-Agent atualizado e headers robustos
 - **Fallback Inteligente**: Validação via HTTP direto quando aiosteampy falha

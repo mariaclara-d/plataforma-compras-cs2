@@ -369,7 +369,7 @@ class InventoryService:
                 response = requests.get(url, headers=headers, timeout=30)
                 
                 if response.status_code == 200:
-                    self.logger.info("✅ Inventário Steam confirmado como acessível")
+                    self.logger.info(" Inventário Steam confirmado como acessível")
                     data = response.json()
                     descriptions = data.get('descriptions', [])
                     
@@ -401,22 +401,22 @@ class InventoryService:
                             real_item = InventoryItem(item_data)
                             inventory_items.append(real_item)
                             
-                    self.logger.info(f"✅ Criados {len(inventory_items)} itens reais do inventário")
+                    self.logger.info(f" Criados {len(inventory_items)} itens reais do inventário")
                 
                 elif response.status_code == 400:
-                    self.logger.error("❌ ERRO 400: Inventário não existe ou está privado")
+                    self.logger.error(" ERRO 400: Inventário não existe ou está privado")
                     return []  # Retornar vazio - inventário inacessível
                 
                 elif response.status_code == 403:
-                    self.logger.error("❌ ERRO 403: Inventário privado")
+                    self.logger.error(" ERRO 403: Inventário privado")
                     return []  # Retornar vazio - inventário privado
                 
                 else:
-                    self.logger.error(f"❌ ERRO {response.status_code}: Não foi possível acessar inventário")
+                    self.logger.error(f" ERRO {response.status_code}: Não foi possível acessar inventário")
                     return []  # Retornar vazio - erro de acesso
                             
             except Exception as e:
-                self.logger.error(f"❌ Erro ao verificar inventário Steam: {e}")
+                self.logger.error(f" Erro ao verificar inventário Steam: {e}")
                 return []  # Retornar vazio em caso de erro
         
         # 4. Criar conjunto de assetids válidos da Steam API
@@ -499,7 +499,7 @@ class InventoryService:
                 response = requests.get(url, headers=headers, timeout=30)
                 
                 if response.status_code == 400:
-                    self.logger.error("❌ ERRO 400: Inventário não existe ou está privado")
+                    self.logger.error(" ERRO 400: Inventário não existe ou está privado")
                     return {
                         'valid': False,
                         'error': 'Inventário não existe ou está privado. Verifique se o inventário CS2 está público.',
@@ -507,7 +507,7 @@ class InventoryService:
                         'invalid_items': selected_assetids
                     }
                 elif response.status_code == 403:
-                    self.logger.error("❌ ERRO 403: Inventário privado")
+                    self.logger.error(" ERRO 403: Inventário privado")
                     return {
                         'valid': False,
                         'error': 'Inventário privado. Por favor, torne seu inventário CS2 público para vendas.',
@@ -515,7 +515,7 @@ class InventoryService:
                         'invalid_items': selected_assetids
                     }
                 elif response.status_code != 200:
-                    self.logger.error(f"❌ ERRO {response.status_code}: Não foi possível acessar inventário")
+                    self.logger.error(f" ERRO {response.status_code}: Não foi possível acessar inventário")
                     return {
                         'valid': False,
                         'error': f'Erro {response.status_code} ao acessar inventário. Tente novamente mais tarde.',
@@ -538,10 +538,10 @@ class InventoryService:
                 
                 # Criar conjunto de assetids válidos
                 valid_assetids = {asset.get('assetid') for asset in steam_assets if asset.get('assetid')}
-                self.logger.info(f"✅ Inventário confirmado: {len(valid_assetids)} assetids válidos")
+                self.logger.info(f" Inventário confirmado: {len(valid_assetids)} assetids válidos")
                 
             except Exception as e:
-                self.logger.error(f"❌ Erro ao verificar inventário: {e}")
+                self.logger.error(f" Erro ao verificar inventário: {e}")
                 return {
                     'valid': False,
                     'error': f'Erro de conexão ao verificar inventário: {str(e)}',

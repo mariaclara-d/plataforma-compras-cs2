@@ -222,14 +222,14 @@ function processarVenda(selectedItems, tradelink) {
                     title: 'Oferta Enviada!',
                     html: `
                         <div class="text-start">
-                            <p><strong>✅ ${data.message}</strong></p>
+                            <p><strong> ${data.message}</strong></p>
                             <p><strong>ID da Oferta:</strong> ${data.offer_id}</p>
                             <p><strong>Itens:</strong> ${selectedItems.length} selecionados</p>
                             <p><strong>Status:</strong> Aguardando aceitação no Steam</p>
                             <p><strong>Pagamento:</strong> ${dadosPagamento.metodo_pagamento.toUpperCase()}</p>
                             ${data.trade_protection ? `
                                 <hr>
-                                <p><strong>🛡️ Proteção Ativa:</strong> ${data.trade_protection.periodo_dias} dias</p>
+                                <p><strong> Proteção Ativa:</strong> ${data.trade_protection.periodo_dias} dias</p>
                                 <p class="text-muted small">${data.trade_protection.message}</p>
                             ` : ''}
                         </div>
@@ -257,7 +257,7 @@ function processarVenda(selectedItems, tradelink) {
                 // Personalizar mensagem baseada no tipo de erro
                 if (data.tipo === 'steam_server_error') {
                     errorIcon = 'warning';
-                    errorTitle = '🕐 Steam Temporariamente Indisponível';
+                    errorTitle = ' Steam Temporariamente Indisponível';
                     showRetryButton = true;
                     retryTime = data.retry_sugestao || 'alguns minutos';
                 } else if (data.tipo === 'rate_limit_error') {
@@ -267,16 +267,16 @@ function processarVenda(selectedItems, tradelink) {
                     retryTime = data.retry_sugestao || '30 minutos';
                 } else if (data.tipo === 'timeout_error') {
                     errorIcon = 'warning';
-                    errorTitle = '⏱️ Timeout da Steam';
+                    errorTitle = '⏱ Timeout da Steam';
                     showRetryButton = true;
                     retryTime = data.retry_sugestao || '5 minutos';
                 } else if (data.tipo === 'network_error') {
                     errorIcon = 'warning';
-                    errorTitle = '🌐 Problema de Conectividade';
+                    errorTitle = ' Problema de Conectividade';
                     showRetryButton = true;
                     retryTime = data.retry_sugestao || '2-5 minutos';
                 } else if (data.tipo === 'steam_auth_error') {
-                    errorTitle = '🔒 Erro de Autenticação Steam';
+                    errorTitle = ' Erro de Autenticação Steam';
                     errorIcon = 'warning';
                 }
                 

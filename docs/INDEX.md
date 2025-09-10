@@ -1,30 +1,30 @@
-# 📚 Documentação - Plataforma CS2
+#  Documentação - Plataforma CS2
 
 Esta pasta contém toda a documentação técnica do projeto.
 
-## 📄 Documentos Principais
+##  Documentos Principais
 
-### 📖 Documentação Geral
+###  Documentação Geral
 - **`README.md`** - Documentação completa do sistema
 - **`ETAPA3_BANCO_CONCLUIDA.md`** - Histórico do desenvolvimento
 
-### 🔧 Configuração Técnica
+###  Configuração Técnica
 - **`DOCKER_COMMANDS.md`** - Comandos Docker úteis
 - **`POSTGRESQL_CONFIG.md`** - Configuração do PostgreSQL
 - **`SECURITY_AUDIT.md`** - Auditoria de segurança completa
 
-## 🗂️ Estrutura da Documentação
+##  Estrutura da Documentação
 
 ```
 docs/
-├── README.md                    # 📖 Guia principal
-├── DOCKER_COMMANDS.md           # 🐳 Comandos Docker
-├── POSTGRESQL_CONFIG.md         # 🗃️ Config banco
-├── SECURITY_AUDIT.md           # 🔒 Segurança
-└── ETAPA3_BANCO_CONCLUIDA.md   # 📜 Histórico
+ README.md                    #  Guia principal
+ DOCKER_COMMANDS.md           #  Comandos Docker
+ POSTGRESQL_CONFIG.md         #  Config banco
+ SECURITY_AUDIT.md           #  Segurança
+ ETAPA3_BANCO_CONCLUIDA.md   #  Histórico
 ```
 
-## 🔍 Links Rápidos
+##  Links Rápidos
 
 ### Para Desenvolvedores:
 - [Configuração do Ambiente](POSTGRESQL_CONFIG.md)
@@ -39,10 +39,10 @@ docs/
 - [Comandos Docker](DOCKER_COMMANDS.md)
 - [Configuração PostgreSQL](POSTGRESQL_CONFIG.md)
 
-## 📋 Status da Documentação
+##  Status da Documentação
 
-- ✅ **Configuração:** Completa
-- ✅ **Segurança:** Auditada  
-- ✅ **Deploy:** Documentado
-- ✅ **Docker:** Comandos prontos
-- ✅ **Banco:** Configurado
+-  **Configuração:** Completa
+-  **Segurança:** Auditada  
+-  **Deploy:** Documentado
+-  **Docker:** Comandos prontos
+-  **Banco:** Configurado
