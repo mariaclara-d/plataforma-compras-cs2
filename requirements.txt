@@ -22,7 +22,7 @@ steampy==1.2.0
 twilio==9.8.0
 
 # Segurança e criptografia
-cryptography==41.0.4
+cryptography==44.0.1
 
 # Validação de formulários e emails
 email-validator==2.1.0
