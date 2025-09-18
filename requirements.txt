@@ -12,8 +12,8 @@ psycopg2-binary==2.9.9
 python-dotenv==1.0.0
 
 # HTTP e APIs
-requests==2.32.3
-aiohttp==3.9.5
+requests>=2.32.4
+aiohttp>=3.12.14
 
 # Steam API
 steampy==1.2.0
@@ -29,7 +29,7 @@ email-validator==2.1.0
 WTForms==3.0.1
 
 # Servidor de produção
-gunicorn==21.2.0
+gunicorn==23.0.0
 
 # Utilitários adicionais
 beautifulsoup4==4.12.3
