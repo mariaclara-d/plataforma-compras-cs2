@@ -1,9 +1,9 @@
-# 🔍 SISTEMA DE TRATAMENTO DE ERROS AIOSTEAMPY
+#  SISTEMA DE TRATAMENTO DE ERROS AIOSTEAMPY
 
 ## Visão Geral
 Este documento explica como o sistema de tratamento de erros específicos do **aiosteampy** foi implementado, focando na captura e análise de erros `EResultError` da Steam API.
 
-## 🎯 Problema Original
+##  Problema Original
 
 Quando o aiosteampy falha ao enviar uma trade offer, ele pode lançar exceções específicas do tipo `EResultError` que contêm informações valiosas sobre o erro da Steam:
 
@@ -11,15 +11,15 @@ Quando o aiosteampy falha ao enviar uma trade offer, ele pode lançar exceções
 try:
     offer_id = await client.make_trade_offer(...)
 except Exception as e:
-    # ❌ ANTES: Apenas str(e)
+    #  ANTES: Apenas str(e)
     print(f"Erro: {str(e)}")
     
-    # ✅ DEPOIS: Análise detalhada
+    #  DEPOIS: Análise detalhada
     print(f"e.result: {e.result}")      # Código específico da Steam
     print(f"e.data: {e.data}")          # Dados adicionais
 ```
 
-## 🔧 Implementação
+##  Implementação
 
 ### 1. Wrapper de Análise de Erro
 
@@ -30,8 +30,8 @@ try:
     offer_id = await client.make_trade_offer(...)
     
 except Exception as make_offer_error:
-    # 🔍 ANÁLISE DETALHADA DO ERRO
-    print(f"❌ ERRO DETALHADO em make_trade_offer:")
+    #  ANÁLISE DETALHADA DO ERRO
+    print(f" ERRO DETALHADO em make_trade_offer:")
     print(f"   • Tipo: {type(make_offer_error).__name__}")
     print(f"   • Mensagem: {str(make_offer_error)}")
     
@@ -83,13 +83,13 @@ def map_steam_error_code(error_obj) -> dict:
 ### 3. Tratamento Específico por Tipo de Erro
 
 ```python
-# 🔍 TRATAMENTO ESPECÍFICO PARA EResultError DO AIOSTEAMPY
+#  TRATAMENTO ESPECÍFICO PARA EResultError DO AIOSTEAMPY
 if hasattr(trade_error, 'result') or hasattr(trade_error, 'code'):
     try:
         # Usar função de mapeamento para códigos específicos
         error_info = map_steam_error_code(trade_error)
         
-        print(f"🔍 STEAM ERROR ANALYSIS:")
+        print(f" STEAM ERROR ANALYSIS:")
         print(f"   • Código: {error_info['code']}")
         print(f"   • Mensagem: {error_info['message']}")
         print(f"   • Retry sugerido: {error_info['retry_suggested']}")
@@ -102,19 +102,19 @@ if hasattr(trade_error, 'result') or hasattr(trade_error, 'code'):
         raise RuntimeError(detailed_message)
 ```
 
-## 📋 Códigos de Erro Mapeados
+##  Códigos de Erro Mapeados
 
 | Código Steam | Significado | Retry Sugerido | Ação Recomendada |
 |--------------|-------------|----------------|------------------|
-| `EResult.Fail` | Falha genérica | ✅ Sim | Tentar novamente após delay |
-| `EResult.Invalid` | Parâmetros inválidos | ❌ Não | Verificar dados enviados |
-| `EResult.Timeout` | Timeout da Steam | ✅ Sim | Tentar novamente |
-| `EResult.Busy` | Steam sobrecarregada | ✅ Sim | Aguardar e tentar novamente |
-| `EResult.RateLimitExceeded` | Rate limit atingido | ❌ Não | Aguardar 30+ minutos |
-| `EResult.AccessDenied` | Acesso negado | ❌ Não | Verificar permissões |
-| `EResult.NotLoggedOn` | Não logado | ✅ Sim | Refazer login |
+| `EResult.Fail` | Falha genérica |  Sim | Tentar novamente após delay |
+| `EResult.Invalid` | Parâmetros inválidos |  Não | Verificar dados enviados |
+| `EResult.Timeout` | Timeout da Steam |  Sim | Tentar novamente |
+| `EResult.Busy` | Steam sobrecarregada |  Sim | Aguardar e tentar novamente |
+| `EResult.RateLimitExceeded` | Rate limit atingido |  Não | Aguardar 30+ minutos |
+| `EResult.AccessDenied` | Acesso negado |  Não | Verificar permissões |
+| `EResult.NotLoggedOn` | Não logado |  Sim | Refazer login |
 
-## 🚀 Benefícios
+##  Benefícios
 
 ### 1. **Debugging Melhorado**
 - Logs detalhados com códigos específicos da Steam
@@ -131,28 +131,28 @@ if hasattr(trade_error, 'result') or hasattr(trade_error, 'code'):
 - Informações sobre próximos passos
 - Distinção entre problemas da Steam vs. problemas da aplicação
 
-## 📊 Exemplo de Log Melhorado
+##  Exemplo de Log Melhorado
 
 **ANTES:**
 ```
-❌ Erro ao criar oferta: Request failed with status 500
+ Erro ao criar oferta: Request failed with status 500
 ```
 
 **DEPOIS:**
 ```
-❌ ERRO DETALHADO em make_trade_offer:
+ ERRO DETALHADO em make_trade_offer:
    • Tipo: EResultError
    • Mensagem: Request failed with status 500
    • e.result: EResult.Busy
    • e.data: {"message": "Steam servers are currently overloaded"}
    
-🔍 STEAM ERROR ANALYSIS:
+ STEAM ERROR ANALYSIS:
    • Código: EResult.Busy
    • Mensagem: Steam está temporariamente sobrecarregada
    • Retry sugerido: True
 ```
 
-## 🔄 Fluxo de Tratamento
+##  Fluxo de Tratamento
 
 ```mermaid
 graph TD
@@ -169,7 +169,7 @@ graph TD
     B -->|Não| K[Sucesso - retornar offer_id]
 ```
 
-## 📚 Referências
+##  Referências
 
 - [Documentação aiosteampy](https://github.com/someuser/aiosteampy)
 - [Steam Web API Documentation](https://developer.valvesoftware.com/wiki/Steam_Web_API)

@@ -38,13 +38,13 @@ def migrate_data():
         sqlite_cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
         tables = [row[0] for row in sqlite_cursor.fetchall()]
         
-        print(f"🔄 Migrando {len(tables)} tabelas...")
+        print(f" Migrando {len(tables)} tabelas...")
         
         for table in tables:
             if table == 'sqlite_sequence':
                 continue
                 
-            print(f"📊 Migrando tabela: {table}")
+            print(f" Migrando tabela: {table}")
             
             # Ler dados do SQLite
             sqlite_cursor.execute(f"SELECT * FROM {table}")
@@ -66,17 +66,17 @@ def migrate_data():
                     try:
                         pg_cursor.execute(insert_query, row)
                     except Exception as e:
-                        print(f"⚠️ Erro na linha: {e}")
+                        print(f" Erro na linha: {e}")
                 
                 pg_conn.commit()
-                print(f"✅ {len(rows)} registros migrados de {table}")
+                print(f" {len(rows)} registros migrados de {table}")
             else:
-                print(f"⚠️ Tabela {table} vazia")
+                print(f" Tabela {table} vazia")
         
-        print("🎉 Migração concluída!")
+        print(" Migração concluída!")
         
     except Exception as e:
-        print(f"❌ Erro na migração: {e}")
+        print(f" Erro na migração: {e}")
     finally:
         if 'sqlite_conn' in locals():
             sqlite_conn.close()

@@ -11,7 +11,7 @@ from pathlib import Path
 
 def create_database_backup():
     """Cria backup completo do banco de dados"""
-    print("🗄️ INICIANDO BACKUP DO BANCO DE DADOS")
+    print(" INICIANDO BACKUP DO BANCO DE DADOS")
     print("=" * 50)
     
     # Caminhos
@@ -28,12 +28,12 @@ def create_database_backup():
     
     try:
         if not db_path.exists():
-            print("⚠️ Banco de dados não encontrado!")
+            print(" Banco de dados não encontrado!")
             return False
             
         # Criar backup usando SQLite backup API
-        print(f"📁 Fonte: {db_path}")
-        print(f"💾 Destino: {backup_path}")
+        print(f" Fonte: {db_path}")
+        print(f" Destino: {backup_path}")
         
         # Conectar ao banco original
         source_conn = sqlite3.connect(str(db_path))
@@ -51,9 +51,9 @@ def create_database_backup():
         # Verificar se backup foi criado
         if backup_path.exists():
             size_mb = backup_path.stat().st_size / (1024 * 1024)
-            print(f"✅ Backup criado com sucesso!")
-            print(f"📊 Tamanho: {size_mb:.2f} MB")
-            print(f"📅 Data: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
+            print(f" Backup criado com sucesso!")
+            print(f" Tamanho: {size_mb:.2f} MB")
+            print(f" Data: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
             
             # Criar link simbólico para o backup mais recente
             latest_path = backup_dir / "latest_backup.db"
@@ -62,15 +62,15 @@ def create_database_backup():
             
             # No Windows, usar copy ao invés de symlink
             shutil.copy2(backup_path, latest_path)
-            print(f"🔗 Link criado: {latest_path}")
+            print(f" Link criado: {latest_path}")
             
             return True
         else:
-            print("❌ Falha ao criar backup!")
+            print(" Falha ao criar backup!")
             return False
             
     except Exception as e:
-        print(f"❌ Erro durante backup: {e}")
+        print(f" Erro durante backup: {e}")
         return False
 
 def list_backups():
@@ -78,24 +78,24 @@ def list_backups():
     backup_dir = Path("backups")
     
     if not backup_dir.exists():
-        print("📁 Nenhum backup encontrado")
+        print(" Nenhum backup encontrado")
         return
     
     backups = list(backup_dir.glob("users_backup_*.db"))
     
     if not backups:
-        print("📁 Nenhum backup encontrado")
+        print(" Nenhum backup encontrado")
         return
     
-    print("\n📋 BACKUPS DISPONÍVEIS:")
+    print("\n BACKUPS DISPONÍVEIS:")
     print("-" * 50)
     
     for backup in sorted(backups, reverse=True):
         size_mb = backup.stat().st_size / (1024 * 1024)
         mtime = datetime.fromtimestamp(backup.stat().st_mtime)
-        print(f"📄 {backup.name}")
-        print(f"   📊 Tamanho: {size_mb:.2f} MB")
-        print(f"   📅 Criado: {mtime.strftime('%d/%m/%Y %H:%M:%S')}")
+        print(f" {backup.name}")
+        print(f"    Tamanho: {size_mb:.2f} MB")
+        print(f"    Criado: {mtime.strftime('%d/%m/%Y %H:%M:%S')}")
         print()
 
 def restore_backup(backup_name=None):
@@ -108,7 +108,7 @@ def restore_backup(backup_name=None):
         backup_path = backup_dir / "latest_backup.db"
     
     if not backup_path.exists():
-        print(f"❌ Backup não encontrado: {backup_path}")
+        print(f" Backup não encontrado: {backup_path}")
         return False
     
     db_path = Path("instance/users.db")
@@ -118,18 +118,18 @@ def restore_backup(backup_name=None):
         if db_path.exists():
             current_backup = db_path.with_suffix('.db.bak')
             shutil.copy2(db_path, current_backup)
-            print(f"💾 Backup atual salvo como: {current_backup}")
+            print(f" Backup atual salvo como: {current_backup}")
         
         # Restaurar backup
         shutil.copy2(backup_path, db_path)
-        print(f"✅ Backup restaurado com sucesso!")
-        print(f"📁 De: {backup_path}")
-        print(f"📁 Para: {db_path}")
+        print(f" Backup restaurado com sucesso!")
+        print(f" De: {backup_path}")
+        print(f" Para: {db_path}")
         
         return True
         
     except Exception as e:
-        print(f"❌ Erro ao restaurar backup: {e}")
+        print(f" Erro ao restaurar backup: {e}")
         return False
 
 def main():
@@ -153,7 +153,7 @@ def main():
         backup_name = sys.argv[2] if len(sys.argv) > 2 else None
         restore_backup(backup_name)
     else:
-        print(f"❌ Comando desconhecido: {command}")
+        print(f" Comando desconhecido: {command}")
 
 if __name__ == "__main__":
     main()

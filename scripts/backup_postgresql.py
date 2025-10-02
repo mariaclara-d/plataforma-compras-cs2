@@ -17,7 +17,7 @@ def create_backup_directory():
 
 def backup_postgresql_database():
     """Faz backup do banco PostgreSQL"""
-    print("🗄️ BACKUP POSTGRESQL")
+    print(" BACKUP POSTGRESQL")
     print("=" * 50)
     
     backup_dir = create_backup_directory()
@@ -47,7 +47,7 @@ def backup_postgresql_database():
             db_config['database']
         ]
         
-        print(f"📁 Criando backup: {backup_file}")
+        print(f" Criando backup: {backup_file}")
         
         # Definir senha via variável de ambiente
         env = os.environ.copy()
@@ -56,26 +56,26 @@ def backup_postgresql_database():
         result = subprocess.run(cmd, env=env, capture_output=True, text=True)
         
         if result.returncode == 0:
-            print(f"✅ Backup criado com sucesso!")
-            print(f"📁 Arquivo: {backup_file}")
-            print(f"📊 Tamanho: {backup_file.stat().st_size / 1024:.2f} KB")
+            print(f" Backup criado com sucesso!")
+            print(f" Arquivo: {backup_file}")
+            print(f" Tamanho: {backup_file.stat().st_size / 1024:.2f} KB")
             return str(backup_file)
         else:
-            print(f"❌ Erro no backup: {result.stderr}")
+            print(f" Erro no backup: {result.stderr}")
             return None
             
     except FileNotFoundError:
-        print("❌ pg_dump não encontrado. Instale PostgreSQL client tools.")
-        print("💡 Windows: Baixe PostgreSQL e adicione ao PATH")
-        print("💡 Ubuntu: sudo apt-get install postgresql-client")
+        print(" pg_dump não encontrado. Instale PostgreSQL client tools.")
+        print(" Windows: Baixe PostgreSQL e adicione ao PATH")
+        print(" Ubuntu: sudo apt-get install postgresql-client")
         return None
     except Exception as e:
-        print(f"❌ Erro: {e}")
+        print(f" Erro: {e}")
         return None
 
 def backup_sqlite_to_sql():
     """Faz backup do SQLite atual para migração"""
-    print("\n🔄 BACKUP SQLITE PARA MIGRAÇÃO")
+    print("\n BACKUP SQLITE PARA MIGRAÇÃO")
     print("=" * 50)
     
     backup_dir = create_backup_directory()
@@ -83,7 +83,7 @@ def backup_sqlite_to_sql():
     
     sqlite_path = Path('instance/users.db')
     if not sqlite_path.exists():
-        print("❌ Banco SQLite não encontrado")
+        print(" Banco SQLite não encontrado")
         return None
     
     backup_file = backup_dir / f"migration_from_sqlite_{timestamp}.sql"
@@ -100,21 +100,21 @@ def backup_sqlite_to_sql():
             result = subprocess.run(cmd, stdout=f, stderr=subprocess.PIPE, text=True)
         
         if result.returncode == 0:
-            print(f"✅ Dump SQLite criado!")
-            print(f"📁 Arquivo: {backup_file}")
-            print(f"📊 Tamanho: {backup_file.stat().st_size / 1024:.2f} KB")
+            print(f" Dump SQLite criado!")
+            print(f" Arquivo: {backup_file}")
+            print(f" Tamanho: {backup_file.stat().st_size / 1024:.2f} KB")
             return str(backup_file)
         else:
-            print(f"❌ Erro no dump: {result.stderr}")
+            print(f" Erro no dump: {result.stderr}")
             return None
             
     except Exception as e:
-        print(f"❌ Erro: {e}")
+        print(f" Erro: {e}")
         return None
 
 def create_migration_script():
     """Cria script de migração SQLite -> PostgreSQL"""
-    print("\n🔄 CRIANDO SCRIPT DE MIGRAÇÃO")
+    print("\n CRIANDO SCRIPT DE MIGRAÇÃO")
     print("=" * 50)
     
     migration_script = '''#!/usr/bin/env python3
@@ -157,13 +157,13 @@ def migrate_data():
         sqlite_cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
         tables = [row[0] for row in sqlite_cursor.fetchall()]
         
-        print(f"🔄 Migrando {len(tables)} tabelas...")
+        print(f" Migrando {len(tables)} tabelas...")
         
         for table in tables:
             if table == 'sqlite_sequence':
                 continue
                 
-            print(f"📊 Migrando tabela: {table}")
+            print(f" Migrando tabela: {table}")
             
             # Ler dados do SQLite
             sqlite_cursor.execute(f"SELECT * FROM {table}")
@@ -185,17 +185,17 @@ def migrate_data():
                     try:
                         pg_cursor.execute(insert_query, row)
                     except Exception as e:
-                        print(f"⚠️ Erro na linha: {e}")
+                        print(f" Erro na linha: {e}")
                 
                 pg_conn.commit()
-                print(f"✅ {len(rows)} registros migrados de {table}")
+                print(f" {len(rows)} registros migrados de {table}")
             else:
-                print(f"⚠️ Tabela {table} vazia")
+                print(f" Tabela {table} vazia")
         
-        print("🎉 Migração concluída!")
+        print(" Migração concluída!")
         
     except Exception as e:
-        print(f"❌ Erro na migração: {e}")
+        print(f" Erro na migração: {e}")
     finally:
         if 'sqlite_conn' in locals():
             sqlite_conn.close()
@@ -209,11 +209,11 @@ if __name__ == "__main__":
     with open('migrate_to_postgresql.py', 'w', encoding='utf-8') as f:
         f.write(migration_script)
     
-    print("✅ Script de migração criado: migrate_to_postgresql.py")
+    print(" Script de migração criado: migrate_to_postgresql.py")
 
 def main():
     """Função principal"""
-    print("🗄️ CONFIGURAÇÃO BANCO POSTGRESQL")
+    print(" CONFIGURAÇÃO BANCO POSTGRESQL")
     print("=" * 60)
     
     # 1. Backup do banco atual (se PostgreSQL já existir)
@@ -225,10 +225,10 @@ def main():
     # 3. Criar script de migração
     create_migration_script()
     
-    print(f"\n📋 RESUMO:")
-    print(f"✅ Backup SQLite: {'OK' if sqlite_backup else 'ERRO'}")
-    print(f"✅ Script migração: OK")
-    print(f"\n🎯 PRÓXIMOS PASSOS:")
+    print(f"\n RESUMO:")
+    print(f" Backup SQLite: {'OK' if sqlite_backup else 'ERRO'}")
+    print(f" Script migração: OK")
+    print(f"\n PRÓXIMOS PASSOS:")
     print(f"1. Configurar PostgreSQL")
     print(f"2. Ajustar credenciais nos scripts")
     print(f"3. Executar: python migrate_to_postgresql.py")

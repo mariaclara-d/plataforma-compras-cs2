@@ -1,8 +1,8 @@
 # API Response Standards - Phase 1
 
-## 📋 JSON Response Conventions
+##  JSON Response Conventions
 
-### ✅ **Standard Error Format**
+###  **Standard Error Format**
 ```json
 {
   "error": "Error message in English",
@@ -12,7 +12,7 @@
 }
 ```
 
-### ✅ **Standard Success Format**
+###  **Standard Success Format**
 ```json
 {
   "message": "Success message in English",
@@ -21,17 +21,17 @@
 }
 ```
 
-## 🔧 **Field Naming Conventions**
+##  **Field Naming Conventions**
 
 ### **Consistent Fields (English):**
-- ✅ `error` (not `erro`)
-- ✅ `message` (not `mensagem`)
-- ✅ `details` (not `detalhes`)
-- ✅ `type` (not `tipo`)
-- ✅ `retry_suggestion` (not `retry_sugestao`)
-- ✅ `contact_support` (not `contato_suporte`)
-- ✅ `active` (not `ativo`)
-- ✅ `period_days` (not `periodo_dias`)
+-  `error` (not `erro`)
+-  `message` (not `mensagem`)
+-  `details` (not `detalhes`)
+-  `type` (not `tipo`)
+-  `retry_suggestion` (not `retry_sugestao`)
+-  `contact_support` (not `contato_suporte`)
+-  `active` (not `ativo`)
+-  `period_days` (not `periodo_dias`)
 
 ### **Trade Protection Fields:**
 ```json
@@ -45,7 +45,7 @@
 }
 ```
 
-## 🎯 **HTTP Status Codes**
+##  **HTTP Status Codes**
 
 - `200` - Success
 - `400` - Bad Request (validation errors)
@@ -58,7 +58,7 @@
 - `503` - Service Unavailable (Steam issues)
 - `504` - Gateway Timeout
 
-## 📱 **Frontend Integration**
+##  **Frontend Integration**
 
 ### **JavaScript Error Handling:**
 ```javascript
@@ -75,26 +75,26 @@
 ```
 
 ### **Required Frontend Updates:**
-- ✅ `data.error` instead of `data.erro`
-- ✅ `data.message` instead of `data.mensagem`
-- ✅ `data.trade_protection.message` instead of `data.trade_protection.mensagem`
-- ✅ `data.trade_protection.active` instead of `data.trade_protection.ativo`
+-  `data.error` instead of `data.erro`
+-  `data.message` instead of `data.mensagem`
+-  `data.trade_protection.message` instead of `data.trade_protection.mensagem`
+-  `data.trade_protection.active` instead of `data.trade_protection.ativo`
 
-## 📝 **Implementation Status**
+##  **Implementation Status**
 
-### ✅ **Phase 1 Completed:**
+###  **Phase 1 Completed:**
 - [x] `/trade/enviar-oferta` - All responses standardized
 - [x] `/saque` - Error responses standardized
 - [x] `dashboard-updated.js` - Updated to handle new format
 - [x] Error handling consistency across routes
 
-### 🔄 **Next Steps (Future Phases):**
+###  **Next Steps (Future Phases):**
 - [ ] Function names in English
 - [ ] Endpoint names in English
 - [ ] Database model names in English
 - [ ] Complete frontend localization
 
-## 🚨 **Breaking Changes**
+##  **Breaking Changes**
 
 **Frontend must be updated to handle:**
 1. `error` field instead of `erro`
@@ -105,7 +105,7 @@
 - None required for Phase 1
 - All changes are consistent and applied simultaneously
 
-## 📊 **Testing Checklist**
+##  **Testing Checklist**
 
 - [ ] Error responses display correctly
 - [ ] Success messages work
@@ -117,4 +117,4 @@
 
 **Last Updated:** July 31, 2025  
 **Phase:** 1 - JSON Response Standardization  
-**Status:** ✅ Complete
+**Status:**  Complete

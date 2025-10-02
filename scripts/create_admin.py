@@ -26,22 +26,22 @@ def create_first_admin():
         # Verifica se já existe admin
         existing_admin = Admin.query.first()
         if existing_admin:
-            print("❌ Já existe um admin cadastrado:")
+            print(" Já existe um admin cadastrado:")
             print(f"   Username: {existing_admin.username}")
             print(f"   Criado em: {existing_admin.created_at}")
             return False
         
-        print("🔐 Criando primeiro administrador...")
+        print(" Criando primeiro administrador...")
         
         # Solicitar dados do admin
         import getpass
         
         username = input("Username para admin: ").strip()
         if not username or len(username) < 3:
-            print("❌ Username deve ter pelo menos 3 caracteres")
+            print(" Username deve ter pelo menos 3 caracteres")
             return False
         
-        print("⚠️  A senha deve ter pelo menos 8 caracteres, incluindo:")
+        print("  A senha deve ter pelo menos 8 caracteres, incluindo:")
         print("   - Letras maiúsculas e minúsculas")
         print("   - Números")
         print("   - Símbolos")
@@ -51,12 +51,12 @@ def create_first_admin():
             password_confirm = getpass.getpass("Confirme a senha: ")
             
             if password != password_confirm:
-                print("❌ Senhas não coincidem. Tente novamente.")
+                print(" Senhas não coincidem. Tente novamente.")
                 continue
             
             # Validar força da senha
             if not validate_password_strength(password):
-                print("❌ Senha não atende aos critérios de segurança. Tente novamente.")
+                print(" Senha não atende aos critérios de segurança. Tente novamente.")
                 continue
             
             break
@@ -69,11 +69,11 @@ def create_first_admin():
         db.session.add(admin)
         db.session.commit()
         
-        print("✅ Administrador criado com sucesso!")
+        print(" Administrador criado com sucesso!")
         print(f"   Username: {username}")
-        print("   🔗 Acesse: http://localhost:5000/admin")
+        print("    Acesse: http://localhost:5000/admin")
         print("")
-        print("🔒 IMPORTANTE:")
+        print(" IMPORTANTE:")
         print("   - Guarde a senha em local seguro")
         print("   - Considere ativar 2FA em produção")
         print("   - Monitore logs de acesso admin")
@@ -85,46 +85,46 @@ def validate_password_strength(password):
     import re
     
     if len(password) < 8:
-        print("   ❌ Senha deve ter pelo menos 8 caracteres")
+        print("    Senha deve ter pelo menos 8 caracteres")
         return False
     
     if not re.search(r'[A-Z]', password):
-        print("   ❌ Senha deve conter pelo menos uma letra maiúscula")
+        print("    Senha deve conter pelo menos uma letra maiúscula")
         return False
     
     if not re.search(r'[a-z]', password):
-        print("   ❌ Senha deve conter pelo menos uma letra minúscula")
+        print("    Senha deve conter pelo menos uma letra minúscula")
         return False
     
     if not re.search(r'\d', password):
-        print("   ❌ Senha deve conter pelo menos um número")
+        print("    Senha deve conter pelo menos um número")
         return False
     
     if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
-        print("   ❌ Senha deve conter pelo menos um símbolo")
+        print("    Senha deve conter pelo menos um símbolo")
         return False
     
     # Verificar sequências comuns
     common_sequences = ['123456', 'abcdef', 'qwerty', 'password', 'admin']
     for seq in common_sequences:
         if seq.lower() in password.lower():
-            print(f"   ❌ Senha não pode conter sequências comuns como '{seq}'")
+            print(f"    Senha não pode conter sequências comuns como '{seq}'")
             return False
     
     return True
 
 if __name__ == '__main__':
-    print("🔧 Criando primeiro usuário admin...")
+    print(" Criando primeiro usuário admin...")
     print("")
     
     try:
         success = create_first_admin()
         if success:
-            print("🎯 Admin criado com sucesso!")
+            print(" Admin criado com sucesso!")
         else:
-            print("ℹ️  Admin já existe no sistema")
+            print("ℹ  Admin já existe no sistema")
             
     except Exception as e:
-        print(f"❌ Erro ao criar admin: {str(e)}")
+        print(f" Erro ao criar admin: {str(e)}")
         import traceback
         traceback.print_exc()

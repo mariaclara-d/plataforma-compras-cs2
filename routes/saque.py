@@ -86,9 +86,9 @@ def solicitar_saque():
             chave_pix=chave_pix
         )
         
-        current_app.logger.info("✅ Notificação de saque enviada com sucesso")
+        current_app.logger.info(" Notificação de saque enviada com sucesso")
     except Exception as e:
-        current_app.logger.error(f"❌ Erro ao enviar notificação de saque: {e}")
+        current_app.logger.error(f" Erro ao enviar notificação de saque: {e}")
     # -----------------------------------------
 
     return jsonify({'mensagem': 'Solicitação de saque registrada', 'id': saque.id})

@@ -41,7 +41,7 @@ def create_app():
             # Apenas para desenvolvimento - gerar chave aleatória
             import secrets
             secret_key = secrets.token_urlsafe(32)
-            print("⚠️  AVISO: Usando SECRET_KEY temporária para desenvolvimento")
+            print("  AVISO: Usando SECRET_KEY temporária para desenvolvimento")
     
     app.config['SECRET_KEY'] = secret_key
     app.config['STEAM_API_KEY_NAO_OFICIAL'] = os.getenv("STEAM_API_KEY_NAO_OFICIAL")
@@ -117,13 +117,13 @@ if __name__ == '__main__':
     
     # Log de inicialização
     env_mode = os.getenv('FLASK_ENV', 'development')
-    print(f"🚀 Iniciando aplicação em modo: {env_mode}")
-    print(f"📍 URL: http://{host}:{port}")
+    print(f" Iniciando aplicação em modo: {env_mode}")
+    print(f" URL: http://{host}:{port}")
     
     if env_mode == 'staging':
-        print("🧪 AMBIENTE DE STAGING ATIVO")
-        print("📊 Logs disponíveis em: ./logs/")
-        print("🔒 Segurança: Rate limiting e validações ativas")
+        print(" AMBIENTE DE STAGING ATIVO")
+        print(" Logs disponíveis em: ./logs/")
+        print(" Segurança: Rate limiting e validações ativas")
     
     app.run(debug=(env_mode == 'development'), host=host, port=port)
 

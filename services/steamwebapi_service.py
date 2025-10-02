@@ -154,46 +154,46 @@ class SteamWebAPIService:
                             steam_cookie = result.get('cookies', {}).get('steamloginsecure')
                             
                             if steam_cookie:
-                                logger.info("[STEAMWEBAPI] ✅ steamLoginSecure obtido com sucesso!")
+                                logger.info("[STEAMWEBAPI]  steamLoginSecure obtido com sucesso!")
                                 logger.info(f"[STEAMWEBAPI] Cookie: {steam_cookie[:50]}...")
                                 return steam_cookie
                             else:
-                                logger.error(f"[STEAMWEBAPI] ❌ Erro: Campo steamloginsecure não encontrado no response")
-                                logger.error(f"[STEAMWEBAPI] ❌ Response completo: {result}")
+                                logger.error(f"[STEAMWEBAPI]  Erro: Campo steamloginsecure não encontrado no response")
+                                logger.error(f"[STEAMWEBAPI]  Response completo: {result}")
                                 raise Exception(f"Campo steamloginsecure não encontrado: {result}")
 
                         except json.JSONDecodeError as e:
-                            logger.error(f"[STEAMWEBAPI] ❌ Resposta não é JSON: {e}")
-                            logger.error(f"[STEAMWEBAPI] ❌ Response raw: {response_text}")
+                            logger.error(f"[STEAMWEBAPI]  Resposta não é JSON: {e}")
+                            logger.error(f"[STEAMWEBAPI]  Response raw: {response_text}")
                             raise Exception(f"Resposta inválida da API: {response_text}")
                     else:
-                        logger.error(f"[STEAMWEBAPI] ❌ HTTP {response.status}: {response_text}")
+                        logger.error(f"[STEAMWEBAPI]  HTTP {response.status}: {response_text}")
                         raise Exception(f"Erro HTTP {response.status}: {response_text}")
 
             except asyncio.TimeoutError:
-                logger.warning(f"[STEAMWEBAPI] ⚠️ Timeout na tentativa {attempt + 1}/{max_retries}")
+                logger.warning(f"[STEAMWEBAPI]  Timeout na tentativa {attempt + 1}/{max_retries}")
                 if attempt < max_retries - 1:
                     delay = base_delay * (attempt + 1)
                     logger.info(f"[STEAMWEBAPI] Aguardando {delay}s antes de tentar novamente...")
                     await asyncio.sleep(delay)
                     continue
                 else:
-                    logger.error("[STEAMWEBAPI] ❌ Timeout final na requisição steamLoginSecure")
+                    logger.error("[STEAMWEBAPI]  Timeout final na requisição steamLoginSecure")
                     raise Exception("Timeout ao conectar com SteamWebAPI após 3 tentativas")
                     
             except aiohttp.ClientError as e:
-                logger.warning(f"[STEAMWEBAPI] ⚠️ Erro de conexão na tentativa {attempt + 1}: {e}")
+                logger.warning(f"[STEAMWEBAPI]  Erro de conexão na tentativa {attempt + 1}: {e}")
                 if attempt < max_retries - 1:
                     delay = base_delay * (attempt + 1)
                     logger.info(f"[STEAMWEBAPI] Aguardando {delay}s antes de tentar novamente...")
                     await asyncio.sleep(delay)
                     continue
                 else:
-                    logger.error(f"[STEAMWEBAPI] ❌ Erro de conexão final: {e}")
+                    logger.error(f"[STEAMWEBAPI]  Erro de conexão final: {e}")
                     raise Exception(f"Erro de conexão com SteamWebAPI: {e}")
                     
             except Exception as e:
-                logger.error(f"[STEAMWEBAPI] ❌ Erro ao obter steamLoginSecure: {e}")
+                logger.error(f"[STEAMWEBAPI]  Erro ao obter steamLoginSecure: {e}")
                 raise
     
     async def create_trade_offer(self, steam_cookie, trade_data):
@@ -246,7 +246,7 @@ class SteamWebAPIService:
                         if result.get('tradeofferid') or result.get('success'):
                             trade_offer_id = result.get('tradeofferid', result.get('id', 'unknown'))
                             
-                            logger.info(f"[STEAMWEBAPI] ✅ TRADE OFFER CRIADA! ID: {trade_offer_id}")
+                            logger.info(f"[STEAMWEBAPI]  TRADE OFFER CRIADA! ID: {trade_offer_id}")
                             
                             return {
                                 'success': True,
@@ -258,7 +258,7 @@ class SteamWebAPIService:
                             }
                         else:
                             error_msg = result.get('error', result.get('message', 'Trade offer não criada'))
-                            logger.error(f"[STEAMWEBAPI] ❌ Erro da API: {error_msg}")
+                            logger.error(f"[STEAMWEBAPI]  Erro da API: {error_msg}")
                             
                             return {
                                 'success': False,
@@ -268,7 +268,7 @@ class SteamWebAPIService:
                             }
                             
                     except json.JSONDecodeError as e:
-                        logger.error(f"[STEAMWEBAPI] ❌ Resposta não é JSON: {e}")
+                        logger.error(f"[STEAMWEBAPI]  Resposta não é JSON: {e}")
                         return {
                             'success': False,
                             'error': 'Resposta inválida',
@@ -278,7 +278,7 @@ class SteamWebAPIService:
                 
                 # Tratar códigos de erro específicos da documentação
                 elif response.status == 401:
-                    logger.error("[STEAMWEBAPI] ❌ 401: steamloginsecure inválido ou expirado")
+                    logger.error("[STEAMWEBAPI]  401: steamloginsecure inválido ou expirado")
                     return {
                         'success': False,
                         'error': 'Unauthorized',
@@ -286,7 +286,7 @@ class SteamWebAPIService:
                         'method': 'SteamWebAPI'
                     }
                 elif response.status == 402:
-                    logger.error("[STEAMWEBAPI] ❌ 402: Rate limit excedido")
+                    logger.error("[STEAMWEBAPI]  402: Rate limit excedido")
                     return {
                         'success': False,
                         'error': 'Rate limit exceeded',
@@ -294,7 +294,7 @@ class SteamWebAPIService:
                         'method': 'SteamWebAPI'
                     }
                 elif response.status == 406:
-                    logger.error("[STEAMWEBAPI] ❌ 406: Asset ID inválido ou muitas trade offers pendentes")
+                    logger.error("[STEAMWEBAPI]  406: Asset ID inválido ou muitas trade offers pendentes")
                     return {
                         'success': False,
                         'error': 'Invalid asset ID',
@@ -302,7 +302,7 @@ class SteamWebAPIService:
                         'method': 'SteamWebAPI'
                     }
                 elif response.status == 409:
-                    logger.error("[STEAMWEBAPI] ❌ 409: Muitos cancelamentos recentes")
+                    logger.error("[STEAMWEBAPI]  409: Muitos cancelamentos recentes")
                     return {
                         'success': False,
                         'error': 'Too many cancellations',
@@ -310,7 +310,7 @@ class SteamWebAPIService:
                         'method': 'SteamWebAPI'
                     }
                 elif response.status == 429:
-                    logger.error("[STEAMWEBAPI] ❌ 429: Rate limit excedido")
+                    logger.error("[STEAMWEBAPI]  429: Rate limit excedido")
                     return {
                         'success': False,
                         'error': 'Rate limit exceeded',
@@ -318,7 +318,7 @@ class SteamWebAPIService:
                         'method': 'SteamWebAPI'
                     }
                 else:
-                    logger.error(f"[STEAMWEBAPI] ❌ HTTP {response.status}: {response_text}")
+                    logger.error(f"[STEAMWEBAPI]  HTTP {response.status}: {response_text}")
                     return {
                         'success': False,
                         'error': f'HTTP {response.status}',
@@ -327,7 +327,7 @@ class SteamWebAPIService:
                     }
                     
         except Exception as e:
-            logger.error(f"[STEAMWEBAPI] ❌ Erro ao criar trade offer: {e}")
+            logger.error(f"[STEAMWEBAPI]  Erro ao criar trade offer: {e}")
             return {
                 'success': False,
                 'error': str(e),
@@ -419,7 +419,7 @@ async def enviar_oferta_steamwebapi(partner_steamid64, items_dict, message="Vend
             logger.info("[MAIN] Criando trade offer...")
             result = await api.create_trade_offer(steam_cookie, trade_data)
         
-        logger.info(f"[MAIN] ✅ SteamWebAPI result: {result}")
+        logger.info(f"[MAIN]  SteamWebAPI result: {result}")
         return result
         
     except Exception as e:

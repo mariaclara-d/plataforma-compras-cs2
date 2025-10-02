@@ -30,7 +30,7 @@ class SteamErrorHandler {
     showSteamServerError(errorData) {
         Swal.fire({
             icon: 'warning',
-            title: '⚠️ Steam Temporariamente Indisponível',
+            title: ' Steam Temporariamente Indisponível',
             html: `
                 <div class="steam-error-content">
                     <p><strong>Os servidores da Steam estão com problemas.</strong></p>
@@ -38,10 +38,10 @@ class SteamErrorHandler {
                     <br>
                     <div class="error-actions">
                         <button class="btn btn-primary" onclick="steamErrorHandler.scheduleRetry()">
-                            🔄 Tentar Novamente em 30s
+                             Tentar Novamente em 30s
                         </button>
                         <button class="btn btn-secondary" onclick="steamErrorHandler.checkSteamStatus()">
-                            📊 Verificar Status da Steam
+                             Verificar Status da Steam
                         </button>
                     </div>
                 </div>
@@ -57,13 +57,13 @@ class SteamErrorHandler {
     showAuthError(errorData) {
         Swal.fire({
             icon: 'error',
-            title: '🔒 Problema de Autenticação',
+            title: ' Problema de Autenticação',
             html: `
                 <p>Nosso bot Steam está com problemas de autenticação.</p>
                 <p><strong>Entre em contato com o suporte.</strong></p>
                 <br>
                 <button class="btn btn-primary" onclick="steamErrorHandler.contactSupport()">
-                    💬 Contatar Suporte
+                     Contatar Suporte
                 </button>
             `,
             showConfirmButton: false
@@ -96,15 +96,15 @@ class SteamErrorHandler {
     showGeneralError(errorData) {
         Swal.fire({
             icon: 'error',
-            title: '❌ Erro Técnico',
+            title: ' Erro Técnico',
             html: `
                 <p>${errorData.detalhes || 'Erro desconhecido'}</p>
                 <br>
                 <button class="btn btn-primary" onclick="location.reload()">
-                    🔄 Recarregar Página
+                     Recarregar Página
                 </button>
                 <button class="btn btn-secondary" onclick="steamErrorHandler.contactSupport()">
-                    💬 Reportar Erro
+                     Reportar Erro
                 </button>
             `,
             showConfirmButton: false
@@ -115,7 +115,7 @@ class SteamErrorHandler {
     scheduleRetry() {
         Swal.fire({
             icon: 'info',
-            title: '🔄 Tentando Novamente...',
+            title: ' Tentando Novamente...',
             text: 'Aguarde enquanto tentamos enviar sua oferta novamente.',
             showConfirmButton: false,
             allowOutsideClick: false
@@ -179,7 +179,7 @@ class SteamErrorHandler {
         
         // Mostrar loading
         Swal.fire({
-            title: '🚀 Enviando Oferta...',
+            title: ' Enviando Oferta...',
             text: 'Aguarde enquanto processamos sua solicitação.',
             allowOutsideClick: false,
             showConfirmButton: false,
@@ -204,7 +204,7 @@ class SteamErrorHandler {
                 // Sucesso
                 Swal.fire({
                     icon: 'success',
-                    title: '✅ Oferta Enviada!',
+                    title: ' Oferta Enviada!',
                     html: `
                         <p><strong>Oferta criada com sucesso!</strong></p>
                         <p>ID da Oferta: <code>${data.offer_id || 'N/A'}</code></p>

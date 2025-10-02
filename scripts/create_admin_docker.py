@@ -28,7 +28,7 @@ def create_first_admin():
             # Verifica se já existe admin
             existing_admin = Admin.query.first()
             if existing_admin:
-                print("❌ Já existe um admin cadastrado:")
+                print(" Já existe um admin cadastrado:")
                 print(f"   Username: {existing_admin.username}")
                 print(f"   Criado em: {existing_admin.created_at}")
                 return False
@@ -41,18 +41,18 @@ def create_first_admin():
             db.session.add(admin)
             db.session.commit()
             
-            print("✅ Primeiro admin criado com sucesso!")
+            print(" Primeiro admin criado com sucesso!")
             print("   Username: admin")
             print("   Password: admin123")
-            print("   🔗 Acesse: http://localhost:5000/admin")
+            print("    Acesse: http://localhost:5000/admin")
             print("")
-            print("⚠️  IMPORTANTE: Troque a senha após o primeiro login!")
+            print("  IMPORTANTE: Troque a senha após o primeiro login!")
             
             return True
             
         except Exception as e:
-            print(f"❌ Erro ao acessar banco: {str(e)}")
-            print("🔧 Tentando criar as tabelas primeiro...")
+            print(f" Erro ao acessar banco: {str(e)}")
+            print(" Tentando criar as tabelas primeiro...")
             
             # Tenta criar as tabelas
             db.create_all()
@@ -65,25 +65,25 @@ def create_first_admin():
             db.session.add(admin)
             db.session.commit()
             
-            print("✅ Tabelas criadas e admin configurado!")
+            print(" Tabelas criadas e admin configurado!")
             print("   Username: admin")
             print("   Password: admin123")
-            print("   🔗 Acesse: http://localhost:5000/admin")
+            print("    Acesse: http://localhost:5000/admin")
             
             return True
 
 if __name__ == '__main__':
-    print("🔧 Criando primeiro usuário admin no PostgreSQL...")
+    print(" Criando primeiro usuário admin no PostgreSQL...")
     print("")
     
     try:
         success = create_first_admin()
         if success:
-            print("🎯 Admin criado com sucesso!")
+            print(" Admin criado com sucesso!")
         else:
-            print("ℹ️  Admin já existe no sistema")
+            print("ℹ  Admin já existe no sistema")
             
     except Exception as e:
-        print(f"❌ Erro ao criar admin: {str(e)}")
+        print(f" Erro ao criar admin: {str(e)}")
         import traceback
         traceback.print_exc()
