@@ -1,8 +1,0 @@
-<svg width="40" height="25" viewBox="0 0 40 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="40" height="25" rx="3" fill="#32BCAD"/>
-<path d="M8 8H12V10H10V12H12V14H8V8Z" fill="white"/>
-<path d="M14 8H16V14H14V8Z" fill="white"/>
-<path d="M18 8H22L20 11L22 14H18L20 11L18 8Z" fill="white"/>
-<circle cx="32" cy="12" r="6" fill="white"/>
-<text x="29" y="15" fill="#32BCAD" font-family="Arial" font-size="4" font-weight="bold">PIX</text>
-</svg>

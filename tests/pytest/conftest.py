@@ -14,12 +14,18 @@ class TestConfig:
 # ----------- APP FLASK -----------
 @pytest.fixture(scope="session")
 def app():
-    app = create_app(config_class=TestConfig)
+    app = create_app()  # sem argumento
+    app.config['TESTING'] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+    app.config['SECRET_KEY'] = 'teste'
+    app.config['WTF_CSRF_ENABLED'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     with app.app_context():
         db.create_all()
         yield app
         db.session.remove()
         db.drop_all()
+
 # Cliente
 @pytest.fixture()
 def client(app):
