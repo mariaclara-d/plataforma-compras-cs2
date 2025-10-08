@@ -3,7 +3,7 @@ from flask import Flask
 from db_config import db
 from app import create_app
 
-# --- Configuração de teste ---
+# --- Configuração de teste --- 
 class TestConfig:
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
