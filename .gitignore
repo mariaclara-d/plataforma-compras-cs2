@@ -13,8 +13,6 @@ secrets/
 config/secrets.json
 
 # Arquivos de teste temporários
-test_*.py
-teste_*.py
 debug_*.py
 verificar_*.py
 
