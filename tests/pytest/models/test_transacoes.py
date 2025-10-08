@@ -25,6 +25,7 @@ class TestTransacao:
         assert isinstance(resultado.criado_em, datetime)
 
     def test_repr_transacao(self):
+        
         transacao = Transacao(
             steamid="76561198000000000",
             valor=250.0,
