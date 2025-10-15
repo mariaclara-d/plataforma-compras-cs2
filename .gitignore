@@ -12,9 +12,11 @@
 secrets/
 config/secrets.json
 config/steam/steam_guard.json
-config/steam/*.json
-config/steamwebapi/*.json
+config/steamwebapi/config.json
 *_guard.json
+# Permitir arquivos exemplo
+!config/steam/steam_guard.example.json
+!config/steamwebapi/config.example.json
 
 # Arquivos de teste temporários
 test_*.py

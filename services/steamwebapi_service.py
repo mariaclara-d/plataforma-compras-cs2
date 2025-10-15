@@ -7,6 +7,7 @@ import hmac
 import hashlib
 import struct
 import base64
+import os
 from pathlib import Path
 from datetime import datetime, timedelta
 
@@ -343,36 +344,37 @@ async def enviar_oferta_steamwebapi(partner_steamid64, items_dict, message="Vend
     logger.info("[MAIN] === USANDO STEAMWEBAPI OFICIAL ===")
     
     try:
-        # Carregar configurações Steam
-        steam_config_file = Path("config/steam/steam_guard.json")
-        with open(steam_config_file, 'r', encoding='utf-8') as f:
-            steam_config = json.load(f)
-        username = steam_config['username']  # ← use 'username'
-        password = steam_config['password']
-        shared_secret = steam_config['code']  # ← use 'code' para o shared_secret
+        # Carregar credenciais Steam do .env
+        username = os.getenv('STEAM_USERNAME')
+        password = os.getenv('STEAM_PASSWORD') 
+        shared_secret = os.getenv('STEAM_SHARED_SECRET')
         
-        # Carregar API key
-        api_config_file = Path("config/steamwebapi/config.json")
-        
-        if not api_config_file.exists():
-            api_config_file.parent.mkdir(parents=True, exist_ok=True)
-            default_config = {
-                "api_key": "SUA_API_KEY_STEAMWEBAPI_AQUI",
-                "plan": "free",
-                "rate_limit_per_day": 100
-            }
+        if not all([username, password, shared_secret]):
+            # Fallback: tentar carregar do arquivo se .env não tiver
+            steam_config_file = Path("config/steam/steam_guard.json")
+            if steam_config_file.exists():
+                with open(steam_config_file, 'r', encoding='utf-8') as f:
+                    steam_config = json.load(f)
+                username = username or steam_config.get('username')
+                password = password or steam_config.get('password')
+                shared_secret = shared_secret or steam_config.get('code')
             
-            with open(api_config_file, 'w', encoding='utf-8') as f:
-                json.dump(default_config, f, indent=4)
-            
-            raise ValueError(f"Configure sua API key em: {api_config_file}")
+            if not all([username, password, shared_secret]):
+                raise ValueError("Credenciais Steam não configuradas no .env ou steam_guard.json")
         
-        with open(api_config_file, 'r', encoding='utf-8') as f:
-            api_config = json.load(f)
+        # Carregar API key do .env
+        api_key = os.getenv('STEAMWEBAPI_KEY')
         
-        api_key = api_config.get('api_key')
+        if not api_key:
+            # Fallback: tentar carregar do arquivo de configuração
+            api_config_file = Path("config/steamwebapi/config.json")
+            if api_config_file.exists():
+                with open(api_config_file, 'r', encoding='utf-8') as f:
+                    api_config = json.load(f)
+                api_key = api_config.get('api_key')
+        
         if not api_key or api_key == "SUA_API_KEY_STEAMWEBAPI_AQUI":
-            raise ValueError("API key não configurada")
+            raise ValueError("STEAMWEBAPI_KEY não configurada no .env")
         
         # Extrair dados
         tradelink = items_dict.get("tradelink")
