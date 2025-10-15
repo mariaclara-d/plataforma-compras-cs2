@@ -18,6 +18,11 @@ config/steamwebapi/config.json
 !config/steam/steam_guard.example.json
 !config/steamwebapi/config.example.json
 
+# Logs e arquivos sensíveis
+logs/
+*.log
+log/
+
 # Arquivos de teste temporários
 test_*.py
 teste_*.py
