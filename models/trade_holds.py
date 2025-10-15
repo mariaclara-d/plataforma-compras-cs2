@@ -1,7 +1,8 @@
 """
 Modelo para Trade Holds - Sistema de proteção de 7 dias
 """
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from decimal import Decimal
 from db_config import db
 
 class TradeHold(db.Model):
@@ -10,10 +11,10 @@ class TradeHold(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     steam_id = db.Column(db.String(100), nullable=False)  # Steam ID em vez de user_id
     transacao_id = db.Column(db.Integer, db.ForeignKey('transacoes.id'), nullable=False)
-    valor = db.Column(db.Float, nullable=False)  # Valor em hold
+    valor = db.Column(db.Numeric(10, 2), nullable=False)  # Valor em hold
     item_name = db.Column(db.String(200), nullable=False)  # Nome do item vendido
     status = db.Column(db.String(20), default='active')  # active, completed, reversed
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     expires_at = db.Column(db.DateTime, nullable=False)
     completed_at = db.Column(db.DateTime, nullable=True)
     reversal_reason = db.Column(db.Text, nullable=True)
@@ -89,7 +90,7 @@ class TradeHold(db.Model):
             steam_id=steam_id,
             status='active'
         ).scalar()
-        return result or 0.0
+        return Decimal(str(result)) if result else Decimal('0.00')
     
     @staticmethod
     def process_expired_holds():

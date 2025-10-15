@@ -2,6 +2,7 @@
 from flask import Blueprint, session, redirect, url_for, render_template, jsonify, request
 from routes.forms import TradeLinkForm 
 from services.inventory_service import InventoryService
+from decimal import Decimal, InvalidOperation
 from services.saldo_service import calcular_saldo_usuario
 from utils.auth_helpers import require_auth
 import requests
@@ -44,11 +45,11 @@ def get_steam_user_info(steam_id):
 
 def parse_price(price_str):
     if price_str is None:
-        return 0
+        return Decimal('0.00')
     try:
-        return float(price_str)
-    except (ValueError, TypeError):
-        return 0
+        return Decimal(price_str)
+    except (ValueError, TypeError, InvalidOperation):
+        return Decimal('0.00')
 
 @dashboard_blueprint.route("/dashboard", methods=["GET", "POST"])
 @require_auth
@@ -65,7 +66,7 @@ def dashboard():
     if not user_info:
         return redirect(url_for("auth.logout"))
 
-    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+    saldo = calcular_saldo_usuario(user_steam_id)
 
     if form.validate_on_submit():
         tradelink = form.tradelink.data
@@ -95,8 +96,7 @@ def dashboard():
 @require_auth
 def api_saldo():
     user_steam_id = session["steam_id"]
-    percentual_comissao = 0.65
-    saldo = calcular_saldo_usuario(user_steam_id, percentual_comissao)
+    saldo = calcular_saldo_usuario(user_steam_id)
     return jsonify({"saldo": saldo})
 
 @dashboard_blueprint.route("/logout")
