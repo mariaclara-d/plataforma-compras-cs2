@@ -11,6 +11,10 @@
 *.p12
 secrets/
 config/secrets.json
+config/steam/steam_guard.json
+config/steam/*.json
+config/steamwebapi/*.json
+*_guard.json
 
 # Arquivos de teste temporários
 test_*.py
