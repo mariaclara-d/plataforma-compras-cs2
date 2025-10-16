@@ -27,7 +27,7 @@ class TradeHold(db.Model):
         self.transacao_id = transacao_id
         self.valor = valor
         self.item_name = item_name
-        self.expires_at = datetime.utcnow() + timedelta(days=7)
+        self.expires_at = datetime.now(timezone.utc) + timedelta(days=7)
     
     @property
     def days_remaining(self):
