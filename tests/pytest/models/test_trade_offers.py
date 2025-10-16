@@ -5,14 +5,26 @@ import pytest
 @pytest.mark.usefixtures("db_session")
 class TestTradeOffer:
  # ----------------------------- Criação e representação -----------------------------
-    def test_criar_trade_offer(self, db_session):
-        # - Definir data de expiração
-        # - Criar objeto TradeOffer
-        # - Verificar se o objeto foi criado corretamente
-        # - Adicionar/comitar no banco
-        # - Verificar no banco
-        # - Asserts
-        pass
+    def test_criar_trade_offer(self, db_session): # testar criação de trade offer
+        expires = datetime.now(timezone.utc) + timedelta(days=7) # data de expiração futura
+        trade_offer = TradeOffer( # trade offer com status pendente
+            tradeofferid="1234567890", # trade offer id único
+            partnersteamid="76561198000000000", # steam id do parceiro
+            expires_at=expires # data de expiração futura
+        )
+
+        db_session.add(trade_offer) # adiciona o trade offer à sessão
+        db_session.commit() # commit para persistir no banco de dados
+
+        resultado = db_session.query(TradeOffer).first() # consulta o trade offer persistido
+        assert resultado is not None # verifica se o trade offer foi persistido
+        assert resultado.tradeofferid == "1234567890" # trade offer id único
+        assert resultado.partnersteamid == "76561198000000000" # steam id do parceiro
+        assert resultado.expires_at.replace(tzinfo=timezone.utc) == expires # data de expiração futura
+        assert resultado.status == "pendente" # status pendente 
+
+    
+
     def test_repr_trade_offer(self):
         # - Criar objeto TradeOffer
         # - Verificar se a representação (__repr__) é a esperada
