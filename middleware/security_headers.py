@@ -44,9 +44,13 @@ class SecurityHeadersMiddleware:
             "payment=(), usb=()"
         )
         
-        # HSTS apenas em produção
+        # HSTS - habilitado sempre para testes
+        # Em produção: max-age longo, em desenvolvimento: max-age curto
         if current_app.config.get('ENV') == 'production':
             response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains; preload'
+        else:
+            # Para testes de desenvolvimento
+            response.headers['Strict-Transport-Security'] = 'max-age=300; includeSubDomains'
         
         # Cache control para páginas sensíveis
         sensitive_endpoints = [

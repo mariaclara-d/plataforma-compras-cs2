@@ -1,33 +1,15 @@
-from db_config import db
-from models import TradeOffer, Skin, Transacao
-from sqlalchemy import func
 
-def calcular_saldo_usuario(steamid, percentual_comissao=0.65):
+from models.saldos import Saldo
+from decimal import Decimal
+
+def calcular_saldo_usuario(steamid):
     """
-    Calcula o saldo disponível do usuário baseado nas skins vendidas
-    e descontando transações já pagas.
-
-    :param steamid: SteamID64 do usuário
-    :param percentual_comissao: percentual que o usuário recebe (ex: 0.65 = 80%)
-    :return: saldo (float)
+    Calcula o saldo disponível do usuário.
+    Usa o método do modelo Saldo que já implementa toda lógica corretamente.
     """
 
-    total_vendido = (
-        db.session.query(func.coalesce(func.sum(Skin.preco), 0.0))
-        .join(TradeOffer, TradeOffer.tradeofferid == Skin.tradeofferid)
-        .filter(TradeOffer.partnersteamid == steamid)
-        .filter(TradeOffer.status == "aceito")
-        .scalar()
-    )
+    # Usar método do modelo (que já está correto)
+    saldo_atual = Saldo.get_saldo_atual(steamid)
 
-    total_para_usuario = total_vendido * percentual_comissao
-
-    total_pago = (
-        db.session.query(func.coalesce(func.sum(Transacao.valor), 0.0))
-        .filter(Transacao.steamid == steamid)
-        .filter(Transacao.status == "pago")
-        .scalar()
-    )
-
-    saldo_atual = total_para_usuario - total_pago
-    return max(saldo_atual, 0.0)
+    # Garantir que retorna Decimal para compatibilidade
+    return saldo_atual if saldo_atual is not None else Decimal('0.00')

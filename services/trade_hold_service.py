@@ -2,6 +2,7 @@
 Serviço para Trade Holds - Gerenciamento do sistema de proteção
 """
 from datetime import datetime, timedelta
+from decimal import Decimal
 from db_config import db
 from models.trade_holds import TradeHold
 from models.transacoes import Transacao
@@ -44,13 +45,13 @@ class TradeHoldService:
         from models.saldos import Saldo
         
         # Saldo total do usuário
-        saldo_atual = Saldo.get_saldo_atual(steam_id) or 0.0
+        saldo_atual = Saldo.get_saldo_atual(steam_id) or Decimal('0.00')
         
         # Valor total em hold
         valor_em_hold = TradeHold.get_total_hold_amount_by_user(steam_id)
         
         # Saldo disponível = saldo total - valores em hold
-        saldo_disponivel = max(0.0, saldo_atual - valor_em_hold)
+        saldo_disponivel = max(Decimal('0.00'), saldo_atual - valor_em_hold)
         
         return {
             'saldo_total': saldo_atual,

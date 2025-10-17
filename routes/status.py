@@ -2,6 +2,7 @@ import asyncio
 import os
 import json
 from datetime import datetime, timezone
+from decimal import Decimal
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
@@ -70,7 +71,7 @@ async def login_aiosteampy():
 def calcular_valor_liquido(preco, percentual_comissao=None):
     """Calcula o valor líquido baseado no preço e percentual de comissão."""
     if percentual_comissao is None:
-        percentual_comissao = float(os.getenv("PERCENTUAL_COMISSAO", "0.65"))
+        percentual_comissao = Decimal(os.getenv("PERCENTUAL_COMISSAO", "0.65"))
     if preco is None:
         return None
     return preco * percentual_comissao
@@ -135,7 +136,7 @@ scheduler = BackgroundScheduler()
 
 @scheduler.scheduled_job('interval', seconds=60)
 def tarefa_agendada():
-    logging.info("⏳ Executando tarefa agendada de verificação de ofertas...")
+    logging.info("Executando tarefa agendada de verificação de ofertas...")
     asyncio.run(verificar_status())
 
 scheduler.start()

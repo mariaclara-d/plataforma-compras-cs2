@@ -157,7 +157,7 @@ function venderItens() {
                 <p><strong>Valor total:</strong> R$ ${totalValue.toFixed(2)}</p>
                 <p><strong>Proteção:</strong> 7 dias</p>
                 <hr>
-                <p class="text-warning small"><i class="fas fa-exclamation-triangle"></i> A oferta será enviada através do aiosteampy.</p>
+                <p class="text-warning small"><i class="fas fa-exclamation-triangle"></i> A oferta será enviada através do SteamWebAPI.</p>
                 <p class="text-muted small">Os itens ficarão em proteção por 7 dias antes de liberar o saldo para saque.</p>
             </div>
         `,
@@ -179,7 +179,7 @@ function processarVenda(selectedItems, tradelink) {
     // Mostrar loading
     Swal.fire({
         title: 'Processando Venda...',
-        text: 'Conectando com a Steam via aiosteampy e enviando oferta...',
+        text: 'Conectando com a Steam via SteamWebAPI e enviando oferta...',
         allowOutsideClick: false,
         didOpen: () => {
             Swal.showLoading();

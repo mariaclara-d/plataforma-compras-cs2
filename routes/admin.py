@@ -5,7 +5,12 @@ from models.saques import Saque
 from services.notification_service import notification_service
 from db_config import db
 from functools import wraps
-from datetime import datetime
+from datetime import datetime, timezone
+from decimal import Decimal
+from sqlalchemy import desc
+from utils.auth_helpers import require_auth
+from middleware.rate_limiting import rate_limit
+import logging
 from sqlalchemy import desc
 from utils.auth_helpers import require_auth
 from middleware.rate_limiting import rate_limit
@@ -62,7 +67,7 @@ def login():
         admin = Admin.query.filter_by(username=username, is_active=True).first()
         
         if admin and admin.check_password(password):
-            admin.last_login = datetime.utcnow()
+            admin.last_login = datetime.now(timezone.utc)
             db.session.commit()
             
             session['admin_id'] = admin.id
@@ -107,9 +112,9 @@ def dashboard():
             
         try:
             saques_pendentes_obj = Saque.query.filter_by(status='pendente').all()
-            valor_saques_pendente = sum([float(s.valor or 0) for s in saques_pendentes_obj])
+            valor_saques_pendente = sum([Decimal(str(s.valor or 0)) for s in saques_pendentes_obj])
         except:
-            valor_saques_pendente = 0.0
+            valor_saques_pendente = Decimal('0.00')
             
         try:
             ofertas_recentes = TradeOffer.query.order_by(desc(TradeOffer.created_at)).limit(5).all()

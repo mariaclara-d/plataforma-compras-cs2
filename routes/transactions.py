@@ -31,7 +31,7 @@ def get_transaction_history():
             transactions.append({
                 'id': transacao.id,
                 'type': 'Venda de Skin',
-                'amount': float(transacao.valor),
+                'amount': str(transacao.valor),
                 'status': 'completed',
                 'created_at': transacao.criado_em.isoformat(),
                 'description': f"Transação #{transacao.id}"
@@ -48,7 +48,7 @@ def get_transaction_history():
             transactions.append({
                 'id': f"saque_{saque.id}",
                 'type': 'Saque',
-                'amount': -float(saque.valor),  # Negativo para saques
+                'amount': str(-saque.valor),  # Negativo para saques
                 'status': status_map.get(saque.status, 'pending'),
                 'created_at': saque.data_saque.isoformat(),
                 'description': f"Saque via {saque.metodo_pagamento}"

@@ -5,6 +5,7 @@ from services.saldo_service import calcular_saldo_usuario
 from services.notification_service import notification_service
 from services.trade_hold_service import TradeHoldService
 import os
+from decimal import Decimal, InvalidOperation
 
 bp = Blueprint('saque_sistema', __name__)
 
@@ -23,8 +24,8 @@ def solicitar_saque():
     data = request.json
     steamid = data.get('steamid')
     try:
-        valor = float(data.get('valor', 0))
-    except (TypeError, ValueError):
+        valor = Decimal(data.get('valor', 0))
+    except (TypeError, ValueError, InvalidOperation):
         return jsonify({'error': 'Invalid amount'}), 400
 
     # Garante que o usuário só saque do próprio saldo
@@ -62,7 +63,7 @@ def solicitar_saque():
         return jsonify({'error': 'Internal error in protection system'}), 500
 
     saque = Saque(steamid=steamid, valor=valor)
-    db.session.add(saque)
+    db.session.add(saque)    
     db.session.commit()
 
     # --- Notificação via WhatsApp (Twilio) ---

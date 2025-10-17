@@ -25,9 +25,8 @@ setup_security_logging()
 csrf = CSRFProtect()
 
 def create_app():
-    # Carrega o .env manualmente
-    dotenv_path = Path("c:/Users/Windows 10/Documents/GitHub/documentacaoFlask---Copia/.env")
-    load_dotenv(dotenv_path=dotenv_path)
+    # Carrega o .env (local) ou usa variáveis de ambiente Heroku
+    load_dotenv()
 
     # Inicializa o app
     app = Flask(__name__)

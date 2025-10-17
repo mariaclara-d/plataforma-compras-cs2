@@ -2,6 +2,7 @@
 
 import re
 from datetime import datetime, timedelta, timezone
+from decimal import Decimal, InvalidOperation
 from db_config import db
 from models import TradeOffer
 
@@ -38,26 +39,19 @@ def validar_dados_requisicao(dados):
     partner_steamid64 = steamid32_to_steamid64(partner_steamid32)
     return itens_selecionados, tradelink, partner_steamid64
 
-def registrar_oferta_no_banco(offer_id, steamid64):
-    """Registra oferta no banco de dados"""
-    nova_oferta = TradeOffer(
-        offer_id=offer_id,
-        steamid=steamid64,
-        status="pendente",
-        data_criacao=datetime.now(timezone.utc),
-        data_expiracao=datetime.now(timezone.utc) + timedelta(minutes=10)
-    )
-    db.session.add(nova_oferta)
-    db.session.commit()
-
 def calcular_valor_liquido(preco, percentual_comissao=0.65):
     """
     Calcula valor líquido após comissão
     Consolidada aqui para evitar duplicação
     """
     if preco is None:
-        return 0.0
+        return Decimal('0.00')
     try:
-        return round(float(preco) * percentual_comissao, 2)
-    except (ValueError, TypeError):
-        return 0.0
+        # Converter para Decimal para manter precisão financeira
+        preco_decimal = Decimal(str(preco))
+        comissao_decimal = Decimal(str(percentual_comissao))
+        resultado = preco_decimal * comissao_decimal
+        # Arredondar para 2 casas decimais
+        return resultado.quantize(Decimal('0.01'))
+    except (ValueError, TypeError, InvalidOperation):
+        return Decimal('0.00')

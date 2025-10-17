@@ -34,7 +34,7 @@ class NotificationService:
  *Método:* {metodo_pagamento}
  *Chave PIX:* {chave_pix}
 
-⏰ *Data:* {datetime.now().strftime('%d/%m/%Y %H:%M')}
+ *Data:* {datetime.now().strftime('%d/%m/%Y %H:%M')}
 
 Acesse o painel admin para processar."""
             
