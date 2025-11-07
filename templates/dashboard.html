@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/dashboard-clean.css" />
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome para ícones -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- SweetAlert2 para modais bonitos -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar Melhorada -->
+    <nav class="navbar navbar-expand-lg navbar-dark dashboard-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <i class="fas fa-gamepad me-2"></i>
+                <span class="brand-text">TitoSkins</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inventory-pane" data-bs-toggle="tab">
+                            <i class="fas fa-box me-1"></i> Inventário
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#balance-pane" data-bs-toggle="tab">
+                            <i class="fas fa-wallet me-1"></i> Saldos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex align-items-center user-info">
+                <div class="user-avatar me-2">
+                    <img src="{{ user_info.get('avatar', '/static/images/default-avatar.png') }}" alt="Avatar" class="avatar-img">
+                </div>
+                <div class="user-details d-none d-md-block me-3">
+                    <span class="user-name">{{ user_info['personaname'] }}</span>
+                    <div class="user-balance">
+                        <i class="fas fa-coins me-1"></i>
+                        <span class="balance-amount">R$ <span id="saldoAtual">{{ saldo | round(2) }}</span></span>
+                    </div>
+                </div>
+                <a href="/logout" class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-sign-out-alt me-1"></i>
+                    Sair
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid dashboard-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="dashboard-title">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Dashboard
+                        </h1>
+                        <p class="dashboard-subtitle">Gerencie seu inventário e acompanhe suas vendas</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Saldo Total</span>
+                                <span class="stat-value text-success">R$ <span id="totalBalance">{{ saldo | round(2) }}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs Melhoradas -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="dashboard-tabs">
+                        <ul class="nav nav-pills nav-justified mb-4" id="dashboardTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="inventory-tab" data-bs-toggle="tab" data-bs-target="#inventory-pane" type="button" role="tab">
+                                    <div class="tab-content-wrapper">
+                                        <i class="fas fa-box tab-icon"></i>
+                                        <div class="tab-text">
+                                            <span class="tab-title">Inventário</span>
+                                            <span class="tab-subtitle">Gerencie seus itens</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="protection-tab" data-bs-toggle="tab" data-bs-target="#protection-pane" type="button" role="tab">
+                                    <div class="tab-content-wrapper">
+                                        <i class="fas fa-shield-alt tab-icon"></i>
+                                        <div class="tab-text">
+                                            <span class="tab-title">Proteção</span>
+                                            <span class="tab-subtitle">Trades protegidos</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="balance-tab" data-bs-toggle="tab" data-bs-target="#balance-pane" type="button" role="tab">
+                                    <div class="tab-content-wrapper">
+                                        <i class="fas fa-wallet tab-icon"></i>
+                                        <div class="tab-text">
+                                            <span class="tab-title">Saldos</span>
+                                            <span class="tab-subtitle">Histórico & Saques</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="container">
+            <div class="tab-content" id="dashboardTabContent">
+                <!-- Inventory Tab -->
+                <div class="tab-pane fade show active" id="inventory-pane" role="tabpanel">
+                    <div class="row g-4">
+                        <!-- Inventory Section -->
+                        <div class="col-lg-8">
+                            <div class="card dashboard-card">
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-box me-2"></i>
+                                        Seu Inventário CS2
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Trade URL Form -->
+                                    <div class="trade-url-section mb-4">
+                                        <form method="POST" action="/dashboard">
+                                            {{ form.hidden_tag() }}
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+                                            <div class="input-group">
+                                                {{ form.tradelink(class="form-control", id="tradelink", placeholder="Cole sua Trade URL do Steam aqui...") }}
+                                                <button class="btn btn-primary" type="submit">
+                                                    <i class="fas fa-sync-alt me-1"></i>
+                                                    Carregar Inventário
+                                                </button>
+                                            </div>
+                                            <small class="form-text text-muted mt-1">
+                                                <i class="fas fa-info-circle me-1"></i>
+                                                Sua Trade URL é necessária para acessar seu inventário do Steam
+                                            </small>
+                                        </form>
+                                    </div>
+
+                                    {% if error %}
+                                        <div class="alert alert-danger">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            {{ error }}
+                                        </div>
+                                    {% endif %}
+
+                                    <!-- Inventory Grid -->
+                                    <div class="inventory-container">
+                                        {% if inventory and inventory|length > 0 %}
+                                            <div class="inventory-grid">
+                                                {% for item in inventory %}
+                                                    <div class="inventory-item" data-price="{{ item.price_median or 0 }}">
+                                                        <div class="item-card">
+                                                            <div class="item-image-container">
+                                                                <img src="{{ item.image_url }}" alt="{{ item.name }}" class="item-image" />
+                                                                <div class="item-overlay">
+                                                                    <div class="item-checkbox">
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            class="skin-checkbox"
+                                                                            name="item_ids"
+                                                                            value="{{ item.assetid }}"
+                                                                            data-price="{{ item.price_median or 0 }}"
+                                                                            id="skin-{{ loop.index }}"
+                                                                            data-assetid="{{ item.assetid }}"
+                                                                        />
+                                                                        <label for="skin-{{ loop.index }}" class="checkbox-label">
+                                                                            <i class="fas fa-check"></i>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="item-info">
+                                                                <h6 class="item-name">{{ item.name }}</h6>
+                                                                <div class="item-price">
+                                                                    {% if item.price_median %}
+                                                                        <span class="price-value">R$ {{ item.price_median }}</span>
+                                                                    {% else %}
+                                                                        <span class="price-na">Preço N/A</span>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <div class="empty-inventory">
+                                                <div class="empty-state">
+                                                    <i class="fas fa-box-open empty-icon"></i>
+                                                    <h5>Inventário vazio</h5>
+                                                    <p>Cole sua Trade URL acima para carregar seus itens do Steam.</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Summary Section -->
+                        <div class="col-lg-4">
+                            <div class="card dashboard-card summary-card sticky-top">
+                                <div class="card-header">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-calculator me-2"></i>
+                                        Resumo da Venda
+                                    </h5>
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="summary-stats">
+                                        <div class="stat-group">
+                                            <span class="stat-label">Itens Selecionados</span>
+                                            <span class="stat-number" id="selectedCount">0</span>
+                                        </div>
+                                        <div class="stat-group">
+                                            <span class="stat-label">Valor Total</span>
+                                            <span class="stat-number text-success" id="totalValue">R$ 0,00</span>
+                                        </div>
+                                        <div class="stat-group">
+                                            <span class="stat-label">Você Recebe</span>
+                                            <span class="stat-amount" id="finalAmount">R$ 0,00</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Payment Method Selection -->
+                                    <div class="payment-section mt-4 mb-4">
+                                        <h6 class="payment-title">
+                                            <i class="fas fa-credit-card me-2"></i>
+                                            Forma de Pagamento
+                                        </h6>
+                                        
+                                        <div class="payment-method-selector">
+                                            <select class="form-select" id="paymentMethod">
+                                                <option value="pix">PIX</option>
+                                                <option value="transfer">Transferência Bancária</option>
+                                                <option value="skrill">Skrill</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- PIX Fields -->
+                                        <div class="payment-fields" id="pixFields">
+                                            <div class="mt-3">
+                                                <label for="pixKey" class="form-label">Chave PIX</label>
+                                                <input type="text" class="form-control" id="pixKey" 
+                                                       placeholder="CPF, CNPJ, E-mail ou Telefone">
+                                                <small class="text-muted">Digite sua chave PIX válida</small>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Transfer Fields -->
+                                        <div class="payment-fields d-none" id="transferFields">
+                                            <div class="row mt-3">
+                                                <div class="col-12 mb-2">
+                                                    <label for="bankName" class="form-label">Banco</label>
+                                                    <input type="text" class="form-control" id="bankName" placeholder="Nome do Banco">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label for="bankAgency" class="form-label">Agência</label>
+                                                    <input type="text" class="form-control" id="bankAgency" placeholder="0000">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label for="bankAccount" class="form-label">Conta</label>
+                                                    <input type="text" class="form-control" id="bankAccount" placeholder="00000-0">
+                                                </div>
+                                                <div class="col-12 mb-2">
+                                                    <label for="accountType" class="form-label">Tipo de Conta</label>
+                                                    <select class="form-select" id="accountType">
+                                                        <option value="corrente">Conta Corrente</option>
+                                                        <option value="poupanca">Conta Poupança</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Skrill Fields -->
+                                        <div class="payment-fields d-none" id="skrillFields">
+                                            <div class="mt-3">
+                                                <label for="skrillEmail" class="form-label">E-mail Skrill</label>
+                                                <input type="email" class="form-control" id="skrillEmail" 
+                                                       placeholder="seu@email.com">
+                                                <small class="text-muted">E-mail cadastrado no Skrill</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="action-buttons mt-4">
+                                        <button id="btnVender" class="btn btn-success btn-lg w-100" disabled>
+                                            <i class="fas fa-handshake me-2"></i>
+                                            Vender Itens
+                                        </button>
+                                        <button id="btnLimpar" class="btn btn-outline-secondary w-100 mt-2">
+                                            <i class="fas fa-times me-2"></i>
+                                            Limpar Seleção
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="fee-info mt-3">
+                                        <small class="text-muted">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Proteção: 7 dias
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Trade Protection Tab -->
+            <div class="tab-pane fade" id="protection-pane" role="tabpanel">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="mb-0">
+                                    <i class="fas fa-shield-alt text-primary"></i>
+                                    Sistema de Proteção de Trade
+                                </h4>
+                                <span class="badge bg-info">Steam Policy Compliance</span>
+                            </div>
+                            <div class="card-body">
+                                <!-- Balance Info -->
+                                <div class="row mb-4">
+                                    <div class="col-md-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title text-muted">Saldo Total</h5>
+                                                <h3 class="text-primary" id="totalBalance">R$ 0,00</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title text-muted">Disponível para Saque</h5>
+                                                <h3 class="text-success" id="availableBalance">R$ 0,00</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title text-muted">Em Proteção</h5>
+                                                <h3 class="text-warning" id="protectedBalance">R$ 0,00</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Protection Info -->
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i>
+                                    <strong>Como funciona:</strong> Por questões de segurança e compliance com as políticas da Steam, 
+                                    vendas são protegidas por 7 dias antes de ficarem disponíveis para saque. 
+                                    Durante este período, você pode reverter trades se necessário.
+                                </div>
+
+                                <!-- Active Holds -->
+                                <div id="activeHolds">
+                                    <h5>Trades em Proteção</h5>
+                                    <div id="holdsContainer">
+                                        <!-- Will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balance & Withdrawal Tab -->
+            <div class="tab-pane fade" id="balance-pane" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><i class="fas fa-history"></i> Histórico de Transações</h4>
+                            </div>
+                            <div class="card-body">
+                                <!-- Transaction history will be loaded here -->
+                                <div id="transactionHistory">
+                                    <p class="text-muted">Carregando histórico...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><i class="fas fa-money-bill-wave"></i> Solicitar Saque</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Valor Disponível</label>
+                                    <h4 class="text-success" id="withdrawableAmount">R$ 0,00</h4>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="withdrawAmount" class="form-label">Valor para Saque</label>
+                                    <input type="number" class="form-control" id="withdrawAmount" placeholder="0,00" min="0" step="0.01">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="withdrawMethod" class="form-label">Método de Pagamento</label>
+                                    <select class="form-select" id="withdrawMethod">
+                                        <option value="">Selecione...</option>
+                                        <option value="pix">PIX</option>
+                                        <option value="transfer">Transferência Bancária</option>
+                                        <option value="skrill">Skrill</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-success w-100" onclick="requestWithdraw()">
+                                    <i class="fas fa-paper-plane"></i> Solicitar Saque
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 para alertas bonitos -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Steam Status Monitor -->
+    <script src="/static/js/steam-status-monitor.js"></script>
+    <!-- Trade Protection System Scripts -->
+    <script src="/static/js/trade_protection.js"></script>
+    <!-- Dashboard Scripts -->
+    <script src="/static/js/dashboard-updated.js"></script>
+
+    <script>
+        // Initialize dashboard with trade protection support
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load trade protection data when protection tab is shown
+            document.getElementById('protection-tab').addEventListener('shown.bs.tab', function() {
+                loadTradeProtectionData();
+            });
+
+            // Load balance data when balance tab is shown
+            document.getElementById('balance-tab').addEventListener('shown.bs.tab', function() {
+                loadBalanceData();
+            });
+        });
+
+        // Function to load trade protection data
+        function loadTradeProtectionData() {
+            fetch('/api/trade-holds/user-info', {
+                method: 'GET',
+                headers: {
+                    'X-CSRFToken': document.getElementById('csrf_token').value,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateProtectionBalances(data.balances);
+                    renderActiveHolds(data.holds);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao carregar dados de proteção:', error);
+            });
+        }
+
+        // Function to update balance displays
+        function updateProtectionBalances(balances) {
+            document.getElementById('totalBalance').textContent = `R$ ${balances.total.toFixed(2)}`;
+            document.getElementById('availableBalance').textContent = `R$ ${balances.available.toFixed(2)}`;
+            document.getElementById('protectedBalance').textContent = `R$ ${balances.protected.toFixed(2)}`;
+            document.getElementById('withdrawableAmount').textContent = `R$ ${balances.available.toFixed(2)}`;
+        }
+
+        // Function to render active holds
+        function renderActiveHolds(holds) {
+            const container = document.getElementById('holdsContainer');
+            
+            if (!holds || holds.length === 0) {
+                container.innerHTML = '<p class="text-muted">Nenhum trade em proteção no momento.</p>';
+                return;
+            }
+
+            container.innerHTML = holds.map(hold => `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-3">
+                                <strong>Trade #${hold.id}</strong><br>
+                                <small class="text-muted">${new Date(hold.created_at).toLocaleDateString('pt-BR')}</small>
+                            </div>
+                            <div class="col-md-2">
+                                <h5 class="text-primary mb-0">R$ ${hold.amount.toFixed(2)}</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="countdown" data-expires="${hold.expires_at}">
+                                    <small class="text-muted">Libera em:</small><br>
+                                    <span class="countdown-timer"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="badge bg-${hold.status === 'active' ? 'warning' : 'success'}">${hold.status}</span>
+                            </div>
+                            <div class="col-md-2">
+                                ${hold.can_reverse ? `
+                                    <button class="btn btn-sm btn-outline-danger" onclick="reverseHold(${hold.id})">
+                                        <i class="fas fa-undo"></i> Reverter
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Start countdown timers
+            startCountdownTimers();
+        }
+
+        // Function to load balance data for withdraw tab
+        function loadBalanceData() {
+            // This will load transaction history and update withdrawal form
+            fetch('/api/transactions/history', {
+                method: 'GET',
+                headers: {
+                    'X-CSRFToken': document.getElementById('csrf_token').value,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    renderTransactionHistory(data.transactions);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao carregar histórico:', error);
+            });
+        }
+
+        // Function to render transaction history
+        function renderTransactionHistory(transactions) {
+            const container = document.getElementById('transactionHistory');
+            
+            if (!transactions || transactions.length === 0) {
+                container.innerHTML = '<p class="text-muted">Nenhuma transação encontrada.</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${transactions.map(tx => `
+                                <tr>
+                                    <td>${new Date(tx.created_at).toLocaleDateString('pt-BR')}</td>
+                                    <td>${tx.type}</td>
+                                    <td>R$ ${tx.amount.toFixed(2)}</td>
+                                    <td><span class="badge bg-${tx.status === 'completed' ? 'success' : 'warning'}">${tx.status}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Function to request withdrawal
+        function requestWithdraw() {
+            const amount = document.getElementById('withdrawAmount').value;
+            const method = document.getElementById('withdrawMethod').value;
+
+            if (!amount || !method) {
+                Swal.fire('Erro', 'Preencha todos os campos', 'error');
+                return;
+            }
+
+            Swal.fire({
+                title: 'Confirmar Saque',
+                text: `Solicitar saque de R$ ${parseFloat(amount).toFixed(2)} via ${method}?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Process withdrawal request
+                    fetch('/api/withdraw/request', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': document.getElementById('csrf_token').value,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            amount: parseFloat(amount),
+                            method: method
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire('Sucesso', 'Solicitação de saque enviada com sucesso!', 'success');
+                            // Reset form and reload data
+                            document.getElementById('withdrawAmount').value = '';
+                            document.getElementById('withdrawMethod').value = '';
+                            loadBalanceData();
+                            loadTradeProtectionData();
+                        } else {
+                            Swal.fire('Erro', data.message || 'Erro ao processar saque', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        Swal.fire('Erro', 'Erro ao processar solicitação', 'error');
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

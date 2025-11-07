@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Inventário - FortuneSkins{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <h2 class="mb-4 text-center">Selecione os itens que deseja vender</h2>
+    <p class="text-center text-muted">Após enviar a oferta, você será notificado pelo SteamGuard para aceitar a troca. Verifique sua conta Steam.</p>
+    
+    <form id="ofertaForm" method="post" action="/trade/enviar-oferta">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for item in inventory %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.name }}" style="max-height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ item.name }}</h5>
+                        <p class="card-text">
+                            <strong>Preço Médio:</strong> {{ item.price_median }} <br>
+                            <strong>Preço Seguro:</strong> {{ item.price_safe }} <br>
+                            <strong>Preço Máx.:</strong> {{ item.price_max }} <br>
+                            <strong>Preço Mín.:</strong> {{ item.price_min }} <br>
+                            <strong>Preço Avg.:</strong> {{ item.price_avg }} <br>
+                        </p>
+                        <a href="{{ item.inspect_link }}" target="_blank" class="btn btn-outline-primary btn-sm w-100 mb-2" rel="noopener noreferrer">Inspecionar</a>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="item_ids" value="{{ item.assetid }}" id="item-{{ item.assetid }}">
+                            <label class="form-check-label" for="item-{{ item.assetid }}">Selecionar</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Campo oculto para manter o tradelink -->
+        <input type="hidden" name="tradelink" value="{{ tradelink }}">
+
+        <!-- Botão para enviar -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success btn-lg" id="btnEnviar">
+                <i class="fas fa-paper-plane"></i> Enviar Oferta
+            </button>
+        </div>
+    </form>
+
+    <!-- Div para exibir mensagens de status -->
+    <div id="status" class="mt-3 text-center"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('ofertaForm');
+    const btnEnviar = document.getElementById('btnEnviar');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Verificar se pelo menos um item foi selecionado
+        const itensSelecionados = document.querySelectorAll('input[name="item_ids"]:checked');
+        if (itensSelecionados.length === 0) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Nenhum item selecionado',
+                text: 'Por favor, selecione pelo menos um item para enviar na oferta.',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+        
+        // Desabilitar botão e mostrar loading
+        btnEnviar.disabled = true;
+        btnEnviar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        
+        // Preparar dados da oferta
+        const formData = new FormData(form);
+        const tradeData = {
+            item_ids: Array.from(itensSelecionados).map(item => item.value),
+            tradelink: formData.get('tradelink'),
+            csrf_token: formData.get('csrf_token')
+        };
+        
+        // Usar o sistema de tratamento de erros Steam
+        steamErrorHandler.sendTradeOffer(tradeData);
+        
+        // Reabilitar botão após envio
+        setTimeout(() => {
+            btnEnviar.disabled = false;
+            btnEnviar.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Oferta';
+        }, 3000);
+    });
+});
+</script>
+{% endblock %}

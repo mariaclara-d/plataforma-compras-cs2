@@ -1,0 +1,15 @@
+﻿version: '3.8'
+services:
+  web:
+    image: documentacaoflask---copia-web
+    container_name: documentacaoflask---copia-web-1
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    
+  db:
+    image: postgres:15
+    container_name: documentacaoflask---copia-db-1
+    ports:
+      - "5432:5432"

@@ -1,0 +1,223 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Saques - Admin Panel{% endblock %}
+{% block page_title %}Gestão de Saques{% endblock %}
+
+{% block content %}
+<!-- Filtros e Controles -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <form method="GET" class="form-inline">
+            <div class="form-group mr-3">
+                <label for="status" class="mr-2">Status:</label>
+                <select name="status" id="status" class="form-control" onchange="this.form.submit()">
+                    <option value="">Todos</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="processado">Processado</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 text-right">
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+        </a>
+    </div>
+</div>
+
+<!-- Estatísticas Rápidas -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pendentes</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {% set count = 0 %}
+                            {% for saque in saques %}
+                                {% if saque.status == 'pendente' %}
+                                    {% set count = count + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ count }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clock fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Processados</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {% set count = 0 %}
+                            {% for saque in saques %}
+                                {% if saque.status == 'processado' %}
+                                    {% set count = count + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ count }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-check fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ saques | length }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money-bill-wave fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Valor Total</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {% set total = 0 %}
+                            {% for saque in saques %}
+                                {% if saque.valor %}
+                                    {% set total = total + (saque.valor | float) %}
+                                {% endif %}
+                            {% endfor %}
+                            R$ {{ "%.2f" | format(total) }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabela de Saques -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            Lista de Saques
+            {% if status %}
+                - {{ status.title() }}
+            {% endif %}
+        </h6>
+    </div>
+    <div class="card-body">
+        {% if saques %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Steam ID</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for saque in saques %}
+                    <tr>
+                        <td><code>{{ saque.id }}</code></td>
+                        <td><span class="text-monospace">{{ saque.steamid[:15] }}...</span></td>
+                        <td><strong>R$ {{ "%.2f" | format(saque.valor | float) if saque.valor else "0.00" }}</strong></td>
+                        <td>
+                            {% if saque.status == 'pendente' %}
+                                <span class="badge badge-warning">Pendente</span>
+                            {% elif saque.status == 'processado' %}
+                                <span class="badge badge-success">Processado</span>
+                            {% elif saque.status == 'cancelado' %}
+                                <span class="badge badge-danger">Cancelado</span>
+                            {% else %}
+                                <span class="badge badge-secondary">{{ saque.status or 'N/A' }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if saque.criado_em %}
+                                <small>{{ saque.criado_em.strftime('%d/%m/%Y %H:%M') }}</small>
+                            {% else %}
+                                <small class="text-muted">N/A</small>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if saque.status == 'pendente' %}
+                                <form method="POST" action="{{ url_for('admin.processar_saque', saque_id=saque.id) }}" class="d-inline">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+                                    <button type="submit" class="btn btn-sm btn-success" 
+                                            onclick="return confirm('Processar este saque?')">
+                                        <i class="fas fa-check"></i> Processar
+                                    </button>
+                                </form>
+                                <form method="POST" action="{{ url_for('admin.cancelar_saque', saque_id=saque.id) }}" class="d-inline ml-1">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Cancelar este saque?')">
+                                        <i class="fas fa-times"></i> Cancelar
+                                    </button>
+                                </form>
+                            {% else %}
+                                <span class="text-muted">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">Nenhum saque encontrado</h5>
+            {% if status %}
+                <p class="text-muted">Não há saques com status "{{ status }}"</p>
+                <a href="{{ url_for('admin.listar_saques') }}" class="btn btn-primary">Ver Todos</a>
+            {% else %}
+                <p class="text-muted">Ainda não foram realizados saques.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    console.log('Página de saques carregada');
+    
+    // Auto-refresh para saques pendentes (a cada 1 minuto)
+    var hasRefresh = '{{ status }}' === 'pendente' || '{{ status }}' === '';
+    if (hasRefresh) {
+        setTimeout(function() {
+            location.reload();
+        }, 60000);
+    }
+});
+</script>
+{% endblock %}
